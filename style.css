@@ -1,0 +1,517 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700&display=swap');
+
+body {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    background-color: #fff5e8;
+    color: #4a4a4a;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: auto;
+    /* Disabled to allow JS Luxury Scroll to take over */
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #C5A059;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #613613;
+}
+
+/* Hover Effects */
+.hover-lift {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Flash Sale Badge Pulse */
+@keyframes pulse-red {
+    0% {
+        box-shadow: 0 0 0 0 rgba(250, 17, 17, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(250, 17, 17, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(250, 17, 17, 0);
+    }
+}
+
+.pulse-badge {
+    animation: pulse-red 2s infinite;
+}
+
+/* Oriental Pattern Divider */
+.oriental-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.oriental-divider::before,
+.oriental-divider::after {
+    content: "";
+    height: 1px;
+    width: 60px;
+    background-color: #C5A059;
+}
+
+.oriental-icon {
+    color: #C5A059;
+    font-size: 1.2rem;
+}
+
+/* Custom Background for Product Section */
+.bg-oriental {
+    background-image: url('assets/bg-product.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    /* Ensure text maintains contrast if bg is busy, though white cards handle this */
+}
+
+/* Glassmorphism Card Effect for this background */
+.card-oriental {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(197, 160, 89, 0.3);
+    /* Gold tint border */
+}
+
+/* Enhancing the "Moon/Sun" circle effect content centering */
+.product-grid-container {
+    padding-top: 4rem;
+    /* More space for the sticker */
+    padding-bottom: 2rem;
+}
+
+/* Tám Thủy Brand Sticker */
+.brand-sticker {
+    position: absolute;
+    top: -40px;
+    /* Overlap the top */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    width: 260px;
+    height: auto;
+    background: #800020;
+    /* Brand Red */
+    border: 4px solid #C5A059;
+    /* Gold Border */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    border-radius: 50px;
+    padding: 10px 20px;
+    text-align: center;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.brand-sticker::before {
+    content: "";
+    /* Inner gold border */
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    right: 4px;
+    bottom: 4px;
+    border: 1px dashed #C5A059;
+    border-radius: 44px;
+    pointer-events: none;
+}
+
+.sticker-sub {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #C5A059;
+    background: #800020;
+    padding: 0 10px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Tám Thủy Brand Sticker - Optimized */
+.sticker-main {
+    font-family: 'Playfair Display', serif;
+    /* Use serif for brand name */
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    margin: 5px 0;
+}
+
+/* Feature/Trust Box Styles (User Request) */
+/* Feature/Trust Box Styles (User Request) */
+.feature-box-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    padding: 0px 0px;
+    margin-top: 1.5rem;
+    max-width: 1200px;
+    /* Widened based on feedback */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.feature-box {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 24px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    width: 100%;
+    /* Ensure full width in grid cell */
+}
+
+.feature-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.feature-icon {
+    width: 50px;
+    flex-shrink: 0;
+    text-align: center;
+}
+
+.feature-icon img {
+    max-width: 100%;
+    height: auto;
+}
+
+.feature-text {
+    font-size: 0.95rem;
+    color: #4f4f4f;
+    line-height: 1.4;
+}
+
+.feature-text strong {
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 6px;
+    color: #613613;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .feature-box-container {
+        grid-template-columns: repeat(2, 1fr);
+        margin-top: 0.5rem;
+        gap: 16px;
+    }
+
+    .feature-box {
+        padding: 16px;
+        gap: 12px;
+    }
+
+    .feature-icon {
+        width: 40px;
+    }
+
+    .feature-text {
+        font-size: 0.85rem;
+    }
+
+    .feature-text strong {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .feature-box-container {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-top: 0rem;
+    }
+
+    .feature-box {
+        padding: 12px;
+        gap: 12px;
+    }
+
+    .feature-icon {
+        width: 35px;
+    }
+
+    .feature-text {
+        font-size: 0.8rem;
+    }
+
+    .feature-text strong {
+        font-size: 0.9rem;
+    }
+}
+
+/* =========================================
+   New Premium Hero Section (Rose Brown)
+   ========================================= */
+.hero-rose-brown {
+    background-color: #D4B28C;
+    /* Directional Light Source: Top Left */
+    background-image: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.3) 0%, rgba(212, 178, 140, 0) 50%);
+    position: absolute;
+    /* Sits at top of page */
+    top: 0;
+    left: 0;
+    z-index: 50;
+    /* Hero on TOP of content */
+    box-shadow: 0 50px 100px rgba(0, 0, 0, 0.5);
+    /* Strong shadow for lifting effect */
+    height: 100vh;
+    /* Full Viewport Height */
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Scroll Down Button ('V' shape) */
+.scroll-down-btn {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    z-index: 100;
+    /* Ensure it is top-most clickable item in Hero */
+    transition: all 0.3s ease;
+    animation: bounce-gentle 2s infinite;
+}
+
+.scroll-down-btn:hover {
+    color: #fff;
+    bottom: 25px;
+    /* Slight movement on hover */
+}
+
+.scroll-down-btn svg {
+    width: 40px;
+    height: 40px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+@keyframes bounce-gentle {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    40% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+
+    60% {
+        transform: translateX(-50%) translateY(-5px);
+    }
+}
+
+/* Product Item Spacing */
+.product-item {
+    margin-bottom: 14rem;
+    /* Significant spacing between products */
+}
+
+.product-item:last-child {
+    margin-bottom: 4rem;
+    /* Remove margin for the last item */
+}
+
+/* Nutrient Floating Particles (Optional background ambiance) */
+.hero-particles {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 30px 30px;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+/* Blended Product Images */
+.hero-product-img {
+    position: absolute;
+    /* Removed border-radius and box-shadow to avoid boxy frame */
+    transition: transform 0.5s ease;
+    opacity: 1;
+    /* Set to 1 for clarity */
+    /* Slight blend to not feel "stuck on" */
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+}
+
+.hero-product-img:hover {
+    transform: scale(1.02);
+    opacity: 1;
+    z-index: 10;
+}
+
+/* Specific Positions for the 3 images */
+.hero-img-box {
+    /* Hộp yến 1 lạng - Main centerpiece, slightly right */
+    top: 50%;
+    right: 15%;
+    transform: translateY(-50%);
+    width: 350px;
+    z-index: 2;
+    animation: float-medium 6s ease-in-out infinite;
+}
+
+.hero-img-hu {
+    /* Hũ yến - Top left balance */
+    top: 15%;
+    left: 10%;
+    width: 220px;
+    z-index: 1;
+    animation: float-slow 7s ease-in-out infinite;
+    animation-delay: 1s;
+}
+
+.hero-img-raw {
+    /* Tổ yến thô - Bottom center-left */
+    bottom: 10%;
+    left: 25%;
+    width: 280px;
+    z-index: 3;
+    animation: float-fast 8s ease-in-out infinite;
+    animation-delay: 2s;
+}
+
+/* Responsive adjustments for Hero Images */
+@media (max-width: 1024px) {
+    .hero-img-box {
+        right: 5%;
+        width: 300px;
+    }
+
+    .hero-img-hu {
+        left: 5%;
+        width: 180px;
+    }
+
+    .hero-img-raw {
+        left: 20%;
+        width: 240px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-rose-brown {
+        min-height: 500px;
+        /* On mobile, maybe stack them or just let them float freely, 
+           but careful of overlap. Center them for safety. */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .hero-product-img {
+        position: relative;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        transform: none !important;
+        width: 60% !important;
+        max-width: 250px;
+        animation: none !important;
+        /* Disable float on mobile to prevent shifts */
+    }
+
+    .hero-img-box {
+        order: 2;
+        width: 70% !important;
+    }
+
+    .hero-img-hu {
+        order: 1;
+    }
+
+    .hero-img-raw {
+        order: 3;
+    }
+}
+
+/* Animations */
+@keyframes float-slow {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes float-medium {
+
+    0%,
+    100% {
+        transform: translateY(-50%) translateY(0);
+    }
+
+    /* specialized for vertically centered elements */
+    50% {
+        transform: translateY(-50%) translateY(-20px);
+    }
+}
+
+@keyframes float-fast {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-10px) rotate(1deg);
+    }
+}

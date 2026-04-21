@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yến Sào Premium - Tinh Hoa Thiên Nhiên</title>
+
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind Config -->
+    <script src="tailwind.config.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-brand-cream text-gray-700 antialiased overflow-x-hidden">
+
+    <!-- Main Header -->
+    <header id="main-header"
+        class="fixed top-0 left-0 w-full z-[100] bg-transparent backdrop-blur-sm transition-all duration-300 py-6 border-b border-transparent">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div
+                    class="w-10 h-10 bg-brand-brown rounded-full flex items-center justify-center text-brand-gold text-2xl font-serif font-bold group-hover:bg-brand-gold group-hover:text-white transition-all">
+                    Y</div>
+                <div>
+                    <h1
+                        class="font-sans font-bold text-xl text-brand-brown tracking-wide leading-none group-hover:text-brand-red transition-colors">
+                        YẾN SÀO <span class="text-brand-gold">VIỆT</span></h1>
+                    <span class="text-[10px] text-gray-500 uppercase tracking-[0.2em]">Thượng Hạng</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav
+                class="hidden rounded-full border border-gray-100 bg-gray-50/80 backdrop-blur-md px-10 py-3 md:flex items-center gap-10 shadow-sm">
+                <a href="#hero"
+                    class="text-base font-bold text-gray-800 hover:text-brand-red transition-colors uppercase tracking-wide">Trang
+                    chủ</a>
+                <a href="#products"
+                    class="text-base font-bold text-gray-800 hover:text-brand-red transition-colors uppercase tracking-wide">Sản
+                    phẩm</a>
+                <a href="#about"
+                    class="text-base font-bold text-gray-800 hover:text-brand-red transition-colors uppercase tracking-wide">Về
+                    chúng tôi</a>
+                <a href="#contact"
+                    class="text-base font-bold text-gray-800 hover:text-brand-red transition-colors uppercase tracking-wide">Liên
+                    hệ</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="flex items-center gap-4">
+                <button
+                    class="hidden md:flex items-center gap-2 border border-brand-red text-brand-red px-5 py-2 rounded-full font-bold text-sm hover:bg-brand-red hover:text-white transition-all pulse-badge">
+                    <span>MUA NGAY</span>
+                </button>
+                <button class="md:hidden text-gray-800"
+                    onclick="document.getElementById('mobile-menu').classList.remove('translate-x-full')">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu"
+        class="fixed inset-0 z-[60] bg-white translate-x-full transition-transform duration-300 md:hidden flex flex-col">
+        <div class="p-6 flex justify-between items-center border-b border-gray-100">
+            <span class="font-bold text-xl text-brand-brown">MENU</span>
+            <button onclick="document.getElementById('mobile-menu').classList.add('translate-x-full')"
+                class="text-gray-500 hover:text-brand-red">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
+                </svg>
+            </button>
+        </div>
+        <div class="flex flex-col p-8 gap-6 text-lg font-medium text-gray-800 content-start">
+            <a href="#hero" onclick="document.getElementById('mobile-menu').classList.add('translate-x-full')">Trang
+                chủ</a>
+            <a href="#products" onclick="document.getElementById('mobile-menu').classList.add('translate-x-full')">Sản
+                phẩm</a>
+            <a href="#about" onclick="document.getElementById('mobile-menu').classList.add('translate-x-full')">Về chúng
+                tôi</a>
+            <a href="#contact" onclick="document.getElementById('mobile-menu').classList.add('translate-x-full')">Liên
+                hệ</a>
+        </div>
+    </div>
+
+    <!-- Hero Section (Redesigned: Premium, Warm, Minimal) -->
+    <section id="hero" class="hero-rose-brown">
+        <!-- Subtle Ambient Particles -->
+        <div class="hero-particles"></div>
+
+        <!-- Decorative Light Glow (Top Left) -->
+        <div class="absolute top-0 left-0 w-1/2 h-1/2 bg-white/5 blur-3xl rounded-full pointer-events-none"></div>
+
+        <!-- Product Images (Blended, Floating) -->
+        <!-- Hũ Yến -->
+        <img src="assets/yen-hu.png" alt="Yến Chưng Sẵn" class="hero-product-img hero-img-hu">
+
+        <!-- Hộp Yến (Centerpiece) -->
+        <img src="assets/yen-hop.png" alt="Hộp Quà Yến Sào" class="hero-product-img hero-img-box">
+
+        <!-- Tổ Yến Thô -->
+        <img src="assets/yen-tinh-che.png" alt="Tổ Yến Nguyên Chất" class="hero-product-img hero-img-raw">
+
+        <!-- Minimal Brand Overlay (Optional - kept very subtle as requested 'no large headline') -->
+        <!-- Just a very faint watermark or standard text if needed, but user said NO large headline.
+             We will leave it purely visual as requested. -->
+
+        <!-- Scroll Down 'V' Button -->
+        <div id="hero-scroll-btn" class="scroll-down-btn">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Main Content Wrapper (Fixed Underneath - Card Deck Effect) -->
+    <!-- It is fixed at the top, waiting to be revealed. JS handles its scroll. -->
+    <main id="main-content" class="fixed top-0 left-0 w-full z-10 bg-brand-cream will-change-transform">
+
+        <!-- Padding top 100vh? No, we handle reveal via Hero moving away. -->
+        <!-- Content starts at top of this fixed container. -->
+
+        <!-- Trust Badges REMOVED as per request -->
+        <!-- Content now starts directly with Products -->
+
+        <!-- Parallax Compensation Spacer -->
+        <!-- Update: Increased to 40vh. 
+             Calculation: 20vh (Parallax Loss) + 15vh (Header approx) + 5vh (Breathing room) = 40vh -->
+        <div class="h-[40vh] w-full"></div>
+
+        <!-- Product Section (Zig-Zag Storytelling) -->
+        <section id="products" class="py-24 bg-brand-cream relative">
+
+            <!-- Tám Thủy Sticker (Preserved) -->
+            <div class="brand-sticker">
+                <span class="sticker-sub">Thương Hiệu</span>
+                <span class="sticker-main">Tám Thủy</span>
+                <span class="text-[10px] text-white/80 tracking-widest uppercase">Yến Sào Thượng Hạng</span>
+            </div>
+
+            <div class="container mx-auto px-8 md:px-36 relative z-10 pt-10">
+
+                <!-- Section Header -->
+                <div class="text-center mb-24">
+                    <p class="text-brand-gold text-sm font-bold uppercase tracking-widest mb-3">Bộ Sưu Tập</p>
+                    <h2 class="text-5xl font-serif font-bold text-brand-brown">Tinh Hoa Yến Việt</h2>
+                    <div class="w-24 h-1 bg-brand-gold mx-auto mt-6 rounded-full"></div>
+                </div>
+
+                <!-- Product 1: Yến Thô Nguyên Bản (Text Left - Img Right) -->
+                <div class="flex flex-col md:flex-row items-center gap-16 group product-item">
+                    <div class="w-full md:w-1/2 text-left order-2 md:order-1">
+                        <h3
+                            class="text-4xl font-serif font-bold text-brand-brown mb-4 group-hover:text-brand-red transition-colors">
+                            Yến Thô Nguyên Bản</h3>
+                        <p class="text-brand-gold italic mb-6">Giữ trọn tinh hoa thiên nhiên</p>
+                        <p class="text-gray-600 leading-relaxed mb-8 text-lg">
+                            Tổ yến nguyên thủy 100% được thu hoạch và phân loại nghiêm ngặt.
+                            Giữ nguyên vẹn hình dáng, mùi vị tanh đặc trưng và giá trị dinh dưỡng tuyệt đối.
+                            Nở nhiều, sợi dai, phù hợp cho người sành ăn và muốn tự tay sơ chế.
+                        </p>
+                        <button
+                            class="bg-brand-brown text-white px-8 py-3 rounded-full font-bold hover:bg-brand-red transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                            Xem Chi Tiết
+                        </button>
+                    </div>
+                    <div class="w-full md:w-1/2 order-1 md:order-2 relative">
+                        <!-- Decorative Blob -->
+                        <div
+                            class="absolute inset-0 bg-brand-gold/10 rounded-[60%_40%_30%_70%/60%_30%_70%_40%] transform rotate-6 scale-110 -z-10">
+                        </div>
+                        <img src="assets/yen-tinh-che.png" alt="Yến Thô Nguyên Bản"
+                            class="w-full drop-shadow-2xl transform transition-transform duration-700 group-hover:scale-105 object-contain aspect-[4/3]">
+                    </div>
+                </div>
+
+                <!-- Product 2: Yến Tươi Tiện Lợi (Img Left - Text Right) -->
+                <div class="flex flex-col md:flex-row items-center gap-16 group product-item">
+                    <div class="w-full md:w-1/2 relative">
+                        <!-- Decorative Blob -->
+                        <div
+                            class="absolute inset-0 bg-brand-red/5 rounded-[30%_70%_70%_30%/30%_30%_70%_70%] transform -rotate-3 scale-110 -z-10">
+                        </div>
+                        <img src="assets/yen-hop.png" alt="Yến Tươi Tiện Lợi"
+                            class="w-full drop-shadow-2xl transform transition-transform duration-700 group-hover:scale-105 object-contain aspect-[4/3]">
+                    </div>
+                    <div class="w-full md:w-1/2 text-left">
+                        <h3
+                            class="text-4xl font-serif font-bold text-brand-brown mb-4 group-hover:text-brand-red transition-colors">
+                            Yến Tươi Tiện Lợi</h3>
+                        <p class="text-brand-gold italic mb-6">Giải pháp cho người bận rộn</p>
+                        <p class="text-gray-600 leading-relaxed mb-8 text-lg">
+                            Đã được nhặt sạch lông, loại bỏ tạp chất và chưa qua sấy khô.
+                            Giữ nguyên độ tươi mới, chỉ cần mua về là chưng được ngay.
+                            Tiết kiệm tối đa thời gian, là lựa chọn hoàn hảo cho các mẹ nội trợ hiện đại.
+                        </p>
+                        <button
+                            class="bg-brand-brown text-white px-8 py-3 rounded-full font-bold hover:bg-brand-red transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                            Xem Chi Tiết
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 3: Yến Tinh Chế Thượng Hạng (Text Left - Img Right) -->
+                <div class="flex flex-col md:flex-row items-center gap-16 group product-item">
+                    <div class="w-full md:w-1/2 text-left order-2 md:order-1">
+                        <h3
+                            class="text-4xl font-serif font-bold text-brand-brown mb-4 group-hover:text-brand-red transition-colors">
+                            Yến Tinh Chế Thượng Hạng</h3>
+                        <p class="text-brand-gold italic mb-6">Quà biếu sang trọng</p>
+                        <p class="text-gray-600 leading-relaxed mb-8 text-lg">
+                            Được tuyển chọn từ những tổ yến già, làm sạch thủ công và ép khuôn định hình đẹp mắt.
+                            Sợi yến dài, màu trắng ngà tự nhiên, khi chưng nở to, dai và thơm.
+                            Bao bì thiết kế tinh tế, là món quà sức khỏe đẳng cấp để biếu tặng.
+                        </p>
+                        <button
+                            class="bg-brand-brown text-white px-8 py-3 rounded-full font-bold hover:bg-brand-red transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                            Xem Chi Tiết
+                        </button>
+                    </div>
+                    <div class="w-full md:w-1/2 order-1 md:order-2 relative">
+                        <!-- Decorative Blob -->
+                        <div
+                            class="absolute inset-0 bg-brand-gold/10 rounded-[50%_50%_30%_70%/50%_40%_60%_50%] transform rotate-12 scale-110 -z-10">
+                        </div>
+                        <img src="assets/yen-hop.png" alt="Yến Tinh Chế"
+                            class="w-full drop-shadow-2xl transform transition-transform duration-700 group-hover:scale-105 object-contain aspect-[4/3]">
+                    </div>
+                </div>
+
+                <!-- Product 4: Hũ Yến Chưng Sẵn (Img Left - Text Right) -->
+                <div class="flex flex-col md:flex-row items-center gap-16 group product-item">
+                    <div class="w-full md:w-1/2 relative">
+                        <!-- Decorative Blob -->
+                        <div
+                            class="absolute inset-0 bg-brand-red/5 rounded-[70%_30%_30%_70%/60%_40%_60%_40%] transform -rotate-6 scale-110 -z-10">
+                        </div>
+                        <img src="assets/yen-hu.png" alt="Hũ Yến Chưng Sẵn"
+                            class="w-full drop-shadow-2xl transform transition-transform duration-700 group-hover:scale-105 object-contain aspect-[4/3]">
+                    </div>
+                    <div class="w-full md:w-1/2 text-left">
+                        <h3
+                            class="text-4xl font-serif font-bold text-brand-brown mb-4 group-hover:text-brand-red transition-colors">
+                            Hũ Yến Chưng Sẵn</h3>
+                        <p class="text-brand-gold italic mb-6">Dinh dưỡng tức thì</p>
+                        <p class="text-gray-600 leading-relaxed mb-8 text-lg">
+                            Yến chưng tươi tiệt trùng, kết hợp cùng các nguyên liệu quý như Táo Đỏ, Hạt Sen, Đông Trùng
+                            Hạ Thảo.
+                            Hàm lượng yến cao, vị thanh mát, bật nắp dùng ngay.
+                            Cực tốt cho người mới ốm dậy, người già cần bồi bổ nhanh chóng.
+                        </p>
+                        <button
+                            class="bg-brand-brown text-white px-8 py-3 rounded-full font-bold hover:bg-brand-red transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                            Xem Chi Tiết
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Farm Section: Cơ Sở Chăn Nuôi (Bonus) -->
+                <div
+                    class="bg-white rounded-[3rem] p-12 shadow-xl border border-gray-100 flex flex-col md:flex-row items-center gap-12">
+                    <div class="w-full md:w-1/2">
+                        <h3 class="text-4xl font-serif font-bold text-brand-brown mb-6">Cơ sở chăn nuôi <br><span
+                                class="text-brand-gold">Chuẩn Tự Nhiên</span></h3>
+                        <div class="w-16 h-1 bg-brand-gold mb-8"></div>
+                        <p class="text-gray-600 leading-relaxed mb-6">
+                            Hệ thống nhà yến của <strong>Tám Thủy</strong> được đặt tại các vùng ven biển trong lành, xa
+                            khu công nghiệp để đảm bảo môi trường sống tốt nhất cho chim yến.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed mb-8">
+                            Quy trình thu hoạch nhân đạo, chỉ khai thác khi chim non đã bay đi, kết hợp với kỹ thuật sơ
+                            chế thủ công tỉ mỉ giúp giữ trọn vẹn vi chất quý giá trong từng sợi yến.
+                        </p>
+                        <button
+                            class="border-2 border-brand-brown text-brand-brown px-8 py-3 rounded-full font-bold hover:bg-brand-brown hover:text-white transition-colors">
+                            Xem Thêm
+                        </button>
+                    </div>
+                    <div class="w-full md:w-1/2 grid grid-cols-2 gap-4">
+                        <img src="assets/farm1.png" onerror="this.src='https://via.placeholder.com/300x400'"
+                            alt="Nhà yến 1"
+                            class="rounded-2xl w-full h-48 object-cover transform translate-y-8 shadow-lg">
+                        <img src="assets/farm2.png" onerror="this.src='https://via.placeholder.com/300x400'"
+                            alt="Nhà yến 2" class="rounded-2xl w-full h-48 object-cover shadow-lg">
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Breeding Facility Section (New Layout) -->
+        <section id="about" class="py-24 bg-[#fff5e8]">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-16 items-center">
+
+                    <!-- Text Content -->
+                    <div class="order-2 md:order-1">
+                        <h2 class="font-serif font-bold text-4xl md:text-5xl text-brand-brown mb-6 leading-tight">
+                            Cơ sở chăn nuôi <br>
+                            <span class="text-brand-brown">chuẩn tự nhiên</span>
+                        </h2>
+
+                        <div class="space-y-6 text-gray-600 text-lg leading-relaxed mb-8">
+                            <p>
+                                Hệ thống nhà yến của <span class="font-bold text-brand-brown">Tám Thủy</span> được đặt
+                                tại
+                                các vùng ven biển trong lành, xa khu công nghiệp để đảm bảo môi trường sống tốt nhất cho
+                                chim yến.
+                            </p>
+                            <p>
+                                Quy trình thu hoạch nhân đạo, chỉ khai thác khi chim non đã bay đi, kết hợp với kỹ thuật
+                                sơ
+                                chế thủ công tỉ mỉ, giúp giữ trọn vẹn vi chất quý giá trong từng sợi yến.
+                            </p>
+                        </div>
+
+                        <a href="#"
+                            class="inline-block px-8 py-3 bg-[#a56d38] text-white font-bold rounded-full hover:bg-brand-brown transition-all shadow-lg hover:shadow-xl">
+                            Xem thêm
+                        </a>
+                    </div>
+
+                    <!-- Overlapping Images -->
+                    <div class="order-1 md:order-2 relative h-[500px] w-full">
+                        <!-- Main Image (Top Right) -->
+                        <div
+                            class="absolute top-0 right-0 w-[85%] h-[80%] rounded-3xl overflow-hidden shadow-2xl z-10 border-4 border-white">
+                            <img src="assets/farm2.png" alt="Nhà yến tự nhiên"
+                                class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                        </div>
+
+                        <!-- Secondary Image (Bottom Left) -->
+                        <div
+                            class="absolute bottom-0 left-0 w-[55%] h-[55%] rounded-3xl overflow-hidden shadow-2xl z-20 border-4 border-white animate-float-slow">
+                            <img src="assets/farm1.png" alt="Yến tinh chế" class="w-full h-full object-cover">
+
+                            <!-- Optional Badge on secondary image -->
+                            <div
+                                class="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-sm p-3 rounded-xl text-center shadow-lg">
+                                <span class="block text-brand-brown font-bold font-serif">Nguồn dinh dưỡng</span>
+                                <span class="block text-xs text-brand-gold uppercase tracking-wider">Từ Chữa Lành</span>
+                            </div>
+                        </div>
+
+                        <!-- Decorative Elements -->
+                        <div class="absolute -top-10 -right-10 w-40 h-40 bg-brand-gold/10 rounded-full blur-3xl z-0">
+                        </div>
+                        <div class="absolute bottom-20 left-20 w-32 h-32 bg-brand-red/10 rounded-full blur-2xl z-0">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-brand-brown text-white/80 py-16">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12 border-b border-white/10 pb-12">
+                    <div class="md:col-span-1">
+                        <div
+                            class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-brand-brown text-3xl font-bold mb-6">
+                            Y</div>
+                        <p class="text-sm leading-relaxed mb-6">Yến Sào Việt - Thượng phẩm cho sức khỏe. Chúng tôi cam
+                            kết
+                            mang đến những sản phẩm yến sào chất lượng cao nhất.</p>
+                        <div class="flex gap-4">
+                            <a href="#"
+                                class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-red transition-colors">F</a>
+                            <a href="#"
+                                class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-red transition-colors">Y</a>
+                            <a href="#"
+                                class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-red transition-colors">I</a>
+                        </div>
+                    </div>
+
+                    <div class="col-span-1">
+                        <h4 class="font-bold text-white text-lg mb-6">Liên Hệ</h4>
+                        <ul class="space-y-4 text-sm">
+                            <li class="flex items-start gap-3">
+                                <span class="text-brand-gold">📍</span> 123 Đường ABC, Quận XYZ, TP.HCM
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="text-brand-gold">📞</span> 09xx.xxx.xxx
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="text-brand-gold">✉️</span> cskh@yensaoviet.com
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-span-1">
+                        <h4 class="font-bold text-white text-lg mb-6">Chính Sách</h4>
+                        <ul class="space-y-4 text-sm">
+                            <li><a href="#" class="hover:text-brand-gold transition-colors">Chính sách vận chuyển</a>
+                            </li>
+                            <li><a href="#" class="hover:text-brand-gold transition-colors">Chính sách đổi trả</a></li>
+                            <li><a href="#" class="hover:text-brand-gold transition-colors">Bảo mật thông tin</a></li>
+                            <li><a href="#" class="hover:text-brand-gold transition-colors">Hướng dẫn mua hàng</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-span-1">
+                        <h4 class="font-bold text-white text-lg mb-6">Đăng Ký Nhận Tin</h4>
+                        <p class="text-sm mb-4">Nhận ngay mã giảm giá 10% cho đơn hàng đầu tiên.</p>
+                        <div class="flex">
+                            <input type="email" placeholder="Email của bạn..."
+                                class="bg-white/10 border-none outline-none px-4 py-2 rounded-l w-full focus:ring-1 focus:ring-brand-gold placeholder-white/50">
+                            <button
+                                class="bg-brand-red px-4 text-white font-bold rounded-r hover:bg-red-600 transition-colors">Gửi</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-8 text-center text-sm text-white/40">
+                    &copy; 2024 Yến Sào Việt. Designed with ❤️ by Antigravity.
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Spacer to drive scroll height (Hero + Main Content) -->
+    <div id="scroll-spacer" class="absolute top-0 left-0 w-full -z-10 pointer-events-none"></div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+
+</html>
