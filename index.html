@@ -103,17 +103,22 @@
 
         <!-- Product Images (Blended, Floating) -->
         <!-- Hũ Yến -->
-        <img src="assets/yen-hu.png" alt="Yến Chưng Sẵn" class="hero-product-img hero-img-hu">
+        <img src="assets/yen-hu.png" alt="Yến Chưng Sẵn" class="hero-product-img hero-img-hu mouse-parallax" data-speed="0.04">
 
         <!-- Hộp Yến (Centerpiece) -->
-        <img src="assets/yen-hop.png" alt="Hộp Quà Yến Sào" class="hero-product-img hero-img-box">
+        <img src="assets/yen-hop.png" alt="Hộp Quà Yến Sào" class="hero-product-img hero-img-box mouse-parallax" data-speed="-0.03">
 
         <!-- Tổ Yến Thô -->
-        <img src="assets/yen-tinh-che.png" alt="Tổ Yến Nguyên Chất" class="hero-product-img hero-img-raw">
+        <img src="assets/yen-tinh-che.png" alt="Tổ Yến Nguyên Chất" class="hero-product-img hero-img-raw mouse-parallax" data-speed="0.05">
 
-        <!-- Minimal Brand Overlay (Optional - kept very subtle as requested 'no large headline') -->
-        <!-- Just a very faint watermark or standard text if needed, but user said NO large headline.
-             We will leave it purely visual as requested. -->
+        <!-- Minimal Brand Overlay / Text Reveal -->
+        <div class="absolute z-10 text-center flex flex-col items-center pointer-events-none top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-[60%] w-full">
+            <h1 class="text-brand-brown font-serif font-bold text-7xl md:text-9xl opacity-90 reveal filter drop-shadow-lg">
+                <span class="text-reveal-mask"><span class="text-reveal-item">TÁM</span></span>
+                <span class="text-reveal-mask"><span class="text-reveal-item stagger-2 text-brand-gold">THỦY</span></span>
+            </h1>
+            <p class="text-brand-brown tracking-[0.6em] uppercase text-sm md:text-base mt-2 reveal delay-200 font-medium">Tuyệt Phẩm Thiên Nhiên</p>
+        </div>
 
         <!-- Scroll Down 'V' Button -->
         <div id="hero-scroll-btn" class="scroll-down-btn">
@@ -150,11 +155,16 @@
 
             <div class="container mx-auto px-8 md:px-36 relative z-10 pt-10">
 
-                <!-- Section Header -->
-                <div class="text-center mb-24 reveal reveal-up">
-                    <p class="text-brand-gold text-sm font-bold uppercase tracking-widest mb-3">Bộ Sưu Tập</p>
-                    <h2 class="text-5xl font-serif font-bold text-brand-brown">Tinh Hoa Yến Việt</h2>
-                    <div class="w-24 h-1 bg-brand-gold mx-auto mt-6 rounded-full"></div>
+                <!-- Section Header with Text Reveal -->
+                <div class="text-center mb-24 reveal visible">
+                    <p class="text-brand-gold text-sm font-bold uppercase tracking-widest mb-3 reveal delay-100">Bộ Sưu Tập</p>
+                    <h2 class="text-5xl font-serif font-bold text-brand-brown reveal">
+                        <span class="text-reveal-mask"><span class="text-reveal-item">Tinh</span></span>
+                        <span class="text-reveal-mask"><span class="text-reveal-item stagger-1">Hoa</span></span>
+                        <span class="text-reveal-mask"><span class="text-reveal-item stagger-2 text-brand-gold">Yến</span></span>
+                        <span class="text-reveal-mask"><span class="text-reveal-item stagger-3">Việt</span></span>
+                    </h2>
+                    <div class="w-24 h-1 bg-brand-gold mx-auto mt-6 rounded-full reveal delay-300"></div>
                 </div>
 
                 <!-- Product 1: Yến Thô Nguyên Bản (Text Left - Img Right) -->

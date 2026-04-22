@@ -65,19 +65,21 @@ const renderProducts = () => {
     if (!container) return;
 
     container.innerHTML = products.map(product => `
-        <div class="group card-oriental rounded-xl shadow-card overflow-hidden hover-lift flex flex-col transform transition-all duration-300">
+        <div class="group product-card-premium card-oriental rounded-xl flex flex-col">
             <!-- Image & Tag -->
             <div class="relative aspect-[4/3] overflow-hidden cursor-pointer">
                 <div class="absolute top-0 left-0 bg-brand-red text-white text-xs font-bold px-3 py-1 z-10 rounded-br-lg uppercase tracking-wider">
                     ${product.tag}
                 </div>
-                <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">
                 
-                <!-- Quick Action Overlay -->
-                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <a href="https://zalo.me/0900000000" class="bg-white text-brand-brown px-6 py-2 rounded-full font-bold shadow-lg hover:bg-brand-red hover:text-white transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300">
-                        Xem Chi Tiết
-                    </a>
+                <!-- Quick Action Overlay - Nút Mua ngay trượt lên mượt mà -->
+                <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                    <div class="btn-buy-now">
+                        <a href="https://zalo.me/0900000000" class="bg-white text-brand-brown px-7 py-3 rounded-full font-bold shadow-xl hover:bg-brand-red hover:text-white transition-colors block">
+                            Mua Ngay
+                        </a>
+                    </div>
                 </div>
             </div>
 
@@ -215,30 +217,57 @@ document.addEventListener('DOMContentLoaded', () => {
                 mainContent.style.opacity = 1;
             }
 
-            // Custom Luxury Reveal Logic
-            const windowHeight = window.innerHeight;
-            const isUserScrollingPastHero = scrollY > (windowHeight * 0.3);
-            
-            document.querySelectorAll('.reveal').forEach(el => {
-                if (el.classList.contains('visible')) return;
-                const rect = el.getBoundingClientRect();
-                
-                const isInView = rect.top < windowHeight * 0.85 && rect.bottom > 0;
-                
-                if (isInView) {
-                    // For elements initially at the top of main content (behind hero)
-                    // We hold the animation until user starts scrolling past hero
-                    if (rect.top < windowHeight && !isUserScrollingPastHero) {
-                        return; // wait
-                    }
-                    el.classList.add('visible');
-                }
-            });
+            // Xoá Logic Tự Viết -> Chuyển sang Intersection Observer an toàn
         };
 
         window.addEventListener('scroll', handleScroll);
-        // Initial run
         handleScroll();
+
+        // ==========================================
+        // Tối ưu hóa: Intersection Observer mượt mà
+        // ==========================================
+        const observerOptions = {
+            root: null,
+            rootMargin: '-50px 0px -50px 0px', // Kích hoạt hiệu ứng sớm một chút khi vào màn hình
+            threshold: 0.15 
+        };
+
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                // Logic chặn các element bị giấu dưới Hero (chỉ áp dụng cho những element thuộc #main-content)
+                const rect = entry.boundingClientRect;
+                const windowHeight = window.innerHeight;
+                
+                const insideMainContent = entry.target.closest('#main-content') !== null;
+                const isUnderHero = insideMainContent && rect.top < windowHeight && window.scrollY < windowHeight * 0.3;
+
+                if (entry.isIntersecting && !isUnderHero) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        // ==========================================
+        // Hero Mouse Parallax (Hiệu ứng di chuột lơ lửng)
+        // ==========================================
+        const parallaxElements = document.querySelectorAll('.mouse-parallax');
+        document.addEventListener('mousemove', (e) => {
+            if(window.scrollY > window.innerHeight) return; // Không tính toán khi đã cuộn qua
+            
+            const x = (window.innerWidth - e.pageX) / 100;
+            const y = (window.innerHeight - e.pageY) / 100;
+
+            parallaxElements.forEach(el => {
+                const speed = parseFloat(el.getAttribute('data-speed')) || 0.05;
+                el.style.transform = `translateX(${x * speed * 100}px) translateY(${y * speed * 100}px)`;
+            });
+        });
+
     };
 
     // Run init, and also re-run on resize to handle dynamic height changes
