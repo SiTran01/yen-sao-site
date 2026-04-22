@@ -138,6 +138,13 @@ window.luxuryScrollTo = (targetY, duration = 1500) => {
 
 // Initialization
 document.addEventListener('DOMContentLoaded', () => {
+    // Page load animation trigger
+    setTimeout(() => {
+        document.body.classList.add('page-loaded');
+    }, 100);
+
+    // Reveal handled via scroll logic due to fixed card-deck architecture
+
     renderProducts();
 
     // Header Scroll Effect
@@ -207,6 +214,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 mainContent.style.transform = `translateY(-${offsetAtTransition + contentScroll}px)`;
                 mainContent.style.opacity = 1;
             }
+
+            // Custom Luxury Reveal Logic
+            const windowHeight = window.innerHeight;
+            const isUserScrollingPastHero = scrollY > (windowHeight * 0.3);
+            
+            document.querySelectorAll('.reveal').forEach(el => {
+                if (el.classList.contains('visible')) return;
+                const rect = el.getBoundingClientRect();
+                
+                const isInView = rect.top < windowHeight * 0.85 && rect.bottom > 0;
+                
+                if (isInView) {
+                    // For elements initially at the top of main content (behind hero)
+                    // We hold the animation until user starts scrolling past hero
+                    if (rect.top < windowHeight && !isUserScrollingPastHero) {
+                        return; // wait
+                    }
+                    el.classList.add('visible');
+                }
+            });
         };
 
         window.addEventListener('scroll', handleScroll);

@@ -378,10 +378,42 @@ html {
     position: absolute;
     /* Removed border-radius and box-shadow to avoid boxy frame */
     transition: transform 0.5s ease;
-    opacity: 1;
-    /* Set to 1 for clarity */
+    opacity: 0; /* Wait for page load */
     /* Slight blend to not feel "stuck on" */
     filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+}
+
+.hero-product-img:hover {
+    transform: scale(1.02);
+    z-index: 10;
+}
+
+/* Load Animations triggered by JS */
+.page-loaded .hero-img-box {
+    animation: heroLoadCenter 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards, float-medium 6s ease-in-out infinite 1.5s;
+}
+
+.page-loaded .hero-img-hu {
+    animation: heroLoadLeft 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards, float-slow 7s ease-in-out infinite 1.5s;
+}
+
+.page-loaded .hero-img-raw {
+    animation: heroLoadRight 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards, float-fast 8s ease-in-out infinite 1.5s;
+}
+
+@keyframes heroLoadCenter {
+    0% { opacity: 0; transform: translateY(-50%) scale(0.8) translateY(50px); }
+    100% { opacity: 1; transform: translateY(-50%) scale(1) translateY(0); }
+}
+
+@keyframes heroLoadLeft {
+    0% { opacity: 0; transform: translateX(-100px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes heroLoadRight {
+    0% { opacity: 0; transform: translateX(100px) translateY(50px); }
+    100% { opacity: 1; transform: translateX(0) translateY(0); }
 }
 
 .hero-product-img:hover {
@@ -460,8 +492,18 @@ html {
         transform: none !important;
         width: 60% !important;
         max-width: 250px;
+        /* Mobile simple load */
         animation: none !important;
-        /* Disable float on mobile to prevent shifts */
+        opacity: 1;
+    }
+    
+    .page-loaded .hero-product-img {
+        animation: revealMobile 1s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+    }
+
+    @keyframes revealMobile {
+        0% { opacity: 0; transform: translateY(30px); }
+        100% { opacity: 1; transform: translateY(0); }
     }
 
     .hero-img-box {
@@ -515,3 +557,48 @@ html {
         transform: translateY(-10px) rotate(1deg);
     }
 }
+
+/* =========================================
+   Luxury Reveal Animations (Video-like)
+   ========================================= */
+.reveal {
+    opacity: 0;
+    transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+}
+
+.reveal.reveal-up {
+    transform: translateY(60px);
+}
+
+.reveal.reveal-left {
+    transform: translateX(-60px);
+}
+
+.reveal.reveal-right {
+    transform: translateX(60px);
+}
+
+.reveal.reveal-zoom {
+    transform: scale(0.9);
+}
+
+.reveal.reveal-zoom-center {
+    transform: translateX(-50%) scale(0.8);
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translate(0) scale(1);
+}
+
+.reveal.visible.reveal-zoom-center {
+    transform: translateX(-50%) scale(1);
+}
+
+/* Stagger delays for elegant sequencing */
+.delay-100 { transition-delay: 0.1s; }
+.delay-200 { transition-delay: 0.2s; }
+.delay-300 { transition-delay: 0.3s; }
+.delay-400 { transition-delay: 0.4s; }
+.delay-500 { transition-delay: 0.5s; }
