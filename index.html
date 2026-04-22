@@ -24,37 +24,27 @@
             <!-- Logo -->
             <a href="#" class="flex items-center gap-3 group">
                 <div
-                    class="w-10 h-10 bg-brand-brown rounded-full flex items-center justify-center text-brand-gold text-2xl font-serif font-bold group-hover:bg-brand-gold group-hover:text-white transition-all">
+                    class="w-12 h-12 bg-gradient-to-br from-[#C5A059] to-[#8C6239] rounded-full flex items-center justify-center text-white text-2xl font-serif font-bold group-hover:scale-105 transition-transform shadow-lg">
                     Y</div>
-                <div>
-                    <h1
-                        class="font-sans font-bold text-xl text-brand-brown tracking-wide leading-none group-hover:text-brand-red transition-colors">
-                        YẾN SÀO <span class="text-brand-gold">VIỆT</span></h1>
-                    <span class="text-[10px] text-gray-500 uppercase tracking-[0.2em]">Thượng Hạng</span>
+                <div class="flex flex-col text-left">
+                    <span class="font-serif font-bold text-base text-[#6A5A4A] tracking-[0.1em] leading-tight group-hover:text-[#4A1515] transition-colors">YẾN SÀO</span>
+                    <span class="font-serif font-bold text-base text-[#6A5A4A] tracking-[0.1em] leading-tight group-hover:text-[#4A1515] transition-colors">TÁM THỦY</span>
                 </div>
             </a>
 
             <!-- Desktop Nav -->
             <nav
-                class="hidden rounded-full border border-gray-100 bg-gray-50/80 backdrop-blur-md px-10 py-3 md:flex items-center gap-10 shadow-sm">
-                <a href="#hero"
-                    class="text-base font-bold text-gray-800 hover:text-brand-red transition-colors uppercase tracking-wide">Trang
-                    chủ</a>
-                <a href="#products"
-                    class="text-base font-bold text-gray-800 hover:text-brand-red transition-colors uppercase tracking-wide">Sản
-                    phẩm</a>
-                <a href="#about"
-                    class="text-base font-bold text-gray-800 hover:text-brand-red transition-colors uppercase tracking-wide">Về
-                    chúng tôi</a>
-                <a href="#contact"
-                    class="text-base font-bold text-gray-800 hover:text-brand-red transition-colors uppercase tracking-wide">Liên
-                    hệ</a>
+                class="hidden rounded-full border border-gray-400/30 bg-[#F4EDE5]/60 backdrop-blur-md px-12 py-3 md:flex items-center gap-10 shadow-sm">
+                <a href="#hero" class="nav-item-premium uppercase tracking-[0.1em]">Trang chủ</a>
+                <a href="#products" class="nav-item-premium uppercase tracking-[0.1em]">Sản phẩm</a>
+                <a href="#about" class="nav-item-premium uppercase tracking-[0.1em]">Về chúng tôi</a>
+                <a href="#contact" class="nav-item-premium uppercase tracking-[0.1em]">Liên hệ</a>
             </nav>
 
             <!-- Actions -->
             <div class="flex items-center gap-4">
                 <button
-                    class="hidden md:flex items-center gap-2 border border-brand-red text-brand-red px-5 py-2 rounded-full font-bold text-sm hover:bg-brand-red hover:text-white transition-all pulse-badge">
+                    class="hidden md:flex items-center gap-2 border border-[#C5A059]/50 bg-[#4A1515] text-[#E8D1A7] px-8 py-2.5 rounded-[30px] font-bold text-xs hover:bg-[#C5A059] hover:text-white transition-all uppercase tracking-widest shadow-xl">
                     <span>MUA NGAY</span>
                 </button>
                 <button class="md:hidden text-gray-800"
@@ -93,37 +83,55 @@
         </div>
     </div>
 
-    <!-- Hero Section (Redesigned: Premium, Warm, Minimal) -->
-    <section id="hero" class="hero-rose-brown">
-        <!-- Subtle Ambient Particles -->
-        <div class="hero-particles"></div>
+    <!-- Hero Section (Marble Premium Re-Design) -->
+    <section id="hero" class="hero-marble relative w-full h-screen overflow-hidden flex items-center justify-center">
 
-        <!-- Decorative Light Glow (Top Left) -->
-        <div class="absolute top-0 left-0 w-1/2 h-1/2 bg-white/5 blur-3xl rounded-full pointer-events-none"></div>
+        <!-- Birds decorative placeholders (SVG) -->
+        <svg class="absolute top-[25%] left-[20%] w-32 h-32 opacity-20 text-brand-brown/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5" d="M3 15C3 15 5.5 12 12 12C18.5 12 21 15 21 15C21 15 16 8 12 8C8 8 3 15 3 15Z" transform="rotate(-15 12 12)"/></svg>
+        <svg class="absolute top-[15%] right-[25%] w-48 h-48 opacity-20 text-brand-brown/50 scale-x-[-1]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5" d="M3 15C3 15 5.5 12 12 12C18.5 12 21 15 21 15C21 15 16 8 12 8C8 8 3 15 3 15Z" transform="rotate(10 12 12)"/></svg>
+        <svg class="absolute bottom-[20%] left-[45%] w-20 h-20 opacity-20 text-brand-brown/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5" d="M3 15C3 15 5.5 12 12 12C18.5 12 21 15 21 15C21 15 16 8 12 8C8 8 3 15 3 15Z" transform="rotate(-5 12 12)"/></svg>
 
-        <!-- Product Images (Blended, Floating) -->
-        <!-- Hũ Yến -->
-        <img src="assets/yen-hu.png" alt="Yến Chưng Sẵn" class="hero-product-img hero-img-hu mouse-parallax" data-speed="0.04">
+        <!-- Product Images (Hành trình thị giác) -->
+        <!-- Hộp Yến (Centerpiece Back Right) -->
+        <div class="absolute top-[25%] right-[8%] md:right-[12%] w-[50%] md:w-[450px] z-10 hero-img-load" style="transition-delay: 0.1s;">
+            <div class="transition-transform duration-500 hover:scale-[1.02] w-full h-full">
+                <img src="assets/yen-hop.png" alt="Hộp Quà" class="w-full mouse-parallax opacity-95 drop-shadow-xl" data-speed="-0.02">
+            </div>
+        </div>
+        
+        <!-- Hũ Yến (Left Front) -->
+        <div class="absolute top-[35%] left-[8%] md:left-[18%] w-[60%] md:w-[320px] z-20 hero-img-load" style="transition-delay: 0.3s;">
+            <div class="transition-transform duration-500 hover:scale-[1.02] w-full h-full">
+                <img src="assets/yen-hu.png" alt="Yến Chưng" class="w-full mouse-parallax drop-shadow-2xl" data-speed="0.04">
+            </div>
+        </div>
+        
+        <!-- Tổ Yến Thô (Right Front) -->
+        <div class="absolute bottom-[10%] right-[15%] md:right-[25%] w-[70%] md:w-[380px] z-30 hero-img-load" style="transition-delay: 0.5s;">
+            <div class="transition-transform duration-500 hover:scale-[1.02] w-full h-full">
+                <img src="assets/yen-tinh-che.png" alt="Tổ Yến" class="w-full mouse-parallax drop-shadow-2xl" data-speed="0.06">
+            </div>
+        </div>
 
-        <!-- Hộp Yến (Centerpiece) -->
-        <img src="assets/yen-hop.png" alt="Hộp Quà Yến Sào" class="hero-product-img hero-img-box mouse-parallax" data-speed="-0.03">
-
-        <!-- Tổ Yến Thô -->
-        <img src="assets/yen-tinh-che.png" alt="Tổ Yến Nguyên Chất" class="hero-product-img hero-img-raw mouse-parallax" data-speed="0.05">
-
-        <!-- Minimal Brand Overlay / Text Reveal -->
-        <div class="absolute z-10 text-center flex flex-col items-center pointer-events-none top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-[60%] w-full">
-            <h1 class="text-brand-brown font-serif font-bold text-7xl md:text-9xl opacity-90 reveal filter drop-shadow-lg">
-                <span class="text-reveal-mask"><span class="text-reveal-item">TÁM</span></span>
-                <span class="text-reveal-mask"><span class="text-reveal-item stagger-2 text-brand-gold">THỦY</span></span>
+        <!-- Center Brand Title (Golden Gradient) -->
+        <div class="absolute z-40 text-center flex flex-col items-center pointer-events-none w-full max-w-[1200px] px-4">
+            <h1 class="font-serif font-bold text-[4.5rem] md:text-[6.5rem] lg:text-[7.5rem] leading-[1.05] reveal w-full" style="text-shadow: 0 25px 40px rgba(0,0,0,0.15), 0 4px 15px rgba(0,0,0,0.1);">
+                <!-- Dòng 1: YẾN SÀO -->
+                <span class="text-reveal-mask block px-4 py-2">
+                    <span class="text-reveal-item text-transparent bg-clip-text bg-gradient-to-b from-[#C5A059] to-[#8B6508]">YẾN SÀO</span>
+                </span>
+                <!-- Dòng 2: TÁM THỦY -->
+                <span class="text-reveal-mask block md:-mt-8 px-4 py-2">
+                    <span class="text-reveal-item stagger-2 text-transparent bg-clip-text bg-gradient-to-b from-[#C5A059] to-[#8B6508]">TÁM THỦY</span>
+                </span>
             </h1>
-            <p class="text-brand-brown tracking-[0.6em] uppercase text-sm md:text-base mt-2 reveal delay-200 font-medium">Tuyệt Phẩm Thiên Nhiên</p>
+            <p class="text-[#333333] font-bold tracking-[0.4em] md:tracking-[0.8em] uppercase text-[10px] md:text-sm mt-8 reveal delay-300">Tuyệt Phẩm Thiên Nhiên</p>
         </div>
 
         <!-- Scroll Down 'V' Button -->
-        <div id="hero-scroll-btn" class="scroll-down-btn">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        <div id="hero-scroll-btn" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-brand-brown cursor-pointer z-50 animate-bounce">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="w-8 h-8 opacity-70 hover:text-brand-gold transition-colors">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path>
             </svg>
         </div>
     </section>

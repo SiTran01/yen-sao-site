@@ -22,6 +22,36 @@ html {
 }
 
 /* Custom Scrollbar */
+/* Premium Navigation Link Effects */
+.nav-item-premium {
+    font-size: 16px;
+    font-weight: 500;
+    color: #6D5A46;
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-item-premium::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #4A1515; /* Brand red/dark brown */
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.nav-item-premium:hover {
+    color: #4A1515;
+}
+
+.nav-item-premium:hover::after {
+    transform: scaleX(1);
+}
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -286,20 +316,18 @@ html {
 /* =========================================
    New Premium Hero Section (Rose Brown)
    ========================================= */
-.hero-rose-brown {
-    background-color: #D4B28C;
-    /* Directional Light Source: Top Left */
-    background-image: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.3) 0%, rgba(212, 178, 140, 0) 50%);
+.hero-marble {
+    background-color: #F4EBE1; /* Creamy off-white base */
+    background-image: 
+        radial-gradient(ellipse at top right, rgba(255, 255, 255, 0.9), transparent 60%),
+        radial-gradient(ellipse at bottom left, rgba(200, 180, 150, 0.3), transparent 60%),
+        url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.015' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E"); /* Faint Marble Texture noise */
     position: absolute;
-    /* Sits at top of page */
     top: 0;
     left: 0;
-    z-index: 50;
-    /* Hero on TOP of content */
-    box-shadow: 0 50px 100px rgba(0, 0, 0, 0.5);
-    /* Strong shadow for lifting effect */
+    z-index: 50; /* Hero on TOP of content */
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
     height: 100vh;
-    /* Full Viewport Height */
     width: 100%;
     overflow: hidden;
     display: flex;
@@ -373,54 +401,22 @@ html {
     pointer-events: none;
 }
 
-/* Blended Product Images */
-.hero-product-img {
-    position: absolute;
-    /* Removed border-radius and box-shadow to avoid boxy frame */
-    transition: transform 0.5s ease;
-    opacity: 0; /* Wait for page load */
-    /* Slight blend to not feel "stuck on" */
-    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+/* Blended Product Images Hero Layout */
+.hero-img-load {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(80px);
+    will-change: transform, opacity, filter;
+    transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 1.5s cubic-bezier(0.25, 1, 0.5, 1), filter 1.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.hero-product-img:hover {
-    transform: scale(1.02);
-    z-index: 10;
-}
-
-/* Load Animations triggered by JS */
-.page-loaded .hero-img-box {
-    animation: heroLoadCenter 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards, float-medium 6s ease-in-out infinite 1.5s;
-}
-
-.page-loaded .hero-img-hu {
-    animation: heroLoadLeft 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards, float-slow 7s ease-in-out infinite 1.5s;
-}
-
-.page-loaded .hero-img-raw {
-    animation: heroLoadRight 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards, float-fast 8s ease-in-out infinite 1.5s;
-}
-
-@keyframes heroLoadCenter {
-    0% { opacity: 0; transform: translateY(-50%) scale(0.8) translateY(50px); }
-    100% { opacity: 1; transform: translateY(-50%) scale(1) translateY(0); }
-}
-
-@keyframes heroLoadLeft {
-    0% { opacity: 0; transform: translateX(-100px); }
-    100% { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes heroLoadRight {
-    0% { opacity: 0; transform: translateX(100px) translateY(50px); }
-    100% { opacity: 1; transform: translateX(0) translateY(0); }
-}
-
-.hero-product-img:hover {
-    transform: scale(1.02);
+.page-loaded .hero-img-load {
     opacity: 1;
-    z-index: 10;
+    filter: blur(0);
+    transform: translateY(0);
 }
+
+/* Animations that won't override parallax (Legacy classes removed for parallax clarity) */
 
 /* Specific Positions for the 3 images */
 .hero-img-box {
@@ -600,7 +596,7 @@ html {
     transform: translateY(110%);
     opacity: 0;
     will-change: transform, opacity;
-    transition: transform 1.2s cubic-bezier(0.25, 1, 0.2, 1), opacity 0.8s cubic-bezier(0.25, 1, 0.2, 1);
+    transition: transform 1.5s cubic-bezier(0.25, 1, 0.2, 1), opacity 1.5s cubic-bezier(0.25, 1, 0.2, 1);
 }
 .reveal.visible .text-reveal-item {
     transform: translateY(0);

@@ -140,151 +140,118 @@ window.luxuryScrollTo = (targetY, duration = 1500) => {
 
 // Initialization
 document.addEventListener('DOMContentLoaded', () => {
-    // Page load animation trigger
+    // 1. Page load animation trigger
     setTimeout(() => {
         document.body.classList.add('page-loaded');
     }, 100);
 
-    // Reveal handled via scroll logic due to fixed card-deck architecture
-
+    // 2. Render Products
     renderProducts();
 
-    // Header Scroll Effect
-    // Header Scroll Effect
+    // 3. Header Scroll Effect
     const header = document.getElementById('main-header');
-
-    // Initial check in case of reload mid-scroll
     const updateHeader = () => {
+        if (!header) return;
         if (window.scrollY > 50) {
-            // Scrolled State: White background, shadow, compact
             header.classList.remove('bg-transparent', 'py-6');
             header.classList.add('bg-white/95', 'shadow-md', 'py-4');
         } else {
-            // Top State: Transparent, no shadow, spacious, remove white bg
             header.classList.add('bg-transparent', 'py-6');
             header.classList.remove('bg-white/95', 'shadow-md', 'py-4');
         }
     };
-
     window.addEventListener('scroll', updateHeader);
-    updateHeader(); // Run once on load
+    updateHeader();
 
-    // ========================================== (Moved to Global)
+    // 4. Hero Mouse Parallax Effect
+    const parallaxElements = document.querySelectorAll('.mouse-parallax');
+    document.addEventListener('mousemove', (e) => {
+        if(window.scrollY > window.innerHeight) return;
+        const x = (window.innerWidth - e.pageX) / 100;
+        const y = (window.innerHeight - e.pageY) / 100;
+        parallaxElements.forEach(el => {
+            const speed = parseFloat(el.getAttribute('data-speed')) || 0.05;
+            el.style.transform = `translateX(${x * speed * 100}px) translateY(${y * speed * 100}px)`;
+        });
+    });
 
-    // ==========================================
-    // Card Deck Reveal Effect Logic
-    // ==========================================
+    // 5. Intersection Observer for `.reveal`
+    const observerOptions = {
+        root: null,
+        rootMargin: '-50px 0px -50px 0px',
+        threshold: 0.15 
+    };
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            const rect = entry.boundingClientRect;
+            const windowHeight = window.innerHeight;
+            const insideMainContent = entry.target.closest('#main-content') !== null;
+            const isUnderHero = insideMainContent && rect.top < windowHeight && window.scrollY < windowHeight * 0.3;
+
+            if (entry.isIntersecting && !isUnderHero) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => {
+        revealObserver.observe(el);
+    });
+
+    // 6. Card Deck Reveal Effect Logic
     const hero = document.getElementById('hero');
     const mainContent = document.getElementById('main-content');
     const spacer = document.getElementById('scroll-spacer');
+    
+    // Store handleScroll function globally to remove duplicates if needed
+    let handleScrollFn = null;
 
     const initCardDeck = () => {
         if (!hero || !mainContent || !spacer) return;
 
-        // 1. Calculate Heights
-        const heroHeight = window.innerHeight; // Hero is 100vh
-        const contentHeight = mainContent.scrollHeight; // Full height of content
+        const heroHeight = window.innerHeight;
+        const contentHeight = mainContent.scrollHeight;
         const totalHeight = heroHeight + contentHeight;
 
-        // 2. Set Spacer Height (This creates the scrollable area)
         spacer.style.height = `${totalHeight}px`;
 
-        // 3. Sync Logic
-        const handleScroll = () => {
+        if (handleScrollFn) {
+            window.removeEventListener('scroll', handleScrollFn);
+        }
+
+        handleScrollFn = () => {
             const scrollY = window.scrollY;
-            const parallaxFactor = 0.2; // Move content at 20% speed of scroll
+            const parallaxFactor = 0.2;
 
-            // Scenario A: Scrolled less than 100vh (Hero is still visible)
-            // Hero moves up naturally (it's absolute).
-            // Main Content moves slightly UP (Parallax effect) AND Fades In.
             if (scrollY <= heroHeight) {
-                // Parallax Move
                 mainContent.style.transform = `translateY(-${scrollY * parallaxFactor}px)`;
-
-                // Opacity Fade: Unveil from 0.4 to 1.0
-                // Starts at 0.4 when scrollY=0. Reaches 1.0 when scrollY=heroHeight.
                 const fadeStart = 0.4;
-                const progress = scrollY / heroHeight; // 0 to 1
+                const progress = scrollY / heroHeight;
                 const opacity = fadeStart + (progress * (1 - fadeStart));
                 mainContent.style.opacity = opacity;
-            }
-            // Scenario B: Scrolled past Hero
-            // Content takes over fully.
-            else {
+            } else {
                 const offsetAtTransition = heroHeight * parallaxFactor;
                 const contentScroll = scrollY - heroHeight;
                 mainContent.style.transform = `translateY(-${offsetAtTransition + contentScroll}px)`;
                 mainContent.style.opacity = 1;
             }
-
-            // Xoá Logic Tự Viết -> Chuyển sang Intersection Observer an toàn
         };
 
-        window.addEventListener('scroll', handleScroll);
-        handleScroll();
-
-        // ==========================================
-        // Tối ưu hóa: Intersection Observer mượt mà
-        // ==========================================
-        const observerOptions = {
-            root: null,
-            rootMargin: '-50px 0px -50px 0px', // Kích hoạt hiệu ứng sớm một chút khi vào màn hình
-            threshold: 0.15 
-        };
-
-        const revealObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                // Logic chặn các element bị giấu dưới Hero (chỉ áp dụng cho những element thuộc #main-content)
-                const rect = entry.boundingClientRect;
-                const windowHeight = window.innerHeight;
-                
-                const insideMainContent = entry.target.closest('#main-content') !== null;
-                const isUnderHero = insideMainContent && rect.top < windowHeight && window.scrollY < windowHeight * 0.3;
-
-                if (entry.isIntersecting && !isUnderHero) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.reveal').forEach(el => {
-            revealObserver.observe(el);
-        });
-
-        // ==========================================
-        // Hero Mouse Parallax (Hiệu ứng di chuột lơ lửng)
-        // ==========================================
-        const parallaxElements = document.querySelectorAll('.mouse-parallax');
-        document.addEventListener('mousemove', (e) => {
-            if(window.scrollY > window.innerHeight) return; // Không tính toán khi đã cuộn qua
-            
-            const x = (window.innerWidth - e.pageX) / 100;
-            const y = (window.innerHeight - e.pageY) / 100;
-
-            parallaxElements.forEach(el => {
-                const speed = parseFloat(el.getAttribute('data-speed')) || 0.05;
-                el.style.transform = `translateX(${x * speed * 100}px) translateY(${y * speed * 100}px)`;
-            });
-        });
-
+        window.addEventListener('scroll', handleScrollFn);
+        handleScrollFn();
     };
 
-    // Run init, and also re-run on resize to handle dynamic height changes
     window.addEventListener('load', initCardDeck);
     window.addEventListener('resize', initCardDeck);
 
-    // ==========================================
-    // Attach Scroll Button Event
-    // ==========================================
+    // 7. Scroll Button Event
     const scrollBtn = document.getElementById('hero-scroll-btn');
     if (scrollBtn) {
         scrollBtn.addEventListener('click', () => {
-            const target = window.innerHeight; // Scroll exactly one viewport down
+            const target = window.innerHeight;
             window.luxuryScrollTo(target);
         });
     }
-
-
 
 });
