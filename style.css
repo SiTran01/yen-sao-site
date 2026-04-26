@@ -602,7 +602,8 @@ html {
     /* Tăng thời gian chuyển động thêm 1s theo yêu cầu: 1.5s -> 2.5s */
     transition: transform 3.5s cubic-bezier(0.25, 1, 0.2, 1), opacity 4.5s cubic-bezier(0.25, 1, 0.2, 1);
 }
-.reveal.visible .text-reveal-item {
+.reveal.visible .text-reveal-item,
+.aos-animate .text-reveal-item {
     transform: translateY(0);
     opacity: 1;
 }

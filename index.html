@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="bg-brand-cream text-gray-700 antialiased overflow-x-hidden">
+<body class="bg-brand-cream text-gray-700 antialiased overflow-x-clip">
 
     <!-- Lottie Chim Yến (GSAP) -->
     <div id="chim-container" style="position: absolute; top: 0; left: 0; pointer-events: none; z-index: 9999; opacity: 0;">
@@ -96,44 +96,44 @@
     </div>
 
     <!-- Hero Section (Marble Premium Re-Design) -->
-    <section id="hero" class="hero-marble relative w-full h-screen overflow-hidden flex items-center justify-center">   
+    <section id="hero" class="hero-pin-container hero-marble relative w-full h-screen overflow-hidden flex items-center justify-center">   
         <!-- Thiết kế Hero Mới -->
         <!-- Hero Content Grid (Left Products / Right Text) -->
         <div class="container mx-auto px-8 w-full h-full flex flex-col md:flex-row items-center justify-between z-40 relative pt-[0px]">
             
             <!-- Left Side: Product Parallax Area (Bounded Box to prevent overflow) -->
             <div class="w-full md:w-1/2 flex justify-center items-center mt-10 md:mt-0 relative">
-                <!-- Khung lưới vuông khóa chặt 3 hình ảnh, không cho tràn lên Header -->
-                <div class="relative w-full max-w-[480px] aspect-square">
+                <!-- Khung lưới vuông khóa chặt 3 hình ảnh -->
+                <div class="hero-products-wrapper relative w-full max-w-[480px] aspect-square">
                     
                     <!-- Đĩa Yến Thô (Top Left) -->
-                    <div class="absolute top-[0%] left-[0%] w-[65%] z-10 hero-img-load drop-shadow-2xl" style="transition-delay: 0.1s;">
+                    <div class="gsap-hero-img-1 absolute top-[0%] left-[0%] w-[65%] z-10 hero-img-load drop-shadow-2xl" style="transition-delay: 0.1s;">
                         <div class="w-full h-full transition-transform duration-500 hover:scale-[1.05]">
-                            <img src="assets/yen-tinh-che.png" alt="Tổ Yến Tinh Chế" class="w-full mouse-parallax opacity-95" data-speed="-0.015">
+                            <img src="assets/yen-tinh-che.png" alt="Tổ Yến Tinh Chế" class="w-full opacity-95">
                         </div>
                     </div>
                     
                     <!-- Hũ Yến (Top Right) -->
-                    <div class="absolute top-[18%] right-[0%] w-[45%] z-20 hero-img-load drop-shadow-2xl" style="transition-delay: 0.3s;">
+                    <div class="gsap-hero-img-2 absolute top-[18%] right-[0%] w-[45%] z-20 hero-img-load drop-shadow-2xl" style="transition-delay: 0.3s;">
                         <div class="w-full h-full transition-transform duration-500 hover:scale-[1.05]">
-                            <img src="assets/yen-hu.png" alt="Hũ Yến Chưng" class="w-full mouse-parallax" data-speed="0.02">
+                            <img src="assets/yen-hu.png" alt="Hũ Yến Chưng" class="w-full">
                         </div>
                     </div>
 
                     <!-- Hộp Qùa Đỏ (Bottom Center) -->
-                    <div class="absolute bottom-[5%] left-[20%] w-[60%] z-30 hero-img-load drop-shadow-[0_25px_30px_rgba(0,0,0,0.2)]" style="transition-delay: 0.5s;">
+                    <div class="gsap-hero-img-3 absolute bottom-[5%] left-[20%] w-[60%] z-30 hero-img-load drop-shadow-[0_25px_30px_rgba(0,0,0,0.2)]" style="transition-delay: 0.5s;">
                         <div class="w-full h-full transition-transform duration-500 hover:scale-[1.05]">
-                            <img src="assets/yen-hop.png" alt="Hộp Quà Yến Sào" class="w-full mouse-parallax" data-speed="0.03">
+                            <img src="assets/yen-hop.png" alt="Hộp Quà Yến Sào" class="w-full">
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Right Side: Text & Brand Identity -->
-            <div class="w-full md:w-1/2 flex flex-col text-left pl-0 md:pl-10 relative z-50">
-                <p class="text-[#222222] font-black tracking-[0.4em] md:tracking-[0.6em] uppercase text-xs md:text-sm mb-4 reveal delay-100 opacity-80">Tuyệt Phẩm Thiên Nhiên</p>
+            <div class="hero-text-wrapper w-full md:w-1/2 flex flex-col text-left pl-0 md:pl-10 relative z-50">
+                <p class="hero-subtitle text-[#222222] font-black tracking-[0.4em] md:tracking-[0.6em] uppercase text-xs md:text-sm mb-4 opacity-80" data-aos="fade-up" data-aos-delay="0">Tuyệt Phẩm Thiên Nhiên</p>
                 
-                <h1 class="font-serif font-black text-[3.5rem] md:text-[4rem] lg:text-[5rem] xl:text-[7rem] leading-snug reveal w-full" style="text-shadow: 2px 4px 15px rgba(74, 44, 42, 0.25);">
+                <h1 class="hero-title font-serif font-black text-[3.5rem] md:text-[4rem] lg:text-[5rem] xl:text-[7rem] leading-snug w-full" style="text-shadow: 2px 4px 15px rgba(74, 44, 42, 0.25);" data-aos="fade-up" data-aos-delay="150">
                     <!-- Dòng 1: YẾN SÀO -->
                     <span class="text-reveal-mask block pt-6 pb-2">
                         <span id="to-chim" class="text-reveal-item text-gold-foil">YẾN SÀO</span>
@@ -144,7 +144,7 @@
                     </span>
                 </h1>
                 
-                <div class="mt-8 md:mt-12 reveal delay-500">
+                <div class="mt-8 md:mt-12" data-aos="fade-up" data-aos-delay="300">
                     <button class="bg-[#4A2C2A] text-white overflow-hidden px-10 py-4 md:py-5 rounded-full font-bold text-xs md:text-sm tracking-widest uppercase shadow-[0_10px_20px_rgba(74,44,42,0.3)] hover:-translate-y-1 transition-transform relative group">
                         <span class="relative z-10 group-hover:text-[#F3E5D4] transition-colors">Khám Phá Ngay</span>
                         <div class="absolute inset-0 bg-[#8B6508] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-center duration-300 z-0"></div>
@@ -162,157 +162,132 @@
         </div>
     </section>
 
-    <!-- Main Content Wrapper (Fixed Underneath - Card Deck Effect) -->
-    <!-- It is fixed at the top, waiting to be revealed. JS handles its scroll. -->
-    <main id="main-content" class="fixed top-0 left-0 w-full z-10 bg-brand-cream will-change-transform">
-
-        <!-- Padding top 100vh? No, we handle reveal via Hero moving away. -->
-        <!-- Content starts at top of this fixed container. -->
-
-        <!-- Trust Badges REMOVED as per request -->
-        <!-- Content now starts directly with Products -->
-
-        <!-- Parallax Compensation Spacer -->
-        <!-- Update: Increased to 40vh. 
-             Calculation: 20vh (Parallax Loss) + 15vh (Header approx) + 5vh (Breathing room) = 40vh -->
-        <div class="h-[40vh] w-full"></div>
+    <!-- Main Content Wrapper -->
+    <main id="main-content" class="relative z-10 bg-brand-cream">
 
         <!-- Product Section (Zig-Zag Storytelling) -->
         <section id="products" class="py-24 bg-brand-cream relative">
 
             <!-- Tám Thủy Sticker (Preserved) -->
-            <div class="brand-sticker reveal reveal-zoom-center">
-                <span class="sticker-sub">Thương Hiệu</span>
-                <span class="sticker-main">Tám Thủy</span>
-                <span class="text-[10px] text-white/80 tracking-widest uppercase">Yến Sào Thượng Hạng</span>
+            <div class="relative w-full flex justify-center pt-10 pb-6 z-20" data-aos="zoom-in" data-aos-delay="0">
+                <div class="brand-sticker" style="position: relative; top: auto; left: auto; transform: none;">
+                    <span class="sticker-sub">Thương Hiệu</span>
+                    <span class="sticker-main">Tám Thủy</span>
+                    <span class="text-[10px] text-white/80 tracking-widest uppercase">Yến Sào Thượng Hạng</span>
+                </div>
             </div>
 
             <div class="container mx-auto px-8 md:px-36 relative z-10 pt-10">
 
                 <!-- Section Header with Text Reveal -->
-                <div class="text-center mb-24 reveal visible">
-                    <p class="text-brand-gold text-sm font-bold uppercase tracking-widest mb-3 reveal delay-100">Bộ Sưu Tập</p>
-                    <h2 class="text-5xl font-serif font-bold text-brand-brown reveal">
+                <div class="text-center mb-24">
+                    <p class="text-brand-gold text-sm font-bold uppercase tracking-widest mb-3" data-aos="fade-up" data-aos-delay="150">Bộ Sưu Tập</p>
+                    <h2 class="text-5xl font-serif font-bold text-brand-brown" data-aos="fade-up" data-aos-delay="300">
                         <span class="text-reveal-mask"><span class="text-reveal-item">Tinh</span></span>
                         <span class="text-reveal-mask"><span class="text-reveal-item stagger-1">Hoa</span></span>
                         <span class="text-reveal-mask"><span class="text-reveal-item stagger-2 text-brand-gold">Yến</span></span>
                         <span class="text-reveal-mask"><span class="text-reveal-item stagger-3">Việt</span></span>
                     </h2>
-                    <div class="w-24 h-1 bg-brand-gold mx-auto mt-6 rounded-full reveal delay-300"></div>
+                    <div class="w-24 h-1 bg-brand-gold mx-auto mt-6 rounded-full" data-aos="fade-up" data-aos-delay="450"></div>
                 </div>
 
                 <!-- Product 1: Yến Thô Nguyên Bản (Text Left - Img Right) -->
-                <div class="flex flex-col md:flex-row items-center gap-16 group product-item">
-                    <div class="w-full md:w-1/2 text-left order-2 md:order-1 reveal reveal-left">
-                        <h3
-                            class="text-4xl font-serif font-bold text-brand-brown mb-4 group-hover:text-brand-red transition-colors">
-                            Yến Thô Nguyên Bản</h3>
-                        <p class="text-brand-gold italic mb-6">Giữ trọn tinh hoa thiên nhiên</p>
-                        <p class="text-gray-600 leading-relaxed mb-8 text-lg">
-                            Tổ yến nguyên thủy 100% được thu hoạch và phân loại nghiêm ngặt.
-                            Giữ nguyên vẹn hình dáng, mùi vị tanh đặc trưng và giá trị dinh dưỡng tuyệt đối.
-                            Nở nhiều, sợi dai, phù hợp cho người sành ăn và muốn tự tay sơ chế.
+                <div class="relative w-full max-w-6xl mx-auto mb-24 flex flex-col md:flex-row items-center gap-8 md:gap-12 group">
+                    <!-- Glass Card Background -->
+                    <div class="absolute inset-0 bg-white/70 backdrop-blur-xl border border-white/80 rounded-[3rem] shadow-[0_15px_50px_rgba(74,44,42,0.05)] transform transition-transform duration-700 group-hover:scale-[1.02] -z-10" data-aos="fade-up" data-aos-duration="1000"></div>
+                    
+                    <div class="w-full md:w-1/2 p-10 md:p-16 text-left order-2 md:order-1" data-aos="fade-right" data-aos-delay="150">
+                        <div class="inline-block px-5 py-1.5 border border-[#C5A059]/50 text-[#8B6508] rounded-full text-xs font-bold tracking-[0.2em] uppercase mb-6 bg-[#C5A059]/5">Nguyên Bản 100%</div>
+                        <h3 class="text-4xl md:text-5xl font-serif font-black text-[#4A2C2A] mb-4 group-hover:text-[#8B6508] transition-colors duration-500">Yến Thô Tự Nhiên</h3>
+                        <p class="text-[#C5A059] italic mb-6 text-lg font-serif">Giữ trọn tinh hoa từ thiên nhiên</p>
+                        <p class="text-gray-600 leading-relaxed mb-10 text-base md:text-lg">
+                            Tổ yến nguyên thủy được thu hoạch và phân loại khắt khe nhất. Giữ nguyên vẹn cấu trúc tổ, mùi thơm đặc trưng và giá trị dinh dưỡng tuyệt đối. Lựa chọn hoàn hảo cho người sành sỏi muốn tự tay tinh chế món quà sức khỏe.
                         </p>
-                        <button
-                            class="bg-brand-brown text-white px-8 py-3 rounded-full font-bold hover:bg-brand-red transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                            Xem Chi Tiết
+                        <button class="relative overflow-hidden bg-[#4A2C2A] text-white px-8 py-3.5 rounded-full font-bold shadow-[0_10px_20px_rgba(74,44,42,0.2)] hover:-translate-y-1 transition-all group/btn">
+                            <span class="relative z-10 tracking-widest uppercase text-xs">Chi Tiết Sản Phẩm</span>
+                            <div class="absolute inset-0 bg-[#8B6508] transform scale-x-0 group-hover/btn:scale-x-100 transition-transform origin-center duration-500 z-0"></div>
                         </button>
                     </div>
-                    <div class="w-full md:w-1/2 order-1 md:order-2 relative reveal reveal-right delay-200">
-                        <!-- Decorative Blob -->
-                        <div
-                            class="absolute inset-0 bg-brand-gold/10 rounded-[60%_40%_30%_70%/60%_30%_70%_40%] transform rotate-6 scale-110 -z-10">
-                        </div>
-                        <img src="assets/yen-tinh-che.png" alt="Yến Thô Nguyên Bản"
-                            class="w-full drop-shadow-2xl transform transition-transform duration-700 group-hover:scale-105 object-contain aspect-[4/3]">
+                    
+                    <div class="w-full md:w-1/2 order-1 md:order-2 relative p-8 md:p-12" data-aos="zoom-in-left" data-aos-delay="300">
+                        <!-- Glowing Orb Backdrop -->
+                        <div class="absolute inset-0 bg-gradient-to-tr from-[#C5A059]/30 to-transparent rounded-full blur-[60px] -z-10 transform group-hover:scale-125 transition-transform duration-1000"></div>
+                        <img src="assets/yen-tinh-che.png" alt="Yến Thô Nguyên Bản" class="w-full drop-shadow-[0_25px_35px_rgba(0,0,0,0.2)] transform transition-all duration-[1.5s] group-hover:scale-110 group-hover:-translate-y-6 group-hover:rotate-2 object-contain aspect-square">
                     </div>
                 </div>
 
                 <!-- Product 2: Yến Tươi Tiện Lợi (Img Left - Text Right) -->
-                <div class="flex flex-col md:flex-row items-center gap-16 group product-item">
-                    <div class="w-full md:w-1/2 relative reveal reveal-left">
-                        <!-- Decorative Blob -->
-                        <div
-                            class="absolute inset-0 bg-brand-red/5 rounded-[30%_70%_70%_30%/30%_30%_70%_70%] transform -rotate-3 scale-110 -z-10">
-                        </div>
-                        <img src="assets/yen-hop.png" alt="Yến Tươi Tiện Lợi"
-                            class="w-full drop-shadow-2xl transform transition-transform duration-700 group-hover:scale-105 object-contain aspect-[4/3]">
+                <div class="relative w-full max-w-6xl mx-auto mb-24 flex flex-col md:flex-row items-center gap-8 md:gap-12 group">
+                    <div class="absolute inset-0 bg-white/70 backdrop-blur-xl border border-white/80 rounded-[3rem] shadow-[0_15px_50px_rgba(74,44,42,0.05)] transform transition-transform duration-700 group-hover:scale-[1.02] -z-10" data-aos="fade-up" data-aos-duration="1000"></div>
+                    
+                    <div class="w-full md:w-1/2 relative p-8 md:p-12" data-aos="zoom-in-right" data-aos-delay="150">
+                        <div class="absolute inset-0 bg-gradient-to-tl from-[#800020]/10 via-[#C5A059]/20 to-transparent rounded-full blur-[60px] -z-10 transform group-hover:scale-125 transition-transform duration-1000"></div>
+                        <img src="assets/yen-hop.png" alt="Yến Tươi Tiện Lợi" class="w-full drop-shadow-[0_25px_35px_rgba(0,0,0,0.2)] transform transition-all duration-[1.5s] group-hover:scale-110 group-hover:-translate-y-6 group-hover:-rotate-2 object-contain aspect-square">
                     </div>
-                    <div class="w-full md:w-1/2 text-left reveal reveal-right delay-200">
-                        <h3
-                            class="text-4xl font-serif font-bold text-brand-brown mb-4 group-hover:text-brand-red transition-colors">
-                            Yến Tươi Tiện Lợi</h3>
-                        <p class="text-brand-gold italic mb-6">Giải pháp cho người bận rộn</p>
-                        <p class="text-gray-600 leading-relaxed mb-8 text-lg">
-                            Đã được nhặt sạch lông, loại bỏ tạp chất và chưa qua sấy khô.
-                            Giữ nguyên độ tươi mới, chỉ cần mua về là chưng được ngay.
-                            Tiết kiệm tối đa thời gian, là lựa chọn hoàn hảo cho các mẹ nội trợ hiện đại.
+
+                    <div class="w-full md:w-1/2 p-10 md:p-16 text-left" data-aos="fade-left" data-aos-delay="300">
+                        <div class="inline-block px-5 py-1.5 border border-[#C5A059]/50 text-[#8B6508] rounded-full text-xs font-bold tracking-[0.2em] uppercase mb-6 bg-[#C5A059]/5">Tiện Lợi Tối Đa</div>
+                        <h3 class="text-4xl md:text-5xl font-serif font-black text-[#4A2C2A] mb-4 group-hover:text-[#8B6508] transition-colors duration-500">Yến Tươi Cao Cấp</h3>
+                        <p class="text-[#C5A059] italic mb-6 text-lg font-serif">Giải pháp bồi bổ cho người bận rộn</p>
+                        <p class="text-gray-600 leading-relaxed mb-10 text-base md:text-lg">
+                            Được nhặt sạch lông bằng phương pháp thủ công tỉ mỉ, chưa qua sấy khô để giữ độ tươi giòn nguyên bản. Phân chia sẵn thành từng khẩu phần tinh tế, bạn chỉ cần mở nắp là có thể chưng ngay, tiết kiệm tối đa thời gian.
                         </p>
-                        <button
-                            class="bg-brand-brown text-white px-8 py-3 rounded-full font-bold hover:bg-brand-red transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                            Xem Chi Tiết
+                        <button class="relative overflow-hidden bg-[#4A2C2A] text-white px-8 py-3.5 rounded-full font-bold shadow-[0_10px_20px_rgba(74,44,42,0.2)] hover:-translate-y-1 transition-all group/btn">
+                            <span class="relative z-10 tracking-widest uppercase text-xs">Chi Tiết Sản Phẩm</span>
+                            <div class="absolute inset-0 bg-[#8B6508] transform scale-x-0 origin-right group-hover/btn:scale-x-100 transition-transform duration-500 z-0"></div>
                         </button>
                     </div>
                 </div>
 
                 <!-- Product 3: Yến Tinh Chế Thượng Hạng (Text Left - Img Right) -->
-                <div class="flex flex-col md:flex-row items-center gap-16 group product-item">
-                    <div class="w-full md:w-1/2 text-left order-2 md:order-1 reveal reveal-left">
-                        <h3
-                            class="text-4xl font-serif font-bold text-brand-brown mb-4 group-hover:text-brand-red transition-colors">
-                            Yến Tinh Chế Thượng Hạng</h3>
-                        <p class="text-brand-gold italic mb-6">Quà biếu sang trọng</p>
-                        <p class="text-gray-600 leading-relaxed mb-8 text-lg">
-                            Được tuyển chọn từ những tổ yến già, làm sạch thủ công và ép khuôn định hình đẹp mắt.
-                            Sợi yến dài, màu trắng ngà tự nhiên, khi chưng nở to, dai và thơm.
-                            Bao bì thiết kế tinh tế, là món quà sức khỏe đẳng cấp để biếu tặng.
+                <div class="relative w-full max-w-6xl mx-auto mb-24 flex flex-col md:flex-row items-center gap-8 md:gap-12 group">
+                    <div class="absolute inset-0 bg-white/70 backdrop-blur-xl border border-white/80 rounded-[3rem] shadow-[0_15px_50px_rgba(74,44,42,0.05)] transform transition-transform duration-700 group-hover:scale-[1.02] -z-10" data-aos="fade-up" data-aos-duration="1000"></div>
+                    
+                    <div class="w-full md:w-1/2 p-10 md:p-16 text-left order-2 md:order-1" data-aos="fade-right" data-aos-delay="150">
+                        <div class="inline-block px-5 py-1.5 border border-[#C5A059]/50 text-[#8B6508] rounded-full text-xs font-bold tracking-[0.2em] uppercase mb-6 bg-[#C5A059]/5">Quà Biếu Đẳng Cấp</div>
+                        <h3 class="text-4xl md:text-5xl font-serif font-black text-[#4A2C2A] mb-4 group-hover:text-[#8B6508] transition-colors duration-500">Yến Tinh Chế Ép Tổ</h3>
+                        <p class="text-[#C5A059] italic mb-6 text-lg font-serif">Món quà tặng sức khỏe thượng lưu</p>
+                        <p class="text-gray-600 leading-relaxed mb-10 text-base md:text-lg">
+                            Tuyển chọn từ những tổ yến già cỗi nhất, làm sạch cực kỳ cẩn thận và ép khuôn định hình đẹp mắt. Sợi yến dài, màu trắng ngà tự nhiên, khi chưng nở bung to, dai ngon. Đóng gói trong hộp lụa sang trọng.
                         </p>
-                        <button
-                            class="bg-brand-brown text-white px-8 py-3 rounded-full font-bold hover:bg-brand-red transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                            Xem Chi Tiết
+                        <button class="relative overflow-hidden bg-[#4A2C2A] text-white px-8 py-3.5 rounded-full font-bold shadow-[0_10px_20px_rgba(74,44,42,0.2)] hover:-translate-y-1 transition-all group/btn">
+                            <span class="relative z-10 tracking-widest uppercase text-xs">Chi Tiết Sản Phẩm</span>
+                            <div class="absolute inset-0 bg-[#8B6508] transform scale-x-0 group-hover/btn:scale-x-100 transition-transform origin-center duration-500 z-0"></div>
                         </button>
                     </div>
-                    <div class="w-full md:w-1/2 order-1 md:order-2 relative reveal reveal-right delay-200">
-                        <!-- Decorative Blob -->
-                        <div
-                            class="absolute inset-0 bg-brand-gold/10 rounded-[50%_50%_30%_70%/50%_40%_60%_50%] transform rotate-12 scale-110 -z-10">
-                        </div>
-                        <img src="assets/yen-hop.png" alt="Yến Tinh Chế"
-                            class="w-full drop-shadow-2xl transform transition-transform duration-700 group-hover:scale-105 object-contain aspect-[4/3]">
+                    
+                    <div class="w-full md:w-1/2 order-1 md:order-2 relative p-8 md:p-12" data-aos="zoom-in-left" data-aos-delay="300">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-[#8B6508]/20 via-[#C5A059]/20 to-transparent rounded-full blur-[60px] -z-10 transform group-hover:scale-125 transition-transform duration-1000"></div>
+                        <img src="assets/yen-hop.png" alt="Yến Tinh Chế Thượng Hạng" class="w-full drop-shadow-[0_25px_40px_rgba(0,0,0,0.25)] transform transition-all duration-[1.5s] group-hover:scale-110 group-hover:-translate-y-6 group-hover:rotate-3 object-contain aspect-square">
                     </div>
                 </div>
 
                 <!-- Product 4: Hũ Yến Chưng Sẵn (Img Left - Text Right) -->
-                <div class="flex flex-col md:flex-row items-center gap-16 group product-item">
-                    <div class="w-full md:w-1/2 relative reveal reveal-left">
-                        <!-- Decorative Blob -->
-                        <div
-                            class="absolute inset-0 bg-brand-red/5 rounded-[70%_30%_30%_70%/60%_40%_60%_40%] transform -rotate-6 scale-110 -z-10">
-                        </div>
-                        <img src="assets/yen-hu.png" alt="Hũ Yến Chưng Sẵn"
-                            class="w-full drop-shadow-2xl transform transition-transform duration-700 group-hover:scale-105 object-contain aspect-[4/3]">
+                <div class="relative w-full max-w-6xl mx-auto mb-10 flex flex-col md:flex-row items-center gap-8 md:gap-12 group">
+                    <div class="absolute inset-0 bg-white/70 backdrop-blur-xl border border-white/80 rounded-[3rem] shadow-[0_15px_50px_rgba(74,44,42,0.05)] transform transition-transform duration-700 group-hover:scale-[1.02] -z-10" data-aos="fade-up" data-aos-duration="1000"></div>
+                    
+                    <div class="w-full md:w-1/2 relative p-8 md:p-12" data-aos="zoom-in-right" data-aos-delay="150">
+                        <div class="absolute inset-0 bg-gradient-to-br from-[#800020]/15 via-transparent to-[#C5A059]/20 rounded-full blur-[60px] -z-10 transform group-hover:scale-125 transition-transform duration-1000"></div>
+                        <img src="assets/yen-hu.png" alt="Hũ Yến Chưng Sẵn" class="w-full drop-shadow-[0_20px_35px_rgba(0,0,0,0.2)] transform transition-all duration-[1.5s] group-hover:scale-110 group-hover:-translate-y-6 group-hover:-rotate-3 object-contain aspect-square">
                     </div>
-                    <div class="w-full md:w-1/2 text-left reveal reveal-right delay-200">
-                        <h3
-                            class="text-4xl font-serif font-bold text-brand-brown mb-4 group-hover:text-brand-red transition-colors">
-                            Hũ Yến Chưng Sẵn</h3>
-                        <p class="text-brand-gold italic mb-6">Dinh dưỡng tức thì</p>
-                        <p class="text-gray-600 leading-relaxed mb-8 text-lg">
-                            Yến chưng tươi tiệt trùng, kết hợp cùng các nguyên liệu quý như Táo Đỏ, Hạt Sen, Đông Trùng
-                            Hạ Thảo.
-                            Hàm lượng yến cao, vị thanh mát, bật nắp dùng ngay.
-                            Cực tốt cho người mới ốm dậy, người già cần bồi bổ nhanh chóng.
+
+                    <div class="w-full md:w-1/2 p-10 md:p-16 text-left" data-aos="fade-left" data-aos-delay="300">
+                        <div class="inline-block px-5 py-1.5 border border-[#C5A059]/50 text-[#8B6508] rounded-full text-xs font-bold tracking-[0.2em] uppercase mb-6 bg-[#C5A059]/5">Dinh Dưỡng Tức Thì</div>
+                        <h3 class="text-4xl md:text-5xl font-serif font-black text-[#4A2C2A] mb-4 group-hover:text-[#8B6508] transition-colors duration-500">Hũ Yến Chưng Sẵn</h3>
+                        <p class="text-[#C5A059] italic mb-6 text-lg font-serif">Kết tinh thảo mộc hoàng cung</p>
+                        <p class="text-gray-600 leading-relaxed mb-10 text-base md:text-lg">
+                            Yến chưng tươi tiệt trùng nguyên hũ thủy tinh, kết hợp cùng các dược liệu quý như Táo Đỏ Tân Cương, Hạt Sen Đồng Tháp, Đông Trùng Hạ Thảo. Hàm lượng yến đặc sệt, bật nắp là có thể dùng ngay.
                         </p>
-                        <button
-                            class="bg-brand-brown text-white px-8 py-3 rounded-full font-bold hover:bg-brand-red transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                            Xem Chi Tiết
+                        <button class="relative overflow-hidden bg-[#4A2C2A] text-white px-8 py-3.5 rounded-full font-bold shadow-[0_10px_20px_rgba(74,44,42,0.2)] hover:-translate-y-1 transition-all group/btn">
+                            <span class="relative z-10 tracking-widest uppercase text-xs">Chi Tiết Sản Phẩm</span>
+                            <div class="absolute inset-0 bg-[#8B6508] transform scale-x-0 origin-right group-hover/btn:scale-x-100 transition-transform duration-500 z-0"></div>
                         </button>
                     </div>
                 </div>
 
                 <!-- Farm Section: Cơ Sở Chăn Nuôi (Bonus) -->
                 <div
-                    class="bg-white rounded-[3rem] p-12 shadow-xl border border-gray-100 flex flex-col md:flex-row items-center gap-12 reveal reveal-up">
+                    class="bg-white rounded-[3rem] p-12 shadow-xl border border-gray-100 flex flex-col md:flex-row items-center gap-12" data-aos="fade-up" data-aos-delay="0">
                     <div class="w-full md:w-1/2">
                         <h3 class="text-4xl font-serif font-bold text-brand-brown mb-6">Cơ sở chăn nuôi <br><span
                                 class="text-brand-gold">Chuẩn Tự Nhiên</span></h3>
@@ -348,7 +323,7 @@
                 <div class="grid md:grid-cols-2 gap-16 items-center">
 
                     <!-- Text Content -->
-                    <div class="order-2 md:order-1 reveal reveal-left">
+                    <div class="order-2 md:order-1" data-aos="fade-right" data-aos-delay="0">
                         <h2 class="font-serif font-bold text-4xl md:text-5xl text-brand-brown mb-6 leading-tight">
                             Cơ sở chăn nuôi <br>
                             <span class="text-brand-brown">chuẩn tự nhiên</span>
@@ -375,7 +350,7 @@
                     </div>
 
                     <!-- Overlapping Images -->
-                    <div class="order-1 md:order-2 relative h-[500px] w-full reveal reveal-right delay-200">
+                    <div class="order-1 md:order-2 relative h-[500px] w-full" data-aos="zoom-in" data-aos-delay="150">
                         <!-- Main Image (Top Right) -->
                         <div
                             class="absolute top-0 right-0 w-[85%] h-[80%] rounded-3xl overflow-hidden shadow-2xl z-10 border-4 border-white">
@@ -473,12 +448,11 @@
         </footer>
     </main>
 
-    <!-- Spacer to drive scroll height (Hero + Main Content) -->
-    <div id="scroll-spacer" class="absolute top-0 left-0 w-full -z-10 pointer-events-none"></div>
-
     <!-- Scripts -->
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="assets/js/lenis.min.js"></script>
+    <script src="assets/js/gsap.min.js"></script>
+    <script src="assets/js/ScrollTrigger.min.js"></script>
     <script src="script.js"></script>
 </body>
 

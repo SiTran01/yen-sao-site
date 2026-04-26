@@ -112,30 +112,35 @@ const renderProducts = () => {
 };
 
 // ==========================================
-// Custom Luxury Smooth Scroll (Global Scope)
+// GSAP & Lenis Smooth Scroll Setup
 // ==========================================
-window.luxuryScrollTo = (targetY, duration = 1500) => {
-    const startY = window.scrollY;
-    const diff = targetY - startY;
-    let startTime = null;
+// Register ScrollTrigger
+gsap.registerPlugin(ScrollTrigger);
 
-    // Ease-in-out Cubic function for "luxury" feel
-    const easeInOutCubic = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+// Initialize Lenis
+const lenis = new Lenis({
+    duration: 1.5,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // easeOutExpo
+    smooth: true,
+    smoothTouch: false,
+});
 
-    const animation = (currentTime) => {
-        if (startTime === null) startTime = currentTime;
-        const timeElapsed = currentTime - startTime;
-        const progress = Math.min(timeElapsed / duration, 1);
+function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
 
-        const ease = easeInOutCubic(progress);
-        window.scrollTo(0, startY + (diff * ease));
+// Connect Lenis to GSAP ScrollTrigger
+lenis.on('scroll', ScrollTrigger.update);
+gsap.ticker.add((time) => {
+    lenis.raf(time * 1000);
+});
+gsap.ticker.lagSmoothing(0);
 
-        if (timeElapsed < duration) {
-            requestAnimationFrame(animation);
-        }
-    };
-
-    requestAnimationFrame(animation);
+// Smooth scroll to target
+window.luxuryScrollTo = (targetId) => {
+    lenis.scrollTo(targetId, { duration: 1.5, easing: (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2 });
 };
 
 // Initialization
@@ -143,6 +148,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Page load animation trigger
     setTimeout(() => {
         document.body.classList.add('page-loaded');
+        ScrollTrigger.refresh();
+
+        // Gỡ bỏ CSS transition sau khi animation load xong để nhường quyền điều khiển transform cho GSAP
+        // (Nếu không GSAP sẽ bị CSS giằng xé giật lag)
+        setTimeout(() => {
+            document.querySelectorAll('.hero-img-load').forEach(el => {
+                el.style.transition = 'none';
+            });
+        }, 2000); 
     }, 100);
 
     // 2. Render Products
@@ -150,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Header Scroll Effect
     const header = document.getElementById('main-header');
-    const updateHeader = () => {
+    window.addEventListener('scroll', () => {
         if (!header) return;
         if (window.scrollY > 50) {
             header.classList.remove('bg-transparent', 'py-6');
@@ -159,164 +173,165 @@ document.addEventListener('DOMContentLoaded', () => {
             header.classList.add('bg-transparent', 'py-6');
             header.classList.remove('bg-white/95', 'shadow-md', 'py-4');
         }
-    };
-    window.addEventListener('scroll', updateHeader);
-    updateHeader();
-
-    // 4. Hero Mouse Parallax Effect
-    const parallaxElements = document.querySelectorAll('.mouse-parallax');
-    document.addEventListener('mousemove', (e) => {
-        if(window.scrollY > window.innerHeight) return;
-        const x = (window.innerWidth - e.pageX) / 100;
-        const y = (window.innerHeight - e.pageY) / 100;
-        parallaxElements.forEach(el => {
-            const speed = parseFloat(el.getAttribute('data-speed')) || 0.05;
-            el.style.transform = `translateX(${x * speed * 100}px) translateY(${y * speed * 100}px)`;
-        });
     });
 
-    // 5. Scroll-based Reveal Logic (Thay thế Intersection Observer để đồng bộ với thanh cuộn thủ công)
-    const checkReveals = () => {
-        const windowHeight = window.innerHeight;
-        const scrollY = window.scrollY;
-        const curtainBottom = windowHeight - scrollY; // Đáy của Hero banner khi cuộn
+    // 4. Hero Banner - ScrollTrigger Parallax
+    const heroPinContainer = document.querySelector('.hero-pin-container');
+    if (heroPinContainer) {
+        // Tắt mouse parallax vì ScrollTrigger sẽ lấy trọng tâm
+        document.querySelectorAll('.mouse-parallax').forEach(el => el.classList.remove('mouse-parallax'));
 
-        document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
-            const rect = el.getBoundingClientRect();
-            
-            // Phần tử nằm trong vùng hiển thị của màn hình
-            if (rect.top < windowHeight * 0.85 && rect.bottom > 0) {
-                // Nếu phần tử thuộc khối nội dung chính, bắt buộc phải nằm "lộ" ra khỏi lớp rèm che Hero mới được kích hoạt
-                const isInsideMain = el.closest('#main-content') !== null;
-                
-                // Kích hoạt khi không nằm trong nội dung chính, HOẶC đã kéo lộ khỏi rèm che
-                if (!isInsideMain || rect.top > curtainBottom - 150) {
-                    el.classList.add('visible');
+        // Kịch bản GSAP Parallax (Không dùng Pin nữa để các khối cùng trượt tự nhiên)
+        const heroTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: heroPinContainer,
+                start: "top top",
+                end: "bottom top", // Kéo dài hiệu ứng đúng bằng chiều cao Hero
+                scrub: 1, // Mượt mà liên kết với thanh cuộn
+            }
+        });
+
+        // Chữ trượt lên nhanh hơn một chút để tạo độ sâu (Parallax)
+        heroTl.to('.hero-text-wrapper', {
+            y: -150,
+            opacity: 0.3,
+            duration: 1
+        }, 0);
+
+        // Sản phẩm xòe ra và trượt chậm hơn trang (tạo cảm giác nổi 3D)
+        heroTl.to('.gsap-hero-img-1', {
+            y: 150, // Trượt xuống so với khung => Trượt lên chậm hơn so với trang
+            xPercent: -5,
+            scale: 1.1,
+            rotation: -3,
+            duration: 1
+        }, 0);
+        
+        heroTl.to('.gsap-hero-img-2', {
+            y: 200,
+            xPercent: 10,
+            scale: 1.15,
+            rotation: 5,
+            duration: 1
+        }, 0);
+
+        heroTl.to('.gsap-hero-img-3', {
+            y: 100,
+            scale: 1.1,
+            rotation: -2,
+            duration: 1
+        }, 0);
+    }
+
+    // Hiệu ứng "Trượt lên" cho phần Main Content (Parallax overlap)
+    const mainContent = document.getElementById('main-content');
+    if (mainContent) {
+        gsap.fromTo(mainContent, 
+            { y: 150 }, // Đẩy xuống một chút lúc đầu
+            {
+                y: 0,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: mainContent,
+                    start: "top bottom", // Khi main-content vừa xuất hiện ở đáy màn hình
+                    end: "top 20%",      // Kéo dài cho đến khi nó lên đến 20% màn hình
+                    scrub: 1
                 }
             }
-        });
-    };
+        );
+    }
 
-    // 6. Card Deck Reveal Effect Logic
-    const hero = document.getElementById('hero');
-    const mainContent = document.getElementById('main-content');
-    const spacer = document.getElementById('scroll-spacer');
-    
-    // Store handleScroll function globally to remove duplicates if needed
-    let handleScrollFn = null;
-
-    const initCardDeck = () => {
-        if (!hero || !mainContent || !spacer) return;
-
-        const heroHeight = window.innerHeight;
-        const contentHeight = mainContent.scrollHeight;
-        const totalHeight = heroHeight + contentHeight;
-
-        spacer.style.height = `${totalHeight}px`;
-
-        if (handleScrollFn) {
-            window.removeEventListener('scroll', handleScrollFn);
+    // 5. Trình diễn hiệu ứng cũ của AOS bằng GSAP (Thay thế hoàn toàn AOS)
+    gsap.utils.toArray('[data-aos]').forEach(element => {
+        // Đối với phần tử trong Hero, tự động hiển thị sau khi load xong
+        if (element.closest('#hero')) {
+            setTimeout(() => {
+                element.classList.add('aos-animate');
+            }, (parseInt(element.getAttribute('data-aos-delay')) || 0) + 100);
+            return;
         }
 
-        handleScrollFn = () => {
-            const scrollY = window.scrollY;
-            const parallaxFactor = 0.2;
+        const animationType = element.getAttribute('data-aos');
+        const delay = (parseInt(element.getAttribute('data-aos-delay')) || 0) / 1000;
+        const duration = (parseInt(element.getAttribute('data-aos-duration')) || 1000) / 1000;
 
-            if (scrollY <= heroHeight) {
-                mainContent.style.transform = `translateY(-${scrollY * parallaxFactor}px)`;
-                const fadeStart = 0.4;
-                const progress = scrollY / heroHeight;
-                const opacity = fadeStart + (progress * (1 - fadeStart));
-                mainContent.style.opacity = opacity;
-            } else {
-                const offsetAtTransition = heroHeight * parallaxFactor;
-                const contentScroll = scrollY - heroHeight;
-                mainContent.style.transform = `translateY(-${offsetAtTransition + contentScroll}px)`;
-                mainContent.style.opacity = 1;
+        let y = 0, x = 0, scale = 1;
+        if (animationType === 'fade-up') y = 50;
+        else if (animationType === 'fade-right') x = -50;
+        else if (animationType === 'fade-left') x = 50;
+        else if (animationType === 'zoom-in') scale = 0.8;
+        else if (animationType === 'zoom-in-left') { scale = 0.8; x = -50; }
+        else if (animationType === 'zoom-in-right') { scale = 0.8; x = 50; }
+
+        gsap.fromTo(element, 
+            { opacity: 0, y: y, x: x, scale: scale },
+            {
+                scrollTrigger: {
+                    trigger: element,
+                    start: "top 85%", // Kích hoạt khi phần tử hiện 15% dưới màn hình
+                    toggleActions: "play none none none"
+                },
+                opacity: 1,
+                y: 0,
+                x: 0,
+                scale: 1,
+                duration: duration,
+                delay: delay,
+                ease: "power3.out",
+                onStart: () => element.classList.add('aos-animate') // Giữ class để Text Reveal chạy
             }
-            
-            // Check reveal elements logically synced with parallax layout
-            checkReveals();
-        };
+        );
+    });
 
-        window.addEventListener('scroll', handleScrollFn);
-        handleScrollFn();
-    };
-
-    // Fix lỗi mất Scrollbar: Đảm bảo script tính toán giao diện luôn chạy.
-    // Nếu event load đã fire rồi thì chạy luôn. Nếu chưa thì lắng nghe.
-    if (document.readyState === 'complete') {
-        initCardDeck();
-    } else {
-        window.addEventListener('load', initCardDeck);
-        // Fallback tự chạy sau 500ms để đề phòng browser ngầm chặn event load
-        setTimeout(initCardDeck, 500);
-    }
-    
-    window.addEventListener('resize', initCardDeck);
-
-    // 7. Scroll Button Event
+    // 6. Scroll Button Event
     const scrollBtn = document.getElementById('hero-scroll-btn');
-    const firstSection = document.getElementById('main-content');
-    
-    if (scrollBtn && firstSection) {
+    if (scrollBtn) {
         scrollBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            const target = window.innerHeight; // Kéo xuống màn hình thứ 2
-            
-            // Gọi hàm trượt thủ công 1.5s với hiệu ứng gia tốc cong mịn màng
-            window.luxuryScrollTo(target, 1500); 
+            window.luxuryScrollTo('#products'); 
         });
     }
-
 });
 
-// 8. Chim Yến GSAP Effect (Lottie Version)
+// 7. Chim Yến GSAP Effect (Lottie Version)
 window.addEventListener("load", function () {
     const chimContainer = document.getElementById("chim-container");
     const baiDap = document.getElementById("to-chim");
 
-    // Nếu thiếu HTML thì bỏ qua không chạy để tránh lỗi web
     if (!chimContainer || !baiDap) return;
 
-    // Tính tọa độ bãi đáp (Chữ YẾN SÀO)
     const rect = baiDap.getBoundingClientRect();
-    
-    // Tọa độ điểm đậu (canh vào giữa chữ, nhích lên trên một xíu)
-    const targetX = rect.left + (rect.width / 2) - 60; // 60 là một nửa kích thước chim
-    const targetY = rect.top - 80; // Đậu cao hơn chữ một chút
+    const targetX = rect.left + (rect.width / 2) - 60; 
+    const targetY = rect.top - 80; 
 
-    // Bắt đầu chuỗi hiệu ứng GSAP
     const tl = gsap.timeline();
 
     tl.set(chimContainer, {
-        x: -150, // Xuất phát từ ngoài màn hình bên trái
-        y: targetY - 100, // Cao hơn bãi đáp
+        x: -150, 
+        y: targetY - 100, 
         opacity: 1,
-        scale: 1.5 // Bay từ xa tới nên chim to hơn chút
+        scale: 1.5 
     })
     .to(chimContainer, {
-        duration: 2.5, // Thời gian bay (2.5 giây)
+        duration: 2.5, 
         x: targetX,
         y: targetY,
-        scale: 1, // Thu về kích thước thật khi đậu
-        ease: "power2.out" // Bay nhanh rồi hãm phanh mượt mà lúc đậu
+        scale: 1, 
+        ease: "power2.out" 
     })
     .add(() => {
-        // Hiệu ứng lóe sáng vàng trên chữ khi chim đậu
         gsap.to(baiDap, {
-            textShadow: "0px 0px 20px #F3E5D4, 0px 0px 40px #E1B875", // Thêm hào quang
+            textShadow: "0px 0px 20px #F3E5D4, 0px 0px 40px #E1B875", 
             duration: 0.3,
             yoyo: true,
             repeat: 1
         });
     })
     .to(chimContainer, {
-        // Hiệu ứng nhấp nhô nhẹ lơ lửng sau khi tới nơi
         y: targetY - 15,
         duration: 1.5,
-        repeat: -1, // Lặp lại vô hạn
-        yoyo: true, // Lên xuống mượt mà
+        repeat: -1, 
+        yoyo: true, 
         ease: "sine.inOut"
     });
 });
