@@ -1,0 +1,23 @@
+💡 Ideas hay có thể làm ngay
+🔥 Idea 1 — Con chim bay theo đường cong tự nhiên (Bezier Path)
+Hiện tại con chim bay thẳng từ trái → phải (x: -150 → targetX), trông cứng. Có thể dùng gsap.MotionPathPlugin để bay theo đường cong arc đẹp hơn, giống chim thật.
+
+✨ Idea 2 — Cursor custom hình tổ yến / con chim
+Thay cursor mặc định bằng 1 dot nhỏ màu vàng gold, kèm 1 vòng tròn trail theo sau. Dùng GSAP quickSetter cho lag effect cực mượt — rất phổ biến trên site Awwwards.
+
+🌊 Idea 3 — Horizontal Scroll cho Product Section
+Thay vì zig-zag dọc, biến 4 sản phẩm thành 1 dải horizontal scroll pinned bằng GSAP ScrollTrigger. User kéo dọc → hình ảnh sản phẩm trượt ngang như băng chuyền. Rất đặc biệt, hiếm thấy trên site yến sào VN.
+
+🎇 Idea 4 — Floating particles vàng ở Hero
+Thêm 15-20 particle CSS nhỏ màu gold #C5A059 bay lơ lửng trong Hero background, kết hợp opacity và transform animation stagger. Tăng cảm giác sang trọng, không nặng trang.
+
+📱 Idea 5 — Section "Số liệu uy tín" (Counter Animation)
+Thêm 1 section nhỏ với 3-4 con số: 5000+ khách hàng, 10 năm kinh nghiệm, 100% nguyên chất... Khi scroll đến, số đếm từ 0 → target bằng GSAP. Social proof quan trọng cho site thương mại.
+
+🖱️ Idea 6 — Magnetic Button Effect
+Các nút Chi Tiết Sản Phẩm và Khám Phá Ngay sẽ bị nam châm hút chuột lại khi hover gần. GSAP mousemove event + quickSetter. Micro-interaction cực premium.
+
+🌟 Idea 7 — Pinned Hero với chữ scale to dần khi scroll
+Thay vì hero fade out, thêm effect chữ "YẾN SÀO" scale từ 1 → 3 khi user cuộn xuống, rồi fade out. Dùng ScrollTrigger scrub. Giống Awwwards 2024 trend.
+
+Bạn muốn làm idea nào trước? Mình có thể code ngay cho bạn!

@@ -717,3 +717,247 @@ html {
     transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
     will-change: transform;
 }
+
+/* =========================================
+   Custom Gold Cursor — Luxury Awwwards Style
+   ========================================= */
+
+/* Ẩn cursor mặc định trên desktop có chuột thật */
+@media (hover: hover) {
+    *, *::before, *::after {
+        cursor: none !important;
+    }
+}
+
+/* Base cho cả 2 cursor elements */
+#cursor-dot,
+#cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 999999;
+    opacity: 0;
+    will-change: transform;
+    transform: translate(-50%, -50%);
+}
+
+/* Dot: hạt vàng nhỏ, chạy sát cursor tức thì */
+#cursor-dot {
+    width: 8px;
+    height: 8px;
+    background: #C5A059;
+    box-shadow: 0 0 10px rgba(197, 160, 89, 0.9);
+    transition: width 0.2s ease, height 0.2s ease,
+                background 0.2s ease, box-shadow 0.2s ease,
+                opacity 0.3s ease;
+}
+
+/* Ring: vòng tròn vàng mờ, lag theo sau */
+#cursor-ring {
+    width: 40px;
+    height: 40px;
+    border: 1.5px solid rgba(197, 160, 89, 0.5);
+    background: transparent;
+    transition: width 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+                height 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+                border-color 0.35s ease,
+                background 0.35s ease,
+                opacity 0.3s ease;
+}
+
+/* Hiện cursor lần đầu sau mousemove */
+#cursor-dot.is-visible,
+#cursor-ring.is-visible {
+    opacity: 1;
+}
+
+/* Hover trên interactive element → ring nở to, dot sáng hơn */
+body[data-cursor="hover"] #cursor-dot {
+    width: 10px;
+    height: 10px;
+    background: #8B6508;
+    box-shadow: 0 0 18px rgba(139, 101, 8, 1);
+}
+
+body[data-cursor="hover"] #cursor-ring {
+    width: 54px;
+    height: 54px;
+    border-color: rgba(139, 101, 8, 0.65);
+    background: rgba(197, 160, 89, 0.06);
+}
+
+/* =========================================
+   Horizontal Scroll Gallery (Idea 3)
+   ========================================= */
+
+/* Section container — full viewport height, GSAP sẽ pin tại đây */
+.hscroll-section {
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Horizontal track — flex row, sẽ bị GSAP translate sang trái */
+.hscroll-track {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    will-change: transform;
+    /* Không wrap: tất cả cards trên 1 dòng */
+    flex-wrap: nowrap;
+}
+
+/* Mỗi card giữ kích thước cố định, không co rút */
+.hscroll-card {
+    flex-shrink: 0;
+}
+
+/* Product cards: box-shadow gold khi hover */
+.hscroll-product-card {
+    box-shadow: 0 0 0 0 rgba(197, 160, 89, 0);
+    transition: box-shadow 0.5s ease;
+}
+.hscroll-product-card:hover {
+    box-shadow: 0 0 60px 4px rgba(197, 160, 89, 0.12);
+}
+
+/* ── Intro Text Line Mask (animation "ghi từ trên xuống") ──
+   .hscroll-line-wrap  = outer container, overflow hidden (làm mặt nạ)
+   .hscroll-intro-line = nội dung thực, GSAP dịch từ y:110% → y:0
+   ──────────────────────────────────────────────────────────── */
+.hscroll-line-wrap {
+    display: block;
+    overflow: hidden;
+    line-height: 1.1;
+}
+
+.hscroll-intro-line {
+    display: block;
+    /* Trạng thái ban đầu do GSAP set(), không set ở đây
+       để tránh flash ẩn trên mobile */
+}
+
+
+/* Scroll hint arrow animation (horizontal bounce — legacy, kept for safety) */
+@keyframes hscroll-bounce {
+    0%, 100% { transform: translateX(0); }
+    50%       { transform: translateX(5px); }
+}
+.hscroll-arrow-anim {
+    animation: hscroll-bounce 1.4s ease-in-out infinite;
+}
+
+/* ── Drag Hint Chevron Wave ─────────────────────────────────────────────
+   3 chevrons nhấp nháy lần lượt → tạo sóng chỉ hướng phải
+   ──────────────────────────────────────────────────────────────────── */
+@keyframes chev-pulse {
+    0%, 60%, 100% { opacity: 0.25; transform: translateX(0); }
+    30%           { opacity: 1;    transform: translateX(3px); }
+}
+
+.hscroll-chev-1 { animation: chev-pulse 1.6s ease-in-out infinite; animation-delay: 0s;    }
+.hscroll-chev-2 { animation: chev-pulse 1.6s ease-in-out infinite; animation-delay: 0.2s;  }
+.hscroll-chev-3 { animation: chev-pulse 1.6s ease-in-out infinite; animation-delay: 0.4s;  }
+
+
+/* Mobile: tắt pin, cards stack dọc bình thường */
+@media (max-width: 767px) {
+    .hscroll-section {
+        height: auto;
+        overflow: visible;
+    }
+    .hscroll-track {
+        flex-direction: column;
+        height: auto;
+        padding: 4rem 1.5rem 6rem;
+        gap: 1.5rem;
+    }
+    .hscroll-card {
+        width: 100% !important;
+        height: 60vw !important;
+        min-height: 260px;
+    }
+    .hscroll-label {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        justify-content: center;
+        padding: 2rem 0 0;
+    }
+    .hscroll-hint {
+        display: none;
+    }
+}
+
+/* Drag cursor — grab affordance (hoạt động khi custom cursor bị tắt) */
+.hscroll-section {
+    cursor: grab;
+}
+
+/* Khi đang kéo */
+.hscroll-section.is-dragging {
+    cursor: grabbing !important;
+}
+
+/* Ngăn text selection & nhấn nhầm button khi kéo */
+.hscroll-section.is-dragging * {
+    user-select: none !important;
+}
+.hscroll-section.is-dragging button,
+.hscroll-section.is-dragging a {
+    pointer-events: none !important;
+}
+
+/* ── Overscroll Edge Glow ──────────────────────────────────────────────
+   Hiện glow vàng ở mép trái/phải khi người dùng cuộn vượt giới hạn
+   ──────────────────────────────────────────────────────────────────── */
+.hscroll-section::before,
+.hscroll-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 120px;
+    pointer-events: none;
+    z-index: 40;
+    opacity: 0;
+    transition: opacity 0.12s ease;
+}
+
+/* Mép trái */
+.hscroll-section::before {
+    left: 0;
+    background: radial-gradient(ellipse at left center,
+        rgba(197, 160, 89, 0.45) 0%,
+        rgba(197, 160, 89, 0.15) 40%,
+        transparent 70%);
+}
+
+/* Mép phải */
+.hscroll-section::after {
+    right: 0;
+    background: radial-gradient(ellipse at right center,
+        rgba(197, 160, 89, 0.45) 0%,
+        rgba(197, 160, 89, 0.15) 40%,
+        transparent 70%);
+}
+
+/* Animate khi vượt mép — flash rồi fade */
+@keyframes edge-pulse {
+    0%   { opacity: 0; }
+    20%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.hscroll-section.overscroll-left::before {
+    animation: edge-pulse 0.6s ease-out forwards;
+}
+.hscroll-section.overscroll-right::after {
+    animation: edge-pulse 0.6s ease-out forwards;
+}
+
+
+

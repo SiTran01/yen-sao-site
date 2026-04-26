@@ -293,7 +293,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// 7. Chim Yến GSAP Effect (Lottie Version)
+// 7. Chim Yến GSAP Effect — Bezier Arc Path (Giả lập 3 waypoints)
 window.addEventListener("load", function () {
     const chimContainer = document.getElementById("chim-container");
     const baiDap = document.getElementById("to-chim");
@@ -301,37 +301,322 @@ window.addEventListener("load", function () {
     if (!chimContainer || !baiDap) return;
 
     const rect = baiDap.getBoundingClientRect();
-    const targetX = rect.left + (rect.width / 2) - 60; 
-    const targetY = rect.top - 80; 
+    const targetX = rect.left + (rect.width / 2) - 60;
+    const targetY = rect.top - 80;
 
-    const tl = gsap.timeline();
+    const W = window.innerWidth;
+    const H = window.innerHeight;
 
+    const tl = gsap.timeline({ delay: 0.6 });
+
+    // ── Waypoint 0: Xuất phát — ngoài màn hình, phía dưới-trái ─────────────
     tl.set(chimContainer, {
-        x: -150, 
-        y: targetY - 100, 
+        x: -180,
+        y: H * 0.75,
+        scale: 2.0,
+        rotation: -20,   // Mũi chim ngẩng lên (bay lên dốc)
+        scaleX: 1,        // Bird.json hướng sang phải → giữ nguyên
         opacity: 1,
-        scale: 1.5 
     })
+
+    // ── Waypoint 1: Đỉnh cung — bay lên cao, lượn ra giữa màn ─────────────
     .to(chimContainer, {
-        duration: 2.5, 
+        x: W * 0.30,
+        y: H * 0.12,
+        scale: 1.35,
+        rotation: -6,    // Gần nằm ngang ở đỉnh cung
+        duration: 1.5,
+        ease: "power3.out",
+    })
+
+    // ── Waypoint 2: Vòng cung xuống — lao về phía chữ ──────────────────────
+    .to(chimContainer, {
+        x: W * 0.60,
+        y: targetY - 35,
+        scale: 1.08,
+        rotation: 8,     // Mũi chúi nhẹ xuống khi lao
+        duration: 1.0,
+        ease: "power2.inOut",
+    })
+
+    // ── Waypoint 3: Hạ cánh — tiếp đất chính xác trên chữ ─────────────────
+    .to(chimContainer, {
         x: targetX,
         y: targetY,
-        scale: 1, 
-        ease: "power2.out" 
+        scale: 1,
+        rotation: 0,     // Chim đứng thẳng khi đậu
+        duration: 0.55,
+        ease: "power4.out",
     })
+
+    // ── Landing effect: lóe sáng chữ YẾN SÀO ──────────────────────────────
     .add(() => {
         gsap.to(baiDap, {
-            textShadow: "0px 0px 20px #F3E5D4, 0px 0px 40px #E1B875", 
-            duration: 0.3,
+            textShadow: "0px 0px 25px #F3E5D4, 0px 0px 55px #E1B875",
+            duration: 0.35,
             yoyo: true,
-            repeat: 1
+            repeat: 1,
         });
     })
+
+    // ── Float: chim đậu và vỗ cánh, lơ lửng nhẹ ───────────────────────────
     .to(chimContainer, {
         y: targetY - 15,
+        rotation: 0,
         duration: 1.5,
-        repeat: -1, 
-        yoyo: true, 
-        ease: "sine.inOut"
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
     });
 });
+
+// ══════════════════════════════════════════════════════════════
+// 8. Custom Gold Cursor — Awwwards Style (GSAP quickSetter)
+// ══════════════════════════════════════════════════════════════
+(function initCursor() {
+    // Bỏ qua thiết bị cảm ứng — không có cursor vật lý
+    if (window.matchMedia('(hover: none)').matches) return;
+
+    const dot  = document.getElementById('cursor-dot');
+    const ring = document.getElementById('cursor-ring');
+    if (!dot || !ring) return;
+
+    let mx = -100, my = -100; // Vị trí chuột hiện tại
+    let rx = -100, ry = -100; // Vị trí ring (lerp lag)
+
+    // quickSetter: bypass JS property overhead, ghi thẳng vào transform
+    const setDotX  = gsap.quickSetter(dot,  'x', 'px');
+    const setDotY  = gsap.quickSetter(dot,  'y', 'px');
+    const setRingX = gsap.quickSetter(ring, 'x', 'px');
+    const setRingY = gsap.quickSetter(ring, 'y', 'px');
+
+    // ── Dot: theo cursor tức thì, không lag ────────────────────────────────
+    window.addEventListener('mousemove', (e) => {
+        mx = e.clientX;
+        my = e.clientY;
+        setDotX(mx);
+        setDotY(my);
+
+        // Lần đầu rê chuột → fade in cursor
+        if (!dot.classList.contains('is-visible')) {
+            dot.classList.add('is-visible');
+            ring.classList.add('is-visible');
+        }
+    });
+
+    // ── Ring: lerp trong GSAP ticker → lag mượt mà ────────────────────────
+    gsap.ticker.add(() => {
+        const lerp = 0.11; // 0.0 = lag cực nhiều | 1.0 = theo ngay
+        rx += (mx - rx) * lerp;
+        ry += (my - ry) * lerp;
+        setRingX(rx);
+        setRingY(ry);
+    });
+
+    // ── Hover state: event delegation bắt cả element render động ──────────
+    const HOVER_TARGETS = 'a, button, [role="button"], input, label, select, textarea';
+
+    document.addEventListener('mouseover', (e) => {
+        if (e.target.closest(HOVER_TARGETS)) {
+            document.body.setAttribute('data-cursor', 'hover');
+        }
+    });
+
+    document.addEventListener('mouseout', (e) => {
+        if (e.target.closest(HOVER_TARGETS)) {
+            document.body.removeAttribute('data-cursor');
+        }
+    });
+
+    // ── Ẩn khi chuột rời cửa sổ, hiện lại khi vào ────────────────────────
+    document.addEventListener('mouseleave', () => {
+        gsap.to([dot, ring], { opacity: 0, duration: 0.25, overwrite: true });
+    });
+
+    document.addEventListener('mouseenter', () => {
+        gsap.to([dot, ring], { opacity: 1, duration: 0.25, overwrite: true });
+    });
+})();
+
+// ══════════════════════════════════════════════════════════════
+// 9. Horizontal Product Gallery — Wheel → Ngang (Lenis-safe)
+// ══════════════════════════════════════════════════════════════
+(function initHorizontalScroll() {
+    if (window.innerWidth < 768) return;
+
+    const section = document.getElementById('products-horizontal');
+    const track   = document.querySelector('.hscroll-track');
+    const hint    = document.querySelector('.hscroll-hint');
+
+    if (!section || !track) return;
+
+    let current = 0; // vị trí hiện tại (px) — theo lerp
+    let target  = 0; // vị trí mục tiêu (px) — nhảy theo wheel
+
+    const getMaxScroll = () => Math.max(0, track.scrollWidth - section.clientWidth);
+
+    // ── Elastic overscroll state ─────────────────────────────────────────
+    let overBounce  = 0;     // Độ dịch thêm khi vượt mép (px)
+    const MAX_OVER  = 90;    // Tối đa stretch
+    const OVER_DAMP = 0.22;  // Resistance: 22% của overflow
+    let   edgeTimer = null;
+
+    // Flash glow ở mép tương ứng, tự tắt sau 600ms
+    const flashEdge = (side) => {
+        section.classList.remove('overscroll-left', 'overscroll-right');
+        // Force reflow để restart animation
+        void section.offsetWidth;
+        section.classList.add('overscroll-' + side);
+        clearTimeout(edgeTimer);
+        edgeTimer = setTimeout(() =>
+            section.classList.remove('overscroll-left', 'overscroll-right')
+        , 600);
+    };
+
+    // ── Mouse drag-to-scroll (click & drag ngang) ──────────────────────
+    let isDragging   = false;
+    let dragStartX   = 0;
+    let dragStartTarget = 0;
+    let dragVelocity = 0;
+    let lastDragX    = 0;
+
+    section.addEventListener('mousedown', (e) => {
+        // Bỏ qua click trên button/a để không block chúng
+        if (e.target.closest('button, a')) return;
+        isDragging      = true;
+        dragStartX      = e.clientX;
+        lastDragX       = e.clientX;
+        dragStartTarget = target;
+        dragVelocity    = 0;
+        section.classList.add('is-dragging');
+        if (typeof lenis !== 'undefined') lenis.stop();
+        e.preventDefault();
+    });
+
+    window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        dragVelocity = lastDragX - e.clientX; // Vận tốc kéo (px/frame)
+        lastDragX    = e.clientX;
+        const dx = e.clientX - dragStartX;
+        const maxScroll = getMaxScroll();
+        const rawDrag = dragStartTarget - dx;
+        if (rawDrag < 0) {
+            overBounce = Math.max(-MAX_OVER, rawDrag * OVER_DAMP);
+            target = 0;
+            flashEdge('left');
+        } else if (rawDrag > maxScroll) {
+            overBounce = Math.min(MAX_OVER, (rawDrag - maxScroll) * OVER_DAMP);
+            target = maxScroll;
+            flashEdge('right');
+        } else {
+            target = rawDrag;
+        }
+    });
+
+    const stopDrag = () => {
+        if (!isDragging) return;
+        isDragging = false;
+        section.classList.remove('is-dragging');
+        // Trả lại Lenis sau khi kéo xong
+        if (typeof lenis !== 'undefined') lenis.start();
+        // Momentum: ném thêm sau khi thả
+        const maxScroll = getMaxScroll();
+        const rawMomentum = target + dragVelocity * 6;
+        if (rawMomentum < 0) {
+            overBounce = Math.max(-MAX_OVER, rawMomentum * OVER_DAMP);
+            target = 0;
+            flashEdge('left');
+        } else if (rawMomentum > maxScroll) {
+            overBounce = Math.min(MAX_OVER, (rawMomentum - maxScroll) * OVER_DAMP);
+            target = maxScroll;
+            flashEdge('right');
+        } else {
+            target = rawMomentum;
+        }
+        // Cập nhật drag hint
+        const dragHint = section.querySelector('.hscroll-drag-hint');
+        if (dragHint) {
+            const pct = target / Math.max(1, maxScroll);
+            if (pct > 0.05) gsap.to(dragHint, { opacity: 0, duration: 0.4, overwrite: true });
+            else            gsap.to(dragHint, { opacity: 1, duration: 0.4, overwrite: true });
+        }
+        // Fade right-edge indicator khi về cuối
+        const moreRight = section.querySelector('.hscroll-more-right');
+        if (moreRight) {
+            gsap.to(moreRight, {
+                opacity: target >= maxScroll * 0.85 ? 0 : 1,
+                duration: 0.5, overwrite: true
+            });
+        }
+    };
+    window.addEventListener('mouseup',    stopDrag);
+    window.addEventListener('mouseleave', stopDrag);
+
+    // ── Entrance Animation (khi section vào viewport) ────────────────────
+    const introLabel = section.querySelector('.hscroll-intro-el:first-of-type') ||
+                       section.querySelector('.hscroll-intro-el');
+    const introLines  = section.querySelectorAll('.hscroll-intro-line');
+    const introEls    = section.querySelectorAll('.hscroll-intro-el');
+    const cards       = section.querySelectorAll('.hscroll-product-card');
+
+    // Set trạng thái ẩn ban đầu bằng GSAP (không dùng CSS để tránh flash trên mobile)
+    gsap.set(introLines, { y: '110%' });
+    gsap.set(introEls,   { opacity: 0, y: -16 });
+    gsap.set(cards,      { x: 80, opacity: 0 });
+
+    const entranceTl = gsap.timeline({
+        scrollTrigger: {
+            trigger: section,
+            start: 'top 82%',
+            once: true,   // Chỉ chạy 1 lần duy nhất
+        }
+    });
+
+    entranceTl
+        // 1. Các dòng chữ h2: xuất hiện từ trên xuống (mask slide up)
+        .to(introLines, {
+            y: '0%',
+            duration: 0.9,
+            stagger: 0.13,    // Mỗi dòng cách nhau 130ms → cảm giác "ghi từ trên xuống"
+            ease: 'power3.out',
+        })
+        // 2. Mô tả + divider: fade + slide xuống nhẹ
+        .to(introEls, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            stagger: 0.15,
+            ease: 'power2.out',
+        }, '-=0.4')
+        // 3. Các card sản phẩm: trượt từ phải vào, stagger đều
+        .to(cards, {
+            x: 0,
+            opacity: 1,
+            duration: 0.75,
+            stagger: 0.07,    // 8 cards × 70ms = ~560ms tổng
+            ease: 'power3.out',
+        }, '-=0.6');
+
+    // ── Smooth lerp trong gsap.ticker → di chuyển mượt mà ──────────────
+    const setX = gsap.quickSetter(track, 'x', 'px');
+
+
+    gsap.ticker.add(() => {
+        const diff = target - current;
+        if (Math.abs(diff) > 0.1) {
+            current += diff * 0.08;
+        }
+        // Spring overBounce → 0 (elastic recovery, 12% per frame)
+        overBounce += (0 - overBounce) * 0.12;
+        // Ghi translate = main position + elastic offset
+        setX(-(current + overBounce));
+    });
+
+    // ── Reset khi resize cửa sổ ─────────────────────────────────────────
+    window.addEventListener('resize', () => {
+        current = 0;
+        target  = 0;
+        setX(0);
+    });
+})();
+

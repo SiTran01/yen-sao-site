@@ -17,6 +17,10 @@
 
 <body class="bg-brand-cream text-gray-700 antialiased overflow-x-clip">
 
+    <!-- Custom Gold Cursor -->
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
+
     <!-- Lottie Chim Yến (GSAP) -->
     <div id="chim-container" style="position: absolute; top: 0; left: 0; pointer-events: none; z-index: 9999; opacity: 0;">
         <lottie-player 
@@ -316,6 +320,234 @@
 
             </div>
         </section>
+
+        <!-- ══════════════════════════════════════════════════════════
+             [MỚI - IDEA 3] Horizontal Scroll Gallery — Cuộn Ngang
+             ══════════════════════════════════════════════════════ -->
+        <section id="products-horizontal" class="hscroll-section relative bg-[#110904] overflow-hidden">
+
+            <!-- Section Label Top -->
+            <div class="hscroll-label absolute top-10 left-1/2 -translate-x-1/2 z-30 flex items-center gap-4 pointer-events-none">
+                <div class="w-20 h-px bg-[#C5A059]/30"></div>
+                <span class="text-[#C5A059] text-[10px] font-bold uppercase tracking-[0.35em] whitespace-nowrap">Bộ Sưu Tập · Khám Phá Cuộn Ngang</span>
+                <div class="w-20 h-px bg-[#C5A059]/30"></div>
+            </div>
+
+            <!-- Drag Hint — hiển thị ban đầu, ẩn sau khi kéo -->
+            <div class="hscroll-drag-hint absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 pointer-events-none">
+                <!-- Dòng text + icon tay -->
+                <div class="flex items-center gap-2">
+                    <!-- Hand drag icon -->
+                    <svg class="w-5 h-5 text-[#C5A059]/70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                        <path d="M9 11V6a2 2 0 0 1 4 0v5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M13 11V9a2 2 0 0 1 4 0v4a6 6 0 0 1-6 6H9a5 5 0 0 1-5-5v-1a2 2 0 0 1 4 0" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="text-white/35 text-[10px] uppercase tracking-[0.22em]">Kéo để khám phá</span>
+                </div>
+                <!-- Chevron arrows animation -->
+                <div class="flex items-center gap-1 mt-1">
+                    <svg class="w-3.5 h-3.5 text-[#C5A059]/30 hscroll-chev-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                    <svg class="w-3.5 h-3.5 text-[#C5A059]/55 hscroll-chev-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                    <svg class="w-3.5 h-3.5 text-[#C5A059]/80 hscroll-chev-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                </div>
+            </div>
+
+            <!-- Right-edge "more content" fade indicator -->
+            <div class="hscroll-more-right absolute right-0 top-0 bottom-0 w-48 pointer-events-none z-25"
+                 style="background: linear-gradient(to left, #110904 0%, rgba(17,9,4,0.7) 40%, transparent 100%);"></div>
+
+            <!-- Horizontal Scrolling Track -->
+            <div class="hscroll-track flex items-center h-screen gap-6 pl-[10vw] pr-[15vw]">
+
+                <!-- Intro Text Panel -->
+                <div class="hscroll-card flex-shrink-0 w-[320px] flex flex-col justify-center pr-8">
+                    <p class="text-[#C5A059] text-xs font-bold uppercase tracking-[0.3em] mb-5">Tám Thủy</p>
+                    <h2 class="font-serif font-black text-[4rem] text-white leading-[1.05] mb-6">
+                        <span class="hscroll-line-wrap"><span class="hscroll-intro-line">Tinh</span></span>
+                        <span class="hscroll-line-wrap"><span class="hscroll-intro-line">Hoa</span></span>
+                        <span class="hscroll-line-wrap"><span class="hscroll-intro-line text-[#C5A059]">Yến</span></span>
+                        <span class="hscroll-line-wrap"><span class="hscroll-intro-line">Việt</span></span>
+                    </h2>
+                    <p class="hscroll-intro-el text-white/40 text-sm leading-relaxed max-w-[240px]">
+                        Tuyển chọn từng sợi yến quý giá, hành trình khám phá hương vị thượng hạng.
+                    </p>
+                    <div class="hscroll-intro-el flex items-center gap-3 mt-8">
+                        <div class="w-10 h-px bg-[#C5A059]/50"></div>
+                        <span class="text-[#C5A059]/50 text-[10px] uppercase tracking-widest">04 sản phẩm</span>
+                    </div>
+                </div>
+
+
+                <!-- Card 1: Yến Thô -->
+                <div class="hscroll-card hscroll-product-card flex-shrink-0 w-[370px] h-[72vh] rounded-[2rem] overflow-hidden relative group">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
+                    <div class="absolute inset-0 bg-[#f0ebe4] flex items-center justify-center overflow-hidden">
+                        <img src="assets/yen-tinh-che.png" alt="Yến Thô" class="w-[80%] object-contain transition-transform duration-700 ease-out group-hover:scale-110 drop-shadow-2xl">
+                    </div>
+                    <!-- Card number -->
+                    <span class="absolute top-7 right-7 z-20 text-white/20 font-serif font-black text-6xl leading-none select-none">01</span>
+                    <!-- Card content -->
+                    <div class="absolute bottom-0 left-0 right-0 p-8 z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                        <span class="text-[#C5A059] text-[10px] uppercase tracking-[0.25em] font-bold mb-2 block">Nguyên Bản 100%</span>
+                        <h3 class="text-white font-serif font-black text-[1.75rem] leading-tight mb-3">Yến Thô<br>Tự Nhiên</h3>
+                        <p class="text-white/50 text-xs leading-relaxed mb-5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                            Giữ trọn tinh hoa từ thiên nhiên, thu hoạch nhân đạo từ nhà yến chuẩn công nghệ Singapore.
+                        </p>
+                        <button class="hscroll-btn bg-[#C5A059] text-[#110904] px-6 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-white transition-all duration-300 opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0">
+                            Xem Chi Tiết →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 2: Yến Hộp -->
+                <div class="hscroll-card hscroll-product-card flex-shrink-0 w-[370px] h-[72vh] rounded-[2rem] overflow-hidden relative group">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
+                    <div class="absolute inset-0 bg-[#1d0a0a] flex items-center justify-center overflow-hidden">
+                        <img src="assets/yen-hop.png" alt="Yến Hộp" class="w-[80%] object-contain transition-transform duration-700 ease-out group-hover:scale-110 drop-shadow-2xl">
+                    </div>
+                    <span class="absolute top-7 right-7 z-20 text-white/20 font-serif font-black text-6xl leading-none select-none">02</span>
+                    <div class="absolute bottom-0 left-0 right-0 p-8 z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                        <span class="text-[#C5A059] text-[10px] uppercase tracking-[0.25em] font-bold mb-2 block">Tiện Lợi Tối Đa</span>
+                        <h3 class="text-white font-serif font-black text-[1.75rem] leading-tight mb-3">Yến Tươi<br>Cao Cấp</h3>
+                        <p class="text-white/50 text-xs leading-relaxed mb-5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                            Phân chia sẵn từng khẩu phần tinh tế, mở nắp là chưng ngay, tiết kiệm tối đa thời gian.
+                        </p>
+                        <button class="hscroll-btn bg-[#C5A059] text-[#110904] px-6 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-white transition-all duration-300 opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0">
+                            Xem Chi Tiết →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 3: Yến Tinh Chế -->
+                <div class="hscroll-card hscroll-product-card flex-shrink-0 w-[370px] h-[72vh] rounded-[2rem] overflow-hidden relative group">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
+                    <div class="absolute inset-0 bg-[#12100d] flex items-center justify-center overflow-hidden">
+                        <img src="assets/yen-hop.png" alt="Yến Tinh Chế" class="w-[80%] object-contain transition-transform duration-700 ease-out group-hover:scale-110 drop-shadow-2xl">
+                    </div>
+                    <span class="absolute top-7 right-7 z-20 text-white/20 font-serif font-black text-6xl leading-none select-none">03</span>
+                    <div class="absolute bottom-0 left-0 right-0 p-8 z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                        <span class="text-[#C5A059] text-[10px] uppercase tracking-[0.25em] font-bold mb-2 block">Quà Biếu Đẳng Cấp</span>
+                        <h3 class="text-white font-serif font-black text-[1.75rem] leading-tight mb-3">Yến Tinh Chế<br>Ép Tổ</h3>
+                        <p class="text-white/50 text-xs leading-relaxed mb-5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                            Đóng gói trong hộp lụa sang trọng, sợi yến dài trắng ngà, dai ngon tuyệt hảo.
+                        </p>
+                        <button class="hscroll-btn bg-[#C5A059] text-[#110904] px-6 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-white transition-all duration-300 opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0">
+                            Xem Chi Tiết →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 4: Hũ Yến -->
+                <div class="hscroll-card hscroll-product-card flex-shrink-0 w-[370px] h-[72vh] rounded-[2rem] overflow-hidden relative group">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
+                    <div class="absolute inset-0 bg-[#0d0806] flex items-center justify-center overflow-hidden">
+                        <img src="assets/yen-hu.png" alt="Hũ Yến" class="w-[80%] object-contain transition-transform duration-700 ease-out group-hover:scale-110 drop-shadow-2xl">
+                    </div>
+                    <span class="absolute top-7 right-7 z-20 text-white/20 font-serif font-black text-6xl leading-none select-none">04</span>
+                    <div class="absolute bottom-0 left-0 right-0 p-8 z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                        <span class="text-[#C5A059] text-[10px] uppercase tracking-[0.25em] font-bold mb-2 block">Dinh Dưỡng Tức Thì</span>
+                        <h3 class="text-white font-serif font-black text-[1.75rem] leading-tight mb-3">Hũ Yến<br>Chưng Sẵn</h3>
+                        <p class="text-white/50 text-xs leading-relaxed mb-5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                            Kết tinh thảo mộc hoàng cung — Táo Đỏ Tân Cương, Đông Trùng Hạ Thảo.
+                        </p>
+                        <button class="hscroll-btn bg-[#C5A059] text-[#110904] px-6 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-white transition-all duration-300 opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0">
+                            Xem Chi Tiết →
+                        </button>
+                    </div>
+                </div>
+
+
+                <!-- Card 5: Hồng Yến Đảo -->
+                <div class="hscroll-card hscroll-product-card flex-shrink-0 w-[370px] h-[72vh] rounded-[2rem] overflow-hidden relative group">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
+                    <div class="absolute inset-0 bg-[#1a0808] flex items-center justify-center overflow-hidden">
+                        <img src="assets/yen-tinh-che.png" alt="Hồng Yến" class="w-[80%] object-contain transition-transform duration-700 ease-out group-hover:scale-110 drop-shadow-2xl">
+                    </div>
+                    <span class="absolute top-7 right-7 z-20 text-white/20 font-serif font-black text-6xl leading-none select-none">05</span>
+                    <div class="absolute bottom-0 left-0 right-0 p-8 z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                        <span class="text-[#C5A059] text-[10px] uppercase tracking-[0.25em] font-bold mb-2 block">Cực Hiếm · Giới Hạn</span>
+                        <h3 class="text-white font-serif font-black text-[1.75rem] leading-tight mb-3">Hồng Yến<br>Đảo Quý</h3>
+                        <p class="text-white/50 text-xs leading-relaxed mb-5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                            Sợi yến hồng tự nhiên từ đảo hoang xa bờ — phẩm chất tối thượng, số lượng giới hạn theo mùa.
+                        </p>
+                        <button class="hscroll-btn bg-[#C5A059] text-[#110904] px-6 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-white transition-all duration-300 opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0">
+                            Xem Chi Tiết →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 6: Yến Chưng Thảo Mộc -->
+                <div class="hscroll-card hscroll-product-card flex-shrink-0 w-[370px] h-[72vh] rounded-[2rem] overflow-hidden relative group">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
+                    <div class="absolute inset-0 bg-[#070d09] flex items-center justify-center overflow-hidden">
+                        <img src="assets/yen-hu.png" alt="Yến Thảo Mộc" class="w-[80%] object-contain transition-transform duration-700 ease-out group-hover:scale-110 drop-shadow-2xl">
+                    </div>
+                    <span class="absolute top-7 right-7 z-20 text-white/20 font-serif font-black text-6xl leading-none select-none">06</span>
+                    <div class="absolute bottom-0 left-0 right-0 p-8 z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                        <span class="text-[#C5A059] text-[10px] uppercase tracking-[0.25em] font-bold mb-2 block">Cân Bằng Âm Dương</span>
+                        <h3 class="text-white font-serif font-black text-[1.75rem] leading-tight mb-3">Yến Chưng<br>Thảo Mộc</h3>
+                        <p class="text-white/50 text-xs leading-relaxed mb-5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                            Hội tụ Kỷ Tử, Nhân Sâm, Bạch Truật — thang thuốc hoàng cung trong một hũ yến nhỏ.
+                        </p>
+                        <button class="hscroll-btn bg-[#C5A059] text-[#110904] px-6 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-white transition-all duration-300 opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0">
+                            Xem Chi Tiết →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 7: Bộ Quà Hoàng Gia -->
+                <div class="hscroll-card hscroll-product-card flex-shrink-0 w-[370px] h-[72vh] rounded-[2rem] overflow-hidden relative group">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
+                    <div class="absolute inset-0 bg-[#0a0a10] flex items-center justify-center overflow-hidden">
+                        <img src="assets/yen-hop.png" alt="Bộ Quà" class="w-[80%] object-contain transition-transform duration-700 ease-out group-hover:scale-110 drop-shadow-2xl">
+                    </div>
+                    <span class="absolute top-7 right-7 z-20 text-white/20 font-serif font-black text-6xl leading-none select-none">07</span>
+                    <div class="absolute bottom-0 left-0 right-0 p-8 z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                        <span class="text-[#C5A059] text-[10px] uppercase tracking-[0.25em] font-bold mb-2 block">Quà Biếu VIP</span>
+                        <h3 class="text-white font-serif font-black text-[1.75rem] leading-tight mb-3">Bộ Quà<br>Hoàng Gia</h3>
+                        <p class="text-white/50 text-xs leading-relaxed mb-5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                            Hộp gỗ mun khảm trai, lụa nhung đỏ — dành cho những món quà mang tầm vóc đặc biệt.
+                        </p>
+                        <button class="hscroll-btn bg-[#C5A059] text-[#110904] px-6 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-white transition-all duration-300 opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0">
+                            Xem Chi Tiết →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 8: Yến Thượng Phẩm -->
+                <div class="hscroll-card hscroll-product-card flex-shrink-0 w-[370px] h-[72vh] rounded-[2rem] overflow-hidden relative group">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
+                    <div class="absolute inset-0 bg-[#100808] flex items-center justify-center overflow-hidden">
+                        <img src="assets/yen-tinh-che.png" alt="Yến Thượng Phẩm" class="w-[80%] object-contain transition-transform duration-700 ease-out group-hover:scale-110 drop-shadow-2xl">
+                    </div>
+                    <span class="absolute top-7 right-7 z-20 text-white/20 font-serif font-black text-6xl leading-none select-none">08</span>
+                    <div class="absolute bottom-0 left-0 right-0 p-8 z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                        <span class="text-[#C5A059] text-[10px] uppercase tracking-[0.25em] font-bold mb-2 block">Đỉnh Cao Phẩm Chất</span>
+                        <h3 class="text-white font-serif font-black text-[1.75rem] leading-tight mb-3">Yến Sào<br>Thượng Phẩm</h3>
+                        <p class="text-white/50 text-xs leading-relaxed mb-5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                            Tuyển thủ công từng tổ nguyên, sợi dài đều đặn — đỉnh cao của nghề yến Tám Thủy.
+                        </p>
+                        <button class="hscroll-btn bg-[#C5A059] text-[#110904] px-6 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-white transition-all duration-300 opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0">
+                            Xem Chi Tiết →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Progress dots (08 sản phẩm) -->
+                <div class="flex-shrink-0 flex flex-col justify-center gap-2 pl-12">
+                    <div class="w-1.5 h-1.5 rounded-full bg-[#C5A059]"></div>
+                    <div class="w-1.5 h-1.5 rounded-full bg-white/20"></div>
+                    <div class="w-1.5 h-1.5 rounded-full bg-white/20"></div>
+                    <div class="w-1.5 h-1.5 rounded-full bg-white/20"></div>
+                    <div class="w-1.5 h-1.5 rounded-full bg-white/20"></div>
+                    <div class="w-1.5 h-1.5 rounded-full bg-white/20"></div>
+                    <div class="w-1.5 h-1.5 rounded-full bg-white/20"></div>
+                    <div class="w-1.5 h-1.5 rounded-full bg-white/20"></div>
+                </div>
+
+
+            </div><!-- /.hscroll-track -->
+        </section><!-- /#products-horizontal -->
 
         <!-- Breeding Facility Section (New Layout) -->
         <section id="about" class="py-24 bg-[#fff5e8]">
