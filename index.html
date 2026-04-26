@@ -17,18 +17,30 @@
 
 <body class="bg-brand-cream text-gray-700 antialiased overflow-x-hidden">
 
+    <!-- Lottie Chim Yến (GSAP) -->
+    <div id="chim-container" style="position: absolute; top: 0; left: 0; pointer-events: none; z-index: 9999; opacity: 0;">
+        <lottie-player 
+            src="assets/Bird.json" 
+            background="transparent" 
+            speed="0.6" 
+            style="width: 120px; height: 120px;" 
+            loop 
+            autoplay>
+        </lottie-player>
+    </div>
+
     <!-- Main Header -->
     <header id="main-header"
         class="fixed top-0 left-0 w-full z-[100] bg-transparent backdrop-blur-sm transition-all duration-300 py-6 border-b border-transparent">
         <div class="container mx-auto px-6 flex justify-between items-center">
             <!-- Logo -->
-            <a href="#" class="flex items-center gap-3 group">
-                <div
-                    class="w-12 h-12 bg-gradient-to-br from-[#C5A059] to-[#8C6239] rounded-full flex items-center justify-center text-white text-2xl font-serif font-bold group-hover:scale-105 transition-transform shadow-lg">
-                    Y</div>
+            <a href="#" class="flex items-center gap-4 group">
+                <div class="w-16 h-16 bg-gradient-to-br from-[#E1B875] via-[#C5A059] to-[#8B6508] rounded-full flex items-center justify-center text-white text-4xl font-serif font-black group-hover:scale-105 transition-transform shadow-[0_4px_15px_rgba(139,101,8,0.4)] border-2 border-white/90">
+                    <span class="drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)] mt-1">Y</span>
+                </div>
                 <div class="flex flex-col text-left">
-                    <span class="font-serif font-bold text-base text-[#6A5A4A] tracking-[0.1em] leading-tight group-hover:text-[#4A1515] transition-colors">YẾN SÀO</span>
-                    <span class="font-serif font-bold text-base text-[#6A5A4A] tracking-[0.1em] leading-tight group-hover:text-[#4A1515] transition-colors">TÁM THỦY</span>
+                    <span class="font-serif font-black text-xl text-[#4A2C2A] tracking-[0.15em] leading-tight group-hover:text-[#8B6508] transition-colors">YẾN SÀO</span>
+                    <span class="font-serif font-black text-xl text-[#4A2C2A] tracking-[0.15em] leading-tight group-hover:text-[#8B6508] transition-colors">TÁM THỦY</span>
                 </div>
             </a>
 
@@ -84,53 +96,67 @@
     </div>
 
     <!-- Hero Section (Marble Premium Re-Design) -->
-    <section id="hero" class="hero-marble relative w-full h-screen overflow-hidden flex items-center justify-center">
+    <section id="hero" class="hero-marble relative w-full h-screen overflow-hidden flex items-center justify-center">   
+        <!-- Thiết kế Hero Mới -->
+        <!-- Hero Content Grid (Left Products / Right Text) -->
+        <div class="container mx-auto px-8 w-full h-full flex flex-col md:flex-row items-center justify-between z-40 relative pt-[0px]">
+            
+            <!-- Left Side: Product Parallax Area (Bounded Box to prevent overflow) -->
+            <div class="w-full md:w-1/2 flex justify-center items-center mt-10 md:mt-0 relative">
+                <!-- Khung lưới vuông khóa chặt 3 hình ảnh, không cho tràn lên Header -->
+                <div class="relative w-full max-w-[480px] aspect-square">
+                    
+                    <!-- Đĩa Yến Thô (Top Left) -->
+                    <div class="absolute top-[0%] left-[0%] w-[65%] z-10 hero-img-load drop-shadow-2xl" style="transition-delay: 0.1s;">
+                        <div class="w-full h-full transition-transform duration-500 hover:scale-[1.05]">
+                            <img src="assets/yen-tinh-che.png" alt="Tổ Yến Tinh Chế" class="w-full mouse-parallax opacity-95" data-speed="-0.015">
+                        </div>
+                    </div>
+                    
+                    <!-- Hũ Yến (Top Right) -->
+                    <div class="absolute top-[18%] right-[0%] w-[45%] z-20 hero-img-load drop-shadow-2xl" style="transition-delay: 0.3s;">
+                        <div class="w-full h-full transition-transform duration-500 hover:scale-[1.05]">
+                            <img src="assets/yen-hu.png" alt="Hũ Yến Chưng" class="w-full mouse-parallax" data-speed="0.02">
+                        </div>
+                    </div>
 
-        <!-- Birds decorative placeholders (SVG) -->
-        <svg class="absolute top-[25%] left-[20%] w-32 h-32 opacity-20 text-brand-brown/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5" d="M3 15C3 15 5.5 12 12 12C18.5 12 21 15 21 15C21 15 16 8 12 8C8 8 3 15 3 15Z" transform="rotate(-15 12 12)"/></svg>
-        <svg class="absolute top-[15%] right-[25%] w-48 h-48 opacity-20 text-brand-brown/50 scale-x-[-1]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5" d="M3 15C3 15 5.5 12 12 12C18.5 12 21 15 21 15C21 15 16 8 12 8C8 8 3 15 3 15Z" transform="rotate(10 12 12)"/></svg>
-        <svg class="absolute bottom-[20%] left-[45%] w-20 h-20 opacity-20 text-brand-brown/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5" d="M3 15C3 15 5.5 12 12 12C18.5 12 21 15 21 15C21 15 16 8 12 8C8 8 3 15 3 15Z" transform="rotate(-5 12 12)"/></svg>
+                    <!-- Hộp Qùa Đỏ (Bottom Center) -->
+                    <div class="absolute bottom-[5%] left-[20%] w-[60%] z-30 hero-img-load drop-shadow-[0_25px_30px_rgba(0,0,0,0.2)]" style="transition-delay: 0.5s;">
+                        <div class="w-full h-full transition-transform duration-500 hover:scale-[1.05]">
+                            <img src="assets/yen-hop.png" alt="Hộp Quà Yến Sào" class="w-full mouse-parallax" data-speed="0.03">
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <!-- Product Images (Hành trình thị giác) -->
-        <!-- Hộp Yến (Centerpiece Back Right) -->
-        <div class="absolute top-[25%] right-[8%] md:right-[12%] w-[50%] md:w-[450px] z-10 hero-img-load" style="transition-delay: 0.1s;">
-            <div class="transition-transform duration-500 hover:scale-[1.02] w-full h-full">
-                <img src="assets/yen-hop.png" alt="Hộp Quà" class="w-full mouse-parallax opacity-95 drop-shadow-xl" data-speed="-0.02">
+            <!-- Right Side: Text & Brand Identity -->
+            <div class="w-full md:w-1/2 flex flex-col text-left pl-0 md:pl-10 relative z-50">
+                <p class="text-[#222222] font-black tracking-[0.4em] md:tracking-[0.6em] uppercase text-xs md:text-sm mb-4 reveal delay-100 opacity-80">Tuyệt Phẩm Thiên Nhiên</p>
+                
+                <h1 class="font-serif font-black text-[3.5rem] md:text-[4rem] lg:text-[5rem] xl:text-[7rem] leading-snug reveal w-full" style="text-shadow: 2px 4px 15px rgba(74, 44, 42, 0.25);">
+                    <!-- Dòng 1: YẾN SÀO -->
+                    <span class="text-reveal-mask block pt-6 pb-2">
+                        <span id="to-chim" class="text-reveal-item text-gold-foil">YẾN SÀO</span>
+                    </span>
+                    <!-- Dòng 2: TÁM THỦY -->
+                    <span class="text-reveal-mask block -mt-4 md:-mt-8 lg:-mt-12 pt-6 pb-2">
+                        <span class="text-reveal-item stagger-2 text-gold-foil">TÁM THỦY</span>
+                    </span>
+                </h1>
+                
+                <div class="mt-8 md:mt-12 reveal delay-500">
+                    <button class="bg-[#4A2C2A] text-white overflow-hidden px-10 py-4 md:py-5 rounded-full font-bold text-xs md:text-sm tracking-widest uppercase shadow-[0_10px_20px_rgba(74,44,42,0.3)] hover:-translate-y-1 transition-transform relative group">
+                        <span class="relative z-10 group-hover:text-[#F3E5D4] transition-colors">Khám Phá Ngay</span>
+                        <div class="absolute inset-0 bg-[#8B6508] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-center duration-300 z-0"></div>
+                    </button>
+                </div>
             </div>
-        </div>
-        
-        <!-- Hũ Yến (Left Front) -->
-        <div class="absolute top-[35%] left-[8%] md:left-[18%] w-[60%] md:w-[320px] z-20 hero-img-load" style="transition-delay: 0.3s;">
-            <div class="transition-transform duration-500 hover:scale-[1.02] w-full h-full">
-                <img src="assets/yen-hu.png" alt="Yến Chưng" class="w-full mouse-parallax drop-shadow-2xl" data-speed="0.04">
-            </div>
-        </div>
-        
-        <!-- Tổ Yến Thô (Right Front) -->
-        <div class="absolute bottom-[10%] right-[15%] md:right-[25%] w-[70%] md:w-[380px] z-30 hero-img-load" style="transition-delay: 0.5s;">
-            <div class="transition-transform duration-500 hover:scale-[1.02] w-full h-full">
-                <img src="assets/yen-tinh-che.png" alt="Tổ Yến" class="w-full mouse-parallax drop-shadow-2xl" data-speed="0.06">
-            </div>
-        </div>
 
-        <!-- Center Brand Title (Golden Gradient) -->
-        <div class="absolute z-40 text-center flex flex-col items-center pointer-events-none w-full max-w-[1200px] px-4">
-            <h1 class="font-serif font-bold text-[4.5rem] md:text-[6.5rem] lg:text-[7.5rem] leading-[1.05] reveal w-full" style="text-shadow: 0 25px 40px rgba(0,0,0,0.15), 0 4px 15px rgba(0,0,0,0.1);">
-                <!-- Dòng 1: YẾN SÀO -->
-                <span class="text-reveal-mask block px-4 py-2">
-                    <span class="text-reveal-item text-transparent bg-clip-text bg-gradient-to-b from-[#C5A059] to-[#8B6508]">YẾN SÀO</span>
-                </span>
-                <!-- Dòng 2: TÁM THỦY -->
-                <span class="text-reveal-mask block md:-mt-8 px-4 py-2">
-                    <span class="text-reveal-item stagger-2 text-transparent bg-clip-text bg-gradient-to-b from-[#C5A059] to-[#8B6508]">TÁM THỦY</span>
-                </span>
-            </h1>
-            <p class="text-[#333333] font-bold tracking-[0.4em] md:tracking-[0.8em] uppercase text-[10px] md:text-sm mt-8 reveal delay-300">Tuyệt Phẩm Thiên Nhiên</p>
         </div>
 
         <!-- Scroll Down 'V' Button -->
-        <div id="hero-scroll-btn" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-brand-brown cursor-pointer z-50 animate-bounce">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="w-8 h-8 opacity-70 hover:text-brand-gold transition-colors">
+        <div id="hero-scroll-btn" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-[#4A2C2A] cursor-pointer z-[999] animate-bounce w-14 h-14 flex items-center justify-center rounded-full transition-all duration-300 hover:bg-[#8B6508]/5 hover:ring-1 hover:ring-[#8B6508]/60 group">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="w-8 h-8 opacity-70 group-hover:scale-110 group-hover:opacity-100 group-hover:text-[#8B6508] transition-all duration-300">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path>
             </svg>
         </div>
@@ -451,6 +477,8 @@
     <div id="scroll-spacer" class="absolute top-0 left-0 w-full -z-10 pointer-events-none"></div>
 
     <!-- Scripts -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="script.js"></script>
 </body>
 

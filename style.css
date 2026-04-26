@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 body {
     font-family: 'Be Vietnam Pro', sans-serif;
@@ -11,8 +11,9 @@ h2,
 h3,
 h4,
 h5,
-h6 {
-    font-family: 'Montserrat', sans-serif;
+h6,
+.font-serif {
+    font-family: 'Playfair Display', serif !important;
 }
 
 /* Smooth Scrolling */
@@ -24,8 +25,9 @@ html {
 /* Custom Scrollbar */
 /* Premium Navigation Link Effects */
 .nav-item-premium {
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: 'Playfair Display', serif !important;
     color: #6D5A46;
     text-decoration: none;
     position: relative;
@@ -314,19 +316,20 @@ html {
 }
 
 /* =========================================
-   New Premium Hero Section (Rose Brown)
+   New Premium Hero Section (White Marble & Gold Veins)
    ========================================= */
 .hero-marble {
-    background-color: #F4EBE1; /* Creamy off-white base */
+    background-color: #ffffff; /* Cẩm thạch trắng base */
     background-image: 
-        radial-gradient(ellipse at top right, rgba(255, 255, 255, 0.9), transparent 60%),
-        radial-gradient(ellipse at bottom left, rgba(200, 180, 150, 0.3), transparent 60%),
-        url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.015' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E"); /* Faint Marble Texture noise */
+        radial-gradient(ellipse at top right, rgba(255, 255, 255, 1), transparent 70%),
+        radial-gradient(ellipse at bottom left, rgba(245, 240, 235, 0.8), transparent 70%),
+        linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(212,175,55,0.08) 50%, rgba(255,255,255,0) 100%),
+        url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
     position: absolute;
     top: 0;
     left: 0;
     z-index: 50; /* Hero on TOP of content */
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08); /* Bóng đổ nhẹ hơn nỉ */
     height: 100vh;
     width: 100%;
     overflow: hidden;
@@ -596,11 +599,49 @@ html {
     transform: translateY(110%);
     opacity: 0;
     will-change: transform, opacity;
-    transition: transform 1.5s cubic-bezier(0.25, 1, 0.2, 1), opacity 1.5s cubic-bezier(0.25, 1, 0.2, 1);
+    /* Tăng thời gian chuyển động thêm 1s theo yêu cầu: 1.5s -> 2.5s */
+    transition: transform 3.5s cubic-bezier(0.25, 1, 0.2, 1), opacity 4.5s cubic-bezier(0.25, 1, 0.2, 1);
 }
 .reveal.visible .text-reveal-item {
     transform: translateY(0);
     opacity: 1;
+}
+
+/* =========================================
+   Animated Gold Foil Text (Luxury Title)
+   ========================================= */
+.text-gold-foil {
+    color: transparent;
+    background-color: #4A2C2A; /* Nền nâu tĩnh mặc định an toàn */
+    background-image: linear-gradient(
+        110deg, 
+        transparent 25%, 
+        #8B6508 35%,    /* Bắt đầu ửng vàng sớm hơn */
+        #E1B875 42%,    /* Dải vàng sáng rộng hơn */
+        #FFFFFF 50%,    /* Tim chói sáng ở giữa */
+        #E1B875 58%,    /* Dải vàng sáng mượt mà */
+        #8B6508 65%,    /* Ánh vàng tắt dần */
+        transparent 75%
+    );
+    background-size: 200% auto;
+    background-repeat: no-repeat;       
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-position: 200% center; /* Ép vệt sáng nằm ẩn ngoài lề Trái trong lúc chờ */
+    animation: shine-foil 5s linear 1s infinite backwards; /* Chờ 4s (animation-delay) mới chạy vòng đầu */
+}
+
+@keyframes shine-foil {
+    0% {
+        background-position: 200% center; /* Đẩy thẻ sáng lùi tuốt sang mép Trái */
+    }
+    80.5% {
+        background-position: -200% center; /* Lướt chậm mất 5 giây (62.5% của 8s) để hoàn thành đường quét */
+    }
+    100% {
+        background-position: -200% center; /* Neo lại nghỉ yên 3 giây còn lại */
+    }
 }
 
 /* Stagger Animations */
@@ -674,4 +715,4 @@ html {
 .mouse-parallax {
     transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
     will-change: transform;
-}
+}

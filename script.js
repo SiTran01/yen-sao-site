@@ -175,29 +175,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 5. Intersection Observer for `.reveal`
-    const observerOptions = {
-        root: null,
-        rootMargin: '-50px 0px -50px 0px',
-        threshold: 0.15 
-    };
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            const rect = entry.boundingClientRect;
-            const windowHeight = window.innerHeight;
-            const insideMainContent = entry.target.closest('#main-content') !== null;
-            const isUnderHero = insideMainContent && rect.top < windowHeight && window.scrollY < windowHeight * 0.3;
+    // 5. Scroll-based Reveal Logic (Thay thế Intersection Observer để đồng bộ với thanh cuộn thủ công)
+    const checkReveals = () => {
+        const windowHeight = window.innerHeight;
+        const scrollY = window.scrollY;
+        const curtainBottom = windowHeight - scrollY; // Đáy của Hero banner khi cuộn
 
-            if (entry.isIntersecting && !isUnderHero) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
+        document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
+            const rect = el.getBoundingClientRect();
+            
+            // Phần tử nằm trong vùng hiển thị của màn hình
+            if (rect.top < windowHeight * 0.85 && rect.bottom > 0) {
+                // Nếu phần tử thuộc khối nội dung chính, bắt buộc phải nằm "lộ" ra khỏi lớp rèm che Hero mới được kích hoạt
+                const isInsideMain = el.closest('#main-content') !== null;
+                
+                // Kích hoạt khi không nằm trong nội dung chính, HOẶC đã kéo lộ khỏi rèm che
+                if (!isInsideMain || rect.top > curtainBottom - 150) {
+                    el.classList.add('visible');
+                }
             }
         });
-    }, observerOptions);
-
-    document.querySelectorAll('.reveal').forEach(el => {
-        revealObserver.observe(el);
-    });
+    };
 
     // 6. Card Deck Reveal Effect Logic
     const hero = document.getElementById('hero');
@@ -236,22 +234,89 @@ document.addEventListener('DOMContentLoaded', () => {
                 mainContent.style.transform = `translateY(-${offsetAtTransition + contentScroll}px)`;
                 mainContent.style.opacity = 1;
             }
+            
+            // Check reveal elements logically synced with parallax layout
+            checkReveals();
         };
 
         window.addEventListener('scroll', handleScrollFn);
         handleScrollFn();
     };
 
-    window.addEventListener('load', initCardDeck);
+    // Fix lỗi mất Scrollbar: Đảm bảo script tính toán giao diện luôn chạy.
+    // Nếu event load đã fire rồi thì chạy luôn. Nếu chưa thì lắng nghe.
+    if (document.readyState === 'complete') {
+        initCardDeck();
+    } else {
+        window.addEventListener('load', initCardDeck);
+        // Fallback tự chạy sau 500ms để đề phòng browser ngầm chặn event load
+        setTimeout(initCardDeck, 500);
+    }
+    
     window.addEventListener('resize', initCardDeck);
 
     // 7. Scroll Button Event
     const scrollBtn = document.getElementById('hero-scroll-btn');
-    if (scrollBtn) {
-        scrollBtn.addEventListener('click', () => {
-            const target = window.innerHeight;
-            window.luxuryScrollTo(target);
+    const firstSection = document.getElementById('main-content');
+    
+    if (scrollBtn && firstSection) {
+        scrollBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = window.innerHeight; // Kéo xuống màn hình thứ 2
+            
+            // Gọi hàm trượt thủ công 1.5s với hiệu ứng gia tốc cong mịn màng
+            window.luxuryScrollTo(target, 1500); 
         });
     }
 
+});
+
+// 8. Chim Yến GSAP Effect (Lottie Version)
+window.addEventListener("load", function () {
+    const chimContainer = document.getElementById("chim-container");
+    const baiDap = document.getElementById("to-chim");
+
+    // Nếu thiếu HTML thì bỏ qua không chạy để tránh lỗi web
+    if (!chimContainer || !baiDap) return;
+
+    // Tính tọa độ bãi đáp (Chữ YẾN SÀO)
+    const rect = baiDap.getBoundingClientRect();
+    
+    // Tọa độ điểm đậu (canh vào giữa chữ, nhích lên trên một xíu)
+    const targetX = rect.left + (rect.width / 2) - 60; // 60 là một nửa kích thước chim
+    const targetY = rect.top - 80; // Đậu cao hơn chữ một chút
+
+    // Bắt đầu chuỗi hiệu ứng GSAP
+    const tl = gsap.timeline();
+
+    tl.set(chimContainer, {
+        x: -150, // Xuất phát từ ngoài màn hình bên trái
+        y: targetY - 100, // Cao hơn bãi đáp
+        opacity: 1,
+        scale: 1.5 // Bay từ xa tới nên chim to hơn chút
+    })
+    .to(chimContainer, {
+        duration: 2.5, // Thời gian bay (2.5 giây)
+        x: targetX,
+        y: targetY,
+        scale: 1, // Thu về kích thước thật khi đậu
+        ease: "power2.out" // Bay nhanh rồi hãm phanh mượt mà lúc đậu
+    })
+    .add(() => {
+        // Hiệu ứng lóe sáng vàng trên chữ khi chim đậu
+        gsap.to(baiDap, {
+            textShadow: "0px 0px 20px #F3E5D4, 0px 0px 40px #E1B875", // Thêm hào quang
+            duration: 0.3,
+            yoyo: true,
+            repeat: 1
+        });
+    })
+    .to(chimContainer, {
+        // Hiệu ứng nhấp nhô nhẹ lơ lửng sau khi tới nơi
+        y: targetY - 15,
+        duration: 1.5,
+        repeat: -1, // Lặp lại vô hạn
+        yoyo: true, // Lên xuống mượt mà
+        ease: "sine.inOut"
+    });
 });
