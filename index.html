@@ -39,9 +39,7 @@
         <div class="container mx-auto px-6 flex justify-between items-center">
             <!-- Logo -->
             <a href="#" class="flex items-center gap-4 group">
-                <div class="w-16 h-16 bg-gradient-to-br from-[#E1B875] via-[#C5A059] to-[#8B6508] rounded-full flex items-center justify-center text-white text-4xl font-serif font-black group-hover:scale-105 transition-transform shadow-[0_4px_15px_rgba(139,101,8,0.4)] border-2 border-white/90">
-                    <span class="drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)] mt-1">Y</span>
-                </div>
+                <img src="assets/avt-svg.svg" alt="Yến Sào Tám Thủy Logo" class="w-20 h-20 object-contain group-hover:scale-105 transition-transform drop-shadow-md">
                 <div class="flex flex-col text-left">
                     <span class="font-serif font-black text-xl text-[#4A2C2A] tracking-[0.15em] leading-tight group-hover:text-[#8B6508] transition-colors">YẾN SÀO</span>
                     <span class="font-serif font-black text-xl text-[#4A2C2A] tracking-[0.15em] leading-tight group-hover:text-[#8B6508] transition-colors">TÁM THỦY</span>
@@ -130,30 +128,38 @@
                             <img src="assets/yen-hop.png" alt="Hộp Quà Yến Sào" class="w-full">
                         </div>
                     </div>
+                    
+                    <!-- Tám Thủy Sticker (Moved to Hero) -->
+                    <div class="absolute bottom-[5%] right-[-2%] md:bottom-[10%] md:right-[-5%] xl:bottom-[10%] xl:right-[-5%] z-50 pointer-events-auto" style="margin-right: 20px; margin-bottom: -50px;">
+                        <div class="stamp-animation" style="animation-delay: 2s;">
+                            <div class="brand-sticker scale-50 md:scale-75 xl:scale-90">
+                                <div class="w-20 h-20 shrink-0 bg-[#C5A059] drop-shadow-md" style="-webkit-mask-image: url('assets/avt-svg.svg'); -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; -webkit-mask-position: center; mask-image: url('assets/avt-svg.svg'); mask-size: contain; mask-repeat: no-repeat; mask-position: center;"></div>
+                                <div class="flex flex-col text-left">
+                                    <span class="sticker-main">Tám Thủy</span>
+                                    <span class="text-[11px] md:text-xs text-[#C5A059] font-bold tracking-widest uppercase mt-1">Yến Sào Đầm Thị Nại</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Right Side: Text & Brand Identity -->
-            <div class="hero-text-wrapper w-full md:w-1/2 flex flex-col text-left pl-0 md:pl-10 relative z-50">
+            <div class="hero-text-wrapper w-full md:w-1/2 flex flex-col items-start text-left pl-0 md:pl-10 mb-16 md:mb-24 relative z-50">
                 <p class="hero-subtitle text-[#222222] font-black tracking-[0.4em] md:tracking-[0.6em] uppercase text-xs md:text-sm mb-4 opacity-80" data-aos="fade-up" data-aos-delay="0">Tuyệt Phẩm Thiên Nhiên</p>
                 
-                <h1 class="hero-title font-serif font-black text-[3.5rem] md:text-[4rem] lg:text-[5rem] xl:text-[7rem] leading-snug w-full" style="text-shadow: 2px 4px 15px rgba(74, 44, 42, 0.25);" data-aos="fade-up" data-aos-delay="150">
+                <h1 class="hero-title font-serif font-black text-[3rem] md:text-[3.5rem] lg:text-[4.5rem] xl:text-[5.5rem] leading-snug w-full" style="text-shadow: 2px 4px 15px rgba(74, 44, 42, 0.25);" data-aos="fade-up" data-aos-delay="150">
                     <!-- Dòng 1: YẾN SÀO -->
                     <span class="text-reveal-mask block pt-6 pb-2">
                         <span id="to-chim" class="text-reveal-item text-gold-foil">YẾN SÀO</span>
                     </span>
                     <!-- Dòng 2: TÁM THỦY -->
-                    <span class="text-reveal-mask block -mt-4 md:-mt-8 lg:-mt-12 pt-6 pb-2">
+                    <span class="text-reveal-mask block -mt-2 md:-mt-6 lg:-mt-8 pt-6 pb-2">
                         <span class="text-reveal-item stagger-2 text-gold-foil">TÁM THỦY</span>
                     </span>
                 </h1>
                 
-                <div class="mt-8 md:mt-12" data-aos="fade-up" data-aos-delay="300">
-                    <button class="bg-[#4A2C2A] text-white overflow-hidden px-10 py-4 md:py-5 rounded-full font-bold text-xs md:text-sm tracking-widest uppercase shadow-[0_10px_20px_rgba(74,44,42,0.3)] hover:-translate-y-1 transition-transform relative group">
-                        <span class="relative z-10 group-hover:text-[#F3E5D4] transition-colors">Khám Phá Ngay</span>
-                        <div class="absolute inset-0 bg-[#8B6508] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-center duration-300 z-0"></div>
-                    </button>
-                </div>
+
             </div>
 
         </div>
@@ -169,23 +175,88 @@
     <!-- Main Content Wrapper -->
     <main id="main-content" class="relative z-10 bg-brand-cream">
 
-        <!-- Product Section (Zig-Zag Storytelling) -->
-        <section id="products" class="py-24 bg-brand-cream relative">
-
-            <!-- Tám Thủy Sticker (Preserved) -->
-            <div class="relative w-full flex justify-center pt-10 pb-6 z-20" data-aos="zoom-in" data-aos-delay="0">
-                <div class="brand-sticker" style="position: relative; top: auto; left: auto; transform: none;">
-                    <span class="sticker-sub">Thương Hiệu</span>
-                    <span class="sticker-main">Tám Thủy</span>
-                    <span class="text-[10px] text-white/80 tracking-widest uppercase">Yến Sào Thượng Hạng</span>
+        <!-- ══════════════════════════════════════════════════════════
+             [MỚI] Stats Section — Con Số Nói Lên Tất Cả
+             ══════════════════════════════════════════════════════ -->
+        <section id="stats-section" class="stats-section relative z-10">
+            <div class="stats-top-line" aria-hidden="true"></div>
+        
+            <div class="container mx-auto px-6 py-16 md:py-20">
+                <p class="stats-eyebrow" id="stats-eyebrow">Tám Thủy · Con Số Nói Lên Tất Cả</p>
+        
+                <div class="stats-grid">
+                    <div class="stat-card" id="stat-card-0">
+                        <div class="stat-icon" aria-hidden="true">
+                            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="14" cy="13" r="6" stroke="currentColor" stroke-width="1.8"/>
+                                <path d="M2 34c0-6.627 5.373-12 12-12h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                                <circle cx="28" cy="13" r="6" stroke="currentColor" stroke-width="1.8"/>
+                                <path d="M38 34c0-6.627-5.373-12-12-12h-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="stat-number-wrap">
+                            <span class="stat-number" data-target="5000" data-suffix="+">0</span>
+                        </div>
+                        <p class="stat-label">Khách Hàng Tin Tưởng</p>
+                        <p class="stat-desc">Trải dài từ Bắc vào Nam</p>
+                    </div>
+        
+                    <div class="stat-card" id="stat-card-1">
+                        <div class="stat-icon" aria-hidden="true">
+                            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="20" cy="20" r="17" stroke="currentColor" stroke-width="1.8"/>
+                                <path d="M20 10v10l6 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="stat-number-wrap">
+                            <span class="stat-number" data-target="10" data-suffix="+">0</span>
+                        </div>
+                        <p class="stat-label">Năm Kinh Nghiệm</p>
+                        <p class="stat-desc">Nuôi yến & tinh chế thủ công</p>
+                    </div>
+        
+                    <div class="stat-card" id="stat-card-2">
+                        <div class="stat-icon" aria-hidden="true">
+                            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20 4C20 4 6 14 6 24a14 14 0 0028 0C34 14 20 4 20 4z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                                <path d="M14 26s1.5-4 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="stat-number-wrap">
+                            <span class="stat-number" data-target="100" data-suffix="%">0</span>
+                        </div>
+                        <p class="stat-label">Nguyên Chất Tự Nhiên</p>
+                        <p class="stat-desc">Không chất bảo quản, không pha trộn</p>
+                    </div>
+        
+                    <div class="stat-card" id="stat-card-3">
+                        <div class="stat-icon" aria-hidden="true">
+                            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20 36s-16-10-16-20a10 10 0 0116-8 10 10 0 0116 8c0 10-16 20-16 20z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="stat-number-wrap">
+                            <span class="stat-number" data-target="98" data-suffix="%">0</span>
+                        </div>
+                        <p class="stat-label">Khách Hàng Hài Lòng</p>
+                        <p class="stat-desc">Phản hồi tích cực sau mỗi đơn</p>
+                    </div>
                 </div>
             </div>
+        
+            <div class="stats-bottom-line" aria-hidden="true"></div>
+        </section>
 
-            <div class="container mx-auto px-8 md:px-36 relative z-10 pt-10">
+        <!-- Product Section (Zig-Zag Storytelling) -->
+        <section id="products" class="pt-8 pb-24 bg-brand-cream relative">
+
+
+
+            <div class="container mx-auto px-8 md:px-36 relative z-10 pt-4">
 
                 <!-- Section Header with Text Reveal -->
                 <div class="text-center mb-24">
-                    <p class="text-brand-gold text-sm font-bold uppercase tracking-widest mb-3" data-aos="fade-up" data-aos-delay="150">Bộ Sưu Tập</p>
+                    
                     <h2 class="text-5xl font-serif font-bold text-brand-brown" data-aos="fade-up" data-aos-delay="300">
                         <span class="text-reveal-mask"><span class="text-reveal-item">Tinh</span></span>
                         <span class="text-reveal-mask"><span class="text-reveal-item stagger-1">Hoa</span></span>
@@ -289,34 +360,7 @@
                     </div>
                 </div>
 
-                <!-- Farm Section: Cơ Sở Chăn Nuôi (Bonus) -->
-                <div
-                    class="bg-white rounded-[3rem] p-12 shadow-xl border border-gray-100 flex flex-col md:flex-row items-center gap-12" data-aos="fade-up" data-aos-delay="0">
-                    <div class="w-full md:w-1/2">
-                        <h3 class="text-4xl font-serif font-bold text-brand-brown mb-6">Cơ sở chăn nuôi <br><span
-                                class="text-brand-gold">Chuẩn Tự Nhiên</span></h3>
-                        <div class="w-16 h-1 bg-brand-gold mb-8"></div>
-                        <p class="text-gray-600 leading-relaxed mb-6">
-                            Hệ thống nhà yến của <strong>Tám Thủy</strong> được đặt tại các vùng ven biển trong lành, xa
-                            khu công nghiệp để đảm bảo môi trường sống tốt nhất cho chim yến.
-                        </p>
-                        <p class="text-gray-600 leading-relaxed mb-8">
-                            Quy trình thu hoạch nhân đạo, chỉ khai thác khi chim non đã bay đi, kết hợp với kỹ thuật sơ
-                            chế thủ công tỉ mỉ giúp giữ trọn vẹn vi chất quý giá trong từng sợi yến.
-                        </p>
-                        <button
-                            class="border-2 border-brand-brown text-brand-brown px-8 py-3 rounded-full font-bold hover:bg-brand-brown hover:text-white transition-colors">
-                            Xem Thêm
-                        </button>
-                    </div>
-                    <div class="w-full md:w-1/2 grid grid-cols-2 gap-4">
-                        <img src="assets/farm1.png" onerror="this.src='https://via.placeholder.com/300x400'"
-                            alt="Nhà yến 1"
-                            class="rounded-2xl w-full h-48 object-cover transform translate-y-8 shadow-lg">
-                        <img src="assets/farm2.png" onerror="this.src='https://via.placeholder.com/300x400'"
-                            alt="Nhà yến 2" class="rounded-2xl w-full h-48 object-cover shadow-lg">
-                    </div>
-                </div>
+
 
             </div>
         </section>

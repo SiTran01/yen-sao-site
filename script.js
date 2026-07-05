@@ -140,7 +140,7 @@ gsap.ticker.lagSmoothing(0);
 
 // Smooth scroll to target
 window.luxuryScrollTo = (targetId) => {
-    lenis.scrollTo(targetId, { duration: 1.5, easing: (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2 });
+    lenis.scrollTo(targetId, { offset: -100, duration: 1.5, easing: (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2 });
 };
 
 // Initialization
@@ -268,7 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
             {
                 scrollTrigger: {
                     trigger: element,
-                    start: "top 85%", // Kích hoạt khi phần tử hiện 15% dưới màn hình
+                    start: "top 95%", // Kích hoạt khi phần tử hiện 5% dưới màn hình
                     toggleActions: "play none none none"
                 },
                 opacity: 1,
@@ -288,7 +288,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (scrollBtn) {
         scrollBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            window.luxuryScrollTo('#products'); 
+            // Truyền trực tiếp offset lớn hơn để bù trừ cho menu và margin
+            lenis.scrollTo('#stats-section', { offset: -250, duration: 1.5, easing: (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2 }); 
         });
     }
 });
@@ -620,3 +621,59 @@ window.addEventListener("load", function () {
     });
 })();
 
+
+
+/* Stats Section Animation */
+(function initStatsCounter() {
+    const section  = document.getElementById('stats-section');
+    const eyebrow  = document.getElementById('stats-eyebrow');
+    const cards    = document.querySelectorAll('.stat-card');
+    const counters = document.querySelectorAll('.stat-number');
+
+    if (!section || !counters.length) return;
+
+    const tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: section,
+            start: 'top 80%',
+            once: true,
+        }
+    });
+
+    tl.to(eyebrow, {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        ease: 'power3.out',
+    });
+
+    tl.to(cards, {
+        opacity: 1,
+        y: 0,
+        duration: 0.75,
+        stagger: 0.12,
+        ease: 'power3.out',
+    }, '-=0.3');
+
+    counters.forEach((el, i) => {
+        const target = parseInt(el.getAttribute('data-target'), 10);
+        const obj = { val: 0 };
+
+        tl.to(obj, {
+            val: target,
+            duration: 2.2,
+            ease: 'power2.out',
+            onUpdate() {
+                const v = Math.round(obj.val);
+                el.textContent = target >= 1000
+                    ? v.toLocaleString('vi-VN')
+                    : v;
+            },
+            onComplete() {
+                el.textContent = target >= 1000
+                    ? target.toLocaleString('vi-VN')
+                    : target;
+            }
+        }, i === 0 ? '-=0.8' : '<0.18');
+    });
+})();
