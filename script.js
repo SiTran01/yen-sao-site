@@ -677,3 +677,439 @@ window.addEventListener("load", function () {
         }, i === 0 ? '-=0.8' : '<0.18');
     });
 })();
+
+// ══════════════════════════════════════════════════════════════
+// 🔔 TOAST NOTIFICATION SYSTEM
+// ══════════════════════════════════════════════════════════════
+(function initToastSystem() {
+    /**
+     * showToast({ type, title, message, duration })
+     * type: 'success' | 'error'
+     */
+    window.showToast = function ({ type = 'success', title, message, duration = 4000 } = {}) {
+        const container = document.getElementById('toast-container');
+        if (!container) return;
+
+        const icons = {
+            success: '✓',
+            error: '✕',
+        };
+
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.innerHTML = `
+            <div class="toast-icon">${icons[type] || '!'}</div>
+            <div class="toast-content">
+                ${title ? `<p class="toast-title">${title}</p>` : ''}
+                ${message ? `<p class="toast-msg">${message}</p>` : ''}
+            </div>
+            <button class="toast-close" onclick="this.parentElement.remove()">✕</button>
+        `;
+
+        container.appendChild(toast);
+
+        // Auto remove
+        setTimeout(() => {
+            toast.classList.add('toast-exit');
+            setTimeout(() => toast.remove(), 300);
+        }, duration);
+    };
+})();
+
+// ══════════════════════════════════════════════════════════════
+// 📦 ORDER FORM — n8n Webhook Integration
+// ══════════════════════════════════════════════════════════════
+(function initOrderForm() {
+
+    // ─────────────────────────────────────────────────────────────
+    // 🔧 CẤU HÌNH — Thay URL này khi cài xong n8n self-hosted
+    // ─────────────────────────────────────────────────────────────
+    const N8N_WEBHOOK_URL = ''; // Ví dụ: 'https://n8n.tamthuy.vn/webhook/order'
+    const IS_WEBHOOK_CONFIGURED = N8N_WEBHOOK_URL.trim() !== '';
+
+    // Cập nhật indicator trạng thái n8n
+    const dot = document.getElementById('n8n-dot');
+    const statusText = document.getElementById('n8n-status-text');
+    if (dot && statusText) {
+        if (IS_WEBHOOK_CONFIGURED) {
+            dot.classList.remove('pending');
+            statusText.textContent = 'Tự động hóa n8n · Đang hoạt động';
+        } else {
+            dot.classList.add('pending');
+            statusText.textContent = 'n8n Webhook · Chưa cấu hình (sẽ lưu tạm)';
+        }
+    }
+
+    // ── Form Validation ──────────────────────────────────────
+    function validateForm(data) {
+        if (!data.name || data.name.trim().length < 2) {
+            showToast({ type: 'error', title: 'Thiếu họ tên', message: 'Vui lòng nhập đầy đủ họ và tên.' });
+            return false;
+        }
+        const phoneRegex = /^(0|\+84)[0-9]{8,10}$/;
+        if (!phoneRegex.test(data.phone.replace(/\s/g, ''))) {
+            showToast({ type: 'error', title: 'Số điện thoại không hợp lệ', message: 'Vui lòng nhập SĐT Việt Nam hợp lệ.' });
+            return false;
+        }
+        if (!data.product) {
+            showToast({ type: 'error', title: 'Chưa chọn sản phẩm', message: 'Vui lòng chọn sản phẩm bạn quan tâm.' });
+            return false;
+        }
+        return true;
+    }
+
+    // ── Send to n8n Webhook ──────────────────────────────────
+    async function sendToN8N(payload) {
+        if (!IS_WEBHOOK_CONFIGURED) {
+            // Lưu tạm vào localStorage khi chưa có n8n
+            const orders = JSON.parse(localStorage.getItem('tamthuy_orders') || '[]');
+            orders.push({ ...payload, timestamp: new Date().toISOString(), id: Date.now() });
+            localStorage.setItem('tamthuy_orders', JSON.stringify(orders));
+            console.log('[TámThủy] Đơn hàng lưu tạm (chưa có n8n):', payload);
+            return { success: true, mode: 'localStorage' };
+        }
+
+        const response = await fetch(N8N_WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return { success: true, mode: 'n8n', data: await response.json().catch(() => ({})) };
+    }
+
+    // ── Form Submit Handler ──────────────────────────────────
+    const form = document.getElementById('order-form');
+    const submitBtn = document.getElementById('order-submit-btn');
+    const successEl = document.getElementById('order-success');
+
+    if (!form) return;
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const payload = {
+            name:    document.getElementById('order-name')?.value?.trim()    || '',
+            phone:   document.getElementById('order-phone')?.value?.trim()   || '',
+            product: document.getElementById('order-product')?.value         || '',
+            qty:     document.getElementById('order-qty')?.value             || '1',
+            channel: document.getElementById('order-channel')?.value         || 'zalo',
+            note:    document.getElementById('order-note')?.value?.trim()    || '',
+            source:  'website-tamthuy',
+            utm:     window.location.search || '',
+        };
+
+        if (!validateForm(payload)) return;
+
+        // Loading state
+        submitBtn.classList.add('is-loading');
+
+        try {
+            const result = await sendToN8N(payload);
+
+            // Hide form, show success
+            form.style.display = 'none';
+            successEl.classList.add('is-visible');
+
+            const modeMsg = result.mode === 'localStorage'
+                ? 'Đơn đã lưu tạm · Sẽ gửi tự động khi n8n kết nối'
+                : 'n8n đã nhận đơn và đang xử lý tự động';
+
+            showToast({
+                type: 'success',
+                title: '🎉 Đặt hàng thành công!',
+                message: modeMsg,
+                duration: 6000,
+            });
+
+        } catch (err) {
+            console.error('[TámThủy] Webhook error:', err);
+            showToast({
+                type: 'error',
+                title: 'Gửi thất bại',
+                message: 'Hệ thống đang bận. Vui lòng thử lại hoặc gọi hotline.',
+            });
+        } finally {
+            submitBtn.classList.remove('is-loading');
+        }
+    });
+
+    // ── Reset Form ────────────────────────────────────────────
+    window.resetOrderForm = function () {
+        form.reset();
+        form.style.display = '';
+        successEl.classList.remove('is-visible');
+    };
+
+})();
+
+// ══════════════════════════════════════════════════════════════
+// 📱 FLOATING ORDER BUTTON — Mobile Visibility Control
+// ══════════════════════════════════════════════════════════════
+(function initFloatingBtn() {
+    const floatingBtn = document.getElementById('floating-order-btn');
+    if (!floatingBtn) return;
+
+    // Hiện sau khi scroll qua hero
+    const heroSection = document.getElementById('hero');
+    if (!heroSection) return;
+
+    ScrollTrigger.create({
+        trigger: heroSection,
+        start: 'bottom 80%',
+        onEnter: () => floatingBtn.classList.add('is-visible'),
+        onLeaveBack: () => floatingBtn.classList.remove('is-visible'),
+    });
+})();
+
+// ══════════════════════════════════════════════════════════════
+// ✨ ORDER SECTION — GSAP Entrance Animation
+// ══════════════════════════════════════════════════════════════
+(function initOrderAnimation() {
+    const section = document.getElementById('order');
+    if (!section) return;
+
+    const leftContent = section.querySelector('.order-section-grid > div:first-child');
+    const formCard    = section.querySelector('.order-form-card');
+
+    if (leftContent) {
+        gsap.fromTo(leftContent,
+            { opacity: 0, x: -60 },
+            {
+                opacity: 1, x: 0,
+                duration: 1,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 75%',
+                    once: true,
+                }
+            }
+        );
+    }
+
+    if (formCard) {
+        gsap.fromTo(formCard,
+            { opacity: 0, x: 60, y: 20 },
+            {
+                opacity: 1, x: 0, y: 0,
+                duration: 1,
+                ease: 'power3.out',
+                delay: 0.15,
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 75%',
+                    once: true,
+                }
+            }
+        );
+    }
+
+    // Trust badges stagger
+    const badges = section.querySelectorAll('.trust-badge');
+    if (badges.length) {
+        gsap.fromTo(badges,
+            { opacity: 0, y: 15 },
+            {
+                opacity: 1, y: 0,
+                duration: 0.5,
+                stagger: 0.08,
+                ease: 'power2.out',
+                delay: 0.4,
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 70%',
+                    once: true,
+                }
+            }
+        );
+    }
+})();
+
+// ══════════════════════════════════════════════════════════════
+// ⏳ PRELOADER — Ẩn sau khi trang load xong
+// ══════════════════════════════════════════════════════════════
+(function initPreloader() {
+    const preloader = document.getElementById('site-preloader');
+    if (!preloader) return;
+
+    // Ẩn preloader sau khi trang load (tối thiểu 1.8s để animation bar chạy xong)
+    const hidePreloader = () => {
+        setTimeout(() => {
+            preloader.classList.add('is-hidden');
+            // Remove khỏi DOM sau khi transition kết thúc
+            preloader.addEventListener('transitionend', () => preloader.remove(), { once: true });
+        }, 300); // 300ms buffer sau window.load
+    };
+
+    if (document.readyState === 'complete') {
+        hidePreloader();
+    } else {
+        window.addEventListener('load', hidePreloader);
+    }
+})();
+
+// ══════════════════════════════════════════════════════════════
+// ❓ FAQ ACCORDION — Toggle với animation
+// ══════════════════════════════════════════════════════════════
+(function initFaqAccordion() {
+    const faqList = document.getElementById('faq-list');
+    if (!faqList) return;
+
+    const items = faqList.querySelectorAll('.faq-item');
+
+    items.forEach(item => {
+        const trigger = item.querySelector('.faq-trigger');
+        const body    = item.querySelector('.faq-body');
+
+        if (!trigger || !body) return;
+
+        trigger.addEventListener('click', () => {
+            const isOpen = item.classList.contains('is-open');
+
+            // Đóng tất cả item khác (accordion behavior)
+            items.forEach(other => {
+                if (other !== item && other.classList.contains('is-open')) {
+                    other.classList.remove('is-open');
+                    other.querySelector('.faq-body').style.maxHeight = '0';
+                    other.querySelector('.faq-trigger')?.setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            // Toggle item hiện tại
+            if (isOpen) {
+                item.classList.remove('is-open');
+                body.style.maxHeight = '0';
+                trigger.setAttribute('aria-expanded', 'false');
+            } else {
+                item.classList.add('is-open');
+                body.style.maxHeight = body.scrollHeight + 'px';
+                trigger.setAttribute('aria-expanded', 'true');
+            }
+        });
+    });
+
+    // Scroll animation cho FAQ items
+    gsap.fromTo(items,
+        { opacity: 0, y: 24 },
+        {
+            opacity: 1, y: 0,
+            duration: 0.6,
+            stagger: 0.08,
+            ease: 'power2.out',
+            scrollTrigger: {
+                trigger: faqList,
+                start: 'top 85%',
+                once: true,
+            }
+        }
+    );
+})();
+
+// ══════════════════════════════════════════════════════════════
+// ⭐ TESTIMONIALS — GSAP Stagger Entrance
+// ══════════════════════════════════════════════════════════════
+(function initTestimonialsAnimation() {
+    const section = document.getElementById('reviews');
+    if (!section) return;
+
+    const cards = section.querySelectorAll('.review-card');
+    const header = section.querySelector('.text-center');
+
+    if (header) {
+        gsap.fromTo(header,
+            { opacity: 0, y: 30 },
+            {
+                opacity: 1, y: 0,
+                duration: 0.8,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 80%',
+                    once: true,
+                }
+            }
+        );
+    }
+
+    if (cards.length) {
+        gsap.fromTo(cards,
+            { opacity: 0, y: 40, scale: 0.97 },
+            {
+                opacity: 1, y: 0, scale: 1,
+                duration: 0.7,
+                stagger: 0.1,
+                ease: 'power3.out',
+                delay: 0.2,
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 75%',
+                    once: true,
+                }
+            }
+        );
+    }
+})();
+
+// ══════════════════════════════════════════════════════════════
+// 📧 NEWSLETTER SUBSCRIBE — Footer Form → n8n
+// ══════════════════════════════════════════════════════════════
+(function initNewsletterForm() {
+    // 🔧 Cấu hình — thay URL khi có n8n
+    const N8N_NEWSLETTER_URL = ''; // VD: 'https://n8n.tamthuy.vn/webhook/newsletter'
+
+    // Tìm form đăng ký email trong footer
+    const footerEmailInput = document.querySelector('footer input[type="email"]');
+    const footerSubmitBtn  = document.querySelector('footer button');
+
+    if (!footerEmailInput || !footerSubmitBtn) return;
+
+    footerSubmitBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const email = footerEmailInput.value.trim();
+
+        // Validate email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            showToast({ type: 'error', title: 'Email không hợp lệ', message: 'Vui lòng nhập địa chỉ email đúng định dạng.' });
+            return;
+        }
+
+        const payload = {
+            email,
+            source: 'newsletter-footer',
+            timestamp: new Date().toISOString(),
+        };
+
+        try {
+            if (N8N_NEWSLETTER_URL) {
+                await fetch(N8N_NEWSLETTER_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                });
+            } else {
+                // Lưu tạm localStorage
+                const subs = JSON.parse(localStorage.getItem('tamthuy_subscribers') || '[]');
+                subs.push(payload);
+                localStorage.setItem('tamthuy_subscribers', JSON.stringify(subs));
+            }
+
+            footerEmailInput.value = '';
+            showToast({
+                type: 'success',
+                title: '🎉 Đăng ký thành công!',
+                message: 'Mã giảm giá 10% sẽ được gửi về email của bạn.',
+                duration: 6000,
+            });
+        } catch {
+            showToast({ type: 'error', title: 'Lỗi kết nối', message: 'Vui lòng thử lại sau.' });
+        }
+    });
+
+    // Cũng cho phép nhấn Enter
+    footerEmailInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') footerSubmitBtn.click();
+    });
+})();

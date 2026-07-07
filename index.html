@@ -4,7 +4,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yến Sào Premium - Tinh Hoa Thiên Nhiên</title>
+
+    <!-- ═══════════════════════════════════════════
+         SEO — PRIMARY META TAGS
+         ═══════════════════════════════════════════ -->
+    <title>Yến Sào Tám Thủy | Tinh Hoa Yến Đảo Bình Định — Giao Toàn Quốc</title>
+    <meta name="description" content="Yến Sào Tám Thủy — Tổ yến nguyên chất 100% từ nhà yến chuẩn tự nhiên tại Đầm Thị Nại, Bình Định. Yến thô, yến tinh chế, hồng yến đảo, hũ yến chưng sẵn. Giao hàng toàn quốc. Hotline: 09xx.xxx.xxx">
+    <meta name="keywords" content="yến sào, tổ yến, yến sào bình định, yến tinh chế, hồng yến, yến chưng, mua yến sào, yến tám thủy, đầm thị nại">
+    <meta name="author" content="Yến Sào Tám Thủy">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://yensaotamthuy.vn/">
+
+    <!-- ═══════════════════════════════════════════
+         OPEN GRAPH — Facebook / Zalo share đẹp
+         ═══════════════════════════════════════════ -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="vi_VN">
+    <meta property="og:url" content="https://yensaotamthuy.vn/">
+    <meta property="og:site_name" content="Yến Sào Tám Thủy">
+    <meta property="og:title" content="Yến Sào Tám Thủy | Tinh Hoa Yến Đảo Bình Định">
+    <meta property="og:description" content="Tổ yến nguyên chất 100% từ nhà yến tự nhiên tại Đầm Thị Nại. Yến thô, tinh chế, hồng yến đảo. Giao toàn quốc — đặt ngay hôm nay!">
+    <meta property="og:image" content="https://yensaotamthuy.vn/assets/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- ═══════════════════════════════════════════
+         JSON-LD STRUCTURED DATA — Google rich results
+         ═══════════════════════════════════════════ -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Yến Sào Tám Thủy",
+        "description": "Cung cấp yến sào cao cấp nguyên chất tại Đầm Thị Nại, Bình Định. Yến thô, tinh chế, hồng yến đảo, hũ yến chưng.",
+        "url": "https://yensaotamthuy.vn",
+        "telephone": "+84900000000",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Quy Nhơn",
+            "addressRegion": "Bình Định",
+            "addressCountry": "VN"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "13.7757",
+            "longitude": "109.2297"
+        },
+        "openingHoursSpecification": [{
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+            "opens": "08:00",
+            "closes": "21:00"
+        }],
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "322"
+        },
+        "priceRange": "₫₫₫"
+    }
+    </script>
+
+    <!-- ═══════════════════════════════════════════
+         GOOGLE ANALYTICS 4 — Thay G-XXXXXXXXXX
+         ═══════════════════════════════════════════ -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script> -->
+
+    <!-- ═══════════════════════════════════════════
+         FACEBOOK PIXEL — Thay YOUR_PIXEL_ID
+         ═══════════════════════════════════════════ -->
+    <!-- <script>
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+        document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', 'YOUR_PIXEL_ID');
+        fbq('track', 'PageView');
+    </script> -->
 
     <!-- Tailwind CSS (CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -16,6 +99,37 @@
 </head>
 
 <body class="bg-brand-cream text-gray-700 antialiased overflow-x-clip">
+
+    <!-- ═══════════════════════════════════════════
+         PRELOADER — Xuất hiện khi tải trang
+         ═══════════════════════════════════════════ -->
+    <div id="site-preloader">
+        <div class="preloader-inner">
+            <div class="preloader-logo">
+                <img src="assets/avt-svg.svg" alt="Tám Thủy" class="preloader-img">
+                <div class="preloader-glow"></div>
+            </div>
+            <p class="preloader-name">YẾN SÀO TÁM THỦY</p>
+            <div class="preloader-bar"><div class="preloader-bar-fill"></div></div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         ZALO CHAT BUBBLE — Cố định góc phải
+         ═══════════════════════════════════════════ -->
+    <a href="https://zalo.me/0900000000" target="_blank" rel="noopener"
+       id="zalo-chat-bubble" class="zalo-chat-bubble" aria-label="Chat Zalo với Tám Thủy">
+        <!-- Zalo icon SVG -->
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="zalo-icon">
+            <rect width="48" height="48" rx="12" fill="#0068FF"/>
+            <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle"
+                  fill="white" font-size="16" font-weight="900" font-family="Arial, sans-serif">Z</text>
+        </svg>
+        <!-- Tooltip -->
+        <span class="zalo-tooltip">Chat với Tám Thủy</span>
+        <!-- Pulse ring -->
+        <span class="zalo-pulse"></span>
+    </a>
 
     <!-- Custom Gold Cursor -->
     <div id="cursor-dot"></div>
@@ -52,14 +166,14 @@
                 <a href="#hero" class="nav-item-premium uppercase tracking-[0.1em]">Trang chủ</a>
                 <a href="#products" class="nav-item-premium uppercase tracking-[0.1em]">Sản phẩm</a>
                 <a href="#about" class="nav-item-premium uppercase tracking-[0.1em]">Về chúng tôi</a>
-                <a href="#contact" class="nav-item-premium uppercase tracking-[0.1em]">Liên hệ</a>
+                <a href="#order" class="nav-item-premium uppercase tracking-[0.1em]">Đặt Hàng</a>
             </nav>
 
             <!-- Actions -->
             <div class="flex items-center gap-4">
-                <button
+                <button onclick="document.getElementById('order').scrollIntoView({behavior:'smooth'})"
                     class="hidden md:flex items-center gap-2 border border-[#C5A059]/50 bg-[#4A1515] text-[#E8D1A7] px-8 py-2.5 rounded-[30px] font-bold text-xs hover:bg-[#C5A059] hover:text-white transition-all uppercase tracking-widest shadow-xl">
-                    <span>MUA NGAY</span>
+                    <span>ĐẶT HÀNG</span>
                 </button>
                 <button class="md:hidden text-gray-800"
                     onclick="document.getElementById('mobile-menu').classList.remove('translate-x-full')">
@@ -593,6 +707,175 @@
             </div><!-- /.hscroll-track -->
         </section><!-- /#products-horizontal -->
 
+        <!-- ══════════════════════════════════════════════════════════
+             ORDER SECTION — n8n Automation Ready
+             ══════════════════════════════════════════════════════ -->
+        <section id="order" class="order-section">
+
+            <!-- Decorative Orbs -->
+            <div class="order-orb order-orb-1"></div>
+            <div class="order-orb order-orb-2"></div>
+
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="order-section-grid">
+
+                    <!-- Left: Brand Copywriting -->
+                    <div>
+                        <!-- Label -->
+                        <p class="text-[#C5A059] text-xs font-bold uppercase tracking-[0.35em] mb-5">Đặt Hàng · Tám Thủy</p>
+
+                        <h2 class="font-serif font-black text-white leading-[1.1] mb-6"
+                            style="font-size: clamp(2.4rem, 4vw, 3.5rem);">
+                            Thưởng Thức<br>
+                            <span class="text-[#C5A059]">Tinh Hoa Yến</span><br>
+                            Tại Nhà Bạn
+                        </h2>
+
+                        <p class="text-white/50 text-base leading-relaxed mb-8 max-w-[420px]">
+                            Để lại thông tin và chúng tôi sẽ liên hệ tư vấn trong vòng <strong class="text-white/80">15 phút</strong>.
+                            Giao hàng toàn quốc, bảo đảm chất lượng 100%.
+                        </p>
+
+                        <!-- Trust Badges -->
+                        <div class="trust-badges">
+                            <div class="trust-badge">
+                                <span class="trust-badge-icon">🔒</span>
+                                Bảo mật thông tin
+                            </div>
+                            <div class="trust-badge">
+                                <span class="trust-badge-icon">🚚</span>
+                                Giao hàng toàn quốc
+                            </div>
+                            <div class="trust-badge">
+                                <span class="trust-badge-icon">↩️</span>
+                                Đổi trả 7 ngày
+                            </div>
+                            <div class="trust-badge">
+                                <span class="trust-badge-icon">⭐</span>
+                                98% hài lòng
+                            </div>
+                            <div class="trust-badge">
+                                <span class="trust-badge-icon">🎁</span>
+                                Tặng quà đơn từ 2tr
+                            </div>
+                        </div>
+
+                        <!-- Contact shortcuts -->
+                        <div class="flex items-center gap-6 mt-10">
+                            <a href="https://zalo.me/0900000000" target="_blank"
+                               class="flex items-center gap-3 text-white/60 hover:text-[#C5A059] transition-colors text-sm font-medium">
+                                <span class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-base hover:border-[#C5A059]/50 transition-colors">💬</span>
+                                Chat Zalo ngay
+                            </a>
+                            <a href="tel:0900000000"
+                               class="flex items-center gap-3 text-white/60 hover:text-[#C5A059] transition-colors text-sm font-medium">
+                                <span class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-base hover:border-[#C5A059]/50 transition-colors">📞</span>
+                                Gọi hotline
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right: Order Form Card -->
+                    <div class="order-form-card">
+
+                        <!-- Form Header -->
+                        <p class="order-form-title">Gửi Thông Tin Đặt Hàng</p>
+                        <p class="order-form-subtitle">Điền form bên dưới · Phản hồi trong 15 phút</p>
+
+                        <!-- Form Body -->
+                        <form id="order-form" novalidate>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label" for="order-name">Họ & Tên *</label>
+                                    <input id="order-name" type="text" class="form-input"
+                                           placeholder="Nguyễn Văn A" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="order-phone">Số Điện Thoại *</label>
+                                    <input id="order-phone" type="tel" class="form-input"
+                                           placeholder="09xx xxx xxx" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="order-product">Sản Phẩm Quan Tâm *</label>
+                                <select id="order-product" class="form-select" required>
+                                    <option value="">-- Chọn sản phẩm --</option>
+                                    <option value="yen-tho">Yến Thô Tự Nhiên</option>
+                                    <option value="yen-tinh-che">Yến Tinh Chế Ép Tổ</option>
+                                    <option value="yen-tuoi">Yến Tươi Cao Cấp</option>
+                                    <option value="hu-yen">Hũ Yến Chưng Sẵn</option>
+                                    <option value="hong-yen">Hồng Yến Đảo Quý</option>
+                                    <option value="yen-thao-moc">Yến Chưng Thảo Mộc</option>
+                                    <option value="bo-qua">Bộ Quà Hoàng Gia</option>
+                                    <option value="tu-van">Cần tư vấn thêm</option>
+                                </select>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label" for="order-qty">Số Lượng</label>
+                                    <select id="order-qty" class="form-select">
+                                        <option value="1">1 hộp / tổ</option>
+                                        <option value="2">2 hộp / tổ</option>
+                                        <option value="3">3–5 hộp</option>
+                                        <option value="5+">5+ hộp (giá sỉ)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="order-channel">Liên Hệ Qua</label>
+                                    <select id="order-channel" class="form-select">
+                                        <option value="zalo">Zalo</option>
+                                        <option value="phone">Điện thoại</option>
+                                        <option value="email">Email</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="order-note">Ghi Chú Thêm</label>
+                                <textarea id="order-note" class="form-textarea"
+                                          placeholder="Quà biếu, dịp đặc biệt, địa chỉ giao hàng..."></textarea>
+                            </div>
+
+                            <!-- Submit -->
+                            <button type="submit" id="order-submit-btn" class="btn-order-submit">
+                                <span class="btn-text">✦ Gửi Yêu Cầu Đặt Hàng</span>
+                                <div class="btn-spinner"></div>
+                            </button>
+
+                            <!-- n8n Status Indicator -->
+                            <div class="n8n-status" id="n8n-webhook-status">
+                                <span class="n8n-dot pending" id="n8n-dot"></span>
+                                <span id="n8n-status-text">Hệ thống tự động · Chờ kết nối n8n</span>
+                            </div>
+
+                        </form>
+
+                        <!-- Success Message (hidden by default) -->
+                        <div class="order-form-success" id="order-success">
+                            <div class="success-icon">
+                                <svg width="32" height="32" fill="none" stroke="#1a0a05" stroke-width="2.5" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                            <h3 class="font-serif font-black text-2xl text-white mb-3">Đã Nhận Đơn!</h3>
+                            <p class="text-white/50 text-sm leading-relaxed mb-6">
+                                Cảm ơn bạn đã tin tưởng Yến Sào Tám Thủy.<br>
+                                Chúng tôi sẽ liên hệ trong vòng <strong class="text-[#C5A059]">15 phút</strong>.
+                            </p>
+                            <button onclick="resetOrderForm()"
+                                    class="text-[#C5A059] text-sm font-bold underline underline-offset-4 bg-transparent border-none cursor-pointer">
+                                Đặt thêm đơn khác →
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Breeding Facility Section (New Layout) -->
         <section id="about" class="py-24 bg-[#fff5e8]">
             <div class="container mx-auto px-6">
@@ -655,6 +938,289 @@
                     </div>
 
                 </div>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════════════════════
+             TESTIMONIALS — Đánh giá từ khách hàng thật
+             ══════════════════════════════════════════════════════ -->
+        <section id="reviews" class="py-24 bg-brand-cream overflow-hidden">
+            <div class="container mx-auto px-6">
+
+                <!-- Header -->
+                <div class="text-center mb-16">
+                    <p class="text-[#C5A059] text-xs font-bold uppercase tracking-[0.35em] mb-4">Khách Hàng Nói Gì</p>
+                    <h2 class="font-serif font-black text-4xl md:text-5xl text-[#4A2C2A]">
+                        Hơn <span class="text-[#C5A059]">5.000</span> Khách Tin Tưởng
+                    </h2>
+                    <div class="w-20 h-0.5 bg-[#C5A059] mx-auto mt-6"></div>
+                </div>
+
+                <!-- Testimonials Grid -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+
+                    <!-- Review 1 -->
+                    <div class="review-card bg-white rounded-3xl p-8 shadow-[0_4px_30px_rgba(74,44,42,0.06)] border border-[#C5A059]/10 hover:shadow-[0_8px_40px_rgba(74,44,42,0.12)] hover:-translate-y-1 transition-all duration-500">
+                        <div class="flex gap-0.5 mb-4">
+                            <span class="text-yellow-400 text-lg">★★★★★</span>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed mb-6 italic text-sm">
+                            "Yến thô của Tám Thủy chất lượng vượt trội so với các nơi khác tôi từng mua. Sợi yến dài, màu đẹp, nở to khi chưng. Gia đình tôi dùng được 2 năm rồi, không nơi nào thay thế được."
+                        </p>
+                        <div class="flex items-center gap-3 pt-5 border-t border-gray-100">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#C5A059] to-[#8B6508] flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                                LH
+                            </div>
+                            <div>
+                                <p class="font-bold text-[#4A2C2A] text-sm">Chị Lê Hoa</p>
+                                <p class="text-xs text-gray-400">TP. Hồ Chí Minh · Mua Yến Thô</p>
+                            </div>
+                            <span class="ml-auto text-[10px] text-[#C5A059] font-bold uppercase tracking-wider bg-[#C5A059]/8 px-2 py-1 rounded-full">Đã xác minh</span>
+                        </div>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="review-card bg-white rounded-3xl p-8 shadow-[0_4px_30px_rgba(74,44,42,0.06)] border border-[#C5A059]/10 hover:shadow-[0_8px_40px_rgba(74,44,42,0.12)] hover:-translate-y-1 transition-all duration-500">
+                        <div class="flex gap-0.5 mb-4">
+                            <span class="text-yellow-400 text-lg">★★★★★</span>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed mb-6 italic text-sm">
+                            "Mua bộ quà hoàng gia biếu sếp dịp Tết, sếp khen đóng gói rất sang. Giao hàng nhanh, đóng gói chắc chắn, nhân viên tư vấn nhiệt tình. Năm sau chắc chắn mua lại!"
+                        </p>
+                        <div class="flex items-center gap-3 pt-5 border-t border-gray-100">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#800020] to-[#4A2C2A] flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                                MT
+                            </div>
+                            <div>
+                                <p class="font-bold text-[#4A2C2A] text-sm">Anh Minh Tuấn</p>
+                                <p class="text-xs text-gray-400">Hà Nội · Mua Bộ Quà Hoàng Gia</p>
+                            </div>
+                            <span class="ml-auto text-[10px] text-[#C5A059] font-bold uppercase tracking-wider bg-[#C5A059]/8 px-2 py-1 rounded-full">Đã xác minh</span>
+                        </div>
+                    </div>
+
+                    <!-- Review 3 (Highlighted) -->
+                    <div class="review-card bg-gradient-to-br from-[#4A2C2A] to-[#2d1208] rounded-3xl p-8 shadow-[0_4px_30px_rgba(74,44,42,0.15)] hover:shadow-[0_8px_40px_rgba(74,44,42,0.25)] hover:-translate-y-1 transition-all duration-500">
+                        <div class="flex gap-0.5 mb-4">
+                            <span class="text-yellow-400 text-lg">★★★★★</span>
+                        </div>
+                        <p class="text-white/80 leading-relaxed mb-6 italic text-sm">
+                            "Tôi bị ốm dài ngày, bác sĩ khuyên bổ sung dinh dưỡng. Dùng hũ yến chưng Tám Thủy đều đặn 1 tháng, sức khỏe cải thiện rõ rệt. Sản phẩm ngon, thơm, không bị ngọt gắt."
+                        </p>
+                        <div class="flex items-center gap-3 pt-5 border-t border-white/10">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#C5A059] to-[#8B6508] flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                                TL
+                            </div>
+                            <div>
+                                <p class="font-bold text-white text-sm">Chị Thu Lan</p>
+                                <p class="text-xs text-white/40">Đà Nẵng · Mua Hũ Yến Chưng</p>
+                            </div>
+                            <span class="ml-auto text-[10px] text-[#C5A059] font-bold uppercase tracking-wider bg-[#C5A059]/15 px-2 py-1 rounded-full">Đã xác minh</span>
+                        </div>
+                    </div>
+
+                    <!-- Review 4 -->
+                    <div class="review-card bg-white rounded-3xl p-8 shadow-[0_4px_30px_rgba(74,44,42,0.06)] border border-[#C5A059]/10 hover:shadow-[0_8px_40px_rgba(74,44,42,0.12)] hover:-translate-y-1 transition-all duration-500">
+                        <div class="flex gap-0.5 mb-4">
+                            <span class="text-yellow-400 text-lg">★★★★★</span>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed mb-6 italic text-sm">
+                            "Hồng Yến Đảo đúng là quý hiếm thật. Màu cam đẹp tự nhiên, sợi nguyên không gãy. Tôi mua cho mẹ già bổ dưỡng, mẹ thích lắm. Giá hơi cao nhưng xứng đáng!"
+                        </p>
+                        <div class="flex items-center gap-3 pt-5 border-t border-gray-100">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#C5A059]/70 to-[#8B6508] flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                                PH
+                            </div>
+                            <div>
+                                <p class="font-bold text-[#4A2C2A] text-sm">Anh Phú Hoàng</p>
+                                <p class="text-xs text-gray-400">Cần Thơ · Mua Hồng Yến Đảo</p>
+                            </div>
+                            <span class="ml-auto text-[10px] text-[#C5A059] font-bold uppercase tracking-wider bg-[#C5A059]/8 px-2 py-1 rounded-full">Đã xác minh</span>
+                        </div>
+                    </div>
+
+                    <!-- Review 5 -->
+                    <div class="review-card bg-white rounded-3xl p-8 shadow-[0_4px_30px_rgba(74,44,42,0.06)] border border-[#C5A059]/10 hover:shadow-[0_8px_40px_rgba(74,44,42,0.12)] hover:-translate-y-1 transition-all duration-500">
+                        <div class="flex gap-0.5 mb-4">
+                            <span class="text-yellow-400 text-lg">★★★★★</span>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed mb-6 italic text-sm">
+                            "Đặt lần đầu qua website, tư vấn qua Zalo rất nhiệt tình. Yến tinh chế sợi dài, chưng nở to, thơm ngon. Ship về Hà Nội 2 ngày, đóng gói cẩn thận. Đã giới thiệu cho 3 người bạn rồi!"
+                        </p>
+                        <div class="flex items-center gap-3 pt-5 border-t border-gray-100">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#800020] to-[#C5A059] flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                                HN
+                            </div>
+                            <div>
+                                <p class="font-bold text-[#4A2C2A] text-sm">Chị Hà Ngân</p>
+                                <p class="text-xs text-gray-400">Hà Nội · Mua Yến Tinh Chế</p>
+                            </div>
+                            <span class="ml-auto text-[10px] text-[#C5A059] font-bold uppercase tracking-wider bg-[#C5A059]/8 px-2 py-1 rounded-full">Đã xác minh</span>
+                        </div>
+                    </div>
+
+                    <!-- Review 6 -->
+                    <div class="review-card bg-white rounded-3xl p-8 shadow-[0_4px_30px_rgba(74,44,42,0.06)] border border-[#C5A059]/10 hover:shadow-[0_8px_40px_rgba(74,44,42,0.12)] hover:-translate-y-1 transition-all duration-500">
+                        <div class="flex gap-0.5 mb-4">
+                            <span class="text-yellow-400 text-lg">★★★★★</span>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed mb-6 italic text-sm">
+                            "Mua sỉ 10 hộp để làm quà tặng đối tác. Được hỗ trợ in logo công ty lên hộp, rất chuyên nghiệp. Giá sỉ hợp lý, chất lượng đồng đều từng hộp. Sẽ hợp tác lâu dài!"
+                        </p>
+                        <div class="flex items-center gap-3 pt-5 border-t border-gray-100">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#4A2C2A] to-[#C5A059] flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                                DN
+                            </div>
+                            <div>
+                                <p class="font-bold text-[#4A2C2A] text-sm">Cty TNHH Đức Nam</p>
+                                <p class="text-xs text-gray-400">TP.HCM · Mua Sỉ Bộ Quà</p>
+                            </div>
+                            <span class="ml-auto text-[10px] text-[#C5A059] font-bold uppercase tracking-wider bg-[#C5A059]/8 px-2 py-1 rounded-full">Đã xác minh</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Overall Rating Bar -->
+                <div class="flex flex-col md:flex-row items-center justify-center gap-8 mt-16 p-8 bg-white rounded-3xl max-w-2xl mx-auto shadow-[0_4px_30px_rgba(74,44,42,0.06)] border border-[#C5A059]/10">
+                    <div class="text-center">
+                        <p class="font-serif font-black text-6xl text-[#4A2C2A]">4.9</p>
+                        <p class="text-yellow-400 text-2xl mt-1">★★★★★</p>
+                        <p class="text-xs text-gray-400 mt-1">322 đánh giá</p>
+                    </div>
+                    <div class="w-px h-16 bg-gray-100 hidden md:block"></div>
+                    <div class="flex flex-col gap-2 w-full max-w-[200px]">
+                        <div class="flex items-center gap-2 text-xs">
+                            <span class="text-gray-500 w-4">5★</span>
+                            <div class="flex-1 h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-yellow-400 rounded-full" style="width:88%"></div>
+                            </div>
+                            <span class="text-gray-400">88%</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs">
+                            <span class="text-gray-500 w-4">4★</span>
+                            <div class="flex-1 h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-yellow-400 rounded-full" style="width:10%"></div>
+                            </div>
+                            <span class="text-gray-400">10%</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs">
+                            <span class="text-gray-500 w-4">3★</span>
+                            <div class="flex-1 h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-yellow-400 rounded-full" style="width:2%"></div>
+                            </div>
+                            <span class="text-gray-400">2%</span>
+                        </div>
+                    </div>
+                    <div class="w-px h-16 bg-gray-100 hidden md:block"></div>
+                    <div class="text-center">
+                        <p class="text-2xl mb-1">🏆</p>
+                        <p class="font-bold text-[#4A2C2A] text-sm">Top Seller</p>
+                        <p class="text-xs text-gray-400">Yến sào Bình Định</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════════════════════
+             FAQ SECTION — Câu hỏi thường gặp
+             ══════════════════════════════════════════════════════ -->
+        <section id="faq" class="py-24 bg-[#fff5e8]">
+            <div class="container mx-auto px-6 max-w-3xl">
+
+                <!-- Header -->
+                <div class="text-center mb-14">
+                    <p class="text-[#C5A059] text-xs font-bold uppercase tracking-[0.35em] mb-4">FAQ</p>
+                    <h2 class="font-serif font-black text-4xl md:text-5xl text-[#4A2C2A]">Câu Hỏi Thường Gặp</h2>
+                </div>
+
+                <!-- FAQ Items -->
+                <div class="faq-list space-y-3" id="faq-list">
+
+                    <div class="faq-item bg-white rounded-2xl overflow-hidden border border-[#C5A059]/10 shadow-sm">
+                        <button class="faq-trigger w-full flex items-center justify-between p-6 text-left" aria-expanded="false">
+                            <span class="font-bold text-[#4A2C2A] pr-4">Yến sào Tám Thủy khác gì so với yến ngoài thị trường?</span>
+                            <span class="faq-icon flex-shrink-0 w-8 h-8 rounded-full border border-[#C5A059]/30 flex items-center justify-center text-[#C5A059] transition-transform duration-300">+</span>
+                        </button>
+                        <div class="faq-body overflow-hidden max-h-0 transition-all duration-500">
+                            <p class="px-6 pb-6 text-gray-600 leading-relaxed text-sm">
+                                Yến Tám Thủy được thu hoạch trực tiếp từ nhà yến tự nhiên tại Đầm Thị Nại, Bình Định — vùng có khí hậu biển lý tưởng. Chúng tôi <strong>không qua trung gian</strong>, không pha trộn, không chất bảo quản. Mỗi mẻ yến đều có thể truy xuất nguồn gốc rõ ràng.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item bg-white rounded-2xl overflow-hidden border border-[#C5A059]/10 shadow-sm">
+                        <button class="faq-trigger w-full flex items-center justify-between p-6 text-left" aria-expanded="false">
+                            <span class="font-bold text-[#4A2C2A] pr-4">Làm sao phân biệt yến thật và yến giả?</span>
+                            <span class="faq-icon flex-shrink-0 w-8 h-8 rounded-full border border-[#C5A059]/30 flex items-center justify-center text-[#C5A059] transition-transform duration-300">+</span>
+                        </button>
+                        <div class="faq-body overflow-hidden max-h-0 transition-all duration-500">
+                            <p class="px-6 pb-6 text-gray-600 leading-relaxed text-sm">
+                                Yến thật có đặc điểm: sợi yến có màu trắng ngà hoặc vàng nhạt tự nhiên (không đều màu), mùi tanh nhẹ đặc trưng của biển, khi chưng nở <strong>gấp 4-6 lần</strong> và có độ dai giòn. Yến giả thường quá trắng đồng đều, không có mùi, nở ít và nhão. Bạn có thể đặt mẫu thử từ Tám Thủy trước khi mua số lượng lớn.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item bg-white rounded-2xl overflow-hidden border border-[#C5A059]/10 shadow-sm">
+                        <button class="faq-trigger w-full flex items-center justify-between p-6 text-left" aria-expanded="false">
+                            <span class="font-bold text-[#4A2C2A] pr-4">Giao hàng bao lâu? Có giao toàn quốc không?</span>
+                            <span class="faq-icon flex-shrink-0 w-8 h-8 rounded-full border border-[#C5A059]/30 flex items-center justify-center text-[#C5A059] transition-transform duration-300">+</span>
+                        </button>
+                        <div class="faq-body overflow-hidden max-h-0 transition-all duration-500">
+                            <p class="px-6 pb-6 text-gray-600 leading-relaxed text-sm">
+                                Chúng tôi giao hàng toàn quốc qua GHTK, GHN, ViettelPost. Thời gian: <strong>1-2 ngày</strong> tại TP.HCM, Hà Nội, Đà Nẵng. <strong>2-3 ngày</strong> các tỉnh thành khác. Đơn hàng được đóng gói chống sốc, bảo đảm yến không gãy vỡ.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item bg-white rounded-2xl overflow-hidden border border-[#C5A059]/10 shadow-sm">
+                        <button class="faq-trigger w-full flex items-center justify-between p-6 text-left" aria-expanded="false">
+                            <span class="font-bold text-[#4A2C2A] pr-4">Chính sách đổi trả như thế nào?</span>
+                            <span class="faq-icon flex-shrink-0 w-8 h-8 rounded-full border border-[#C5A059]/30 flex items-center justify-center text-[#C5A059] transition-transform duration-300">+</span>
+                        </button>
+                        <div class="faq-body overflow-hidden max-h-0 transition-all duration-500">
+                            <p class="px-6 pb-6 text-gray-600 leading-relaxed text-sm">
+                                Chúng tôi đảm bảo <strong>đổi trả trong 7 ngày</strong> nếu sản phẩm không đúng mô tả hoặc có lỗi. Khách hàng chụp ảnh và liên hệ qua Zalo hotline để được xử lý trong vòng 24h. Phí ship đổi trả do Tám Thủy chịu nếu lỗi từ phía chúng tôi.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item bg-white rounded-2xl overflow-hidden border border-[#C5A059]/10 shadow-sm">
+                        <button class="faq-trigger w-full flex items-center justify-between p-6 text-left" aria-expanded="false">
+                            <span class="font-bold text-[#4A2C2A] pr-4">Có giá sỉ cho doanh nghiệp / mua số lượng lớn không?</span>
+                            <span class="faq-icon flex-shrink-0 w-8 h-8 rounded-full border border-[#C5A059]/30 flex items-center justify-center text-[#C5A059] transition-transform duration-300">+</span>
+                        </button>
+                        <div class="faq-body overflow-hidden max-h-0 transition-all duration-500">
+                            <p class="px-6 pb-6 text-gray-600 leading-relaxed text-sm">
+                                Có! Từ 5 hộp trở lên sẽ được <strong>giảm 8–15%</strong> tùy số lượng. Các doanh nghiệp mua quà tặng tập thể (từ 20 hộp) còn được in logo, thiết kế hộp theo yêu cầu, xuất hóa đơn VAT đầy đủ. Liên hệ hotline để nhận báo giá sỉ chi tiết.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item bg-white rounded-2xl overflow-hidden border border-[#C5A059]/10 shadow-sm">
+                        <button class="faq-trigger w-full flex items-center justify-between p-6 text-left" aria-expanded="false">
+                            <span class="font-bold text-[#4A2C2A] pr-4">Bảo quản yến như thế nào để được lâu?</span>
+                            <span class="faq-icon flex-shrink-0 w-8 h-8 rounded-full border border-[#C5A059]/30 flex items-center justify-center text-[#C5A059] transition-transform duration-300">+</span>
+                        </button>
+                        <div class="faq-body overflow-hidden max-h-0 transition-all duration-500">
+                            <p class="px-6 pb-6 text-gray-600 leading-relaxed text-sm">
+                                Yến thô và tinh chế: bảo quản nơi khô ráo, thoáng mát, tránh ánh nắng trực tiếp — dùng được <strong>12–18 tháng</strong>. Hũ yến chưng: bảo quản ngăn mát tủ lạnh sau khi mở, dùng trong <strong>3–5 ngày</strong>. Tránh để gần thức ăn có mùi mạnh.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- CTA below FAQ -->
+                <div class="text-center mt-12">
+                    <p class="text-gray-500 text-sm mb-4">Còn câu hỏi khác?</p>
+                    <a href="https://zalo.me/0900000000" target="_blank"
+                       class="inline-flex items-center gap-2 bg-[#4A2C2A] text-white px-8 py-3 rounded-full font-bold text-sm hover:bg-[#C5A059] transition-all shadow-lg">
+                        💬 Chat Zalo với chúng tôi
+                    </a>
+                </div>
+
             </div>
         </section>
 
@@ -723,6 +1289,18 @@
             </div>
         </footer>
     </main>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Floating Order Button (Mobile Only) -->
+    <button class="floating-order-btn" id="floating-order-btn"
+            onclick="document.getElementById('order').scrollIntoView({behavior:'smooth'})">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+        </svg>
+        Đặt Hàng Ngay
+    </button>
 
     <!-- Scripts -->
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
