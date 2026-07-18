@@ -1,0 +1,102 @@
+<!-- Mobile Menu Overlay -->
+    <div id="mobile-menu"
+        class="fixed inset-0 z-[60] bg-white translate-x-full transition-transform duration-300 md:hidden flex flex-col">
+        <div class="p-6 flex justify-between items-center border-b border-gray-100">
+            <span class="font-bold text-xl text-brand-brown">MENU</span>
+            <button onclick="document.getElementById('mobile-menu').classList.add('translate-x-full')"
+                class="text-gray-500 hover:text-brand-red">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
+                </svg>
+            </button>
+        </div>
+        <div class="flex flex-col p-8 gap-6 text-lg font-medium text-gray-800 content-start">
+            <a href="#hero" onclick="document.getElementById('mobile-menu').classList.add('translate-x-full')">Trang
+                chủ</a>
+            <a href="#products" onclick="document.getElementById('mobile-menu').classList.add('translate-x-full')">Sản
+                phẩm</a>
+            <a href="#about" onclick="document.getElementById('mobile-menu').classList.add('translate-x-full')">Về chúng
+                tôi</a>
+            <a href="#contact" onclick="document.getElementById('mobile-menu').classList.add('translate-x-full')">Liên
+                hệ</a>
+        </div>
+    </div>
+
+    <!-- Hero Section (Marble Premium Re-Design) -->
+    <section id="hero" class="hero-pin-container hero-marble relative w-full h-screen overflow-hidden flex items-center justify-center">   
+        <!-- Thiết kế Hero Mới -->
+        <!-- Hero Content Grid (Left Products / Right Text) -->
+        <div class="container mx-auto px-8 w-full h-full flex flex-col md:flex-row items-center justify-between z-40 relative pt-[0px]">
+            
+            <!-- Left Side: Product Parallax Area (Bounded Box to prevent overflow) -->
+            <div class="w-full md:w-1/2 flex justify-center items-center mt-10 md:mt-0 relative">
+                <!-- Khung lưới vuông khóa chặt 3 hình ảnh -->
+                <div class="hero-products-wrapper relative w-full max-w-[480px] aspect-square">
+                    
+                    <!-- Đĩa Yến Thô (Top Left) -->
+                    <div class="gsap-hero-img-1 absolute top-[0%] left-[0%] w-[65%] z-10 hero-img-load drop-shadow-2xl" style="transition-delay: 0.1s;">
+                        <div class="w-full h-full transition-transform duration-500 hover:scale-[1.05]">
+                            <img src="./assets/images/yen-tinh-che.png" alt="Tổ Yến Tinh Chế" class="w-full opacity-95">
+                        </div>
+                    </div>
+                    
+                    <!-- Hũ Yến (Top Right) -->
+                    <div class="gsap-hero-img-2 absolute top-[18%] right-[0%] w-[45%] z-20 hero-img-load drop-shadow-2xl" style="transition-delay: 0.3s;">
+                        <div class="w-full h-full transition-transform duration-500 hover:scale-[1.05]">
+                            <img src="./assets/images/yen-hu.png" alt="Hũ Yến Chưng" class="w-full">
+                        </div>
+                    </div>
+
+                    <!-- Hộp Qùa Đỏ (Bottom Center) -->
+                    <div class="gsap-hero-img-3 absolute bottom-[5%] left-[20%] w-[60%] z-30 hero-img-load drop-shadow-[0_25px_30px_rgba(0,0,0,0.2)]" style="transition-delay: 0.5s;">
+                        <div class="w-full h-full transition-transform duration-500 hover:scale-[1.05]">
+                            <img src="./assets/images/yen-hop.png" alt="Hộp Quà Yến Sào" class="w-full">
+                        </div>
+                    </div>
+                    
+                    <!-- Tám Thủy Sticker (Moved to Hero) -->
+                    <div class="absolute bottom-[5%] right-[-2%] md:bottom-[10%] md:right-[-5%] xl:bottom-[10%] xl:right-[-5%] z-50 pointer-events-auto" style="margin-right: 20px; margin-bottom: -50px;">
+                        <div class="stamp-animation" style="animation-delay: 2s;">
+                            <div class="brand-sticker scale-50 md:scale-75 xl:scale-90">
+                                <div class="w-20 h-20 shrink-0 bg-[#C5A059] drop-shadow-md" style="-webkit-mask-image: url('./assets/images/avt-svg.svg'); -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; -webkit-mask-position: center; mask-image: url('./assets/images/avt-svg.svg'); mask-size: contain; mask-repeat: no-repeat; mask-position: center;"></div>
+                                <div class="flex flex-col text-left">
+                                    <span class="sticker-main">Tám Thủy</span>
+                                    <span class="text-[11px] md:text-xs text-[#C5A059] font-bold tracking-widest uppercase mt-1">Yến Sào Đầm Thị Nại</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Text & Brand Identity -->
+            <div class="hero-text-wrapper w-full md:w-1/2 flex flex-col items-start text-left pl-0 md:pl-10 mb-16 md:mb-24 relative z-50">
+                <p class="hero-subtitle text-[#222222] font-black tracking-[0.4em] md:tracking-[0.6em] uppercase text-xs md:text-sm mb-4 opacity-80" data-aos="fade-up" data-aos-delay="0">Tuyệt Phẩm Thiên Nhiên</p>
+                
+                <h1 class="hero-title font-serif font-black text-[3rem] md:text-[3.5rem] lg:text-[4.5rem] xl:text-[5.5rem] leading-snug w-full" style="text-shadow: 2px 4px 15px rgba(74, 44, 42, 0.25);" data-aos="fade-up" data-aos-delay="150">
+                    <!-- Dòng 1: YẾN SÀO -->
+                    <span class="text-reveal-mask block pt-6 pb-2">
+                        <span id="to-chim" class="text-reveal-item text-gold-foil">YẾN SÀO</span>
+                    </span>
+                    <!-- Dòng 2: TÁM THỦY -->
+                    <span class="text-reveal-mask block -mt-2 md:-mt-6 lg:-mt-8 pt-6 pb-2">
+                        <span class="text-reveal-item stagger-2 text-gold-foil">TÁM THỦY</span>
+                    </span>
+                </h1>
+                
+
+            </div>
+
+        </div>
+
+        <!-- Scroll Down 'V' Button -->
+        <div id="hero-scroll-btn" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-[#4A2C2A] cursor-pointer z-[999] animate-bounce w-14 h-14 flex items-center justify-center rounded-full transition-all duration-300 hover:bg-[#8B6508]/5 hover:ring-1 hover:ring-[#8B6508]/60 group">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="w-8 h-8 opacity-70 group-hover:scale-110 group-hover:opacity-100 group-hover:text-[#8B6508] transition-all duration-300">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Main Content Wrapper -->
+    <main id="main-content" class="relative z-10 bg-brand-cream">

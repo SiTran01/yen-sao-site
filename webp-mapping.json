@@ -1,0 +1,46 @@
+[
+  {
+    "from": "./assets/images/bg.png",
+    "to": "./assets/images/bg.webp"
+  },
+  {
+    "from": "./assets/images/bg-product.png",
+    "to": "./assets/images/bg-product.webp"
+  },
+  {
+    "from": "./assets/images/farm1.png",
+    "to": "./assets/images/farm1.webp"
+  },
+  {
+    "from": "./assets/images/farm2.png",
+    "to": "./assets/images/farm2.webp"
+  },
+  {
+    "from": "./assets/images/yen-hop.png",
+    "to": "./assets/images/yen-hop.webp"
+  },
+  {
+    "from": "./assets/images/yen-hop1.png",
+    "to": "./assets/images/yen-hop1.webp"
+  },
+  {
+    "from": "./assets/images/yen-tinh-che.png",
+    "to": "./assets/images/yen-tinh-che.webp"
+  },
+  {
+    "from": "./assets/images/yen-tinh-che1.png",
+    "to": "./assets/images/yen-tinh-che1.webp"
+  },
+  {
+    "from": "./assets/images/yen-hu.png",
+    "to": "./assets/images/yen-hu.webp"
+  },
+  {
+    "from": "./assets/images/yen-hu1.png",
+    "to": "./assets/images/yen-hu1.webp"
+  },
+  {
+    "from": "./assets/images/image1.png",
+    "to": "./assets/images/image1.webp"
+  }
+]
