@@ -1,0 +1,20 @@
+[
+  {
+    "id": "dam-thi-nai",
+    "title": "Đầm Thị Nại – Viên Ngọc Quý Của Bình Định Và Những Điều Chưa Kể",
+    "excerpt": "Bạn đã bao giờ nghe về một đầm nước mặn rộng lớn nằm ngay giữa lòng thành phố biển, nơi giao thoa của lịch sử, thiên nhiên và nhịp sống hiện đại chưa?",
+    "thumbnail": "./assets/images/product-4.webp",
+    "tags": ["Đầm Thị Nại", "Kiến Thức"],
+    "date": "26 Tháng 05, 2025",
+    "readTime": "8 phút đọc"
+  },
+  {
+    "id": "cach-chung-yen",
+    "title": "Bí quyết chưng yến đường phèn giữ trọn 100% vi chất",
+    "excerpt": "Hướng dẫn chi tiết từ A-Z cách chưng yến sào chuẩn chuyên gia, không làm mất đi các axit amin và khoáng chất quý hiếm.",
+    "thumbnail": "./assets/images/product-1.webp",
+    "tags": ["Chế Biến", "Cẩm Nang"],
+    "date": "17 Tháng 07, 2026",
+    "readTime": "5 phút đọc"
+  }
+]

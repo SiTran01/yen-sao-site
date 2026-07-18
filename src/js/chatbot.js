@@ -12,7 +12,8 @@
    5. Copy URL webhook vào N8N_AI_WEBHOOK_URL bên dưới
    ─────────────────────────────────────────────────────────── */
 const CHATBOT_CONFIG = {
-    n8nWebhookUrl: 'http://localhost:5678/webhook/tamthuy-chat',  // 👈 PASTE n8n webhook URL của bạn vào đây
+    // 🔧 CẤU HÌNH WEBHOOK
+    n8nWebhookUrl: 'http://localhost:5678/webhook/tamthuy-chat', 
     maxHistoryLength: 12,         // số lượng tin nhắn giữ trong bộ nhớ (6 cặp hỏi/đáp)
     typingDelay: { min: 600, max: 1500 }, // giả lập delay tự nhiên
 };
@@ -246,14 +247,132 @@ function appendUserMessage(text) {
 function appendBotMessage(text) {
     const el = document.createElement('div');
     el.className = 'ai-msg assistant';
+    
+    let bubbleContent = escapeHtml(text);
+    let genUIHtml = '';
+
+    // Parse Generative UI actions (JSON)
+    try {
+        const actionMatch = text.match(/```(?:json)?\s*([\s\S]*?)\s*```/i);
+        let parsed = null;
+        let cleanText = text;
+        
+        if (actionMatch) {
+            parsed = JSON.parse(actionMatch[1]);
+            cleanText = text.replace(/```(?:json)?\s*[\s\S]*?\s*```/i, '').trim();
+        } else if (text.trim().startsWith('{') && text.trim().endsWith('}')) {
+            parsed = JSON.parse(text);
+            cleanText = parsed.message || '';
+        }
+
+        // Fallback robust search if the above fails
+        if (!parsed) {
+            const rawMatch = text.match(/\{\s*"action"\s*:\s*"render_order_form"[\s\S]*?\}/i);
+            if (rawMatch) {
+                parsed = JSON.parse(rawMatch[0]);
+                cleanText = text.replace(rawMatch[0], '').trim();
+            }
+        }
+
+        if (parsed && parsed.action === 'render_order_form') {
+            bubbleContent = cleanText ? escapeHtml(cleanText) : 'Mời anh/chị xác nhận thông tin đơn hàng bên dưới ạ:';
+            genUIHtml = renderMiniOrderForm(parsed.data);
+        }
+    } catch (e) {
+        console.error("GenUI Parse Error", e);
+    }
+
     el.innerHTML = `
         <div class="ai-msg-avatar">
             <img src="./assets/images/avt-svg.svg" alt="Thủy">
         </div>
-        <div class="ai-msg-bubble">${escapeHtml(text)}</div>
+        <div class="ai-msg-content">
+            ${bubbleContent ? `<div class="ai-msg-bubble">${bubbleContent}</div>` : ''}
+            ${genUIHtml}
+        </div>
     `;
     dom.messages.appendChild(el);
     scrollToBottom();
+}
+
+function renderMiniOrderForm(data) {
+    let productName = data.product;
+    if (window.YEN_SAO_DB) {
+        const p = window.YEN_SAO_DB.products.find(x => x.id === data.product);
+        if (p) productName = p.name;
+    }
+    const uniqueId = 'mini-form-' + Date.now();
+    
+    return `
+    <div class="ai-mini-form">
+        <div class="ai-mf-header">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+            <span>Phiếu Đặt Hàng Nhanh</span>
+        </div>
+        <div class="ai-mf-body">
+            <div class="ai-mf-row">
+                <span class="ai-mf-label">Sản phẩm:</span>
+                <span class="ai-mf-value">${escapeHtml(productName || data.product || 'Yến Sào')}</span>
+            </div>
+            <div class="ai-mf-row">
+                <span class="ai-mf-label">Số lượng:</span>
+                <span class="ai-mf-value">${escapeHtml(String(data.quantity || 1))}</span>
+            </div>
+            <div class="ai-mf-input-group">
+                <label>Số điện thoại liên hệ *</label>
+                <input type="tel" id="${uniqueId}-phone" value="${escapeHtml(data.phone || '')}" placeholder="09xx xxx xxx">
+            </div>
+            <button class="ai-mf-btn" onclick="submitMiniOrder('${escapeHtml(data.product)}', '${escapeHtml(String(data.quantity))}', '${uniqueId}-phone', this)">
+                Chốt Đơn Ngay
+            </button>
+        </div>
+    </div>
+    `;
+}
+
+window.submitMiniOrder = async function(productId, qty, phoneId, btnEl) {
+    const phone = document.getElementById(phoneId)?.value?.trim();
+    if (!phone) {
+        alert('Vui lòng nhập số điện thoại để shop liên hệ xác nhận ạ!');
+        return;
+    }
+
+    btnEl.disabled = true;
+    btnEl.innerText = 'Đang xử lý...';
+
+    const payload = {
+        name: 'Khách Chat AI',
+        phone: phone,
+        product: productId,
+        qty: qty,
+        note: 'Đơn hàng tự động chốt từ AI Agent (Generative UI)',
+        source: 'ai-agent',
+        utm: window.location.search || ''
+    };
+
+    try {
+        // Gọi thẳng hàm sendToN8N bên script.js nếu có
+        if (window.sendToN8N) {
+            await window.sendToN8N(payload);
+        } else {
+            console.log("Mock submit:", payload);
+            await new Promise(r => setTimeout(r, 800));
+        }
+        
+        btnEl.innerText = '✓ Đã gửi đơn thành công';
+        btnEl.style.background = '#16a34a';
+        btnEl.style.color = '#fff';
+        btnEl.style.borderColor = '#16a34a';
+        
+        setTimeout(() => {
+            appendBotMessage('Tuyệt vời! Em đã gửi thông tin đơn hàng cho bộ phận sale. Sẽ có nhân viên gọi điện cho anh/chị qua số ' + phone + ' trong ít phút nữa ạ! 🍃');
+        }, 600);
+
+    } catch (e) {
+        btnEl.disabled = false;
+        btnEl.innerText = 'Lỗi. Thử lại';
+        alert('Hệ thống đang bận, anh/chị thử lại sau nhé!');
+    }
 }
 
 function appendErrorMessage(text) {

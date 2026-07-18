@@ -709,6 +709,44 @@
         </section>
 
         
+        <section id="blog" class="py-24 bg-[#F4EDE5] relative overflow-hidden">
+            <!-- Decorative Elements -->
+            <div class="absolute top-0 left-0 w-64 h-64 bg-[#C5A059]/10 rounded-full blur-[80px] -translate-x-1/2 -translate-y-1/2"></div>
+            <div class="absolute bottom-0 right-0 w-96 h-96 bg-[#800020]/5 rounded-full blur-[100px] translate-x-1/3 translate-y-1/3"></div>
+
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="text-center mb-16">
+                    <p class="text-[#8B6508] text-xs font-bold uppercase tracking-[0.3em] mb-4" data-aos="fade-up">Góc Chuyên Gia</p>
+                    <h2 class="text-4xl md:text-5xl font-serif font-black text-[#4A2C2A]" data-aos="fade-up" data-aos-delay="100">Kiến Thức & Cẩm Nang</h2>
+                    <div class="w-16 h-1 bg-[#C5A059] mx-auto mt-6 rounded-full" data-aos="fade-up" data-aos-delay="200"></div>
+                </div>
+
+                <!-- Blog Grid -->
+                <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <!-- Cards will be rendered here by blog.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Modal -->
+        <div id="blog-modal" class="fixed inset-0 z-[1000] hidden opacity-0 transition-opacity duration-300 items-center justify-center p-4 md:p-8">
+            <!-- Backdrop -->
+            <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+            
+            <!-- Modal Content -->
+            <div class="relative w-full max-w-4xl max-h-[90vh] bg-white rounded-[2rem] shadow-2xl overflow-hidden flex flex-col transform transition-transform duration-300 scale-95 data-[state=open]:scale-100">
+                <!-- Close Button -->
+                <button id="blog-modal-close" class="absolute top-6 right-6 w-10 h-10 bg-[#F4EDE5] rounded-full flex items-center justify-center text-[#4A2C2A] hover:bg-[#C5A059] hover:text-white transition-colors z-50 shadow-md">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                </button>
+                
+                <!-- Scrollable Body -->
+                <div id="blog-modal-content" class="overflow-y-auto flex-1 p-8 md:p-12" data-lenis-prevent>
+                    <!-- Content will be injected here -->
+                </div>
+            </div>
+        </div>
+
         <section id="order" class="order-section">
 
             
@@ -1296,6 +1334,8 @@
     <script defer src="./js/script.js"></script>
     <!-- AI Chatbot logic -->
     <script defer src="./js/chatbot.js"></script>
+    <!-- Blog logic -->
+    <script defer src="./js/blog.js"></script>
 </body>
 
 </html>

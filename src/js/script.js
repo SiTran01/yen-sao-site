@@ -628,7 +628,6 @@ window.addEventListener("load", function () {
         return true;
     }
 
-    // Gửi đến n8n (hoặc lưu localStorage nếu chưa cấu hình)
     async function sendToN8N(payload) {
         if (!IS_WEBHOOK_CONFIGURED) {
             const orders = JSON.parse(localStorage.getItem('tamthuy_orders') || '[]');
@@ -646,6 +645,7 @@ window.addEventListener("load", function () {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         return { success: true, mode: 'n8n', data: await response.json().catch(() => ({})) };
     }
+    window.sendToN8N = sendToN8N;
 
     // Form submit handler
     const form      = document.getElementById('order-form');

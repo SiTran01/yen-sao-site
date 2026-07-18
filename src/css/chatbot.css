@@ -396,6 +396,100 @@
     letter-spacing: 0.02em;
 }
 
+/* ── Generative UI (Mini Form) ────────────────────────────── */
+.ai-msg-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 85%;
+}
+
+.ai-mini-form {
+    background: #fff;
+    border: 1px solid rgba(197, 160, 89, 0.4);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    width: 260px;
+    margin-top: 4px;
+    animation: ai-msg-in 0.4s var(--ease-premium);
+    color: #333;
+}
+
+.ai-mf-header {
+    background: linear-gradient(135deg, #C5A059, #8B6508);
+    color: #1a0a05;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ai-mf-body {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ai-mf-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    border-bottom: 1px dashed #eee;
+    padding-bottom: 6px;
+}
+
+.ai-mf-label { color: #666; }
+.ai-mf-value { font-weight: 600; color: #1a0a05; text-align: right; }
+
+.ai-mf-input-group label {
+    display: block;
+    font-size: 12px;
+    color: #555;
+    margin-bottom: 4px;
+}
+
+.ai-mf-input-group input {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+.ai-mf-input-group input:focus {
+    border-color: #C5A059;
+}
+
+.ai-mf-btn {
+    background: #fff5e8;
+    color: #8B6508;
+    border: 1px solid #8B6508;
+    padding: 8px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 4px;
+}
+
+.ai-mf-btn:hover:not(:disabled) {
+    background: #8B6508;
+    color: #fff;
+}
+
+.ai-mf-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
 /* ── Mobile responsive ─────────────────────────────────────── */
 @media (max-width: 480px) {
     .ai-chat-panel {
