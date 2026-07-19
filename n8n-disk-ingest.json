@@ -1,0 +1,146 @@
+{
+  "name": "Nhồi Data Pinecone (Từ Ổ Cứng Thực Sự)",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "e515d9a9",
+      "name": "When clicking 'Execute Workflow'",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [ 0, 0 ]
+    },
+    {
+      "parameters": {
+        "fileSelector": "D:/CODEs/tamthuy/yen-sao-site/src/data/posts/*.json",
+        "options": {}
+      },
+      "id": "b1c2d3e4",
+      "name": "Đọc File JSON",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1.1,
+      "position": [ 220, 0 ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const results = [];\nlet i = 0;\nfor (const item of $input.all()) {\n  if (item.binary && item.binary.data) {\n    try {\n      const binaryData = await this.helpers.getBinaryDataBuffer(i, 'data');\n      const str = binaryData.toString('utf8');\n      const parsed = JSON.parse(str);\n      \n      if (Array.isArray(parsed)) {\n        let content = \"Danh sách các bài viết hiện có trên Website:\\n\";\n        for (const post of parsed) {\n          content += `- Tiêu đề: ${post.title} (Đăng ngày ${post.date})\\n  Tóm tắt: ${post.excerpt}\\n`;\n        }\n        results.push({ json: { text: content } });\n      } else {\n        const content = `Tiêu đề bài viết: ${parsed.title}\\nChủ đề: ${(parsed.tags || []).join(', ')}\\n\\nNội dung chi tiết:\\n${parsed.content}`;\n        results.push({ json: { text: content } });\n      }\n    } catch (error) {\n      throw new Error(`Lỗi khi đọc file ${item.json[\"File Name\"]}: ${error.message}`);\n    }\n  }\n  i++;\n}\nreturn results;"
+      },
+      "id": "extract1",
+      "name": "Giải Nén Dữ Liệu",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [ 420, 0 ]
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "pineconeIndex": "yen-sao-data",
+        "options": {}
+      },
+      "id": "c1d2e3f4",
+      "name": "Pinecone Vector Store",
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1,
+      "position": [ 620, 0 ]
+    },
+    {
+      "parameters": {
+        "model": "text-embedding-3-small"
+      },
+      "id": "d1e2f3g4",
+      "name": "OpenAI Embeddings",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1,
+      "position": [ 620, 200 ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "e1f2g3h4",
+      "name": "Default Data Loader",
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1,
+      "position": [ 820, 200 ]
+    },
+    {
+      "parameters": {
+        "chunkSize": 1000,
+        "chunkOverlap": 200
+      },
+      "id": "f1g2h3i4",
+      "name": "Text Splitter",
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [ 820, 400 ]
+    }
+  ],
+  "connections": {
+    "When clicking 'Execute Workflow'": {
+      "main": [
+        [
+          {
+            "node": "Đọc File JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Đọc File JSON": {
+      "main": [
+        [
+          {
+            "node": "Giải Nén Dữ Liệu",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Giải Nén Dữ Liệu": {
+      "main": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pinecone Vector Store": {},
+    "OpenAI Embeddings": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

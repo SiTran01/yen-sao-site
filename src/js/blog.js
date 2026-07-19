@@ -18,38 +18,44 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderBlogCards(posts) {
-        blogGrid.innerHTML = '';
+        const track = document.getElementById('blog-grid');
+        if (!track) return;
+        // Remove any previously injected cards (but keep intro card)
+        track.querySelectorAll('.blog-post-card').forEach(el => el.remove());
+
         posts.forEach(post => {
             const card = document.createElement('div');
-            card.className = 'group cursor-pointer bg-white rounded-3xl overflow-hidden shadow-[0_10px_30px_rgba(74,44,42,0.05)] hover:shadow-[0_20px_40px_rgba(74,44,42,0.12)] transition-all duration-500 hover:-translate-y-2 border border-[#F4EDE5]';
+            card.className = 'blog-post-card hscroll-card flex-shrink-0 w-[440px] h-[56vh] rounded-[2rem] overflow-hidden relative group cursor-pointer';
             card.innerHTML = `
-                <div class="relative w-full h-64 overflow-hidden bg-[#F4EDE5]">
-                    <img src="${post.thumbnail}" alt="${post.title}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute top-4 left-4 bg-white/90 backdrop-blur text-[#8B6508] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                        ${post.tags[0]}
-                    </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-[#4A2C2A]/95 via-[#4A2C2A]/20 to-transparent z-10"></div>
+                <div class="absolute inset-0 bg-[#f0ebe4] flex items-center justify-center overflow-hidden">
+                    <img src="${post.thumbnail}" alt="${post.title}" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110">
                 </div>
-                <div class="p-8">
-                    <div class="flex items-center gap-4 text-xs text-gray-500 mb-4 uppercase tracking-widest">
-                        <span>${post.date}</span>
-                        <span class="w-1 h-1 bg-[#C5A059] rounded-full"></span>
-                        <span>${post.readTime}</span>
+
+                <div class="absolute top-7 left-7 z-20">
+                    <span class="bg-white/90 backdrop-blur text-[#8B6508] text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">${post.tags[0]}</span>
+                </div>
+
+                <div class="absolute bottom-0 left-0 right-0 p-8 z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="text-[#C5A059] text-[10px] uppercase tracking-[0.25em] font-bold">${post.date}</span>
+                        <span class="w-1 h-1 rounded-full bg-[#C5A059]/50"></span>
+                        <span class="text-white/50 text-[10px] uppercase tracking-[0.25em]">${post.readTime}</span>
                     </div>
-                    <h3 class="text-xl font-serif font-black text-[#4A2C2A] mb-3 group-hover:text-[#8B6508] transition-colors leading-snug line-clamp-2">
-                        ${post.title}
-                    </h3>
-                    <p class="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-3">
-                        ${post.excerpt}
-                    </p>
-                    <div class="flex items-center gap-2 text-[#C5A059] font-bold text-sm group-hover:gap-4 transition-all">
+                    <h3 class="text-white font-serif font-black text-[1.6rem] leading-tight mb-3 line-clamp-2">${post.title}</h3>
+                    <p class="text-white/50 text-xs leading-relaxed mb-5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 line-clamp-3">${post.excerpt}</p>
+                    <div class="flex items-center gap-2 text-[#C5A059] font-bold text-sm opacity-0 group-hover:opacity-100 group-hover:gap-4 transition-all duration-300 delay-150">
                         <span>Đọc tiếp</span>
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                     </div>
                 </div>
             `;
             card.addEventListener('click', () => openPost(post.id));
-            blogGrid.appendChild(card);
+            track.appendChild(card);
         });
+
+        // Trigger blog hscroll init after cards are in DOM
+        if (typeof window.initBlogHScroll === 'function') window.initBlogHScroll();
     }
 
     async function openPost(id) {
@@ -58,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
             modal.classList.remove('hidden');
             modal.classList.add('flex');
             setTimeout(() => modal.classList.remove('opacity-0'), 10);
+            modalContent.scrollTop = 0;
             
             modalContent.innerHTML = `
                 <div class="flex justify-center py-20">
@@ -92,6 +99,9 @@ document.addEventListener('DOMContentLoaded', () => {
             modalContent.innerHTML = '<p class="text-center text-brand-red">Không thể tải nội dung bài viết.</p>';
         }
     }
+    
+    // Expose to window for external links
+    window.openPost = openPost;
 
     function closeModal() {
         modal.classList.add('opacity-0');

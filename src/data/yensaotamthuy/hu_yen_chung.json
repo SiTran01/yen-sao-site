@@ -1,0 +1,32 @@
+{
+  "id": "hu_yen_chung",
+  "name": "Hũ Yến Chưng Sẵn",
+  "short_description": "Yến sào được chưng cất sẵn công nghệ cao cùng các nguyên liệu thảo mộc, đóng hũ thủy tinh tiệt trùng, tiện lợi sử dụng ngay mọi lúc mọi nơi.",
+  "ideal_for": [
+    "Dân văn phòng bận rộn cần bổ sung năng lượng nhanh",
+    "Người ốm nằm viện cần món bồi bổ tiện lợi",
+    "Trẻ em mang theo đi học ăn xế",
+    "Quà biếu thiết thực cho người lớn tuổi"
+  ],
+  "characteristics": {
+    "texture": "Nước chưng sánh mịn, sợi yến nhiều và đặc, không lỏng lẻo",
+    "flavors": [
+      "Đường phèn truyền thống",
+      "Táo đỏ, kỷ tử",
+      "Đông trùng hạ thảo",
+      "Hạt sen",
+      "Mix vị (Tứ vị)"
+    ],
+    "process": "Chưng cất thanh trùng ở nhiệt độ tiêu chuẩn giúp diệt khuẩn nhưng không làm mất chất yến. Đảm bảo KHÔNG sử dụng chất bảo quản, KHÔNG chất tạo mầu, KHÔNG hương liệu nhân tạo."
+  },
+  "benefits": [
+    "Giải khát, cung cấp nguồn năng lượng sạch tức thì",
+    "Tốt cho hệ hô hấp, thanh nhiệt cơ thể",
+    "Bồi bổ sức khỏe toàn diện mà không tốn công sức nấu nướng"
+  ],
+  "usage_instructions": {
+    "prep": "Lắc nhẹ trước khi uống, ngon hơn khi uống lạnh.",
+    "cook": "Mở nắp là có thể thưởng thức ngay. Tốt nhất nên uống vào buổi sáng sớm khi bụng đói hoặc buổi tối trước khi đi ngủ 30 phút."
+  },
+  "storage": "Bảo quản ở nhiệt độ thường nơi thoáng mát hoặc trong ngăn mát tủ lạnh. Hạn sử dụng thường từ 6 - 12 tháng tùy dòng (xem trên nắp hũ). Sau khi mở nắp phải bảo quản tủ lạnh và dùng hết trong ngày."
+}

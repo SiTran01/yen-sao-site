@@ -1,0 +1,27 @@
+{
+  "id": "yen_tho",
+  "name": "Yến Thô Tự Nhiên",
+  "short_description": "Tổ yến còn nguyên lông, giữ trọn vẹn 100% hình dáng và dưỡng chất ban đầu.",
+  "ideal_for": [
+    "Người sành ăn yến, thích hương vị nguyên bản",
+    "Khách hàng có nhiều thời gian rảnh rỗi để tự nhặt lông",
+    "Người muốn mua yến làm quà biếu mang tính chất nguyên thủy, cao cấp"
+  ],
+  "characteristics": {
+    "color": "Trắng ngà đến vàng nhạt tự nhiên",
+    "smell": "Mùi tanh nhẹ đặc trưng của biển và tổ yến",
+    "texture": "Sợi yến nổi rõ, dai và giòn sau khi chưng",
+    "expansion": "Nở gấp 4-6 lần sau khi ngâm nước"
+  },
+  "benefits": [
+    "Tăng cường hệ miễn dịch",
+    "Giúp phục hồi sức khỏe nhanh chóng sau ốm hoặc phẫu thuật",
+    "Tốt cho phụ nữ mang thai (từ tháng thứ 4 trở đi) và sự phát triển của thai nhi",
+    "Làm đẹp da, chống lão hóa"
+  ],
+  "usage_instructions": {
+    "prep": "Ngâm tổ yến trong nước sạch ở nhiệt độ phòng từ 1-2 tiếng cho mềm. Sau đó dùng nhíp nhặt sạch lông và tạp chất.",
+    "cook": "Chưng cách thủy với đường phèn, táo đỏ, kỷ tử, gừng... từ 25-30 phút trên lửa nhỏ."
+  },
+  "storage": "Bảo quản nơi khô ráo, thoáng mát, tránh ánh nắng trực tiếp. Có thể bảo quản trong hộp kín từ 12 - 18 tháng."
+}

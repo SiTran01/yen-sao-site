@@ -9,9 +9,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Yến Sào Tám Thủy | Tinh Hoa Yến Đảo Bình Định — Giao Toàn Quốc</title>
-    <meta name="description" content="Yến Sào Tám Thủy — Tổ yến nguyên chất 100% từ nhà yến chuẩn tự nhiên tại Đầm Thị Nại, Bình Định. Yến thô, yến tinh chế, hồng yến đảo, hũ yến chưng sẵn. Giao hàng toàn quốc. Hotline: 09xx.xxx.xxx">
-    <meta name="keywords" content="yến sào, tổ yến, yến sào bình định, yến tinh chế, hồng yến, yến chưng, mua yến sào, yến tám thủy, đầm thị nại">
+    <title>Yến Sào Tám Thủy | Tinh Hoa Yến Sào Gia Lai — Giao Toàn Quốc</title>
+    <meta name="description" content="Yến Sào Tám Thủy — Tổ yến nguyên chất 100% từ nhà yến chuẩn tự nhiên tại Đầm Thị Nại, Bình Định. Yến thô, yến tinh chế, yến tươi, hũ yến chưng sẵn. Giao hàng toàn quốc. Hotline: 09xx.xxx.xxx">
+    <meta name="keywords" content="yến sào, tổ yến, yến sào bình định, yến tinh chế, yến tươi, yến chưng, mua yến sào, yến tám thủy, đầm thị nại">
     <meta name="author" content="Yến Sào Tám Thủy">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://yensaotamthuy.vn/">
@@ -21,8 +21,8 @@
     <meta property="og:locale" content="vi_VN">
     <meta property="og:url" content="https://yensaotamthuy.vn/">
     <meta property="og:site_name" content="Yến Sào Tám Thủy">
-    <meta property="og:title" content="Yến Sào Tám Thủy | Tinh Hoa Yến Đảo Bình Định">
-    <meta property="og:description" content="Tổ yến nguyên chất 100% từ nhà yến tự nhiên tại Đầm Thị Nại. Yến thô, tinh chế, hồng yến đảo. Giao toàn quốc — đặt ngay hôm nay!">
+    <meta property="og:title" content="Yến Sào Tám Thủy | Tinh Hoa Yến Sào Gia Lai">
+    <meta property="og:description" content="Tổ yến nguyên chất 100% từ nhà yến tự nhiên tại Đầm Thị Nại. Yến thô, tinh chế, yến tươi. Giao toàn quốc — đặt ngay hôm nay!">
     <meta property="og:image" content="https://yensaotamthuy.vn/assets/og-image.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -33,7 +33,7 @@
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "name": "Yến Sào Tám Thủy",
-        "description": "Cung cấp yến sào cao cấp nguyên chất tại Đầm Thị Nại, Bình Định. Yến thô, tinh chế, hồng yến đảo, hũ yến chưng.",
+        "description": "Cung cấp yến sào cao cấp nguyên chất tại khu vực Đầm Thị Nại, Gia Lai. Yến thô, tinh chế, yến tươi, hũ yến chưng.",
         "url": "https://yensaotamthuy.vn",
         "telephone": "+84900000000",
         "address": {
@@ -168,15 +168,15 @@
             
             <nav
                 class="hidden rounded-full border border-gray-400/30 bg-[#F4EDE5]/60 backdrop-blur-md px-8 py-1.5 md:flex items-center gap-8 shadow-sm">
-                <a href="#hero" class="nav-item-premium uppercase tracking-[0.1em] no-underline" style="text-decoration: none;">Trang chủ</a>
-                <a href="#products" class="nav-item-premium uppercase tracking-[0.1em] no-underline" style="text-decoration: none;">Sản phẩm</a>
-                <a href="#about" class="nav-item-premium uppercase tracking-[0.1em] no-underline" style="text-decoration: none;">Về chúng tôi</a>
-                <a href="#order" class="nav-item-premium uppercase tracking-[0.1em] no-underline" style="text-decoration: none;">Đặt Hàng</a>
+                <a href="#hero" onclick="event.preventDefault(); window.luxuryScrollTo('#hero');" class="nav-item-premium uppercase tracking-[0.1em] no-underline" style="text-decoration: none;">Trang chủ</a>
+                <a href="#products" onclick="event.preventDefault(); window.luxuryScrollTo('#products');" class="nav-item-premium uppercase tracking-[0.1em] no-underline" style="text-decoration: none;">Sản phẩm</a>
+                <a href="#blog" onclick="event.preventDefault(); window.luxuryScrollTo('#blog');" class="nav-item-premium uppercase tracking-[0.1em] no-underline" style="text-decoration: none;">Cẩm Nang</a>
+                <a href="#order" onclick="event.preventDefault(); window.luxuryScrollTo('#order');" class="nav-item-premium uppercase tracking-[0.1em] no-underline" style="text-decoration: none;">Đặt Hàng</a>
             </nav>
 
             
             <div class="flex items-center gap-4">
-                <button onclick="document.getElementById('order').scrollIntoView({behavior:'smooth'})"
+                <button onclick="window.luxuryScrollTo('#order')"
                     class="hidden md:flex items-center gap-2 border border-[#C5A059]/50 bg-[#4A1515] text-[#E8D1A7] px-6 py-2 rounded-[30px] font-bold text-xs hover:bg-[#C5A059] hover:text-white transition-all uppercase tracking-widest shadow-xl">
                     <span>ĐẶT HÀNG</span>
                 </button>
@@ -205,14 +205,10 @@
             </button>
         </div>
         <div class="flex flex-col p-8 gap-6 text-lg font-medium text-gray-800 content-start">
-            <a href="#hero" onclick="document.getElementById('mobile-menu').classList.add('translate-x-full')">Trang
-                chủ</a>
-            <a href="#products" onclick="document.getElementById('mobile-menu').classList.add('translate-x-full')">Sản
-                phẩm</a>
-            <a href="#about" onclick="document.getElementById('mobile-menu').classList.add('translate-x-full')">Về chúng
-                tôi</a>
-            <a href="#contact" onclick="document.getElementById('mobile-menu').classList.add('translate-x-full')">Liên
-                hệ</a>
+            <a href="#hero" onclick="event.preventDefault(); document.getElementById('mobile-menu').classList.add('translate-x-full'); window.luxuryScrollTo('#hero');">Trang chủ</a>
+            <a href="#products" onclick="event.preventDefault(); document.getElementById('mobile-menu').classList.add('translate-x-full'); window.luxuryScrollTo('#products');">Sản phẩm</a>
+            <a href="#blog" onclick="event.preventDefault(); document.getElementById('mobile-menu').classList.add('translate-x-full'); window.luxuryScrollTo('#blog');">Cẩm Nang</a>
+            <a href="#contact" onclick="event.preventDefault(); document.getElementById('mobile-menu').classList.add('translate-x-full'); window.luxuryScrollTo('#contact');">Liên hệ</a>
         </div>
     </div>
 
@@ -620,12 +616,12 @@
                 <div class="hscroll-card hscroll-product-card flex-shrink-0 w-[370px] h-[72vh] rounded-[2rem] overflow-hidden relative group">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
                     <div class="absolute inset-0 bg-[#1a0808] flex items-center justify-center overflow-hidden">
-                        <img src="./assets/images/yen-tinh-che.webp" alt="Hồng Yến" class="w-[80%] object-contain transition-transform duration-700 ease-out group-hover:scale-110 drop-shadow-2xl">
+                        <img src="./assets/images/yen-tinh-che.webp" alt="Yến Tươi" class="w-[80%] object-contain transition-transform duration-700 ease-out group-hover:scale-110 drop-shadow-2xl">
                     </div>
                     <span class="absolute top-7 right-7 z-20 text-white/20 font-serif font-black text-6xl leading-none select-none">05</span>
                     <div class="absolute bottom-0 left-0 right-0 p-8 z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
                         <span class="text-[#C5A059] text-[10px] uppercase tracking-[0.25em] font-bold mb-2 block">Cực Hiếm · Giới Hạn</span>
-                        <h3 class="text-white font-serif font-black text-[1.75rem] leading-tight mb-3">Hồng Yến<br>Đảo Quý</h3>
+                        <h3 class="text-white font-serif font-black text-[1.75rem] leading-tight mb-3">Yến Tươi<br>Nguyên Chất</h3>
                         <p class="text-white/50 text-xs leading-relaxed mb-5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
                             Sợi yến hồng tự nhiên từ đảo hoang xa bờ — phẩm chất tối thượng, số lượng giới hạn theo mùa.
                         </p>
@@ -709,44 +705,6 @@
         </section>
 
         
-        <section id="blog" class="py-24 bg-[#F4EDE5] relative overflow-hidden">
-            <!-- Decorative Elements -->
-            <div class="absolute top-0 left-0 w-64 h-64 bg-[#C5A059]/10 rounded-full blur-[80px] -translate-x-1/2 -translate-y-1/2"></div>
-            <div class="absolute bottom-0 right-0 w-96 h-96 bg-[#800020]/5 rounded-full blur-[100px] translate-x-1/3 translate-y-1/3"></div>
-
-            <div class="container mx-auto px-6 relative z-10">
-                <div class="text-center mb-16">
-                    <p class="text-[#8B6508] text-xs font-bold uppercase tracking-[0.3em] mb-4" data-aos="fade-up">Góc Chuyên Gia</p>
-                    <h2 class="text-4xl md:text-5xl font-serif font-black text-[#4A2C2A]" data-aos="fade-up" data-aos-delay="100">Kiến Thức & Cẩm Nang</h2>
-                    <div class="w-16 h-1 bg-[#C5A059] mx-auto mt-6 rounded-full" data-aos="fade-up" data-aos-delay="200"></div>
-                </div>
-
-                <!-- Blog Grid -->
-                <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    <!-- Cards will be rendered here by blog.js -->
-                </div>
-            </div>
-        </section>
-
-        <!-- Blog Modal -->
-        <div id="blog-modal" class="fixed inset-0 z-[1000] hidden opacity-0 transition-opacity duration-300 items-center justify-center p-4 md:p-8">
-            <!-- Backdrop -->
-            <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
-            
-            <!-- Modal Content -->
-            <div class="relative w-full max-w-4xl max-h-[90vh] bg-white rounded-[2rem] shadow-2xl overflow-hidden flex flex-col transform transition-transform duration-300 scale-95 data-[state=open]:scale-100">
-                <!-- Close Button -->
-                <button id="blog-modal-close" class="absolute top-6 right-6 w-10 h-10 bg-[#F4EDE5] rounded-full flex items-center justify-center text-[#4A2C2A] hover:bg-[#C5A059] hover:text-white transition-colors z-50 shadow-md">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
-                </button>
-                
-                <!-- Scrollable Body -->
-                <div id="blog-modal-content" class="overflow-y-auto flex-1 p-8 md:p-12" data-lenis-prevent>
-                    <!-- Content will be injected here -->
-                </div>
-            </div>
-        </div>
-
         <section id="order" class="order-section">
 
             
@@ -901,70 +859,59 @@
             </div>
         </section>
 
-        
-        <section id="about" class="py-24 bg-[#fff5e8]">
-            <div class="container mx-auto px-6">
-                <div class="grid md:grid-cols-2 gap-16 items-center">
+                <section id="blog" class="blog-hscroll-section hscroll-section relative overflow-hidden" style="background: #fff5e8; height: 78vh; scroll-margin-top: 100px;">
 
-                    
-                    <div class="order-2 md:order-1" data-aos="fade-right" data-aos-delay="0">
-                        <h2 class="font-serif font-bold text-4xl md:text-5xl text-brand-brown mb-6 leading-tight">
-                            Cơ sở chăn nuôi <br>
-                            <span class="text-brand-brown">chuẩn tự nhiên</span>
-                        </h2>
+            <!-- Label -->
+            <div class="hscroll-label absolute top-10 left-1/2 -translate-x-1/2 z-30 flex items-center gap-4 pointer-events-none">
+                <div class="w-20 h-px bg-[#C5A059]/30"></div>
+                <span class="text-[#8B6508] text-[10px] font-bold uppercase tracking-[0.35em] whitespace-nowrap">Góc Chuyên Gia · Kéo Để Khám Phá</span>
+                <div class="w-20 h-px bg-[#C5A059]/30"></div>
+            </div>
 
-                        <div class="space-y-6 text-gray-600 text-lg leading-relaxed mb-8">
-                            <p>
-                                Hệ thống nhà yến của <span class="font-bold text-brand-brown">Tám Thủy</span> được đặt
-                                tại
-                                các vùng ven biển trong lành, xa khu công nghiệp để đảm bảo môi trường sống tốt nhất cho
-                                chim yến.
-                            </p>
-                            <p>
-                                Quy trình thu hoạch nhân đạo, chỉ khai thác khi chim non đã bay đi, kết hợp với kỹ thuật
-                                sơ
-                                chế thủ công tỉ mỉ, giúp giữ trọn vẹn vi chất quý giá trong từng sợi yến.
-                            </p>
-                        </div>
-
-                        <a href="#"
-                            class="inline-block px-8 py-3 bg-[#a56d38] text-white font-bold rounded-full hover:bg-brand-brown transition-all shadow-lg hover:shadow-xl">
-                            Xem thêm
-                        </a>
-                    </div>
-
-                    
-                    <div class="order-1 md:order-2 relative h-[500px] w-full" data-aos="zoom-in" data-aos-delay="150">
-                        
-                        <div
-                            class="absolute top-0 right-0 w-[85%] h-[80%] rounded-3xl overflow-hidden shadow-2xl z-10 border-4 border-white">
-                            <img src="./assets/images/farm2.webp" alt="Nhà yến tự nhiên"
-                                class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
-                        </div>
-
-                        
-                        <div
-                            class="absolute bottom-0 left-0 w-[55%] h-[55%] rounded-3xl overflow-hidden shadow-2xl z-20 border-4 border-white animate-float-slow">
-                            <img src="./assets/images/farm1.webp" alt="Yến tinh chế" class="w-full h-full object-cover">
-
-                            
-                            <div
-                                class="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-sm p-3 rounded-xl text-center shadow-lg">
-                                <span class="block text-brand-brown font-bold font-serif">Nguồn dinh dưỡng</span>
-                                <span class="block text-xs text-brand-gold uppercase tracking-wider">Từ Chữa Lành</span>
-                            </div>
-                        </div>
-
-                        
-                        <div class="absolute -top-10 -right-10 w-40 h-40 bg-brand-gold/10 rounded-full blur-3xl z-0">
-                        </div>
-                        <div class="absolute bottom-20 left-20 w-32 h-32 bg-brand-red/10 rounded-full blur-2xl z-0">
-                        </div>
-                    </div>
-
+            <!-- Drag hint -->
+            <div class="hscroll-drag-hint absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 pointer-events-none">
+                <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5" style="color: rgba(139,101,8,0.7)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                        <path d="M9 11V6a2 2 0 0 1 4 0v5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M13 11V9a2 2 0 0 1 4 0v4a6 6 0 0 1-6 6H9a5 5 0 0 1-5-5v-1a2 2 0 0 1 4 0" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="text-[10px] uppercase tracking-[0.22em]" style="color: rgba(74,44,42,0.4)">Kéo để khám phá</span>
+                </div>
+                <div class="flex items-center gap-1 mt-1">
+                    <svg class="w-3.5 h-3.5 hscroll-chev-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: rgba(197,160,89,0.3)"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                    <svg class="w-3.5 h-3.5 hscroll-chev-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: rgba(197,160,89,0.55)"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                    <svg class="w-3.5 h-3.5 hscroll-chev-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: rgba(197,160,89,0.8)"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
                 </div>
             </div>
+
+            <!-- Right fade -->
+            <div class="hscroll-more-right absolute right-0 top-0 bottom-0 w-48 pointer-events-none" style="z-index:25; background: linear-gradient(to left, #fff5e8 0%, rgba(255,245,232,0.7) 40%, transparent 100%);"></div>
+
+            <!-- Track — intro card + blog cards injected by blog.js -->
+            <div id="blog-grid" class="hscroll-track flex items-center gap-8 pl-[10vw] pr-[15vw]" style="height:78vh;">
+
+                <!-- Intro card -->
+                <div class="blog-hscroll-intro flex-shrink-0 w-[260px] flex flex-col justify-center pr-8">
+                    <p class="text-[#C5A059] text-xs font-bold uppercase tracking-[0.3em] mb-5">Tám Thủy</p>
+                    <h2 class="font-serif font-black text-[3rem] text-[#4A2C2A] leading-[1.05] mb-6">
+                        <span class="hscroll-line-wrap"><span class="hscroll-intro-line blog-intro-line">Kiến</span></span>
+                        <span class="hscroll-line-wrap"><span class="hscroll-intro-line blog-intro-line">Thức</span></span>
+                        <span class="hscroll-line-wrap"><span class="hscroll-intro-line blog-intro-line" style="color: #C5A059">&amp; Cẩm</span></span>
+                        <span class="hscroll-line-wrap"><span class="hscroll-intro-line blog-intro-line">Nang</span></span>
+                    </h2>
+                    <p class="hscroll-intro-el blog-intro-el text-[#4A2C2A]/50 text-sm leading-relaxed max-w-[240px]">
+                        Bí quyết và kiến thức từ chuyên gia yến sào Tám Thủy.
+                    </p>
+                </div>
+
+            </div>
         </section>
+</div>
+
+        
+
+        
+        
 
         
         <section id="reviews" class="py-24 bg-brand-cream overflow-hidden">
@@ -1048,7 +995,7 @@
                             <span class="text-yellow-400 text-lg">★★★★★</span>
                         </div>
                         <p class="text-gray-600 leading-relaxed mb-6 italic text-sm">
-                            "Hồng Yến Đảo đúng là quý hiếm thật. Màu cam đẹp tự nhiên, sợi nguyên không gãy. Tôi mua cho mẹ già bổ dưỡng, mẹ thích lắm. Giá hơi cao nhưng xứng đáng!"
+                            "Yến tươi bên shop cực kỳ chất lượng. Sợi yến nhặt sạch sẽ, chưng lên nở to và dai giòn sần sật. Rất tiện lợi cho người bận rộn như tôi!"
                         </p>
                         <div class="flex items-center gap-3 pt-5 border-t border-gray-100">
                             <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#C5A059]/70 to-[#8B6508] flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
@@ -1056,7 +1003,7 @@
                             </div>
                             <div>
                                 <p class="font-bold text-[#4A2C2A] text-sm">Anh Phú Hoàng</p>
-                                <p class="text-xs text-gray-400">Cần Thơ · Mua Hồng Yến Đảo</p>
+                                <p class="text-xs text-gray-400">Cần Thơ · Mua Yến Tươi</p>
                             </div>
                             <span class="ml-auto text-[10px] text-[#C5A059] font-bold uppercase tracking-wider bg-[#C5A059]/8 px-2 py-1 rounded-full">Đã xác minh</span>
                         </div>
@@ -1147,103 +1094,7 @@
         </section>
 
         
-        <section id="faq" class="py-24 bg-[#fff5e8]">
-            <div class="container mx-auto px-6 max-w-3xl">
-
-                
-                <div class="text-center mb-14">
-                    <p class="text-[#C5A059] text-xs font-bold uppercase tracking-[0.35em] mb-4">FAQ</p>
-                    <h2 class="font-serif font-black text-4xl md:text-5xl text-[#4A2C2A]">Câu Hỏi Thường Gặp</h2>
-                </div>
-
-                
-                <div class="faq-list space-y-3" id="faq-list">
-
-                    <div class="faq-item bg-white rounded-2xl overflow-hidden border border-[#C5A059]/10 shadow-sm">
-                        <button class="faq-trigger w-full flex items-center justify-between p-6 text-left" aria-expanded="false">
-                            <span class="font-bold text-[#4A2C2A] pr-4">Yến sào Tám Thủy khác gì so với yến ngoài thị trường?</span>
-                            <span class="faq-icon flex-shrink-0 w-8 h-8 rounded-full border border-[#C5A059]/30 flex items-center justify-center text-[#C5A059] transition-transform duration-300">+</span>
-                        </button>
-                        <div class="faq-body overflow-hidden max-h-0 transition-all duration-500">
-                            <p class="px-6 pb-6 text-gray-600 leading-relaxed text-sm">
-                                Yến Tám Thủy được thu hoạch trực tiếp từ nhà yến tự nhiên tại Đầm Thị Nại, Bình Định — vùng có khí hậu biển lý tưởng. Chúng tôi <strong>không qua trung gian</strong>, không pha trộn, không chất bảo quản. Mỗi mẻ yến đều có thể truy xuất nguồn gốc rõ ràng.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item bg-white rounded-2xl overflow-hidden border border-[#C5A059]/10 shadow-sm">
-                        <button class="faq-trigger w-full flex items-center justify-between p-6 text-left" aria-expanded="false">
-                            <span class="font-bold text-[#4A2C2A] pr-4">Làm sao phân biệt yến thật và yến giả?</span>
-                            <span class="faq-icon flex-shrink-0 w-8 h-8 rounded-full border border-[#C5A059]/30 flex items-center justify-center text-[#C5A059] transition-transform duration-300">+</span>
-                        </button>
-                        <div class="faq-body overflow-hidden max-h-0 transition-all duration-500">
-                            <p class="px-6 pb-6 text-gray-600 leading-relaxed text-sm">
-                                Yến thật có đặc điểm: sợi yến có màu trắng ngà hoặc vàng nhạt tự nhiên (không đều màu), mùi tanh nhẹ đặc trưng của biển, khi chưng nở <strong>gấp 4-6 lần</strong> và có độ dai giòn. Yến giả thường quá trắng đồng đều, không có mùi, nở ít và nhão. Bạn có thể đặt mẫu thử từ Tám Thủy trước khi mua số lượng lớn.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item bg-white rounded-2xl overflow-hidden border border-[#C5A059]/10 shadow-sm">
-                        <button class="faq-trigger w-full flex items-center justify-between p-6 text-left" aria-expanded="false">
-                            <span class="font-bold text-[#4A2C2A] pr-4">Giao hàng bao lâu? Có giao toàn quốc không?</span>
-                            <span class="faq-icon flex-shrink-0 w-8 h-8 rounded-full border border-[#C5A059]/30 flex items-center justify-center text-[#C5A059] transition-transform duration-300">+</span>
-                        </button>
-                        <div class="faq-body overflow-hidden max-h-0 transition-all duration-500">
-                            <p class="px-6 pb-6 text-gray-600 leading-relaxed text-sm">
-                                Chúng tôi giao hàng toàn quốc qua GHTK, GHN, ViettelPost. Thời gian: <strong>1-2 ngày</strong> tại TP.HCM, Hà Nội, Đà Nẵng. <strong>2-3 ngày</strong> các tỉnh thành khác. Đơn hàng được đóng gói chống sốc, bảo đảm yến không gãy vỡ.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item bg-white rounded-2xl overflow-hidden border border-[#C5A059]/10 shadow-sm">
-                        <button class="faq-trigger w-full flex items-center justify-between p-6 text-left" aria-expanded="false">
-                            <span class="font-bold text-[#4A2C2A] pr-4">Chính sách đổi trả như thế nào?</span>
-                            <span class="faq-icon flex-shrink-0 w-8 h-8 rounded-full border border-[#C5A059]/30 flex items-center justify-center text-[#C5A059] transition-transform duration-300">+</span>
-                        </button>
-                        <div class="faq-body overflow-hidden max-h-0 transition-all duration-500">
-                            <p class="px-6 pb-6 text-gray-600 leading-relaxed text-sm">
-                                Chúng tôi đảm bảo <strong>đổi trả trong 7 ngày</strong> nếu sản phẩm không đúng mô tả hoặc có lỗi. Khách hàng chụp ảnh và liên hệ qua Zalo hotline để được xử lý trong vòng 24h. Phí ship đổi trả do Tám Thủy chịu nếu lỗi từ phía chúng tôi.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item bg-white rounded-2xl overflow-hidden border border-[#C5A059]/10 shadow-sm">
-                        <button class="faq-trigger w-full flex items-center justify-between p-6 text-left" aria-expanded="false">
-                            <span class="font-bold text-[#4A2C2A] pr-4">Có giá sỉ cho doanh nghiệp / mua số lượng lớn không?</span>
-                            <span class="faq-icon flex-shrink-0 w-8 h-8 rounded-full border border-[#C5A059]/30 flex items-center justify-center text-[#C5A059] transition-transform duration-300">+</span>
-                        </button>
-                        <div class="faq-body overflow-hidden max-h-0 transition-all duration-500">
-                            <p class="px-6 pb-6 text-gray-600 leading-relaxed text-sm">
-                                Có! Từ 5 hộp trở lên sẽ được <strong>giảm 8–15%</strong> tùy số lượng. Các doanh nghiệp mua quà tặng tập thể (từ 20 hộp) còn được in logo, thiết kế hộp theo yêu cầu, xuất hóa đơn VAT đầy đủ. Liên hệ hotline để nhận báo giá sỉ chi tiết.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item bg-white rounded-2xl overflow-hidden border border-[#C5A059]/10 shadow-sm">
-                        <button class="faq-trigger w-full flex items-center justify-between p-6 text-left" aria-expanded="false">
-                            <span class="font-bold text-[#4A2C2A] pr-4">Bảo quản yến như thế nào để được lâu?</span>
-                            <span class="faq-icon flex-shrink-0 w-8 h-8 rounded-full border border-[#C5A059]/30 flex items-center justify-center text-[#C5A059] transition-transform duration-300">+</span>
-                        </button>
-                        <div class="faq-body overflow-hidden max-h-0 transition-all duration-500">
-                            <p class="px-6 pb-6 text-gray-600 leading-relaxed text-sm">
-                                Yến thô và tinh chế: bảo quản nơi khô ráo, thoáng mát, tránh ánh nắng trực tiếp — dùng được <strong>12–18 tháng</strong>. Hũ yến chưng: bảo quản ngăn mát tủ lạnh sau khi mở, dùng trong <strong>3–5 ngày</strong>. Tránh để gần thức ăn có mùi mạnh.
-                            </p>
-                        </div>
-                    </div>
-
-                </div>
-
-                
-                <div class="text-center mt-12">
-                    <p class="text-gray-500 text-sm mb-4">Còn câu hỏi khác?</p>
-                    <a href="https://zalo.me/0900000000" target="_blank"
-                       class="inline-flex items-center gap-2 bg-[#4A2C2A] text-white px-8 py-3 rounded-full font-bold text-sm hover:bg-[#C5A059] transition-all shadow-lg">
-                        💬 Chat Zalo với chúng tôi
-                    </a>
-                </div>
-
-            </div>
-        </section>
+        
 
         
         <footer class="bg-brand-brown text-white/80 py-16">
@@ -1336,6 +1187,24 @@
     <script defer src="./js/chatbot.js"></script>
     <!-- Blog logic -->
     <script defer src="./js/blog.js"></script>
+
+    <!-- Blog Modal -->
+        <div id="blog-modal" class="fixed inset-0 z-[1000] hidden opacity-0 transition-opacity duration-300 items-center justify-center p-4 md:p-8">
+            <!-- Backdrop -->
+            <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+            
+            <!-- Modal Content -->
+            <div class="relative w-full max-w-4xl max-h-[90vh] bg-white rounded-[2rem] shadow-2xl overflow-hidden flex flex-col transform transition-transform duration-300 scale-95 data-[state=open]:scale-100">
+                <!-- Close Button -->
+                <button id="blog-modal-close" class="absolute top-6 right-6 w-10 h-10 bg-[#F4EDE5] rounded-full flex items-center justify-center text-[#4A2C2A] hover:bg-[#C5A059] hover:text-white transition-colors z-50 shadow-md">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                </button>
+                
+                <!-- Scrollable Body -->
+                <div id="blog-modal-content" class="overflow-y-auto flex-1 p-8 md:p-12" data-lenis-prevent>
+                    <!-- Content will be injected here -->
+                </div>
+            </div>
 </body>
 
 </html>

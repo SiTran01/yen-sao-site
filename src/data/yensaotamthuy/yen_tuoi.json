@@ -1,0 +1,25 @@
+{
+  "id": "yen_tuoi",
+  "name": "Yến Tươi Nguyên Chất",
+  "short_description": "Yến sào đã được làm sạch lông thủ công nhưng chưa qua công đoạn sấy khô, giữ nguyên 100% độ tươi ngon và dưỡng chất, sẵn sàng chưng ngay.",
+  "ideal_for": [
+    "Người muốn nấu chưng ngay lập tức không cần ngâm",
+    "Khách hàng mua ăn liền trong tuần",
+    "Người thích cảm giác sợi yến tươi, dai giòn sần sật đặc trưng"
+  ],
+  "characteristics": {
+    "color": "Trắng trong tự nhiên, hơi ngậm nước",
+    "texture": "Cực kỳ dai, giòn, cảm giác tươi mới khác biệt so với yến sấy khô",
+    "process": "Nhặt sạch lông, vắt ráo nước và đóng gói tiệt trùng, giao ngay trong ngày"
+  },
+  "benefits": [
+    "Giữ được lượng vi chất dinh dưỡng ở trạng thái tự nhiên nhất",
+    "Tiện lợi tối đa, không tốn thời gian ngâm nở",
+    "Bồi bổ sức khỏe toàn diện cho mọi lứa tuổi"
+  ],
+  "usage_instructions": {
+    "prep": "Không cần ngâm. Mở nắp hộp/túi là có thể chưng ngay.",
+    "cook": "Cho yến tươi vào thố cùng 1 ít nước, đường phèn và các vị thảo mộc tùy thích. Chưng cách thủy trên lửa nhỏ khoảng 15-20 phút là dùng được."
+  },
+  "storage": "Bắt buộc bảo quản trong ngăn mát tủ lạnh (được 7-10 ngày) hoặc ngăn đông (lên đến 3 tháng). Không để ở nhiệt độ phòng."
+}

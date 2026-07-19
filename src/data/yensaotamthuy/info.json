@@ -1,0 +1,41 @@
+{
+  "brand_name": "Yến Sào Tám Thủy",
+  "tagline": "Tinh Hoa Yến Sào Bình Định",
+  "location": {
+    "origin": "Nhà yến tự xây khu vực Đầm Thị Nại (nay thuộc Gia Lai sau khi gộp tỉnh)",
+    "environment": "Khí hậu lý tưởng, xa khu công nghiệp, không khí trong lành",
+    "coordinates": "13.80556, 109.255"
+  },
+  "core_values": [
+    "Không qua trung gian",
+    "Không pha trộn tạp chất",
+    "Không chất bảo quản",
+    "100% nguyên chất tự nhiên",
+    "Truy xuất nguồn gốc rõ ràng"
+  ],
+  "products": [
+    {
+      "name": "Yến Thô Tự Nhiên",
+      "description": "Tổ yến còn nguyên lông, hình dáng nguyên bản, giữ trọn vẹn 100% dưỡng chất tự nhiên. Dành cho người có thời gian nhặt lông và thích cảm giác tận hưởng sản phẩm nguyên bản nhất."
+    },
+    {
+      "name": "Yến Tinh Chế",
+      "description": "Tổ yến đã được làm sạch lông thủ công tỉ mỉ bằng nước tinh khiết, ép khuôn định hình và sấy lạnh khô ráo. Chỉ cần ngâm nở và chưng, cực kỳ tiện lợi."
+    },
+    {
+      "name": "Yến Tươi",
+      "description": "Yến sào đã được nhặt sạch lông, chưa qua sấy khô. Tiện lợi, giữ nguyên vẹn độ tươi ngon và dưỡng chất, cực kỳ phù hợp cho người bận rộn muốn chưng ngay."
+    },
+    {
+      "name": "Hũ Yến Chưng Sẵn",
+      "description": "Tiện lợi mang theo, chưng cất với đường phèn, đông trùng hạ thảo, táo đỏ, hạt sen... Không chất bảo quản, giữ nguyên vị thanh mát."
+    }
+  ],
+  "contact": {
+    "hotline": "0327534965",
+    "zalo": "0327534965 (Zalo OA Yến Sào Tám Thủy)",
+    "website": "yensaotamthuy.vn",
+    "email": "yensaotamthuy@gmail.com"
+  },
+  "target_audience": "Phụ nữ mang thai, người lớn tuổi, người mới ốm dậy cần phục hồi sức khỏe, trẻ em suy dinh dưỡng, và khách hàng có nhu cầu biếu tặng cao cấp."
+}

@@ -715,22 +715,24 @@ h6,
     content: '';
     position: absolute;
     top: 0; bottom: 0;
-    width: 120px;
+    width: 160px;
     pointer-events: none;
     z-index: 40;
     opacity: 0;
-    transition: opacity 0.12s ease;
+    /* slow fade-OUT — plays when class is removed */
+    transition: opacity 0.6s ease-out;
 }
 .hscroll-section::before {
     left: 0;
-    background: radial-gradient(ellipse at left center, rgba(197,160,89,0.45) 0%, rgba(197,160,89,0.15) 40%, transparent 70%);
+    background: radial-gradient(ellipse at left center, rgba(197,160,89,0.55) 0%, rgba(197,160,89,0.2) 40%, transparent 70%);
 }
 .hscroll-section::after {
     right: 0;
-    background: radial-gradient(ellipse at right center, rgba(197,160,89,0.45) 0%, rgba(197,160,89,0.15) 40%, transparent 70%);
+    background: radial-gradient(ellipse at right center, rgba(197,160,89,0.55) 0%, rgba(197,160,89,0.2) 40%, transparent 70%);
 }
-.hscroll-section.overscroll-left::before  { animation: edge-pulse 0.6s ease-out forwards; }
-.hscroll-section.overscroll-right::after  { animation: edge-pulse 0.6s ease-out forwards; }
+/* fast fade-IN — plays when class is added */
+.hscroll-section.overscroll-left::before  { opacity: 1; transition: opacity 0.08s ease; }
+.hscroll-section.overscroll-right::after  { opacity: 1; transition: opacity 0.08s ease; }
 
 /* Legacy scroll hint */
 .hscroll-arrow-anim { animation: hscroll-bounce 1.4s ease-in-out infinite; }
@@ -1141,8 +1143,8 @@ h6,
 }
 @keyframes edge-pulse {
     0%   { opacity: 0; }
-    20%  { opacity: 1; }
-    100% { opacity: 0; }
+    15%  { opacity: 1; }
+    100% { opacity: 0.6; }
 }
 
 /* Form loading spinner */

@@ -116,8 +116,13 @@ gsap.ticker.lagSmoothing(0);
 
 /** Smooth scroll to target ID using Lenis */
 window.luxuryScrollTo = (targetId) => {
+    // Ép GSAP tính toán lại toàn bộ height và pinning trước khi cuộn
+    if (typeof ScrollTrigger !== 'undefined') {
+        ScrollTrigger.refresh();
+    }
+    
     lenis.scrollTo(targetId, {
-        offset: -100,
+        offset: -100, // Đảm bảo chừa 100px cho fixed menu
         duration: 1.5,
         easing: (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
     });
@@ -442,14 +447,20 @@ window.addEventListener("load", function () {
     let overBounce = 0;
     const MAX_OVER  = 90;
     const OVER_DAMP = 0.22;
-    let edgeTimer = null;
+    let currentEdgeSide = null;
 
-    const flashEdge = (side) => {
+    // Smooth edge glow — stays on while dragging at edge, fades out slowly on release
+    const showEdge = (side) => {
+        if (currentEdgeSide !== side) {
+            section.classList.remove('overscroll-left', 'overscroll-right');
+            section.classList.add('overscroll-' + side);
+            currentEdgeSide = side;
+        }
+    };
+    const hideEdge = () => {
+        if (!currentEdgeSide) return;
         section.classList.remove('overscroll-left', 'overscroll-right');
-        void section.offsetWidth; // Force reflow để restart animation
-        section.classList.add('overscroll-' + side);
-        clearTimeout(edgeTimer);
-        edgeTimer = setTimeout(() => section.classList.remove('overscroll-left', 'overscroll-right'), 600);
+        currentEdgeSide = null;
     };
 
     // Mouse drag-to-scroll
@@ -477,13 +488,14 @@ window.addEventListener("load", function () {
         if (rawDrag < 0) {
             overBounce = Math.max(-MAX_OVER, rawDrag * OVER_DAMP);
             target = 0;
-            flashEdge('left');
+            showEdge('left');
         } else if (rawDrag > maxScroll) {
             overBounce = Math.min(MAX_OVER, (rawDrag - maxScroll) * OVER_DAMP);
             target = maxScroll;
-            flashEdge('right');
+            showEdge('right');
         } else {
             target = rawDrag;
+            hideEdge();
         }
     });
 
@@ -492,15 +504,16 @@ window.addEventListener("load", function () {
         isDragging = false;
         section.classList.remove('is-dragging');
         if (typeof lenis !== 'undefined') lenis.start();
+        hideEdge(); // fade out glow smoothly
 
         const maxScroll = getMaxScroll();
         const rawMomentum = target + dragVelocity * 6;
         if (rawMomentum < 0) {
             overBounce = Math.max(-MAX_OVER, rawMomentum * OVER_DAMP);
-            target = 0; flashEdge('left');
+            target = 0;
         } else if (rawMomentum > maxScroll) {
             overBounce = Math.min(MAX_OVER, (rawMomentum - maxScroll) * OVER_DAMP);
-            target = maxScroll; flashEdge('right');
+            target = maxScroll;
         } else {
             target = rawMomentum;
         }
@@ -534,18 +547,151 @@ window.addEventListener("load", function () {
         .to(introEls,   { opacity: 1, y: 0, duration: 0.6, stagger: 0.15, ease: 'power2.out' }, '-=0.4')
         .to(cards,      { x: 0, opacity: 1, duration: 0.75, stagger: 0.07, ease: 'power3.out' }, '-=0.6');
 
-    // Smooth lerp trong gsap.ticker
+    // Smooth lerp trong gsap.ticker — slower spring-back for rubber-band feel
     const setX = gsap.quickSetter(track, 'x', 'px');
     gsap.ticker.add(() => {
         const diff = target - current;
         if (Math.abs(diff) > 0.1) current += diff * 0.08;
-        overBounce += (0 - overBounce) * 0.12; // Spring recovery
+        // Slow spring-back only when released — feels like rubber band
+        if (!isDragging) overBounce += (0 - overBounce) * 0.06;
         setX(-(current + overBounce));
     });
 
     // Reset khi resize
     window.addEventListener('resize', () => { current = 0; target = 0; setX(0); });
 })();
+
+
+/* ============================================================
+   09b. BLOG HORIZONTAL SCROLL — Same logic for blog section
+   ============================================================ */
+function createHScrollInstance(section, track) {
+    if (!section || !track || window.innerWidth < 768) return;
+
+    let current = 0, target = 0, overBounce = 0;
+    const MAX_OVER = 90, OVER_DAMP = 0.22;
+    let currentEdgeSide = null;
+    let isDragging = false, dragStartX = 0, dragStartTarget = 0, dragVelocity = 0, lastDragX = 0;
+
+    const getMaxScroll = () => Math.max(0, track.scrollWidth - section.clientWidth);
+
+    // Smooth edge glow — stays on while dragging at edge, fades out slowly on release
+    const showEdge = (side) => {
+        if (currentEdgeSide !== side) {
+            section.classList.remove('overscroll-left', 'overscroll-right');
+            section.classList.add('overscroll-' + side);
+            currentEdgeSide = side;
+        }
+    };
+    const hideEdge = () => {
+        if (!currentEdgeSide) return;
+        section.classList.remove('overscroll-left', 'overscroll-right');
+        currentEdgeSide = null;
+    };
+
+    section.addEventListener('mousedown', (e) => {
+        if (e.target.closest('button, a')) return;
+        isDragging = true;
+        dragStartX = e.clientX;
+        lastDragX  = e.clientX;
+        dragStartTarget = target;
+        dragVelocity = 0;
+        section.classList.add('is-dragging');
+        if (typeof lenis !== 'undefined') lenis.stop();
+        e.preventDefault();
+    });
+
+    window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        dragVelocity = lastDragX - e.clientX;
+        lastDragX = e.clientX;
+        const dx = e.clientX - dragStartX;
+        const maxScroll = getMaxScroll();
+        const rawDrag = dragStartTarget - dx;
+        if (rawDrag < 0) {
+            overBounce = Math.max(-MAX_OVER, rawDrag * OVER_DAMP);
+            target = 0;
+            showEdge('left');
+        } else if (rawDrag > maxScroll) {
+            overBounce = Math.min(MAX_OVER, (rawDrag - maxScroll) * OVER_DAMP);
+            target = maxScroll;
+            showEdge('right');
+        } else {
+            target = rawDrag;
+            hideEdge();
+        }
+    });
+
+    const stopDrag = () => {
+        if (!isDragging) return;
+        isDragging = false;
+        section.classList.remove('is-dragging');
+        if (typeof lenis !== 'undefined') lenis.start();
+        hideEdge(); // fade out glow smoothly
+
+        const maxScroll = getMaxScroll();
+        const rawMomentum = target + dragVelocity * 6;
+        if (rawMomentum < 0) {
+            overBounce = Math.max(-MAX_OVER, rawMomentum * OVER_DAMP);
+            target = 0;
+        } else if (rawMomentum > maxScroll) {
+            overBounce = Math.min(MAX_OVER, (rawMomentum - maxScroll) * OVER_DAMP);
+            target = maxScroll;
+        } else {
+            target = rawMomentum;
+        }
+        const dragHint = section.querySelector('.hscroll-drag-hint');
+        if (dragHint) gsap.to(dragHint, { opacity: target > 0.05 * maxScroll ? 0 : 1, duration: 0.4, overwrite: true });
+        const moreRight = section.querySelector('.hscroll-more-right');
+        if (moreRight) gsap.to(moreRight, { opacity: target >= maxScroll * 0.85 ? 0 : 1, duration: 0.5, overwrite: true });
+    };
+    window.addEventListener('mouseup',    stopDrag);
+    window.addEventListener('mouseleave', stopDrag);
+
+    // Touch support
+    let touchStartX = 0, touchStartTarget = 0;
+    section.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; touchStartTarget = target; }, { passive: true });
+    section.addEventListener('touchmove', (e) => {
+        const dx = e.touches[0].clientX - touchStartX;
+        const maxScroll = getMaxScroll();
+        target = Math.max(0, Math.min(maxScroll, touchStartTarget - dx));
+    }, { passive: true });
+
+    // Entrance animation
+    const introLines = section.querySelectorAll('.hscroll-intro-line');
+    const introEls   = section.querySelectorAll('.hscroll-intro-el');
+    const cards      = section.querySelectorAll('.blog-post-card');
+    gsap.set(introLines, { y: '110%' });
+    gsap.set(introEls,   { opacity: 0, y: -16 });
+    gsap.set(cards,      { x: 80, opacity: 0 });
+    const entranceTl = gsap.timeline({ scrollTrigger: { trigger: section, start: 'top 82%', once: true } });
+    entranceTl
+        .to(introLines, { y: '0%', duration: 0.9, stagger: 0.13, ease: 'power3.out' })
+        .to(introEls,   { opacity: 1, y: 0, duration: 0.6, stagger: 0.15, ease: 'power2.out' }, '-=0.4')
+        .to(cards,      { x: 0, opacity: 1, duration: 0.75, stagger: 0.1, ease: 'power3.out' }, '-=0.6');
+
+    // Lerp ticker — slow spring-back for rubber-band feel
+    const setX = gsap.quickSetter(track, 'x', 'px');
+    gsap.ticker.add(() => {
+        const diff = target - current;
+        if (Math.abs(diff) > 0.1) current += diff * 0.08;
+        // Slow spring-back only when released — feels like rubber band
+        if (!isDragging) overBounce += (0 - overBounce) * 0.06;
+        setX(-(current + overBounce));
+    });
+
+    window.addEventListener('resize', () => { current = 0; target = 0; setX(0); });
+}
+
+// Called by blog.js after cards are injected
+window.initBlogHScroll = function() {
+    const section = document.getElementById('blog');
+    const track   = document.getElementById('blog-grid');
+    if (section && track && !section.dataset.hscrollReady) {
+        section.dataset.hscrollReady = '1';
+        createHScrollInstance(section, track);
+    }
+};
 
 
 /* ============================================================
@@ -594,7 +740,7 @@ window.addEventListener("load", function () {
     // ──────────────────────────────────────────────────────────
     // 🔧 CẤU HÌNH — Thay URL này sau khi cài xong n8n
     // ──────────────────────────────────────────────────────────
-    const N8N_WEBHOOK_URL = 'http://localhost:5678/webhook/order'; // VD: 'https://n8n.tamthuy.vn/webhook/order'
+    const N8N_WEBHOOK_URL = `http://${window.location.hostname}:5678/webhook/order`; // VD: 'https://n8n.tamthuy.vn/webhook/order'
     const IS_WEBHOOK_CONFIGURED = N8N_WEBHOOK_URL.trim() !== '';
 
     // Cập nhật indicator trạng thái
@@ -812,57 +958,7 @@ window.addEventListener("load", function () {
 })();
 
 
-/* ============================================================
-   14. FAQ ACCORDION — Toggle với animation
-   ============================================================ */
-(function initFaqAccordion() {
-    const faqList = document.getElementById('faq-list');
-    if (!faqList) return;
 
-    const items = faqList.querySelectorAll('.faq-item');
-
-    items.forEach(item => {
-        const trigger = item.querySelector('.faq-trigger');
-        const body    = item.querySelector('.faq-body');
-        if (!trigger || !body) return;
-
-        trigger.addEventListener('click', () => {
-            const isOpen = item.classList.contains('is-open');
-
-            // Đóng tất cả item khác (accordion behavior)
-            items.forEach(other => {
-                if (other !== item && other.classList.contains('is-open')) {
-                    other.classList.remove('is-open');
-                    other.querySelector('.faq-body').style.maxHeight = '0';
-                    other.querySelector('.faq-trigger')?.setAttribute('aria-expanded', 'false');
-                }
-            });
-
-            // Toggle item hiện tại
-            if (isOpen) {
-                item.classList.remove('is-open');
-                body.style.maxHeight = '0';
-                trigger.setAttribute('aria-expanded', 'false');
-            } else {
-                item.classList.add('is-open');
-                body.style.maxHeight = body.scrollHeight + 'px';
-                trigger.setAttribute('aria-expanded', 'true');
-            }
-        });
-    });
-
-    // Scroll entrance animation
-    gsap.fromTo(items,
-        { opacity: 0, y: 24 },
-        {
-            opacity: 1, y: 0,
-            duration: 0.6,
-            stagger: 0.08,
-            ease: 'power2.out',
-            scrollTrigger: { trigger: faqList, start: 'top 85%', once: true }
-        }
-    );
-})();
 
 
 /* ============================================================

@@ -1,0 +1,127 @@
+{
+  "name": "Nhồi Data Pinecone (Tám Thủy)",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "e515d9a9-4674-4b5f-89f4-1234567890ab",
+      "name": "When clicking 'Execute Workflow'",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [ 0, 0 ]
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "fileSelector": "D:\\CODEs\\tamthuy\\yen-sao-site\\src\\data\\posts\\*.json"
+      },
+      "id": "a1b2c3d4-4674-4b5f-89f4-1234567890cd",
+      "name": "Đọc File JSON",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [ 220, 0 ]
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "pineconeIndex": "yen-sao-data",
+        "options": {}
+      },
+      "id": "b1c2d3e4-4674-4b5f-89f4-1234567890ef",
+      "name": "Pinecone Vector Store",
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1,
+      "position": [ 460, 0 ]
+    },
+    {
+      "parameters": {
+        "model": "text-embedding-3-small"
+      },
+      "id": "c1d2e3f4-4674-4b5f-89f4-1234567890gh",
+      "name": "OpenAI Embeddings",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1,
+      "position": [ 460, 200 ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "d1e2f3g4-4674-4b5f-89f4-1234567890ij",
+      "name": "Default Data Loader",
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1,
+      "position": [ 620, 200 ]
+    },
+    {
+      "parameters": {
+        "chunkSize": 1000,
+        "chunkOverlap": 200
+      },
+      "id": "e1f2g3h4-4674-4b5f-89f4-1234567890kl",
+      "name": "Text Splitter",
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [ 620, 400 ]
+    }
+  ],
+  "connections": {
+    "When clicking 'Execute Workflow'": {
+      "main": [
+        [
+          {
+            "node": "Đọc File JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Đọc File JSON": {
+      "main": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Embeddings": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

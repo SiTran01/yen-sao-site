@@ -3,8 +3,11 @@
     "id": "dam-thi-nai",
     "title": "Đầm Thị Nại – Viên Ngọc Quý Của Bình Định Và Những Điều Chưa Kể",
     "excerpt": "Bạn đã bao giờ nghe về một đầm nước mặn rộng lớn nằm ngay giữa lòng thành phố biển, nơi giao thoa của lịch sử, thiên nhiên và nhịp sống hiện đại chưa?",
-    "thumbnail": "./assets/images/product-4.webp",
-    "tags": ["Đầm Thị Nại", "Kiến Thức"],
+    "thumbnail": "./assets/images/dam-thi-nai-0.png",
+    "tags": [
+      "Đầm Thị Nại",
+      "Kiến Thức"
+    ],
     "date": "26 Tháng 05, 2025",
     "readTime": "8 phút đọc"
   },
@@ -13,8 +16,35 @@
     "title": "Bí quyết chưng yến đường phèn giữ trọn 100% vi chất",
     "excerpt": "Hướng dẫn chi tiết từ A-Z cách chưng yến sào chuẩn chuyên gia, không làm mất đi các axit amin và khoáng chất quý hiếm.",
     "thumbnail": "./assets/images/product-1.webp",
-    "tags": ["Chế Biến", "Cẩm Nang"],
+    "tags": [
+      "Chế Biến",
+      "Cẩm Nang"
+    ],
     "date": "17 Tháng 07, 2026",
     "readTime": "5 phút đọc"
+  },
+  {
+    "id": "co-so-chan-nuoi",
+    "title": "Cơ Sở Chăn Nuôi Chuẩn Tự Nhiên Tám Thủy",
+    "excerpt": "Quy trình thu hoạch nhân đạo, chỉ khai thác khi chim non đã bay đi, kết hợp với kỹ thuật sơ chế thủ công tỉ mỉ.",
+    "thumbnail": "./assets/images/farm1.png",
+    "tags": [
+      "Cơ Sở",
+      "Kiến Thức"
+    ],
+    "date": "19 Tháng 07, 2026",
+    "readTime": "3 phút đọc"
+  },
+  {
+    "id": "phan-biet-yen-that-gia",
+    "title": "10 Cách Phân Biệt Yến Sào Thật - Giả Chính Xác Nhất",
+    "excerpt": "Hiện nay trên thị trường có rất nhiều tổ yến giả làm từ mủ trôm, agar hoặc tẩy trắng độc hại. Bỏ túi ngay 10 tuyệt chiêu nhận biết tổ yến thật...",
+    "thumbnail": "./assets/images/yen-tinh-che.webp",
+    "tags": [
+      "Kiến Thức",
+      "Cẩm Nang"
+    ],
+    "date": "19 Tháng 07, 2026",
+    "readTime": "7 phút đọc"
   }
 ]

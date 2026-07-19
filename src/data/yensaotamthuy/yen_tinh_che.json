@@ -1,0 +1,27 @@
+{
+  "id": "yen_tinh_che",
+  "name": "Yến Tinh Chế",
+  "short_description": "Tổ yến đã được làm sạch lông hoàn toàn thủ công, sấy lạnh khô ráo, cực kỳ tiện lợi để sử dụng ngay.",
+  "ideal_for": [
+    "Người bận rộn, không có thời gian nhặt lông yến",
+    "Khách hàng mua sử dụng hàng ngày cho gia đình",
+    "Người mua biếu tặng nhờ hình thức tổ được đắp khuôn đẹp mắt"
+  ],
+  "characteristics": {
+    "color": "Trắng sáng, sạch sẽ",
+    "shape": "Được đắp khuôn thành hình tổ yến hoặc hình tròn, đẹp mắt",
+    "texture": "Dễ ngâm nở, khi chưng vẫn giữ được độ dai ngon",
+    "process": "Nhặt sạch lông bằng nước tinh khiết 100%, không sử dụng hóa chất tẩy rửa, sấy lạnh giữ nguyên dưỡng chất"
+  },
+  "benefits": [
+    "Bổ sung vi khoáng chất thiết yếu cho cơ thể",
+    "Giúp trẻ em hay ốm vặt tăng cường sức đề kháng",
+    "Tốt cho hệ hô hấp và tiêu hóa",
+    "Tiết kiệm tối đa thời gian chế biến"
+  ],
+  "usage_instructions": {
+    "prep": "Chỉ cần ngâm vào nước sạch 20-30 phút cho yến nở mềm, tơi ra.",
+    "cook": "Chưng cách thủy cùng các nguyên liệu (đường phèn, táo đỏ...) trong khoảng 20 phút."
+  },
+  "storage": "Bảo quản nơi khô mát, kín gió, tránh ánh sáng trực tiếp. Thời hạn sử dụng lên đến 18 tháng."
+}
