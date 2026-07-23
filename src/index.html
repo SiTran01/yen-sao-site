@@ -63,7 +63,7 @@
     </script>
 
     <!-- Tailwind compiled at build time via PostCSS — NO CDN -->
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/style.css?v=6.11">
     <!-- AI Chatbot styles -->
     <link rel="stylesheet" href="./css/chatbot.css">
 </head>
@@ -181,7 +181,7 @@
                     <span>ĐẶT HÀNG</span>
                 </button>
                 <button class="md:hidden text-gray-800"
-                    onclick="document.getElementById('mobile-menu').classList.remove('translate-x-full')">
+                    onclick="document.getElementById('mobile-menu').style.transform='translateX(0%)'">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16m-7 6h7"></path>
@@ -193,10 +193,10 @@
 
 
     <div id="mobile-menu"
-        class="fixed inset-0 z-[60] bg-white translate-x-full transition-transform duration-300 md:hidden flex flex-col">
+        class="fixed inset-0 bg-white transition-transform duration-300 md:hidden flex flex-col" style="z-index: 110; transform: translateX(100%);">
         <div class="p-6 flex justify-between items-center border-b border-gray-100">
             <span class="font-bold text-xl text-brand-brown">MENU</span>
-            <button onclick="document.getElementById('mobile-menu').classList.add('translate-x-full')"
+            <button onclick="document.getElementById('mobile-menu').style.transform='translateX(100%)'"
                 class="text-gray-500 hover:text-brand-red">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
@@ -205,10 +205,10 @@
             </button>
         </div>
         <div class="flex flex-col p-8 gap-6 text-lg font-medium text-gray-800 content-start">
-            <a href="#hero" onclick="event.preventDefault(); document.getElementById('mobile-menu').classList.add('translate-x-full'); window.luxuryScrollTo('#hero');">Trang chủ</a>
-            <a href="#products" onclick="event.preventDefault(); document.getElementById('mobile-menu').classList.add('translate-x-full'); window.luxuryScrollTo('#products');">Sản phẩm</a>
-            <a href="#blog" onclick="event.preventDefault(); document.getElementById('mobile-menu').classList.add('translate-x-full'); window.luxuryScrollTo('#blog');">Cẩm Nang</a>
-            <a href="#contact" onclick="event.preventDefault(); document.getElementById('mobile-menu').classList.add('translate-x-full'); window.luxuryScrollTo('#contact');">Liên hệ</a>
+            <a href="#hero" onclick="event.preventDefault(); document.getElementById('mobile-menu').style.transform='translateX(100%)'; window.luxuryScrollTo('#hero');">Trang chủ</a>
+            <a href="#products" onclick="event.preventDefault(); document.getElementById('mobile-menu').style.transform='translateX(100%)'; window.luxuryScrollTo('#products');">Sản phẩm</a>
+            <a href="#blog" onclick="event.preventDefault(); document.getElementById('mobile-menu').style.transform='translateX(100%)'; window.luxuryScrollTo('#blog');">Cẩm Nang</a>
+            <a href="#contact" onclick="event.preventDefault(); document.getElementById('mobile-menu').style.transform='translateX(100%)'; window.luxuryScrollTo('#contact');">Liên hệ</a>
         </div>
     </div>
 
@@ -265,11 +265,11 @@
                 
                 <h1 class="hero-title font-serif font-black text-[3rem] md:text-[3.5rem] lg:text-[4.5rem] xl:text-[5.5rem] leading-snug w-full" style="text-shadow: 2px 4px 15px rgba(74, 44, 42, 0.25);" data-aos="fade-up" data-aos-delay="150">
                     
-                    <span class="text-reveal-mask block pt-6 pb-2">
+                    <span class="text-reveal-mask pt-6 pb-2" style="display: block !important;">
                         <span id="to-chim" class="text-reveal-item text-gold-foil">YẾN SÀO</span>
                     </span>
                     
-                    <span class="text-reveal-mask block -mt-2 md:-mt-6 lg:-mt-8 pt-6 pb-2">
+                    <span class="text-reveal-mask -mt-2 md:-mt-6 lg:-mt-8 pt-6 pb-2" style="display: block !important;">
                         <span class="text-reveal-item stagger-2 text-gold-foil">TÁM THỦY</span>
                     </span>
                 </h1>
@@ -391,10 +391,7 @@
                         <p class="text-gray-600 leading-relaxed mb-10 text-base md:text-lg">
                             Tổ yến nguyên thủy được thu hoạch và phân loại khắt khe nhất. Giữ nguyên vẹn cấu trúc tổ, mùi thơm đặc trưng và giá trị dinh dưỡng tuyệt đối. Lựa chọn hoàn hảo cho người sành sỏi muốn tự tay tinh chế món quà sức khỏe.
                         </p>
-                        <button class="relative overflow-hidden bg-[#4A2C2A] text-white px-8 py-3.5 rounded-full font-bold shadow-[0_10px_20px_rgba(74,44,42,0.2)] hover:-translate-y-1 transition-all group/btn">
-                            <span class="relative z-10 tracking-widest uppercase text-xs">Chi Tiết Sản Phẩm</span>
-                            <div class="absolute inset-0 bg-[#8B6508] transform scale-x-0 group-hover/btn:scale-x-100 transition-transform origin-center duration-500 z-0"></div>
-                        </button>
+
                     </div>
                     
                     <div class="w-full md:w-1/2 order-1 md:order-2 relative p-8 md:p-12" data-aos="zoom-in-left" data-aos-delay="300">
@@ -420,10 +417,7 @@
                         <p class="text-gray-600 leading-relaxed mb-10 text-base md:text-lg">
                             Được nhặt sạch lông bằng phương pháp thủ công tỉ mỉ, chưa qua sấy khô để giữ độ tươi giòn nguyên bản. Phân chia sẵn thành từng khẩu phần tinh tế, bạn chỉ cần mở nắp là có thể chưng ngay, tiết kiệm tối đa thời gian.
                         </p>
-                        <button class="relative overflow-hidden bg-[#4A2C2A] text-white px-8 py-3.5 rounded-full font-bold shadow-[0_10px_20px_rgba(74,44,42,0.2)] hover:-translate-y-1 transition-all group/btn">
-                            <span class="relative z-10 tracking-widest uppercase text-xs">Chi Tiết Sản Phẩm</span>
-                            <div class="absolute inset-0 bg-[#8B6508] transform scale-x-0 origin-right group-hover/btn:scale-x-100 transition-transform duration-500 z-0"></div>
-                        </button>
+
                     </div>
                 </div>
 
@@ -438,10 +432,7 @@
                         <p class="text-gray-600 leading-relaxed mb-10 text-base md:text-lg">
                             Tuyển chọn từ những tổ yến già cỗi nhất, làm sạch cực kỳ cẩn thận và ép khuôn định hình đẹp mắt. Sợi yến dài, màu trắng ngà tự nhiên, khi chưng nở bung to, dai ngon. Đóng gói trong hộp lụa sang trọng.
                         </p>
-                        <button class="relative overflow-hidden bg-[#4A2C2A] text-white px-8 py-3.5 rounded-full font-bold shadow-[0_10px_20px_rgba(74,44,42,0.2)] hover:-translate-y-1 transition-all group/btn">
-                            <span class="relative z-10 tracking-widest uppercase text-xs">Chi Tiết Sản Phẩm</span>
-                            <div class="absolute inset-0 bg-[#8B6508] transform scale-x-0 group-hover/btn:scale-x-100 transition-transform origin-center duration-500 z-0"></div>
-                        </button>
+
                     </div>
                     
                     <div class="w-full md:w-1/2 order-1 md:order-2 relative p-8 md:p-12" data-aos="zoom-in-left" data-aos-delay="300">
@@ -466,10 +457,7 @@
                         <p class="text-gray-600 leading-relaxed mb-10 text-base md:text-lg">
                             Yến chưng tươi tiệt trùng nguyên hũ thủy tinh, kết hợp cùng các dược liệu quý như Táo Đỏ Tân Cương, Hạt Sen Đồng Tháp, Đông Trùng Hạ Thảo. Hàm lượng yến đặc sệt, bật nắp là có thể dùng ngay.
                         </p>
-                        <button class="relative overflow-hidden bg-[#4A2C2A] text-white px-8 py-3.5 rounded-full font-bold shadow-[0_10px_20px_rgba(74,44,42,0.2)] hover:-translate-y-1 transition-all group/btn">
-                            <span class="relative z-10 tracking-widest uppercase text-xs">Chi Tiết Sản Phẩm</span>
-                            <div class="absolute inset-0 bg-[#8B6508] transform scale-x-0 origin-right group-hover/btn:scale-x-100 transition-transform duration-500 z-0"></div>
-                        </button>
+
                     </div>
                 </div>
 
@@ -512,10 +500,10 @@
                  style="background: linear-gradient(to left, #110904 0%, rgba(17,9,4,0.7) 40%, transparent 100%);"></div>
 
             
-            <div class="hscroll-track flex items-center h-screen gap-6 pl-[10vw] pr-[15vw]">
+            <div class="hscroll-track hscroll-track-products flex items-center h-screen gap-6 pr-[15vw]">
 
                 
-                <div class="hscroll-card flex-shrink-0 w-[320px] flex flex-col justify-center pr-8">
+            <div class="hscroll-card flex-shrink-0 w-[320px] flex flex-col justify-center pr-8 pl-6 sm:pl-8" id="products-intro-card">
                     <p class="text-[#C5A059] text-xs font-bold uppercase tracking-[0.3em] mb-5">Tám Thủy</p>
                     <h2 class="font-serif font-black text-[4rem] text-white leading-[1.05] mb-6">
                         <span class="hscroll-line-wrap"><span class="hscroll-intro-line">Tinh</span></span>
@@ -859,29 +847,13 @@
             </div>
         </section>
 
-                <section id="blog" class="blog-hscroll-section hscroll-section relative overflow-hidden" style="background: #fff5e8; height: 78vh; scroll-margin-top: 100px;">
+        <section id="blog" class="blog-hscroll-section hscroll-section relative overflow-hidden" style="background: #fff5e8; scroll-margin-top: 100px; height: auto !important; min-height: auto !important; padding-top: 6rem;">
 
             <!-- Label -->
             <div class="hscroll-label absolute top-10 left-1/2 -translate-x-1/2 z-30 flex items-center gap-4 pointer-events-none">
                 <div class="w-20 h-px bg-[#C5A059]/30"></div>
                 <span class="text-[#8B6508] text-[10px] font-bold uppercase tracking-[0.35em] whitespace-nowrap">Góc Chuyên Gia · Kéo Để Khám Phá</span>
                 <div class="w-20 h-px bg-[#C5A059]/30"></div>
-            </div>
-
-            <!-- Drag hint -->
-            <div class="hscroll-drag-hint absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 pointer-events-none">
-                <div class="flex items-center gap-2">
-                    <svg class="w-5 h-5" style="color: rgba(139,101,8,0.7)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
-                        <path d="M9 11V6a2 2 0 0 1 4 0v5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M13 11V9a2 2 0 0 1 4 0v4a6 6 0 0 1-6 6H9a5 5 0 0 1-5-5v-1a2 2 0 0 1 4 0" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <span class="text-[10px] uppercase tracking-[0.22em]" style="color: rgba(74,44,42,0.4)">Kéo để khám phá</span>
-                </div>
-                <div class="flex items-center gap-1 mt-1">
-                    <svg class="w-3.5 h-3.5 hscroll-chev-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: rgba(197,160,89,0.3)"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
-                    <svg class="w-3.5 h-3.5 hscroll-chev-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: rgba(197,160,89,0.55)"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
-                    <svg class="w-3.5 h-3.5 hscroll-chev-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: rgba(197,160,89,0.8)"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
-                </div>
             </div>
 
             <!-- Right fade -->
@@ -891,7 +863,7 @@
             <div id="blog-grid" class="hscroll-track flex items-center gap-8 pl-[10vw] pr-[15vw]" style="height:78vh;">
 
                 <!-- Intro card -->
-                <div class="blog-hscroll-intro flex-shrink-0 w-[260px] flex flex-col justify-center pr-8">
+                <div class="blog-hscroll-intro flex-shrink-0 w-[260px] flex flex-col justify-center pr-8 pl-6 sm:pl-8">
                     <p class="text-[#C5A059] text-xs font-bold uppercase tracking-[0.3em] mb-5">Tám Thủy</p>
                     <h2 class="font-serif font-black text-[3rem] text-[#4A2C2A] leading-[1.05] mb-6">
                         <span class="hscroll-line-wrap"><span class="hscroll-intro-line blog-intro-line">Kiến</span></span>
@@ -905,6 +877,22 @@
                 </div>
 
             </div>
+
+            <!-- Drag hint placed below the track -->
+            <div class="hscroll-drag-hint flex flex-col items-center gap-2 pointer-events-none mt-2 pb-8 w-full z-30 relative">
+                <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5" style="color: rgba(139,101,8,0.7)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                        <path d="M9 11V6a2 2 0 0 1 4 0v5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M13 11V9a2 2 0 0 1 4 0v4a6 6 0 0 1-6 6H9a5 5 0 0 1-5-5v-1a2 2 0 0 1 4 0" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="text-[10px] uppercase tracking-[0.22em]" style="color: rgba(74,44,42,0.4)">Kéo để khám phá</span>
+                </div>
+                <div class="flex items-center gap-1 mt-1">
+                    <svg class="w-3.5 h-3.5 hscroll-chev-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: rgba(197,160,89,0.3)"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                    <svg class="w-3.5 h-3.5 hscroll-chev-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: rgba(197,160,89,0.55)"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                    <svg class="w-3.5 h-3.5 hscroll-chev-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: rgba(197,160,89,0.8)"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                </div>
+            </div>
         </section>
 </div>
 
@@ -914,7 +902,7 @@
         
 
         
-        <section id="reviews" class="py-24 bg-brand-cream overflow-hidden">
+        <section id="reviews" class="pt-4 pb-24 bg-brand-cream overflow-hidden">
             <div class="container mx-auto px-6">
 
                 

@@ -301,10 +301,14 @@ document.addEventListener('DOMContentLoaded', () => {
    ============================================================ */
 (function initHeroAnimations() {
     // AOS replacement với GSAP
+    const isMobile = window.innerWidth < 768;
+    
     gsap.utils.toArray('[data-aos]').forEach(element => {
-        // Trong Hero → hiện ngay sau khi load (không dùng ScrollTrigger)
-        if (element.closest('#hero')) {
+        // Trong Hero hoặc trên Mobile → hiện ngay sau khi load (không dùng ScrollTrigger để tránh lỗi overflow ngang trên Android)
+        if (element.closest('#hero') || isMobile) {
             setTimeout(() => {
+                element.style.opacity = '1';
+                element.style.transform = 'none';
                 element.classList.add('aos-animate');
             }, (parseInt(element.getAttribute('data-aos-delay')) || 0) + 100);
             return;
@@ -431,10 +435,57 @@ window.addEventListener("load", function () {
    09. HORIZONTAL SCROLL GALLERY — Wheel → ngang (Lenis-safe)
    ============================================================ */
 (function initHorizontalScroll() {
-    if (window.innerWidth < 768) return;
-
+    const isMobileView = window.matchMedia('(max-width: 1024px)').matches;
     const section = document.getElementById('products-horizontal');
-    const track   = document.querySelector('.hscroll-track');
+    const track   = document.querySelector('.hscroll-track-products') || document.querySelector('#products-horizontal .hscroll-track');
+
+    if (isMobileView) {
+        // Override TRỰC TIẾP inline style trên track (JS > CSS > !important)
+        if (track) {
+            gsap.killTweensOf(track);
+            // Xóa tất cả inline style có thể interfere
+            track.style.cssText = [
+                'display: flex',
+                'flex-direction: row',
+                'height: auto',
+                'min-height: 300px',
+                'overflow-x: auto',
+                'overflow-y: hidden',
+                'padding: 1rem 2rem 1.5rem 1.5rem',
+                'gap: 0.875rem',
+                'flex-wrap: nowrap',
+                'transform: none',
+                '-webkit-overflow-scrolling: touch',
+                'scroll-snap-type: none',
+                'scrollbar-width: none'
+            ].join(';');
+            track.scrollLeft = 0;
+        }
+        // Fix intro card
+        if (section) {
+            const introCard = section.querySelector('#products-intro-card');
+            if (introCard) {
+                introCard.style.cssText = [
+                    'flex-shrink: 0',
+                    'width: 120px',
+                    'min-width: 120px',
+                    'padding: 0',
+                    'margin: 0',
+                    'display: flex',
+                    'flex-direction: column',
+                    'justify-content: center'
+                ].join(';');
+            }
+            // Reset GSAP inline styles trên các element bên trong
+            const introLines = section.querySelectorAll('.hscroll-intro-line');
+            const introEls   = section.querySelectorAll('.hscroll-intro-el');
+            const cards      = section.querySelectorAll('.hscroll-product-card');
+            gsap.set(introLines, { clearProps: 'all' });
+            gsap.set(introEls,   { clearProps: 'all' });
+            gsap.set(cards,      { clearProps: 'all' });
+        }
+        return;
+    }
 
     if (!section || !track) return;
 
@@ -566,7 +617,53 @@ window.addEventListener("load", function () {
    09b. BLOG HORIZONTAL SCROLL — Same logic for blog section
    ============================================================ */
 function createHScrollInstance(section, track) {
-    if (!section || !track || window.innerWidth < 768) return;
+    const isMobileView = window.matchMedia('(max-width: 1024px)').matches;
+
+    if (!section || !track || isMobileView) {
+        // Override TRỰC TIẾP inline style trên blog track
+        if (track) {
+            gsap.killTweensOf(track);
+            track.style.cssText = [
+                'display: flex',
+                'flex-direction: row',
+                'height: auto',
+                'min-height: 270px',
+                'overflow-x: auto',
+                'overflow-y: hidden',
+                'padding: 1rem 2rem 1.5rem 1.5rem',
+                'gap: 0.75rem',
+                'flex-wrap: nowrap',
+                'transform: none',
+                '-webkit-overflow-scrolling: touch',
+                'scroll-snap-type: none',
+                'scrollbar-width: none'
+            ].join(';');
+            track.scrollLeft = 0;
+        }
+        // Fix blog intro card
+        if (section) {
+            const introCard = section.querySelector('.blog-hscroll-intro');
+            if (introCard) {
+                introCard.style.cssText = [
+                    'flex-shrink: 0',
+                    'width: 110px',
+                    'min-width: 110px',
+                    'padding: 0',
+                    'margin: 0',
+                    'display: flex',
+                    'flex-direction: column',
+                    'justify-content: center'
+                ].join(';');
+            }
+            const introLines = section.querySelectorAll('.hscroll-intro-line');
+            const introEls   = section.querySelectorAll('.hscroll-intro-el');
+            const cards      = section.querySelectorAll('.blog-post-card');
+            gsap.set(introLines, { clearProps: 'all' });
+            gsap.set(introEls,   { clearProps: 'all' });
+            gsap.set(cards,      { clearProps: 'all' });
+        }
+        return;
+    }
 
     let current = 0, target = 0, overBounce = 0;
     const MAX_OVER = 90, OVER_DAMP = 0.22;
