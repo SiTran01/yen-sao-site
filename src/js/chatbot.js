@@ -75,6 +75,55 @@ function initChatbot() {
         renderHistory();
     }
 
+    // --- PROACTIVE GREETING BUBBLE ---
+    const greetingBubble = document.getElementById('ai-chat-greeting');
+    const greetingText = document.getElementById('ai-greeting-text');
+    
+    if (greetingBubble && greetingText && chatHistory.length === 0 && !sessionStorage.getItem('ai_greeting_shown')) {
+        const messages = [
+            "Xin chào! 👋",
+            "Mình là Trợ Lý Tám Thủy. Bạn cần tư vấn về yến sào ạ? ✨"
+        ];
+        
+        let step = 0;
+        
+        const showNextMessage = () => {
+            if (dom.panel.classList.contains('is-open') || step >= messages.length) {
+                greetingBubble.classList.remove('show-greeting');
+                return;
+            }
+            
+            greetingBubble.classList.remove('show-greeting');
+            
+            setTimeout(() => {
+                if (dom.panel.classList.contains('is-open')) return;
+                
+                greetingText.innerText = messages[step];
+                greetingBubble.classList.add('show-greeting');
+                
+                setTimeout(() => {
+                    step++;
+                    showNextMessage();
+                }, 3000);
+            }, 500);
+        };
+        
+        setTimeout(() => {
+            showNextMessage();
+        }, 4000);
+        
+        greetingBubble.addEventListener('click', () => {
+            greetingBubble.classList.remove('show-greeting');
+            step = messages.length;
+            openPanel();
+        });
+        
+        sessionStorage.setItem('ai_greeting_shown', 'true');
+    }
+
+    // Initialize contextual proactive triggers based on scroll position
+    initContextualTriggers();
+
     // Events
     dom.trigger.addEventListener('click', togglePanel);
     dom.closeBtn.addEventListener('click', closePanel);
@@ -110,6 +159,9 @@ function togglePanel() {
 }
 
 function openPanel() {
+    const greetingBubble = document.getElementById('ai-chat-greeting');
+    if (greetingBubble) greetingBubble.classList.remove('show-greeting');
+    
     dom.panel.classList.add('is-open');
     dom.panel.setAttribute('aria-hidden', 'false');
     dom.trigger.classList.add('is-open');
@@ -435,6 +487,117 @@ function trimHistory() {
     if (chatHistory.length > CHATBOT_CONFIG.maxHistoryLength) {
         chatHistory = chatHistory.slice(-CHATBOT_CONFIG.maxHistoryLength);
     }
+}
+
+/* ── Contextual Triggers ────────────────────────────────────── */
+const CONTEXT_TRIGGERS = [
+    {
+        selector: '#v-yen-tho, .hscroll-product-card[data-label="Yến Thô · Tự Nhiên"]',
+        delay: 8000,
+        message: "Yến thô giữ trọn 100% vi chất tự nhiên, rất hợp nếu bạn có thời gian tự nhặt lông. Bạn muốn mình gửi video hướng dẫn cách nhặt lông yến nhanh không? ✨",
+        id: "yen-tho"
+    },
+    {
+        selector: '#v-yen-tuoi, .hscroll-product-card[data-label="Yến Tươi · Cao Cấp"]',
+        delay: 8000,
+        message: "Dòng yến tươi này Tám Thủy đã nhặt lông hoàn toàn thủ công, bạn mua về là chưng được ngay. Mình tư vấn thêm cho bạn nhé? 🎁",
+        id: "yen-tuoi"
+    },
+    {
+        selector: '#v-yen-tinh-che, .hscroll-product-card[data-label="Yến Tinh Chế · Ép Tổ"]',
+        delay: 8000,
+        message: "Yến tinh chế ép tổ là món quà sức khỏe cực kỳ sang trọng và ý nghĩa. Bạn định mua để sử dụng hay mang đi biếu tặng ạ? 🎀",
+        id: "yen-tinh-che"
+    },
+    {
+        selector: '.hscroll-product-card[data-label="Hũ Yến · Chưng Sẵn"]',
+        delay: 7000,
+        message: "Yến chưng sẵn cực kỳ tiện lợi để bồi bổ sức khỏe mỗi ngày hoặc làm quà tặng. Bạn định mua dùng hay biếu ạ? 🍯",
+        id: "yen-chung"
+    },
+    {
+        selector: '#blog',
+        delay: 8000,
+        message: "Bạn đang tìm hiểu kiến thức về yến sào? Cứ hỏi mình bất kỳ thắc mắc nào về cách dùng, cách chưng hay công dụng nhé! 💡",
+        id: "blog-section"
+    },
+    {
+        selector: '#order',
+        delay: 8000,
+        message: "Bạn đang điền form đặt hàng phải không? Nếu có thắc mắc gì về giá cả hay phân loại sản phẩm, cứ hỏi mình nhé! 📝",
+        id: "order-section"
+    },
+    {
+        selector: 'footer',
+        delay: 5000,
+        message: "Bạn cần hỗ trợ thêm thông tin gì không? Đừng ngại nhắn tin cho mình nhé! 📞",
+        id: "footer-section"
+    }
+];
+
+function initContextualTriggers() {
+    const greetingBubble = document.getElementById('ai-chat-greeting');
+    const greetingText = document.getElementById('ai-greeting-text');
+    if (!greetingBubble || !greetingText) return;
+
+    let activeTriggerTimer = null;
+    let currentTriggerId = null;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const triggerId = entry.target.getAttribute('data-trigger-id');
+            const config = CONTEXT_TRIGGERS.find(t => t.id === triggerId);
+            if (!config) return;
+
+            if (entry.isIntersecting) {
+                // Skip if already shown in this session
+                if (sessionStorage.getItem(`ai_ctx_${triggerId}`)) return;
+                
+                currentTriggerId = triggerId;
+                activeTriggerTimer = setTimeout(() => {
+                    // Don't show if panel is already open
+                    if (dom.panel.classList.contains('is-open')) return;
+                    
+                    // Hide any currently visible greeting
+                    greetingBubble.classList.remove('show-greeting');
+                    
+                    setTimeout(() => {
+                        greetingText.innerText = config.message;
+                        greetingBubble.classList.add('show-greeting');
+                        
+                        // Auto hide after 10s
+                        setTimeout(() => {
+                            if (greetingText.innerText === config.message) {
+                                greetingBubble.classList.remove('show-greeting');
+                            }
+                        }, 10000);
+                    }, 500); // Wait for fade out
+                    
+                    sessionStorage.setItem(`ai_ctx_${triggerId}`, 'true');
+                }, config.delay);
+                
+            } else {
+                // If user scrolls away before delay finishes, cancel timer
+                if (currentTriggerId === triggerId && activeTriggerTimer) {
+                    clearTimeout(activeTriggerTimer);
+                    activeTriggerTimer = null;
+                }
+            }
+        });
+    }, {
+        threshold: 0.6 // Trigger when element is 60% visible
+    });
+
+    // Start observing after a short delay
+    setTimeout(() => {
+        CONTEXT_TRIGGERS.forEach(config => {
+            const el = document.querySelector(config.selector);
+            if (el) {
+                el.setAttribute('data-trigger-id', config.id);
+                observer.observe(el);
+            }
+        });
+    }, 1000);
 }
 
 function clearChat() {
