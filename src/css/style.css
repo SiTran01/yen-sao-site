@@ -1364,9 +1364,9 @@ h6,
     /* Intro card — chỉ title, gọn */
     #products-intro-card {
         flex-shrink: 0 !important;
-        width: 120px !important;
-        min-width: 120px !important;
-        max-width: 120px !important;
+        width: 150px !important;
+        min-width: 150px !important;
+        max-width: 150px !important;
         padding: 0 !important;
         margin: 0 !important;
         display: flex !important;
@@ -1374,11 +1374,12 @@ h6,
         justify-content: center !important;
     }
     #products-intro-card > p:first-child {
-        font-size: 0.6rem !important;
+        font-size: 0.72rem !important;
+        letter-spacing: 0.25em !important;
         margin-bottom: 0.5rem !important;
     }
     #products-intro-card h2 {
-        font-size: 1.6rem !important;
+        font-size: 1.95rem !important;
         line-height: 1.05 !important;
         margin-bottom: 0 !important;
     }
@@ -1468,9 +1469,9 @@ h6,
     /* Blog intro card */
     .blog-hscroll-intro {
         flex-shrink: 0 !important;
-        width: 110px !important;
-        min-width: 110px !important;
-        max-width: 110px !important;
+        width: 170px !important;
+        min-width: 170px !important;
+        max-width: 170px !important;
         padding: 0 !important;
         margin: 0 !important;
         display: flex !important;
@@ -1478,16 +1479,23 @@ h6,
         justify-content: center !important;
     }
     .blog-hscroll-intro > p:first-child {
-        font-size: 0.6rem !important;
+        font-size: 0.72rem !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.25em !important;
         margin-bottom: 0.5rem !important;
     }
     .blog-hscroll-intro h2 {
-        font-size: 1.35rem !important;
-        line-height: 1.05 !important;
-        margin-bottom: 0 !important;
+        font-size: 1.85rem !important;
+        line-height: 1.1 !important;
+        margin-bottom: 0.6rem !important;
     }
-    .blog-hscroll-intro .blog-intro-el,
-    .blog-hscroll-intro > p:not(:first-child) { display: none !important; }
+    .blog-hscroll-intro .blog-intro-el {
+        display: block !important;
+        font-size: 0.78rem !important;
+        line-height: 1.45 !important;
+        color: rgba(74, 44, 42, 0.65) !important;
+        max-width: 150px !important;
+    }
 
     /* Blog post cards — hiện 2 card/màn hình */
     .blog-post-card {

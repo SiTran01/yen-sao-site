@@ -60,22 +60,69 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function openPost(id) {
         try {
-            // Show loading state
+            // 1. Mở modal ngay lập tức
             modal.classList.remove('hidden');
             modal.classList.add('flex');
             setTimeout(() => modal.classList.remove('opacity-0'), 10);
             modalContent.scrollTop = 0;
-            
+
+            // 2. Chèn màn hình Preload VÀO TRONG khung modal
+            // Dùng 1 thẻ div trống ép chiều cao 90vh (bằng đúng max-h của modal) để khung không bị giật/thay đổi kích thước khi load xong
+            // Dùng thẻ absolute -inset-[2px] (tràn viền 2px) và rounded-[2rem] để che triệt để viền trắng (anti-aliasing bleed) ở 4 góc trên Safari/Mobile
             modalContent.innerHTML = `
-                <div class="flex justify-center py-20">
-                    <div class="w-10 h-10 border-4 border-[#C5A059] border-t-transparent rounded-full animate-spin"></div>
+                <div style="width: 100%; height: 90vh;"></div>
+                <div class="absolute -inset-[2px] z-[40] flex flex-col items-center justify-center" 
+                     style="background: linear-gradient(135deg, #1a0a05 0%, #2d1208 50%, #4A2C2A 100%); border-radius: 2rem;">
+                    <div class="preloader-inner scale-110 flex flex-col items-center">
+                        <div class="preloader-logo relative w-[80px] h-[80px]">
+                            <img src="./assets/images/avt-svg.svg" alt="Tám Thủy" class="preloader-img absolute inset-0 w-full h-full object-contain" 
+                                 style="filter: brightness(0) invert(1) sepia(1) saturate(3) hue-rotate(10deg); animation: preloaderFloat 1.5s ease-in-out infinite alternate;">
+                            <div class="preloader-glow absolute inset-[-20px] rounded-full" 
+                                 style="background: radial-gradient(circle, rgba(197,160,89,0.35) 0%, transparent 70%); animation: preloaderPulse 1.5s ease-in-out infinite;"></div>
+                        </div>
+                        <p class="mt-8 text-[#C5A059] font-bold text-xs uppercase tracking-[0.3em]">Yến Sào Tám Thủy</p>
+                        <div class="w-24 h-[2px] bg-white/10 rounded-full mt-4 overflow-hidden">
+                            <div class="h-full bg-[#C5A059]" style="animation: preloaderBar 1.5s ease-in-out infinite;"></div>
+                        </div>
+                    </div>
                 </div>
             `;
 
-            const res = await fetch(`./data/posts/${id}.json`);
-            if (!res.ok) throw new Error('Failed to fetch post');
-            const post = await res.json();
+            // 3. Thời gian chờ tối thiểu 1.5s (điện ảnh)
+            const minDelay = new Promise(resolve => setTimeout(resolve, 1500));
+
+            // 4. Tải data JSON bài viết
+            const fetchJSON = fetch(`./data/posts/${id}.json`).then(res => {
+                if (!res.ok) throw new Error('Failed to fetch post');
+                return res.json();
+            });
+            const post = await fetchJSON;
+
+            // 5. Tải trước hình ảnh trong bài viết (Tối đa 2.5s)
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = post.content;
+            const images = Array.from(tempDiv.querySelectorAll('img'));
             
+            const imagePromises = images.map(img => {
+                return new Promise((resolve) => {
+                    if (!img.src) { resolve(); return; }
+                    const imageLoad = new Image();
+                    imageLoad.src = img.src;
+                    imageLoad.onload = resolve;
+                    imageLoad.onerror = resolve; // Bỏ qua lỗi ảnh để không chặn hiển thị
+                });
+            });
+
+            const maxImageTimeout = new Promise(resolve => setTimeout(resolve, 2500));
+            const preloadImagesTask = Promise.race([
+                Promise.all(imagePromises),
+                maxImageTimeout
+            ]);
+
+            // Chờ cả 2: Đủ 1.5s tối thiểu VÀ ảnh load xong (hoặc timeout)
+            await Promise.all([minDelay, preloadImagesTask]);
+            
+            // 6. Ẩn preloader (bằng cách ghi đè nội dung thật vào)
             modalContent.innerHTML = `
                 <div class="mb-8">
                     <div class="flex items-center gap-4 text-sm text-gray-500 mb-4 uppercase tracking-widest font-bold">
@@ -94,9 +141,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     ${post.content}
                 </div>
             `;
+            modalContent.scrollTop = 0; // Đảm bảo cuộn lên trên cùng
+            
         } catch (error) {
             console.error(error);
-            modalContent.innerHTML = '<p class="text-center text-brand-red">Không thể tải nội dung bài viết.</p>';
+            modalContent.innerHTML = '<p class="text-center text-brand-red py-10 font-bold">Không thể tải nội dung bài viết. Vui lòng thử lại.</p>';
         }
     }
     
