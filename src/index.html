@@ -499,12 +499,22 @@
             <div class="hscroll-more-right absolute right-0 top-0 bottom-0 w-48 pointer-events-none z-25"
                  style="background: linear-gradient(to left, #080c14 0%, rgba(8,12,20,0.7) 40%, transparent 100%);"></div>
 
-            
+            <!-- MOBILE INTRO CARD (Fixed above track, hidden on desktop) -->
+            <div class="md:hidden w-full flex flex-col justify-center px-6 pt-4 pb-4 z-20 relative">
+
+                <h2 class="font-serif font-black text-4xl text-white leading-[1.05] mb-4">
+                    Tinh Hoa <br><span style="background: linear-gradient(90deg, #C5A059, #e8c98a, #d4a8c7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Yến</span> Việt
+                </h2>
+                <p class="text-white/40 text-sm leading-relaxed max-w-[280px]">
+                    Tuyển chọn từng sợi yến quý giá, hành trình khám phá hương vị thượng hạng.
+                </p>
+            </div>
+
             <div class="hscroll-track hscroll-track-products flex items-center h-screen gap-6 pr-[15vw]">
 
-                
-            <div class="hscroll-card flex-shrink-0 w-[320px] flex flex-col justify-center pr-8 pl-6 sm:pl-8" id="products-intro-card">
-                    <p class="text-xs font-bold uppercase tracking-[0.3em] mb-5" style="color: #d4a8c7;">Tám Thủy</p>
+                <!-- DESKTOP INTRO CARD (Hidden on mobile) -->
+            <div class="hscroll-card flex-shrink-0 w-[320px] flex-col justify-center pr-8 pl-6 sm:pl-8 hidden md:flex" id="products-intro-card">
+
                     <h2 class="font-serif font-black text-[4rem] text-white leading-[1.05] mb-6">
                         <span class="hscroll-line-wrap"><span class="hscroll-intro-line">Tinh</span></span>
                         <span class="hscroll-line-wrap"><span class="hscroll-intro-line">Hoa</span></span>
@@ -871,12 +881,23 @@
             <!-- Right fade -->
             <div class="hscroll-more-right absolute right-0 top-0 bottom-0 w-48 pointer-events-none" style="z-index:25; background: linear-gradient(to left, #fff5e8 0%, rgba(255,245,232,0.7) 40%, transparent 100%);"></div>
 
+            <!-- MOBILE INTRO CARD (Fixed above track, hidden on desktop) -->
+            <div class="md:hidden w-full flex flex-col justify-center px-6 pt-4 pb-4 z-20 relative">
+
+                <h2 class="font-serif font-black text-3xl text-[#4A2C2A] leading-[1.05] mb-4">
+                    Kiến Thức <br><span style="color: #C5A059">& Cẩm Nang</span>
+                </h2>
+                <p class="text-[#4A2C2A]/60 text-sm leading-relaxed max-w-[280px]">
+                    Bí quyết và kiến thức từ chuyên gia yến sào Tám Thủy.
+                </p>
+            </div>
+
             <!-- Track — intro card + blog cards injected by blog.js -->
             <div id="blog-grid" class="hscroll-track flex items-center gap-8 pl-[10vw] pr-[15vw]" style="height:78vh;">
 
-                <!-- Intro card -->
-                <div class="blog-hscroll-intro flex-shrink-0 w-[320px] flex flex-col justify-center pr-8 pl-6 sm:pl-8">
-                    <p class="text-[#C5A059] text-sm font-bold uppercase tracking-[0.35em] mb-6">Tám Thủy</p>
+                <!-- DESKTOP INTRO CARD (Hidden on mobile) -->
+                <div class="blog-hscroll-intro flex-shrink-0 w-[320px] flex-col justify-center pr-8 pl-6 sm:pl-8 hidden md:flex">
+
                     <h2 class="font-serif font-black text-[3.8rem] text-[#4A2C2A] leading-[1.05] mb-6">
                         <span class="hscroll-line-wrap"><span class="hscroll-intro-line blog-intro-line">Kiến</span></span>
                         <span class="hscroll-line-wrap"><span class="hscroll-intro-line blog-intro-line">Thức</span></span>
@@ -890,7 +911,7 @@
 
             </div>
 
-            <!-- Drag hint placed below the track -->
+            <!-- Drag hint placed below the track (Desktop) -->
             <div class="hscroll-drag-hint flex flex-col items-center gap-2 pointer-events-none mt-2 pb-8 w-full z-30 relative">
                 <div class="flex items-center gap-2">
                     <svg class="w-5 h-5" style="color: rgba(139,101,8,0.7)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
@@ -903,6 +924,25 @@
                     <svg class="w-3.5 h-3.5 hscroll-chev-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: rgba(197,160,89,0.3)"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
                     <svg class="w-3.5 h-3.5 hscroll-chev-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: rgba(197,160,89,0.55)"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
                     <svg class="w-3.5 h-3.5 hscroll-chev-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: rgba(197,160,89,0.8)"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                </div>
+            </div>
+
+            <!-- Swipe indicator — chỉ hiện trên mobile -->
+            <div class="blog-swipe-hint">
+                <div class="blog-swipe-dots">
+                    <span class="blog-swipe-dot blog-swipe-dot-active"></span>
+                    <span class="blog-swipe-dot"></span>
+                    <span class="blog-swipe-dot"></span>
+                    <span class="blog-swipe-dot"></span>
+                </div>
+                <div class="blog-swipe-arrow">
+                    <span class="blog-swipe-label">Vuốt để xem thêm</span>
+                    <svg class="blog-swipe-chevrons" viewBox="0 0 48 16" fill="none">
+                        <path d="M2 8 L10 3 L10 13 Z" fill="currentColor" opacity="0.3"/>
+                        <path d="M14 8 L22 3 L22 13 Z" fill="currentColor" opacity="0.55"/>
+                        <path d="M26 8 L34 3 L34 13 Z" fill="currentColor" opacity="0.8"/>
+                        <path d="M38 8 L46 3 L46 13 Z" fill="currentColor"/>
+                    </svg>
                 </div>
             </div>
         </section>
