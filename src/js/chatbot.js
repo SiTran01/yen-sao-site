@@ -42,6 +42,14 @@ QUY TẮC:
 /* ── State ──────────────────────────────────────────────────── */
 let chatHistory = []; // [{ role: 'user'|'assistant', content: '...' }]
 let isTyping = false;
+const notifSound = new Audio('./assets/notification-sound.mp3');
+notifSound.volume = 0.5; // Giảm âm lượng xuống mức vừa phải (50%)
+
+function playNotificationSound() {
+    try {
+        notifSound.play().catch(e => console.log('Audio play error:', e));
+    } catch (e) {}
+}
 
 /* ── DOM refs (resolve sau khi HTML đã inject) ──────────────── */
 let dom = {};
@@ -100,17 +108,35 @@ function initChatbot() {
                 
                 greetingText.innerText = messages[step];
                 greetingBubble.classList.add('show-greeting');
+                playNotificationSound();
+                
+                // Nếu là tin nhắn cuối cùng (giới thiệu), tăng thời gian hiển thị thêm 5s (8000ms)
+                const delay = (step === messages.length - 1) ? 8000 : 3000;
                 
                 setTimeout(() => {
                     step++;
                     showNextMessage();
-                }, 3000);
+                }, delay);
             }, 500);
         };
         
-        setTimeout(() => {
-            showNextMessage();
-        }, 4000);
+        const startGreeting = () => {
+            // Xoá event listener để chỉ chạy 1 lần
+            document.removeEventListener('click', startGreeting);
+            document.removeEventListener('scroll', startGreeting);
+            document.removeEventListener('touchstart', startGreeting);
+            document.removeEventListener('keydown', startGreeting);
+            
+            setTimeout(() => {
+                showNextMessage();
+            }, 1000); // Đợi 1 giây sau khi khách tương tác mới bắt đầu hiện
+        };
+        
+        // Chờ khách hàng tương tác với trang web rồi mới hiện lời chào để trình duyệt cho phép phát âm thanh
+        document.addEventListener('click', startGreeting);
+        document.addEventListener('scroll', startGreeting, { once: true });
+        document.addEventListener('touchstart', startGreeting, { once: true });
+        document.addEventListener('keydown', startGreeting, { once: true });
         
         greetingBubble.addEventListener('click', () => {
             greetingBubble.classList.remove('show-greeting');
@@ -297,6 +323,7 @@ function appendUserMessage(text) {
 }
 
 function appendBotMessage(text) {
+    playNotificationSound();
     const el = document.createElement('div');
     el.className = 'ai-msg assistant';
     
@@ -564,6 +591,7 @@ function initContextualTriggers() {
                     setTimeout(() => {
                         greetingText.innerText = config.message;
                         greetingBubble.classList.add('show-greeting');
+                        playNotificationSound();
                         
                         // Auto hide after 10s
                         setTimeout(() => {

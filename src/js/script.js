@@ -29,6 +29,34 @@
    02. UTILITIES — Helpers dùng chung
    ============================================================ */
 
+/** ---- Mobile Menu Open/Close ---- */
+function openMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const backdrop = document.getElementById('mobile-menu-backdrop');
+    if (!menu || !backdrop) return;
+    menu.style.transform = 'translateX(0%)';
+    backdrop.style.background = 'rgba(26, 8, 5, 0.6)';
+    backdrop.style.pointerEvents = 'auto';
+    document.body.style.overflow = 'hidden';
+    document.body.classList.add('hamburger-open');
+}
+
+function closeMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const backdrop = document.getElementById('mobile-menu-backdrop');
+    if (!menu || !backdrop) return;
+    menu.style.transform = 'translateX(110%)';
+    backdrop.style.background = 'rgba(26, 8, 5, 0)';
+    backdrop.style.pointerEvents = 'none';
+    document.body.style.overflow = '';
+    document.body.classList.remove('hamburger-open');
+}
+
+// Close mobile menu on Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMobileMenu();
+});
+
 /** Format số thành tiền VNĐ (ví dụ: 3.500.000 ₫) */
 const formatCurrency = (amount) => {
     return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
@@ -1086,6 +1114,25 @@ window.initBlogHScroll = function() {
 /* ============================================================
    16. NEWSLETTER FORM — Footer email → n8n
    ============================================================ */
+
+/** Global wrapper — gọi từ onclick trong HTML */
+function submitFooterNewsletter() {
+    const emailInput = document.getElementById('footer-email');
+    if (!emailInput) return;
+    const email = emailInput.value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        showToast({ type: 'error', title: 'Email không hợp lệ', message: 'Vui lòng nhập địa chỉ email đúng định dạng.' });
+        return;
+    }
+    const payload = { email, source: 'newsletter-footer', timestamp: new Date().toISOString() };
+    const subs = JSON.parse(localStorage.getItem('tamthuy_subscribers') || '[]');
+    subs.push(payload);
+    localStorage.setItem('tamthuy_subscribers', JSON.stringify(subs));
+    emailInput.value = '';
+    showToast({ type: 'success', title: '🎉 Đăng ký thành công!', message: 'Mã giảm giá 10% sẽ được gửi về email của bạn.', duration: 6000 });
+}
+
 (function initNewsletterForm() {
     // 🔧 Cấu hình — thay URL khi có n8n
     const N8N_NEWSLETTER_URL = ''; // VD: 'https://n8n.tamthuy.vn/webhook/newsletter'

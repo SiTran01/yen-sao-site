@@ -441,6 +441,38 @@ h6,
 .nav-item-premium:hover { color: #4A1515; }
 .nav-item-premium:hover::after { transform: scaleX(1); }
 
+/* ---- Mobile Nav Link Hover ---- */
+.mobile-nav-link:hover {
+    background: rgba(197, 160, 89, 0.08) !important;
+    border-color: rgba(197, 160, 89, 0.25) !important;
+}
+.mobile-nav-link:hover > span:first-child {
+    background: rgba(197, 160, 89, 0.15);
+    border-color: rgba(197, 160, 89, 0.7) !important;
+    color: #E1B875 !important;
+}
+
+/* ---- Hamburger active state ---- */
+.hamburger-open #hamburger-btn {
+    background: rgba(74, 21, 21, 0.25) !important;
+    border-color: rgba(197, 160, 89, 0.6) !important;
+}
+.hamburger-open .hamburger-line:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+    width: 20px !important;
+}
+.hamburger-open .hamburger-line:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+.hamburger-open .hamburger-line:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+    width: 20px !important;
+    background-color: #C5A059 !important;
+}
+
+
+
 
 /* ============================================================
    06. HERO SECTION
@@ -526,121 +558,204 @@ h6,
 /* ============================================================
    07. STATS SECTION
    ============================================================ */
+
 .stats-section {
-    background-color: #2C1810;
-    background-image:
-        radial-gradient(ellipse at 20% 50%, rgba(139, 101, 8, 0.18) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 50%, rgba(197, 160, 89, 0.10) 0%, transparent 60%),
-        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C5A059' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background: #1C0D07;
     position: relative;
-    overflow: hidden;
+    padding: 80px 0;
+    border-top: 1px solid rgba(197,160,89,0.25);
+    border-bottom: 1px solid rgba(197,160,89,0.25);
 }
-.stats-top-line,
-.stats-bottom-line {
-    height: 1px;
-    background: linear-gradient(to right,
-        transparent 0%,
-        rgba(197, 160, 89, 0.2) 20%,
-        rgba(197, 160, 89, 0.6) 50%,
-        rgba(197, 160, 89, 0.2) 80%,
-        transparent 100%
-    );
+
+/* Ambient glow */
+.stats-section::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%; height: 100%;
+    background: radial-gradient(ellipse at center, rgba(139,101,8,0.15) 0%, transparent 70%);
+    pointer-events: none;
 }
+
 .stats-eyebrow {
     text-align: center;
     font-family: 'Be Vietnam Pro', sans-serif;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-weight: 700;
-    letter-spacing: 0.35em;
+    letter-spacing: 0.5em;
     text-transform: uppercase;
-    color: rgba(197, 160, 89, 0.6);
-    margin-bottom: 3rem;
+    color: rgba(197, 160, 89, 0.5);
+    margin-bottom: 56px;
     opacity: 0;
     transform: translateY(16px);
 }
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5px;
-    background: linear-gradient(to right, rgba(197,160,89,0.15), rgba(197,160,89,0.08));
-    border: 1px solid rgba(197, 160, 89, 0.15);
-    border-radius: 1.5rem;
-    overflow: hidden;
+.stats-eyebrow::before,
+.stats-eyebrow::after {
+    content: '——';
+    margin: 0 12px;
+    opacity: 0.4;
 }
+
+/* Grid */
+.stats-grid {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Divider */
+.stat-divider {
+    flex-shrink: 0;
+    width: 1px;
+    background: linear-gradient(to bottom,
+        transparent 0%,
+        rgba(197,160,89,0.3) 20%,
+        rgba(197,160,89,0.5) 50%,
+        rgba(197,160,89,0.3) 80%,
+        transparent 100%
+    );
+    position: relative;
+    margin: 0 4px;
+}
+.stat-divider::after {
+    content: '✦';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 8px;
+    color: rgba(197,160,89,0.6);
+    background: #1C0D07;
+    padding: 4px 0;
+    line-height: 1;
+}
+
+/* Stat Card */
 .stat-card {
-    background: rgba(44, 24, 16, 0.95);
-    padding: 2.5rem 2rem;
+    flex: 1;
+    padding: 8px 40px 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 0;
     position: relative;
-    transition: background 0.45s ease;
     opacity: 0;
     transform: translateY(40px);
+    transition: transform 0.4s ease;
+    cursor: default;
 }
-.stat-card:hover { background: rgba(60, 32, 18, 0.98); }
-.stat-card + .stat-card::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 20%; height: 60%; width: 1px;
-    background: linear-gradient(to bottom, transparent, rgba(197,160,89,0.3) 30%, rgba(197,160,89,0.3) 70%, transparent);
-}
+.stat-card:hover { transform: translateY(-6px); }
+
+/* Icon */
 .stat-icon {
-    width: 44px; height: 44px;
-    color: #C5A059;
-    margin-bottom: 1.25rem;
-    opacity: 0.85;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    width: 32px; height: 32px;
+    color: rgba(197,160,89,0.5);
+    margin-bottom: 20px;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
-.stat-card:hover .stat-icon { opacity: 1; transform: scale(1.08); }
+.stat-card:hover .stat-icon {
+    color: #E1B875;
+    transform: scale(1.15) rotate(-5deg);
+}
+
+/* Number */
 .stat-number-wrap {
     display: flex;
     align-items: baseline;
     justify-content: center;
     line-height: 1;
-    margin-bottom: 0.75rem;
+    margin-bottom: 16px;
 }
 .stat-number {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
     font-weight: 900;
     color: transparent;
-    background: linear-gradient(135deg, #f0d896 0%, #C5A059 45%, #E1B875 70%, #8B6508 100%);
+    background: linear-gradient(160deg,
+        #f5e6b0 0%,
+        #E1B875 30%,
+        #C5A059 55%,
+        #8B6508 100%
+    );
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     line-height: 1;
     display: inline-block;
+    letter-spacing: -0.02em;
 }
 .stat-number::after {
     content: attr(data-suffix);
-    font-size: 0.55em;
+    font-size: 0.4em;
     vertical-align: super;
-    margin-left: 2px;
-    color: #C5A059;
-    -webkit-text-fill-color: #C5A059;
-    opacity: 0.85;
+    margin-left: 3px;
+    background: linear-gradient(135deg, #E1B875, #C5A059);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 0.9;
 }
+
+/* Label */
 .stat-label {
     font-family: 'Be Vietnam Pro', sans-serif;
     font-weight: 700;
-    font-size: 0.85rem;
-    letter-spacing: 0.06em;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.88);
-    margin-bottom: 0.35rem;
+    color: rgba(232, 209, 167, 0.85);
+    margin-bottom: 8px;
+    position: relative;
+    padding-bottom: 10px;
 }
+.stat-label::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 20px; height: 1px;
+    background: rgba(197,160,89,0.5);
+    transition: width 0.3s ease;
+}
+.stat-card:hover .stat-label::after { width: 36px; }
+
+/* Desc */
 .stat-desc {
-    font-size: 0.73rem;
-    color: rgba(197, 160, 89, 0.55);
-    letter-spacing: 0.02em;
-    line-height: 1.5;
+    font-size: 0.68rem;
+    color: rgba(197, 160, 89, 0.38);
+    letter-spacing: 0.03em;
+    line-height: 1.6;
+    font-style: italic;
+}
+
+/* Mobile: 2x2 */
+@media (max-width: 768px) {
+    .stats-section { padding: 60px 0; }
+    .stats-grid {
+        flex-wrap: wrap;
+        max-width: 100%;
+    }
+    .stat-card {
+        flex: 0 0 50%;
+        padding: 24px 20px;
+        border-bottom: 1px solid rgba(197,160,89,0.1);
+    }
+    .stat-card:nth-child(1),
+    .stat-card:nth-child(3) {
+        border-right: 1px solid rgba(197,160,89,0.1);
+    }
+    .stat-divider { display: none; }
+    .stats-eyebrow { margin-bottom: 36px; font-size: 0.58rem; }
+    .stats-eyebrow::before, .stats-eyebrow::after { display: none; }
+}
+@media (max-width: 480px) {
+    .stat-card { padding: 20px 16px; }
+    .stat-number { font-size: clamp(2.8rem, 12vw, 3.5rem); }
 }
 
 
-/* ============================================================
    08. PRODUCTS â€” Horizontal Scroll Gallery
    ============================================================ */
 
@@ -1061,22 +1176,47 @@ h6,
 
 /* ============================================================
    13. FOOTER
-   (DÃ¹ng Tailwind utilities chÃ­nh trong HTML)
    ============================================================ */
-/* ThÃªm CSS tÃ¹y chá»‰nh cho Footer táº¡i Ä‘Ã¢y náº¿u cáº§n */
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr 1.2fr;
+    gap: 48px;
+}
+.footer-col-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    color: #C5A059;
+    text-transform: uppercase;
+    margin: 0 0 24px;
+    position: relative;
+    padding-bottom: 12px;
+}
+.footer-col-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 28px; height: 1px;
+    background: linear-gradient(90deg, #C5A059, transparent);
+}
+@media (max-width: 1024px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .footer-brand-col { grid-column: 1 / -1; }
+}
+@media (max-width: 640px) {
+    .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+    #footer > div { padding-left: 20px !important; padding-right: 20px !important; padding-top: 48px !important; }
+}
 
 
 /* ============================================================
    14. PRELOADER
    ============================================================ */
 #site-preloader {
-    position: fixed;
-    inset: 0;
-    z-index: 99999;
+    position: fixed; inset: 0; z-index: 99999;
     background: linear-gradient(135deg, #1a0a05 0%, #2d1208 50%, #4A2C2A 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     transition: opacity 0.7s ease, visibility 0.7s ease;
 }
 #site-preloader.is-hidden {
@@ -1120,9 +1260,7 @@ h6,
 }
 
 
-/* ============================================================
-
-/* ============================================================
+/* =============================================================
 
 
 /* ============================================================
@@ -1703,4 +1841,146 @@ h6,
 @media (max-width: 600px) {
     .feature-box-container { grid-template-columns: 1fr; gap: 10px; }
     .feature-box { padding: 12px; }
+}
+
+
+/* ============================================================
+   REVIEWS SECTION — Luxury Editorial Redesign
+   ============================================================ */
+.reviews-section {
+    background: #fff5e8;
+    padding: 80px 0 96px;
+    overflow: hidden;
+}
+.reviews-header {
+    text-align: center;
+    margin-bottom: 48px;
+    padding: 0 24px;
+}
+.reviews-eyebrow {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: #C5A059;
+    margin-bottom: 16px;
+}
+.reviews-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 900;
+    color: #4A2C2A;
+    margin-bottom: 20px;
+    line-height: 1.15;
+}
+.reviews-title-num { color: #C5A059; font-style: italic; }
+.reviews-title-line {
+    width: 48px; height: 2px;
+    background: linear-gradient(90deg, #C5A059, #E1B875, #C5A059);
+    margin: 0 auto; border-radius: 2px;
+}
+.reviews-summary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border: 1px solid rgba(197,160,89,0.18);
+    border-radius: 20px;
+    max-width: 780px;
+    margin: 0 auto 56px;
+    padding: 28px 40px;
+    box-shadow: 0 8px 40px rgba(74,44,42,0.06);
+}
+.reviews-summary-score { text-align: center; flex-shrink: 0; padding-right: 32px; }
+.reviews-big-score {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.8rem; font-weight: 900; color: #4A2C2A;
+    line-height: 1; display: block;
+}
+.reviews-stars-row {
+    color: #E1A800; font-size: 1.1rem; letter-spacing: 2px; margin: 6px 0 4px;
+}
+.reviews-score-label { font-size: 0.68rem; color: rgba(74,44,42,0.45); }
+.reviews-summary-divider {
+    width: 1px; height: 64px; flex-shrink: 0; margin: 0 32px;
+    background: linear-gradient(to bottom, transparent, rgba(197,160,89,0.3), transparent);
+}
+.reviews-bars { display: flex; flex-direction: column; gap: 8px; min-width: 180px; }
+.reviews-bar-row { display: flex; align-items: center; gap: 8px; }
+.reviews-bar-label { font-size: 0.68rem; color: rgba(74,44,42,0.5); width: 20px; flex-shrink:0; text-align:right; }
+.reviews-bar-track { flex:1; height:5px; background:rgba(197,160,89,0.12); border-radius:99px; overflow:hidden; }
+.reviews-bar-fill { height:100%; background: linear-gradient(90deg, #C5A059, #E1B875); border-radius:99px; }
+.reviews-bar-pct { font-size:0.65rem; color:rgba(74,44,42,0.4); width:28px; flex-shrink:0; }
+.reviews-trust-badges { display:flex; flex-direction:column; gap:16px; }
+.reviews-trust-item { display:flex; align-items:center; gap:10px; }
+.reviews-trust-icon { font-size:1.3rem; flex-shrink:0; }
+.reviews-trust-text { font-size:0.75rem; font-weight:700; color:#4A2C2A; line-height:1.4; }
+.reviews-trust-text small { font-weight:400; color:rgba(74,44,42,0.5); font-size:0.65rem; display:block; }
+
+/* Cards */
+.reviews-grid-wrap { max-width:1200px; margin:0 auto; padding:0 24px; }
+.reviews-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.rv-card {
+    border-radius: 20px; padding: 32px 28px 24px;
+    position: relative; display:flex; flex-direction:column;
+    transition: transform 0.35s ease, box-shadow 0.35s ease; overflow:hidden;
+}
+.rv-card:hover { transform:translateY(-6px); box-shadow:0 20px 50px rgba(74,44,42,0.14); }
+.rv-card--light {
+    background:#fff; border:1px solid rgba(197,160,89,0.14);
+    box-shadow:0 4px 24px rgba(74,44,42,0.05);
+}
+.rv-card--dark {
+    background: linear-gradient(145deg, #3D1A0A, #2d1208);
+    box-shadow:0 4px 32px rgba(74,44,42,0.2);
+}
+.rv-quote-mark {
+    font-family:'Playfair Display',serif; font-size:5rem; line-height:0.8;
+    color:rgba(197,160,89,0.15); margin-bottom:4px; font-style:italic;
+    user-select:none; height:36px; overflow:hidden;
+}
+.rv-quote-mark--light { color:rgba(255,255,255,0.1); }
+.rv-stars { color:#E1A800; font-size:0.85rem; letter-spacing:2px; margin-bottom:14px; }
+.rv-stars--light { color:#E1B875; }
+.rv-text { font-size:0.875rem; line-height:1.75; color:rgba(74,44,42,0.72); flex:1; margin-bottom:20px; font-style:italic; }
+.rv-text--light { color:rgba(255,255,255,0.72); }
+.rv-footer { display:flex; align-items:center; gap:12px; padding-top:16px; border-top:1px solid rgba(197,160,89,0.12); }
+.rv-footer--dark { border-color:rgba(255,255,255,0.08); }
+.rv-avatar {
+    width:38px; height:38px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Be Vietnam Pro',sans-serif; font-weight:800;
+    font-size:0.75rem; color:#fff; flex-shrink:0;
+}
+.rv-avatar--gold  { background:linear-gradient(135deg,#E1B875,#8B6508); }
+.rv-avatar--dark  { background:linear-gradient(135deg,#4A2C2A,#800020); }
+.rv-avatar--gold2 { background:linear-gradient(135deg,#C5A059,#E1B875); }
+.rv-avatar--dark2 { background:linear-gradient(135deg,#800020,#C5A059); }
+.rv-avatar--mix   { background:linear-gradient(135deg,#4A2C2A,#C5A059); }
+.rv-info { flex:1; min-width:0; }
+.rv-name { font-family:'Be Vietnam Pro',sans-serif; font-weight:700; font-size:0.8rem; color:#4A2C2A; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.rv-name--light { color:rgba(255,255,255,0.92); }
+.rv-meta { font-size:0.68rem; color:rgba(74,44,42,0.45); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.rv-meta--light { color:rgba(255,255,255,0.35); }
+.rv-badge {
+    font-size:0.6rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em;
+    color:#C5A059; background:rgba(197,160,89,0.1); border:1px solid rgba(197,160,89,0.25);
+    border-radius:20px; padding:3px 8px; white-space:nowrap; flex-shrink:0;
+}
+.rv-badge--light { color:#E1B875; background:rgba(225,184,117,0.12); border-color:rgba(225,184,117,0.2); }
+
+@media (max-width:900px) {
+    .reviews-grid { grid-template-columns:repeat(2,1fr); }
+    .reviews-summary { flex-direction:column; gap:20px; padding:24px 20px; }
+    .reviews-summary-divider { width:60px; height:1px; margin:4px 0; }
+    .reviews-summary-score { padding:0; }
+    .reviews-big-score { font-size:3rem; }
+}
+@media (max-width:600px) {
+    .reviews-section { padding:56px 0 72px; }
+    .reviews-grid { grid-template-columns:1fr; }
+    .rv-card { padding:24px 20px 18px; }
+    .reviews-grid-wrap { padding:0 16px; }
+    .reviews-summary { margin:0 16px 40px; }
 }
