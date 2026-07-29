@@ -197,6 +197,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 2000);
     }, 100);
 
+    // Header dark mode: toggle class when over dark hero
+    (function initHeaderDarkMode() {
+        const header = document.getElementById('main-header');
+        const hero   = document.getElementById('hero');
+        if (!header || !hero) return;
+
+        const updateHeaderMode = () => {
+            const heroBottom = hero.getBoundingClientRect().bottom;
+            if (heroBottom > 60) {
+                header.classList.add('on-dark-hero');
+            } else {
+                header.classList.remove('on-dark-hero');
+            }
+        };
+
+        updateHeaderMode();
+        window.addEventListener('scroll', updateHeaderMode, { passive: true });
+    })();
+
     // Render product cards
     renderProducts();
 
@@ -294,18 +313,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Header scroll effect (transparent → white/blur)
+    // Header scroll effect — luôn dark glass, không đổi trắng
     const header = document.getElementById('main-header');
-    window.addEventListener('scroll', () => {
+
+    const updateHeaderScroll = () => {
         if (!header) return;
+
         if (window.scrollY > 50) {
-            header.classList.remove('bg-transparent', 'py-6');
-            header.classList.add('bg-white/95', 'shadow-md', 'py-4');
+            header.classList.remove('bg-transparent', 'bg-white/95', 'py-6');
+            header.classList.add('py-4');
+            header.style.background = 'rgba(20, 8, 3, 0.88)';
+            header.style.backdropFilter = 'blur(20px)';
+            header.style.boxShadow = '0 2px 24px rgba(0,0,0,0.35)';
+            header.style.borderBottomColor = 'transparent';
         } else {
             header.classList.add('bg-transparent', 'py-6');
-            header.classList.remove('bg-white/95', 'shadow-md', 'py-4');
+            header.classList.remove('bg-white/95', 'py-4');
+            header.style.background = '';
+            header.style.backdropFilter = '';
+            header.style.boxShadow = '';
+            header.style.borderBottomColor = 'transparent';
         }
-    });
+    };
+
+    window.addEventListener('scroll', updateHeaderScroll, { passive: true });
+    updateHeaderScroll();
 
     // Hero scroll button — click V → scroll xuống page 2
     // Kéo lên tay → page 1 tự quay lại (sticky)
@@ -313,7 +345,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (scrollBtn) {
         scrollBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            lenis.scrollTo('#stats-section', {
+            lenis.scrollTo('#products', {
                 offset: -220,
                 duration: 1.5,
                 easing: (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
@@ -385,7 +417,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Chữ trượt lên nhanh hơn → tạo độ sâu
-        heroTl.to('.hero-text-wrapper', { y: -150, opacity: 0.3, duration: 1 }, 0);
+        heroTl.to('.hero-text-col', { y: -150, opacity: 0.3, duration: 1 }, 0);
 
         // Sản phẩm trượt chậm hơn → cảm giác nổi 3D
         heroTl.to('.gsap-hero-img-1', { y: 150, xPercent: -5, scale: 1.1, rotation: -3, duration: 1 }, 0);
@@ -819,42 +851,7 @@ window.initBlogHScroll = function() {
 };
 
 
-/* ============================================================
-   10. STATS COUNTER — Animated number counting
-   ============================================================ */
-(function initStatsCounter() {
-    const section  = document.getElementById('stats-section');
-    const eyebrow  = document.getElementById('stats-eyebrow');
-    const cards    = document.querySelectorAll('.stat-card');
-    const counters = document.querySelectorAll('.stat-number');
 
-    if (!section || !counters.length) return;
-
-    const tl = gsap.timeline({
-        scrollTrigger: { trigger: section, start: 'top 80%', once: true }
-    });
-
-    tl.to(eyebrow, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' });
-    tl.to(cards,   { opacity: 1, y: 0, duration: 0.75, stagger: 0.12, ease: 'power3.out' }, '-=0.3');
-
-    counters.forEach((el, i) => {
-        const target = parseInt(el.getAttribute('data-target'), 10);
-        const obj = { val: 0 };
-
-        tl.to(obj, {
-            val: target,
-            duration: 2.2,
-            ease: 'power2.out',
-            onUpdate() {
-                const v = Math.round(obj.val);
-                el.textContent = target >= 1000 ? v.toLocaleString('vi-VN') : v;
-            },
-            onComplete() {
-                el.textContent = target >= 1000 ? target.toLocaleString('vi-VN') : target;
-            }
-        }, i === 0 ? '-=0.8' : '<0.18');
-    });
-})();
 
 
 /* ============================================================

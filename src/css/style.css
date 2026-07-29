@@ -1384,9 +1384,9 @@ h6,
         padding-left: 0.5rem !important;
         padding-right: 0.5rem !important;
     }
-    /* Shrink logo */
-    header .w-14 { width: 2rem !important; height: 2rem !important; }
-    header .text-lg { font-size: 0.75rem !important; letter-spacing: 0.05em !important; }
+    /* Shrink logo (adjusted slightly up) */
+    header .w-14 { width: 3.125rem !important; height: 3.125rem !important; } /* 50px */
+    header .text-lg { font-size: 1rem !important; letter-spacing: 0.05em !important; } /* 16px */
     /* Ensure hamburger is visible - critical fix */
     header .md\:hidden {
         display: flex !important;
@@ -1407,11 +1407,15 @@ h6,
 
     .hero-pin-container > div {
         flex-direction: column !important;
-        padding-top: 4.5rem !important;
+        padding-top: 0 !important;
         padding-left: 1rem !important;
         padding-right: 1rem !important;
         gap: 0 !important;
         justify-content: center !important;
+    }
+    /* New hero layout override for mobile */
+    .hero-new-inner {
+        padding-top: 52px !important;
     }
     .hero-pin-container > div > div:first-child {
         order: 1;
@@ -1983,4 +1987,475 @@ h6,
     .rv-card { padding:24px 20px 18px; }
     .reviews-grid-wrap { padding:0 16px; }
     .reviews-summary { margin:0 16px 40px; }
+}
+
+
+/* ============================================================
+   HERO — Dark Luxury Cinematic Redesign
+   ============================================================ */
+.hero-new {
+    min-height: 100vh;
+    background:
+        linear-gradient(135deg, #0D0503 0%, #1A0805 35%, #2C1208 60%, #1A0805 80%, #0D0503 100%);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    z-index: 50;
+}
+
+/* Ambient glow spheres */
+.hero-glow {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(80px);
+}
+.hero-glow-1 {
+    width: 600px; height: 600px;
+    top: -100px; right: -100px;
+    background: radial-gradient(circle, rgba(197,160,89,0.18) 0%, transparent 70%);
+    animation: heroGlowPulse 6s ease-in-out infinite alternate;
+}
+.hero-glow-2 {
+    width: 400px; height: 400px;
+    bottom: 0; left: -80px;
+    background: radial-gradient(circle, rgba(139,101,8,0.12) 0%, transparent 70%);
+    animation: heroGlowPulse 8s ease-in-out infinite alternate-reverse;
+}
+.hero-glow-3 {
+    width: 300px; height: 300px;
+    top: 40%; left: 40%;
+    background: radial-gradient(circle, rgba(197,160,89,0.07) 0%, transparent 70%);
+    animation: heroGlowPulse 10s ease-in-out infinite alternate;
+}
+@keyframes heroGlowPulse {
+    0%   { opacity: 0.6; transform: scale(1); }
+    100% { opacity: 1;   transform: scale(1.15); }
+}
+
+/* Grain */
+.hero-grain {
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Top gold line */
+.hero-top-line {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(197,160,89,0.4) 20%, #C5A059 50%, rgba(197,160,89,0.4) 80%, transparent);
+    position: relative; z-index: 5;
+}
+
+/* Inner layout */
+.hero-new-inner {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 80px 80px 100px;
+    position: relative; z-index: 5;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* LEFT — text col */
+.hero-text-col {
+    flex: 0 0 50%;
+    max-width: 580px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* Eyebrow */
+.hero-eyebrow-wrap {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+}
+.hero-eyebrow-line {
+    flex: 0 0 32px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(197,160,89,0.6));
+}
+.hero-eyebrow-line:last-child {
+    background: linear-gradient(90deg, rgba(197,160,89,0.6), transparent);
+}
+.hero-eyebrow-text {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: rgba(197,160,89,0.7);
+    white-space: nowrap;
+}
+
+/* Main title */
+.hero-new-title {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 28px;
+    line-height: 1.05;
+}
+.hero-title-row {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.2rem, 6.5vw, 5.5rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+}
+.hero-title-plain {
+    color: #E8D1A7;
+}
+.hero-title-italic {
+    font-style: italic;
+    background: linear-gradient(135deg, #f5e6b0 0%, #E1B875 30%, #C5A059 65%, #8B6508 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.hero-title-row-2 {
+    margin-top: -8px;
+    margin-left: 48px; /* Asymmetric indent — editorial look */
+}
+
+/* Tagline */
+.hero-tagline {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: rgba(232,209,167,0.55);
+    margin-bottom: 40px;
+    max-width: 440px;
+}
+.hero-tagline strong { color: rgba(197,160,89,0.85); font-weight: 600; }
+
+/* CTA buttons */
+.hero-cta-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+}
+.hero-cta-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, #C5A059, #E1B875, #C5A059);
+    background-size: 200% auto;
+    border-radius: 50px;
+    color: #1A0805;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-weight: 800;
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    box-shadow: 0 8px 32px rgba(197,160,89,0.4), 0 2px 8px rgba(0,0,0,0.3);
+    white-space: nowrap;
+}
+.hero-cta-primary:hover {
+    background-position: right center;
+    box-shadow: 0 12px 48px rgba(197,160,89,0.55), 0 4px 16px rgba(0,0,0,0.4);
+    transform: translateY(-2px);
+}
+.hero-cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 15px 28px;
+    border: 1px solid rgba(197,160,89,0.35);
+    border-radius: 50px;
+    color: rgba(232,209,167,0.8);
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-weight: 600;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.35s ease;
+    backdrop-filter: blur(8px);
+    background: rgba(197,160,89,0.06);
+    white-space: nowrap;
+}
+.hero-cta-secondary:hover {
+    border-color: rgba(197,160,89,0.7);
+    background: rgba(197,160,89,0.12);
+    color: #E1B875;
+    transform: translateY(-2px);
+}
+
+/* Trust row */
+.hero-trust-row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+.hero-trust-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0 24px;
+}
+.hero-trust-item:first-child { padding-left: 0; }
+.hero-trust-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.85rem;
+    font-weight: 900;
+    color: #E1B875;
+    line-height: 1;
+}
+.hero-trust-num sup {
+    font-size: 0.55em;
+    vertical-align: super;
+    color: rgba(197,160,89,0.7);
+}
+.hero-trust-label {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: rgba(197,160,89,0.45);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+.hero-trust-divider {
+    width: 1px;
+    height: 36px;
+    background: linear-gradient(to bottom, transparent, rgba(197,160,89,0.25), transparent);
+    flex-shrink: 0;
+}
+
+/* RIGHT — image col */
+.hero-img-col {
+    flex: 0 0 48%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Decorative circle behind products */
+.hero-img-circle {
+    position: absolute;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    border: 1px solid rgba(197,160,89,0.12);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+.hero-img-circle::before {
+    content: '';
+    position: absolute;
+    inset: 20px;
+    border-radius: 50%;
+    border: 1px solid rgba(197,160,89,0.07);
+}
+
+/* Brand badge on image */
+.hero-brand-badge {
+    position: absolute;
+    bottom: -10%;
+    right: -8%;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(26,8,5,0.85);
+    border: 1px solid rgba(197,160,89,0.3);
+    border-radius: 14px;
+    padding: 12px 16px;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+.hero-brand-logo {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: rgba(197,160,89,0.1);
+    border: 1px solid rgba(197,160,89,0.3);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+}
+.hero-brand-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #E8D1A7;
+    letter-spacing: 0.08em;
+}
+.hero-brand-sub {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(197,160,89,0.6);
+}
+
+/* Scroll cue */
+.hero-scroll-cue {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+.hero-scroll-cue:hover { opacity: 1; }
+.hero-scroll-text {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: rgba(197,160,89,0.7);
+}
+.hero-scroll-arrow {
+    width: 32px; height: 32px;
+    border: 1px solid rgba(197,160,89,0.3);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(197,160,89,0.7);
+    animation: scrollBounce 2s ease-in-out infinite;
+}
+@keyframes scrollBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(5px); }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .hero-new-inner { padding: 80px 40px 100px; gap: 24px; }
+    .hero-title-row-2 { margin-left: 24px; }
+    .hero-img-circle { width: 340px; height: 340px; }
+}
+@media (max-width: 768px) {
+    .hero-new-inner {
+        flex-direction: column-reverse;
+        padding: 52px 24px 48px;
+        gap: 12px;
+        justify-content: center;
+        align-items: center;
+    }
+    .hero-text-col { max-width: 100%; width: 100%; }
+    .hero-img-col { flex: 0 0 auto; width: 100%; max-width: 300px; }
+    /* Ẩn 2 nút CTA trên mobile để tiết kiệm chiều cao */
+    .hero-cta-row { display: none; }
+    .hero-title-row { font-size: clamp(2.2rem, 10vw, 3rem); }
+    .hero-title-row-2 { margin-left: 16px; }
+    .hero-new-title { gap: 4px; margin-bottom: 12px; }
+    .hero-eyebrow-wrap { margin-bottom: 10px; }
+    .hero-eyebrow-text { font-size: 0.55rem; letter-spacing: 0.25em; }
+    .hero-tagline { font-size: 0.82rem; margin-bottom: 16px; }
+    .hero-trust-row { gap: 0; }
+    .hero-trust-item { padding: 0 12px; }
+    .hero-trust-num { font-size: 1.1rem; }
+    .hero-trust-label { font-size: 0.5rem; }
+    .hero-img-circle { width: 240px; height: 240px; }
+    .hero-brand-badge { display: none; }
+}
+@media (max-width: 480px) {
+    .hero-new-inner { padding: 48px 20px 40px; gap: 8px; }
+    .hero-title-row { font-size: clamp(2rem, 10vw, 2.6rem); }
+    .hero-tagline { font-size: 0.78rem; margin-bottom: 12px; }
+    .hero-img-col { max-width: 260px; }
+    .hero-trust-item { padding: 0 8px; }
+}
+
+/* Header light text on dark hero */
+#main-header.on-dark-hero .nav-item-premium {
+    color: rgba(232,209,167,0.75) !important;
+}
+#main-header.on-dark-hero .nav-item-premium:hover { color: #E1B875 !important; }
+#main-header.on-dark-hero .nav-item-premium::after { background-color: #C5A059 !important; }
+#main-header.on-dark-hero .font-serif { color: #E8D1A7 !important; }
+#main-header.on-dark-hero .border-gray-400\/30 { border-color: rgba(197,160,89,0.2) !important; }
+#main-header.on-dark-hero nav { background: rgba(26,8,5,0.5) !important; }
+#main-header.on-dark-hero img[alt*="Logo"] {
+    filter: brightness(0) invert(1) sepia(1) saturate(3) hue-rotate(10deg);
+}
+#main-header.on-dark-hero #hamburger-btn { border-color: rgba(197,160,89,0.4) !important; }
+#main-header.on-dark-hero .hamburger-line { background-color: rgba(232,209,167,0.8) !important; }
+#main-header.on-dark-hero .bg-\[\#C5A059\] { background: rgba(197,160,89,0.9) !important; }
+
+/* Fix brand badge being clipped */
+.hero-img-col { overflow: visible !important; }
+.hero-img-col .hero-products-wrapper { overflow: visible !important; }
+#hero .hero-products-wrapper { overflow: visible !important; }
+
+/* Badge now positioned relative to hero-img-col (not products-wrapper) */
+.hero-img-col { position: relative; }
+.hero-brand-badge {
+    bottom: 0 !important;
+    right: 0 !important;
+}
+
+/* Header when scrolled over dark hero — force dark bg + light text */
+#main-header.on-dark-hero {
+    border-bottom-color: transparent !important;
+}
+#main-header.on-dark-hero .nav-item-premium {
+    color: rgba(232,209,167,0.8) !important;
+}
+#main-header.on-dark-hero .nav-item-premium:hover { color: #E1B875 !important; }
+#main-header.on-dark-hero .nav-item-premium::after { background-color: #C5A059 !important; }
+#main-header.on-dark-hero [class*="font-serif"][class*="text-"] { color: #E8D1A7 !important; }
+#main-header.on-dark-hero nav { background: rgba(26,8,5,0.55) !important; border-color: rgba(197,160,89,0.25) !important; }
+#main-header.on-dark-hero img[alt*="Logo"] { filter: brightness(0) invert(1) sepia(1) saturate(3) hue-rotate(10deg) !important; }
+#main-header.on-dark-hero [class*="bg-\\[\\#C5A059\\]"] { background: #C5A059 !important; color: #1A0805 !important; }
+#main-header.on-dark-hero .hamburger-line { background-color: rgba(232,209,167,0.8) !important; }
+
+/* Transition for smooth bg change */
+#main-header {
+    transition: background 0.4s ease, box-shadow 0.4s ease, padding 0.3s ease, border-color 0.4s ease !important;
+}
+
+/* Header luôn dùng chữ sáng — vì nền header luôn dark glass */
+#main-header .nav-item-premium {
+    color: rgba(232,209,167,0.8) !important;
+}
+#main-header .nav-item-premium:hover { color: #E1B875 !important; }
+#main-header .nav-item-premium::after { background-color: #C5A059 !important; }
+#main-header [class*="font-serif"] { color: #E8D1A7 !important; }
+#main-header nav { background: rgba(26,8,5,0.5) !important; border-color: rgba(197,160,89,0.2) !important; }
+#main-header img[alt*="Logo"] { filter: brightness(0) invert(1) sepia(1) saturate(3) hue-rotate(10deg) !important; }
+#main-header .hamburger-line { background-color: rgba(232,209,167,0.8) !important; }
+
+/* Custom responsive logo size to bypass Tailwind compiler issues */
+.custom-logo-size {
+    width: 58px;
+    height: 58px;
+}
+@media (min-width: 768px) {
+    .custom-logo-size {
+        width: 56px;
+        height: 56px;
+    }
+}
+
+/* Custom responsive logo text size */
+.custom-logo-text {
+    font-size: 19px;
+}
+@media (min-width: 768px) {
+    .custom-logo-text {
+        font-size: 18px; /* Tailwind text-lg */
+    }
 }
