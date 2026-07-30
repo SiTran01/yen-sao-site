@@ -2089,7 +2089,7 @@ h6,
 }
 .hero-eyebrow-text {
     font-family: 'Be Vietnam Pro', sans-serif;
-    font-size: 0.75rem;
+    font-size: 0.65rem;
     font-weight: 700;
     letter-spacing: 0.42em;
     text-transform: uppercase;
@@ -2211,7 +2211,7 @@ h6,
 .hero-trust-item:first-child { padding-left: 0; }
 .hero-trust-num {
     font-family: 'Playfair Display', serif;
-    font-size: 1.85rem;
+    font-size: 1.6rem;
     font-weight: 900;
     color: #E1B875;
     line-height: 1;
@@ -2223,7 +2223,7 @@ h6,
 }
 .hero-trust-label {
     font-family: 'Be Vietnam Pro', sans-serif;
-    font-size: 0.72rem;
+    font-size: 0.65rem;
     font-weight: 500;
     color: rgba(197,160,89,0.45);
     letter-spacing: 0.06em;
