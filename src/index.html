@@ -311,16 +311,31 @@
                 </div>
 
                 <!-- Main title -->
-                <h1 class="hero-new-title">
+                <div class="hero-title-glow-ring" aria-hidden="true"></div>
+                <h1 class="hero-new-title" id="hero-main-title">
                     <span class="hero-title-row">
-                        <span class="hero-title-plain">Yến</span>
-                        <span class="hero-title-italic"> Sào</span>
+                        <span class="hero-title-plain hero-char-group">
+                            <span class="hc">Y</span><span class="hc">ế</span><span class="hc">n</span>
+                        </span>
+                        <span class="hero-title-italic hero-shine-text hero-word-reveal" style="animation-delay:0.32s,1.9s;"> Sào</span>
                     </span>
                     <span class="hero-title-row hero-title-row-2">
-                        <span class="hero-title-plain">Tám</span>
-                        <span class="hero-title-italic"> Thủy</span>
+                        <span class="hero-title-plain hero-char-group">
+                            <span class="hc">T</span><span class="hc">á</span><span class="hc">m</span>
+                        </span>
+                        <span class="hero-title-italic hero-shine-text hero-word-reveal" style="animation-delay:0.89s,1.9s;"> Thủy</span>
+                        <span class="hero-title-cursor" aria-hidden="true"></span>
                     </span>
                 </h1>
+                <!-- Sparkle particles -->
+                <div class="hero-sparkles" aria-hidden="true">
+                    <span class="hero-sparkle sp-1">✦</span>
+                    <span class="hero-sparkle sp-2">✧</span>
+                    <span class="hero-sparkle sp-3">✦</span>
+                    <span class="hero-sparkle sp-4">✧</span>
+                    <span class="hero-sparkle sp-5">✦</span>
+                    <span class="hero-sparkle sp-6">✧</span>
+                </div>
 
                 <!-- Tagline -->
                 <p class="hero-tagline">
@@ -1363,7 +1378,44 @@
                 <div id="blog-modal-content" class="overflow-y-auto flex-1 p-8 md:p-12" data-lenis-prevent>
                     <!-- Content will be injected here -->
                 </div>
-            </div>
+    <!-- Hero title animation trigger -->
+    <script>
+    (function() {
+        function triggerHeroTitleAnimation() {
+            var title = document.getElementById('hero-main-title');
+            if (title && !title.classList.contains('hero-title-animate')) {
+                title.classList.add('hero-title-animate');
+            }
+        }
+
+        var preloader = document.getElementById('site-preloader');
+        if (!preloader) {
+            // No preloader: trigger immediately after DOM ready
+            setTimeout(triggerHeroTitleAnimation, 100);
+            return;
+        }
+
+        // Watch for preloader gaining .is-hidden class
+        var observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(m) {
+                if (m.type === 'attributes' && m.attributeName === 'class') {
+                    if (preloader.classList.contains('is-hidden')) {
+                        // Small delay so the hero is fully visible before letters fly in
+                        setTimeout(triggerHeroTitleAnimation, 200);
+                        observer.disconnect();
+                    }
+                }
+            });
+        });
+        observer.observe(preloader, { attributes: true });
+
+        // Fallback: trigger after 3s regardless
+        setTimeout(function() {
+            triggerHeroTitleAnimation();
+            observer.disconnect();
+        }, 3000);
+    })();
+    </script>
 </body>
 
 </html>
