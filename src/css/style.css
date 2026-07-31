@@ -2140,12 +2140,18 @@ h6,
 .hero-tagline strong { color: rgba(197,160,89,0.85); font-weight: 600; }
 
 /* CTA buttons */
+@keyframes float-horizontal-gentle {
+    0%, 100% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+}
+
 .hero-cta-row {
     display: flex;
     align-items: center;
     gap: 16px;
     margin-bottom: 48px;
     flex-wrap: wrap;
+    animation: float-horizontal-gentle 5s ease-in-out infinite;
 }
 .hero-cta-primary {
     display: inline-flex;
@@ -2206,7 +2212,7 @@ h6,
 .hero-trust-item {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 12px;
     padding: 0 24px;
 }
 .hero-trust-item:first-child { padding-left: 0; }
