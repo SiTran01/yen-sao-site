@@ -144,13 +144,16 @@ gsap.ticker.lagSmoothing(0);
 
 /** Smooth scroll to target ID using Lenis */
 window.luxuryScrollTo = (targetId) => {
-    // Ép GSAP tính toán lại toàn bộ height và pinning trước khi cuộn
-    if (typeof ScrollTrigger !== 'undefined') {
-        ScrollTrigger.refresh();
-    }
+    // Không gọi ScrollTrigger.refresh() ở đây vì nó tính toán lại toàn trang gây sai vị trí cuộn
     
-    lenis.scrollTo(targetId, {
-        offset: -100, // Đảm bảo chừa 100px cho fixed menu
+    let el = targetId;
+    if (typeof targetId === 'string') {
+        el = document.querySelector(targetId);
+    }
+    if (!el) return;
+    
+    lenis.scrollTo(el, {
+        offset: -130, // Đảm bảo chừa nhiều khoảng trống hơn cho fixed menu
         duration: 1.5,
         easing: (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
     });
@@ -893,6 +896,10 @@ window.initBlogHScroll = function() {
             showToast({ type: 'error', title: 'Chưa chọn sản phẩm', message: 'Vui lòng chọn sản phẩm bạn quan tâm.' });
             return false;
         }
+        if (!data.address || data.address.trim().length < 5) {
+            showToast({ type: 'error', title: 'Thiếu địa chỉ', message: 'Vui lòng nhập địa chỉ nhận hàng chi tiết.' });
+            return false;
+        }
         return true;
     }
 
@@ -940,9 +947,12 @@ window.initBlogHScroll = function() {
         const payload = {
             name:    document.getElementById('order-name')?.value?.trim()    || '',
             phone:   document.getElementById('order-phone')?.value?.trim()   || '',
+            address: document.getElementById('order-address')?.value?.trim() || '',
             product: document.getElementById('order-product')?.value         || '',
             qty:     finalQty || '1',
             note:    document.getElementById('order-note')?.value?.trim()    || '',
+            payment: document.getElementById('order-payment')?.value         || 'COD',
+            isGift:  document.getElementById('order-gift')?.checked ? 'Có' : 'Không',
             source:  'website-tamthuy',
             utm:     window.location.search || '',
         };
@@ -1177,3 +1187,16 @@ function submitFooterNewsletter() {
         if (e.key === 'Enter') footerSubmitBtn.click();
     });
 })();
+
+/* ============================================================
+   17. DYNAMIC PRODUCT COUNT
+   ============================================================ */
+document.addEventListener('DOMContentLoaded', () => {
+    const productCards = document.querySelectorAll('.hscroll-product-card');
+    const countDisplay = document.getElementById('dynamic-product-count');
+    if (countDisplay && productCards.length > 0) {
+        const count = productCards.length;
+        const formattedCount = count < 10 ? '0' + count : count;
+        countDisplay.textContent = `${formattedCount} sản phẩm`;
+    }
+});

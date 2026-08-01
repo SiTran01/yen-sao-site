@@ -43,7 +43,7 @@ QUY TẮC:
 let chatHistory = []; // [{ role: 'user'|'assistant', content: '...' }]
 let isTyping = false;
 const notifSound = new Audio('./assets/notification-sound.mp3');
-notifSound.volume = 0.5; // Giảm âm lượng xuống mức vừa phải (50%)
+notifSound.volume = 0.6; // Giảm âm lượng xuống mức vừa phải (60%)
 
 function playNotificationSound() {
     try {
@@ -76,11 +76,47 @@ function initChatbot() {
     // Restore session history
     restoreSession();
 
-    // Show welcome message nếu chưa có lịch sử
-    if (chatHistory.length === 0) {
-        appendWelcome();
+    // Handle Name Capture Overlay
+    const nameOverlay = document.getElementById('ai-name-overlay');
+    const nameInput = document.getElementById('ai-guest-name-input');
+    const nameSubmitBtn = document.getElementById('ai-name-submit-btn');
+    const savedName = localStorage.getItem('tamthuy_guest_name');
+
+    if (nameOverlay && nameInput && nameSubmitBtn) {
+        if (!savedName) {
+            // Chưa có tên, hiện overlay và ẩn thanh chat
+            nameOverlay.classList.remove('is-hidden');
+            dom.input.disabled = true;
+            
+            nameSubmitBtn.addEventListener('click', () => {
+                const val = nameInput.value.trim();
+                if (val.length > 0) {
+                    localStorage.setItem('tamthuy_guest_name', val);
+                    nameOverlay.classList.add('is-hidden');
+                    dom.input.disabled = false;
+                    dom.input.focus();
+                    
+                    if (chatHistory.length === 0) {
+                        appendBotMessage(`Dạ chào anh/chị ${val}, em có thể giúp gì cho anh/chị ạ?`);
+                        chatHistory.push({ role: 'assistant', content: `Dạ chào anh/chị ${val}, em có thể giúp gì cho anh/chị ạ?` });
+                        saveSession();
+                    }
+                }
+            });
+            
+            nameInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') nameSubmitBtn.click();
+            });
+        } else {
+            nameOverlay.classList.add('is-hidden');
+            if (chatHistory.length > 0) {
+                renderHistory();
+            }
+        }
     } else {
-        renderHistory();
+        if (chatHistory.length > 0) {
+            renderHistory();
+        }
     }
 
     // --- PROACTIVE GREETING BUBBLE ---
@@ -200,10 +236,11 @@ function closePanel() {
     dom.panel.setAttribute('aria-hidden', 'true');
     dom.trigger.classList.remove('is-open');
 }
+window.closeChatPanel = closePanel;
 
 /* ── Welcome message ────────────────────────────────────────── */
 function appendWelcome() {
-    appendBotMessage('Xin chào! 👋 Tôi là Thủy, trợ lý AI của Yến Sào Tám Thủy.\n\nBạn đang tìm hiểu về yến sào hoặc cần tư vấn sản phẩm? Hỏi tôi bất cứ điều gì nhé! 🍃');
+    appendBotMessage('Xin chào! 👋 Tôi là Thanh Thủy, trợ lý AI của Yến Sào Tám Thủy.\n\nBạn đang tìm hiểu về yến sào hoặc cần tư vấn sản phẩm? Hỏi tôi bất cứ điều gì nhé! 🍃');
 }
 
 /* ── Handle send ────────────────────────────────────────────── */
@@ -269,6 +306,7 @@ async function callAI(messages) {
 
     const payload = {
         sessionId: getSessionId(), // Gửi session ID cho n8n để quản lý bộ nhớ
+        guestName: localStorage.getItem('tamthuy_guest_name') || 'Khách',
         messages: messages,
         model: 'gpt-4o-mini',
         max_tokens: 500,
@@ -317,7 +355,13 @@ async function mockResponse(userMsg) {
 function appendUserMessage(text) {
     const el = document.createElement('div');
     el.className = 'ai-msg user';
-    el.innerHTML = `<div class="ai-msg-bubble">${escapeHtml(text)}</div>`;
+    const savedName = localStorage.getItem('tamthuy_guest_name') || 'Bạn';
+    el.innerHTML = `
+        <div class="ai-msg-content" style="align-items: flex-end; max-width: 85%;">
+            <div class="ai-msg-name" style="font-size: 11.5px; color: rgba(255,255,255,0.5); font-weight: 500; margin-bottom: -4px; margin-right: 4px;">${escapeHtml(savedName)}</div>
+            <div class="ai-msg-bubble">${escapeHtml(text)}</div>
+        </div>
+    `;
     dom.messages.appendChild(el);
     scrollToBottom();
 }
@@ -366,6 +410,7 @@ function appendBotMessage(text) {
             <img src="./assets/images/avt-svg.svg" alt="Thủy">
         </div>
         <div class="ai-msg-content">
+            <div class="ai-msg-name" style="font-size: 11.5px; color: rgba(197, 160, 89, 0.9); font-weight: 600; margin-bottom: -4px; margin-left: 4px;">Thanh Thủy (Trợ lý AI)</div>
             ${bubbleContent ? `<div class="ai-msg-bubble">${bubbleContent}</div>` : ''}
             ${genUIHtml}
         </div>
@@ -374,11 +419,70 @@ function appendBotMessage(text) {
     scrollToBottom();
 }
 
+window.scrollToProduct = function(productId) {
+    console.log('[Tám Thủy Chatbot] Clicked product link:', productId);
+    
+    if (!productId || productId.trim() === '' || productId === 'NOT_FOUND') {
+        // Fix tuyệt đối cho trường hợp DOM cũ chưa update (Vite HMR không load lại trang)
+        const links = document.querySelectorAll('.ai-product-link');
+        if (links.length > 0) {
+            const rawName = links[links.length - 1].innerText;
+            const searchStr = rawName.toLowerCase().normalize('NFC').trim();
+            const searchStrNoTones = searchStr.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd');
+            
+            if (searchStr.includes('tinh') || searchStrNoTones.includes('tinh') || searchStr.includes('ép') || searchStrNoTones.includes('ep')) productId = 'yen-tinh-che';
+            else if (searchStr.includes('tươi') || searchStrNoTones.includes('tuoi')) productId = 'yen-tuoi';
+            else if (searchStr.includes('thô') || searchStrNoTones.includes('tho') || searchStr.includes('nguyên bản')) productId = 'yen-tho';
+            else if (searchStr.includes('chưng') || searchStrNoTones.includes('chung') || searchStr.includes('hũ') || searchStrNoTones.includes('hu') || searchStr.includes('sẵn') || searchStrNoTones.includes('san')) productId = 'yen-chung-san';
+        }
+        
+        if (!productId || productId.trim() === '' || productId === 'NOT_FOUND') {
+            alert('Bot không nhận diện được chính xác sản phẩm. Vui lòng chat tên sản phẩm rõ hơn ạ.');
+            console.warn('[Tám Thủy Chatbot] Invalid or empty productId, aborting scroll');
+            return;
+        }
+    }
+    
+    let targetSelector = '#v-' + productId;
+    let el = document.querySelector(targetSelector);
+    
+    if (!el) {
+        el = document.getElementById('v-' + productId);
+    }
+    
+    if (el) {
+        console.log('[Tám Thủy Chatbot] Lenis scrolling to:', el);
+        if (typeof window.luxuryScrollTo === 'function') {
+            window.luxuryScrollTo(el);
+        } else {
+            el.scrollIntoView({behavior: 'smooth'});
+        }
+    }
+};
+
 function renderMiniOrderForm(data) {
     let productName = data.product;
+    let productId = '';
     if (window.YEN_SAO_DB) {
-        const p = window.YEN_SAO_DB.products.find(x => x.id === data.product);
-        if (p) productName = p.name;
+        const searchStr = (data.product || '').toLowerCase().normalize('NFC').trim();
+        const searchStrNoTones = searchStr.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd');
+        
+        let bestMatch = null;
+        if (searchStr.includes('tinh') || searchStrNoTones.includes('tinh') || searchStr.includes('ép') || searchStrNoTones.includes('ep')) bestMatch = 'yen-tinh-che';
+        else if (searchStr.includes('tươi') || searchStrNoTones.includes('tuoi')) bestMatch = 'yen-tuoi';
+        else if (searchStr.includes('thô') || searchStrNoTones.includes('tho') || searchStr.includes('nguyên bản')) bestMatch = 'yen-tho';
+        else if (searchStr.includes('chưng') || searchStrNoTones.includes('chung') || searchStr.includes('hũ') || searchStrNoTones.includes('hu') || searchStr.includes('sẵn') || searchStrNoTones.includes('san')) bestMatch = 'yen-chung-san';
+
+        const p = window.YEN_SAO_DB.products.find(x => {
+            const dbId = x.id.toLowerCase().normalize('NFC');
+            if (bestMatch) return dbId === bestMatch;
+            const dbName = x.name.toLowerCase().normalize('NFC');
+            return dbId === searchStr || dbName.includes(searchStr) || searchStr.includes(dbName) || searchStr.includes(dbId.replace('yen-', ''));
+        });
+        if (p) {
+            productName = p.name;
+            productId = p.id;
+        }
     }
     const uniqueId = 'mini-form-' + Date.now();
     
@@ -391,17 +495,27 @@ function renderMiniOrderForm(data) {
         <div class="ai-mf-body">
             <div class="ai-mf-row">
                 <span class="ai-mf-label">Sản phẩm:</span>
-                <span class="ai-mf-value">${escapeHtml(productName || data.product || 'Yến Sào')}</span>
+                <span class="ai-mf-value">
+                    <a href="${productId ? '#v-'+productId : '#'}" class="ai-product-link" onclick="event.preventDefault(); event.stopPropagation(); window.scrollToProduct('${productId}');">${escapeHtml(productName || data.product || 'Yến Sào')}</a>
+                </span>
             </div>
-            <div class="ai-mf-row">
-                <span class="ai-mf-label">Số lượng:</span>
-                <span class="ai-mf-value">${escapeHtml(String(data.quantity || 1))}</span>
+            <div class="ai-mf-input-group" style="margin-top: 12px;">
+                <label>Số lượng (Có thể ghi rõ: tổ, lạng) *</label>
+                <input type="text" id="${uniqueId}-qty" value="${escapeHtml(String(data.quantity || '1'))}" placeholder="VD: 10 tổ, 1 lạng...">
+            </div>
+            <div class="ai-mf-input-group">
+                <label>Họ & Tên *</label>
+                <input type="text" id="${uniqueId}-name" value="${escapeHtml(localStorage.getItem('tamthuy_guest_name') || data.name || '')}" placeholder="Nguyễn Văn A">
             </div>
             <div class="ai-mf-input-group">
                 <label>Số điện thoại liên hệ *</label>
                 <input type="tel" id="${uniqueId}-phone" value="${escapeHtml(data.phone || '')}" placeholder="09xx xxx xxx">
             </div>
-            <button class="ai-mf-btn" onclick="submitMiniOrder('${escapeHtml(data.product)}', '${escapeHtml(String(data.quantity))}', '${uniqueId}-phone', this)">
+            <div class="ai-mf-input-group">
+                <label>Địa chỉ nhận hàng *</label>
+                <input type="text" id="${uniqueId}-address" value="${escapeHtml(data.address || '')}" placeholder="Số nhà, đường, phường/xã...">
+            </div>
+            <button class="ai-mf-btn" onclick="submitMiniOrder('${escapeHtml(data.product)}', '${escapeHtml(String(data.quantity))}', '${uniqueId}', this)">
                 Chốt Đơn Ngay
             </button>
         </div>
@@ -409,10 +523,15 @@ function renderMiniOrderForm(data) {
     `;
 }
 
-window.submitMiniOrder = async function(productId, qty, phoneId, btnEl) {
-    const phone = document.getElementById(phoneId)?.value?.trim();
-    if (!phone) {
-        alert('Vui lòng nhập số điện thoại để shop liên hệ xác nhận ạ!');
+window.submitMiniOrder = async function(productId, originalQty, formId, btnEl) {
+    const name = document.getElementById(`${formId}-name`)?.value?.trim();
+    const phone = document.getElementById(`${formId}-phone`)?.value?.trim();
+    const address = document.getElementById(`${formId}-address`)?.value?.trim();
+    const qtyInput = document.getElementById(`${formId}-qty`);
+    const qty = qtyInput ? qtyInput.value.trim() : originalQty;
+
+    if (!name || !phone || !address || !qty) {
+        alert('Vui lòng điền đầy đủ thông tin để shop giao hàng ạ!');
         return;
     }
 
@@ -420,12 +539,15 @@ window.submitMiniOrder = async function(productId, qty, phoneId, btnEl) {
     btnEl.innerText = 'Đang xử lý...';
 
     const payload = {
-        name: 'Khách Chat AI',
+        name: name,
         phone: phone,
+        address: address,
         product: productId,
         qty: qty,
         note: 'Đơn hàng tự động chốt từ AI Agent (Generative UI)',
         source: 'ai-agent',
+        payment: 'COD',
+        isGift: 'Không',
         utm: window.location.search || ''
     };
 
@@ -456,8 +578,16 @@ window.submitMiniOrder = async function(productId, qty, phoneId, btnEl) {
 
 function appendErrorMessage(text) {
     const el = document.createElement('div');
-    el.className = 'ai-msg assistant ai-msg-error';
-    el.innerHTML = `<div class="ai-msg-bubble">${escapeHtml(text)}</div>`;
+    el.className = 'ai-msg assistant';
+    el.innerHTML = `
+        <div class="ai-msg-avatar">
+            <img src="./assets/images/avt-svg.svg" alt="AI">
+        </div>
+        <div class="ai-msg-content">
+            <div class="ai-msg-name" style="font-size: 11.5px; color: rgba(197, 160, 89, 0.9); font-weight: 600; margin-bottom: -4px; margin-left: 4px;">Thanh Thủy (Trợ lý AI)</div>
+            <div class="ai-msg-bubble" style="border: 1px solid rgba(255,0,0,0.3);">${escapeHtml(text)}</div>
+        </div>
+    `;
     dom.messages.appendChild(el);
     scrollToBottom();
 }
@@ -640,13 +770,13 @@ function clearChat() {
 
 function saveSession() {
     try {
-        sessionStorage.setItem('ai-chat-history', JSON.stringify(chatHistory));
+        sessionStorage.setItem('ai-chat-history-v2', JSON.stringify(chatHistory));
     } catch (_) {}
 }
 
 function restoreSession() {
     try {
-        const saved = sessionStorage.getItem('ai-chat-history');
+        const saved = sessionStorage.getItem('ai-chat-history-v2');
         if (saved) {
             chatHistory = JSON.parse(saved);
             renderHistory();
