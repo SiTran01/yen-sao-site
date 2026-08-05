@@ -1,18 +1,18 @@
 /* ============================================================
    chatbot.js — Trợ Lý AI Tám Thủy
-   Dùng n8n làm proxy → OpenAI API (GPT-4o-mini)
+   Dùng n8n làm proxy  OpenAI API (GPT-4o-mini)
    ============================================================ */
 
 /* ── Config — paste n8n webhook URL vào đây ─────────────────
    Cách tạo n8n workflow:
    1. Tạo workflow mới trong n8n
-   2. Thêm node "Webhook" → method POST, path /ai-chat
-   3. Thêm node "OpenAI" → model gpt-4o-mini, input: {{ $json.messages }}
-   4. Thêm node "Respond to Webhook" → trả về { reply: ... }
+   2. Thêm node "Webhook"  method POST, path /ai-chat
+   3. Thêm node "OpenAI"  model gpt-4o-mini, input: {{ $json.messages }}
+   4. Thêm node "Respond to Webhook"  trả về { reply: ... }
    5. Copy URL webhook vào N8N_AI_WEBHOOK_URL bên dưới
    ─────────────────────────────────────────────────────────── */
 const CHATBOT_CONFIG = {
-    // 🔧 CẤU HÌNH WEBHOOK
+    //  CẤU HÌNH WEBHOOK
     n8nWebhookUrl: `http://${window.location.hostname}:5678/webhook/tamthuy-chat`,
     maxHistoryLength: 12,         // số lượng tin nhắn giữ trong bộ nhớ (6 cặp hỏi/đáp)
     typingDelay: { min: 600, max: 1500 }, // giả lập delay tự nhiên
@@ -37,7 +37,8 @@ QUY TẮC:
 2. Nếu bị hỏi ngoài chủ đề, nhẹ nhàng hướng về yến sào
 3. Không đưa ra giá cụ thể (vì giá theo thị trường) — hướng khách nhắn Zalo để báo giá
 4. Luôn kết thúc bằng lời mời đặt hàng hoặc gợi ý tiếp theo
-5. Viết tiếng Việt có dấu, câu ngắn, không quá 3 đoạn mỗi lần trả lời`;
+5. Viết tiếng Việt có dấu, câu ngắn, không quá 3 đoạn mỗi lần trả lời
+6. QUAN TRỌNG: Tám Thủy CHỈ BÁN 4 loại yến sào nguyên bản (Yến Thô, Yến Tinh Chế, Yến Tươi, Yến Chưng). TUYỆT ĐỐI KHÔNG BÁN yến huyết, yến hồng hay các loại yến khác. Nếu khách hỏi mua yến huyết/hồng, hãy lịch sự từ chối và giới thiệu sang 4 sản phẩm của shop.`;
 
 /* ── State ──────────────────────────────────────────────────── */
 let chatHistory = []; // [{ role: 'user'|'assistant', content: '...' }]
@@ -125,8 +126,8 @@ function initChatbot() {
     
     if (greetingBubble && greetingText && chatHistory.length === 0 && !sessionStorage.getItem('ai_greeting_shown')) {
         const messages = [
-            "Xin chào! 👋",
-            "Mình là Trợ Lý Tám Thủy. Bạn cần tư vấn về yến sào ạ? ✨"
+            "Xin chào! ",
+            "Mình là Trợ Lý Tám Thủy. Bạn cần tư vấn về yến sào ạ? "
         ];
         
         let step = 0;
@@ -240,7 +241,7 @@ window.closeChatPanel = closePanel;
 
 /* ── Welcome message ────────────────────────────────────────── */
 function appendWelcome() {
-    appendBotMessage('Xin chào! 👋 Tôi là Thanh Thủy, trợ lý AI của Yến Sào Tám Thủy.\n\nBạn đang tìm hiểu về yến sào hoặc cần tư vấn sản phẩm? Hỏi tôi bất cứ điều gì nhé! 🍃');
+    appendBotMessage('Xin chào!  Tôi là Thanh Thủy, trợ lý AI của Yến Sào Tám Thủy.\n\nBạn đang tìm hiểu về yến sào hoặc cần tư vấn sản phẩm? Hỏi tôi bất cứ điều gì nhé! ');
 }
 
 /* ── Handle send ────────────────────────────────────────────── */
@@ -292,14 +293,14 @@ async function sendMessage(text) {
         isTyping = false;
         dom.sendBtn.disabled = false;
         setStatus('Đang hoạt động');
-        appendErrorMessage('Xin lỗi, tôi đang gặp sự cố kết nối. Vui lòng thử lại hoặc liên hệ Zalo để được hỗ trợ nhé! 💬');
+        appendErrorMessage('Xin lỗi, tôi đang gặp sự cố kết nối. Vui lòng thử lại hoặc liên hệ Zalo để được hỗ trợ nhé! ');
         console.error('[Chatbot]', err);
     }
 }
 
 /* ── Call AI via n8n proxy ──────────────────────────────────── */
 async function callAI(messages) {
-    // Nếu chưa có webhook URL → dùng mock response (để test UI)
+    // Nếu chưa có webhook URL  dùng mock response (để test UI)
     if (!CHATBOT_CONFIG.n8nWebhookUrl) {
         return await mockResponse(messages[messages.length - 1].content);
     }
@@ -307,6 +308,7 @@ async function callAI(messages) {
     const payload = {
         sessionId: getSessionId(), // Gửi session ID cho n8n để quản lý bộ nhớ
         guestName: localStorage.getItem('tamthuy_guest_name') || 'Khách',
+        systemPrompt: SYSTEM_PROMPT, // Truyền system prompt chứa thông tin sản phẩm sang n8n
         messages: messages,
         model: 'gpt-4o-mini',
         max_tokens: 500,
@@ -337,18 +339,18 @@ async function mockResponse(userMsg) {
 
     const lower = userMsg.toLowerCase();
     if (lower.includes('giá') || lower.includes('bao nhiêu') || lower.includes('tiền')) {
-        return 'Giá yến sào biến động theo thị trường và loại sản phẩm. Bạn nhắn Zalo để mình báo giá chính xác và mới nhất nhé! Thường mình phản hồi trong vòng 5 phút 😊';
+        return 'Giá yến sào biến động theo thị trường và loại sản phẩm. Bạn nhắn Zalo để mình báo giá chính xác và mới nhất nhé! Thường mình phản hồi trong vòng 5 phút ';
     }
     if (lower.includes('tác dụng') || lower.includes('lợi ích') || lower.includes('sức khỏe')) {
-        return 'Yến sào Tám Thủy có nhiều lợi ích tuyệt vời:\n\n✅ Tăng cường miễn dịch, chống oxy hóa\n✅ Hỗ trợ hô hấp, phổi khỏe\n✅ Đẹp da, cải thiện độ ẩm\n✅ Rất tốt cho trẻ em, người cao tuổi và phụ nữ sau sinh\n\nBạn muốn tìm hiểu thêm sản phẩm nào cụ thể không?';
+        return 'Yến sào Tám Thủy có nhiều lợi ích tuyệt vời:\n\n Tăng cường miễn dịch, chống oxy hóa\n Hỗ trợ hô hấp, phổi khỏe\n Đẹp da, cải thiện độ ẩm\n Rất tốt cho trẻ em, người cao tuổi và phụ nữ sau sinh\n\nBạn muốn tìm hiểu thêm sản phẩm nào cụ thể không?';
     }
     if (lower.includes('đặt hàng') || lower.includes('mua') || lower.includes('order')) {
-        return 'Đặt hàng rất đơn giản! Bạn có thể:\n\n📝 Điền form trên website (phần Đặt Hàng) — mình phản hồi trong 15 phút\n💬 Nhắn Zalo trực tiếp để được tư vấn 1:1\n📞 Gọi hotline để đặt ngay\n\nBạn muốn đặt sản phẩm nào?';
+        return 'Đặt hàng rất đơn giản! Bạn có thể:\n\n Điền form trên website (phần Đặt Hàng) — mình phản hồi trong 15 phút\n Nhắn Zalo trực tiếp để được tư vấn 1:1\n Gọi hotline để đặt ngay\n\nBạn muốn đặt sản phẩm nào?';
     }
     if (lower.includes('loại') || lower.includes('sản phẩm') || lower.includes('có gì')) {
-        return 'Tám Thủy chuyên cung cấp 4 dòng sản phẩm chính:\n\n🥚 Yến Thô — nguyên tổ 100% tự nhiên\n💎 Yến Tinh Chế — đã làm sạch, định hình đẹp\n🌿 Yến Tươi — làm sạch trong ngày, cực tiện lợi\n🍯 Hũ Yến Chưng — tiện lợi, ăn liền\n\nBạn quan tâm loại nào nhất?';
+        return 'Tám Thủy chuyên cung cấp 4 dòng sản phẩm chính:\n\n Yến Thô — nguyên tổ 100% tự nhiên\n Yến Tinh Chế — đã làm sạch, định hình đẹp\n Yến Tươi — làm sạch trong ngày, cực tiện lợi\n Hũ Yến Chưng — tiện lợi, ăn liền\n\nBạn quan tâm loại nào nhất?';
     }
-    return '⚠️ Lưu ý: Chatbot đang chạy ở chế độ demo (chưa kết nối n8n). Paste webhook URL vào CHATBOT_CONFIG.n8nWebhookUrl trong file chatbot.js để bật AI thật nhé!';
+    return '️ Lưu ý: Chatbot đang chạy ở chế độ demo (chưa kết nối n8n). Paste webhook URL vào CHATBOT_CONFIG.n8nWebhookUrl trong file chatbot.js để bật AI thật nhé!';
 }
 
 /* ── Render functions ───────────────────────────────────────── */
@@ -560,13 +562,13 @@ window.submitMiniOrder = async function(productId, originalQty, formId, btnEl) {
             await new Promise(r => setTimeout(r, 800));
         }
         
-        btnEl.innerText = '✓ Đã gửi đơn thành công';
+        btnEl.innerText = ' Đã gửi đơn thành công';
         btnEl.style.background = '#16a34a';
         btnEl.style.color = '#fff';
         btnEl.style.borderColor = '#16a34a';
         
         setTimeout(() => {
-            appendBotMessage('Tuyệt vời! Em đã gửi thông tin đơn hàng cho bộ phận sale. Sẽ có nhân viên gọi điện cho anh/chị qua số ' + phone + ' trong ít phút nữa ạ! 🍃');
+            appendBotMessage('Tuyệt vời! Em đã gửi thông tin đơn hàng cho bộ phận sale. Sẽ có nhân viên gọi điện cho anh/chị qua số ' + phone + ' trong ít phút nữa ạ! ');
         }, 600);
 
     } catch (e) {
@@ -651,43 +653,43 @@ const CONTEXT_TRIGGERS = [
     {
         selector: '#v-yen-tho, .hscroll-product-card[data-label="Yến Thô · Tự Nhiên"]',
         delay: 8000,
-        message: "Yến thô giữ trọn 100% vi chất tự nhiên, rất hợp nếu bạn có thời gian tự nhặt lông. Bạn muốn mình gửi video hướng dẫn cách nhặt lông yến nhanh không? ✨",
+        message: "Yến thô giữ trọn 100% vi chất tự nhiên, rất hợp nếu bạn có thời gian tự nhặt lông. Bạn muốn mình gửi video hướng dẫn cách nhặt lông yến nhanh không? ",
         id: "yen-tho"
     },
     {
         selector: '#v-yen-tuoi, .hscroll-product-card[data-label="Yến Tươi · Cao Cấp"]',
         delay: 8000,
-        message: "Dòng yến tươi này Tám Thủy đã nhặt lông hoàn toàn thủ công, bạn mua về là chưng được ngay. Mình tư vấn thêm cho bạn nhé? 🎁",
+        message: "Dòng yến tươi này Tám Thủy đã nhặt lông hoàn toàn thủ công, bạn mua về là chưng được ngay. Mình tư vấn thêm cho bạn nhé? ",
         id: "yen-tuoi"
     },
     {
         selector: '#v-yen-tinh-che, .hscroll-product-card[data-label="Yến Tinh Chế · Ép Tổ"]',
         delay: 8000,
-        message: "Yến tinh chế ép tổ là món quà sức khỏe cực kỳ sang trọng và ý nghĩa. Bạn định mua để sử dụng hay mang đi biếu tặng ạ? 🎀",
+        message: "Yến tinh chế ép tổ là món quà sức khỏe cực kỳ sang trọng và ý nghĩa. Bạn định mua để sử dụng hay mang đi biếu tặng ạ? ",
         id: "yen-tinh-che"
     },
     {
         selector: '.hscroll-product-card[data-label="Hũ Yến · Chưng Sẵn"]',
         delay: 7000,
-        message: "Yến chưng sẵn cực kỳ tiện lợi để bồi bổ sức khỏe mỗi ngày hoặc làm quà tặng. Bạn định mua dùng hay biếu ạ? 🍯",
+        message: "Yến chưng sẵn cực kỳ tiện lợi để bồi bổ sức khỏe mỗi ngày hoặc làm quà tặng. Bạn định mua dùng hay biếu ạ? ",
         id: "yen-chung"
     },
     {
         selector: '#blog',
         delay: 8000,
-        message: "Bạn đang tìm hiểu kiến thức về yến sào? Cứ hỏi mình bất kỳ thắc mắc nào về cách dùng, cách chưng hay công dụng nhé! 💡",
+        message: "Bạn đang tìm hiểu kiến thức về yến sào? Cứ hỏi mình bất kỳ thắc mắc nào về cách dùng, cách chưng hay công dụng nhé! ",
         id: "blog-section"
     },
     {
         selector: '#order',
         delay: 8000,
-        message: "Bạn đang điền form đặt hàng phải không? Nếu có thắc mắc gì về giá cả hay phân loại sản phẩm, cứ hỏi mình nhé! 📝",
+        message: "Bạn đang điền form đặt hàng phải không? Nếu có thắc mắc gì về giá cả hay phân loại sản phẩm, cứ hỏi mình nhé! ",
         id: "order-section"
     },
     {
         selector: 'footer',
         delay: 5000,
-        message: "Bạn cần hỗ trợ thêm thông tin gì không? Đừng ngại nhắn tin cho mình nhé! 📞",
+        message: "Bạn cần hỗ trợ thêm thông tin gì không? Đừng ngại nhắn tin cho mình nhé! ",
         id: "footer-section"
     }
 ];

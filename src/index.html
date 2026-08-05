@@ -131,7 +131,7 @@
         <div id="ai-name-overlay" class="ai-name-overlay">
             <div class="ai-name-card">
                 <img src="./assets/images/avt-svg.svg" alt="Thủy AI" class="ai-name-avatar">
-                <h3>Chào bạn! 👋</h3>
+                <h3>Chào bạn</h3>
                 <p>Mình là Trợ Lý Tám Thủy. Vui lòng cho biết tên để mình tiện xưng hô nhé.</p>
                 <div class="ai-name-input-wrap">
                     <input type="text" id="ai-guest-name-input" placeholder="Nhập tên của bạn...">
@@ -142,10 +142,10 @@
 
         <div class="ai-chat-messages" id="ai-chat-messages" data-lenis-prevent></div>
         <div class="ai-quick-replies" id="ai-quick-replies">
-            <button class="ai-quick-btn" data-msg="Yến thô giá bao nhiêu?">💰 Hỏi giá yến thô</button>
-            <button class="ai-quick-btn" data-msg="Yến sào có tác dụng gì?">✨ Lợi ích sức khỏe</button>
-            <button class="ai-quick-btn" data-msg="Cách đặt hàng như thế nào?">📦 Cách đặt hàng</button>
-            <button class="ai-quick-btn" data-msg="Có những loại yến nào?">🍃 Xem sản phẩm</button>
+            <button class="ai-quick-btn" data-msg="Yến thô giá bao nhiêu?">Hỏi giá yến thô</button>
+            <button class="ai-quick-btn" data-msg="Yến sào có tác dụng gì?">Lợi ích sức khỏe</button>
+            <button class="ai-quick-btn" data-msg="Cách đặt hàng như thế nào?">Cách đặt hàng</button>
+            <button class="ai-quick-btn" data-msg="Có những loại yến nào?">Xem sản phẩm</button>
         </div>
         <div class="ai-chat-input-area">
             <div class="ai-chat-input-wrapper">
@@ -321,7 +321,7 @@
                 <!-- Eyebrow -->
                 <div class="hero-eyebrow-wrap">
                     <span class="hero-eyebrow-line"></span>
-                    <p class="hero-eyebrow-text">Tuyệt Phẩm Thiên Nhiên · Khánh Hòa</p>
+                    <p class="hero-eyebrow-text">Tinh Hoa Yến Sào · Bình Định</p>
                     <span class="hero-eyebrow-line"></span>
                 </div>
 
@@ -332,14 +332,17 @@
                         <span class="hero-title-plain hero-char-group">
                             <span class="hc">Y</span><span class="hc">ế</span><span class="hc">n</span>
                         </span>
-                        <span class="hero-title-italic hero-shine-text hero-word-reveal" style="animation-delay:0.32s,1.9s;"> Sào</span>
+                        <span class="hero-title-italic hero-char-group">
+                            <span class="hc">S</span><span class="hc">à</span><span class="hc">o</span>
+                        </span>
                     </span>
                     <span class="hero-title-row hero-title-row-2">
                         <span class="hero-title-plain hero-char-group">
                             <span class="hc">T</span><span class="hc">á</span><span class="hc">m</span>
                         </span>
-                        <span class="hero-title-italic hero-shine-text hero-word-reveal" style="animation-delay:0.89s,1.9s;"> Thủy</span>
-                        <span class="hero-title-cursor" aria-hidden="true"></span>
+                        <span class="hero-title-italic hero-char-group">
+                            <span class="hc">T</span><span class="hc">h</span><span class="hc">ủ</span><span class="hc">y</span>
+                        </span>
                     </span>
                 </h1>
                 <!-- Sparkle particles -->
@@ -354,8 +357,8 @@
 
                 <!-- Tagline -->
                 <p class="hero-tagline">
-                    Tinh hoa từ <strong>Đầm Thị Nại</strong> — Nuôi dưỡng sức khỏe,<br>
-                    bồi bổ tâm hồn, sang trọng trong từng giọt.
+                    Chút quà quý từ <strong>Đầm Thị Nại</strong> — Chắt chiu từng sợi yến nguyên thủy, 
+                    trọn tâm ý trao gửi sức khỏe dài lâu.
                 </p>
 
                 <!-- CTA Buttons -->
@@ -420,12 +423,20 @@
 
                 <!-- Brand badge — outside wrapper to avoid clip -->
                 <div class="hero-brand-badge stamp-animation" style="animation-delay:2s;">
-                    <div class="hero-brand-logo">
-                        <div style="width:32px;height:32px;-webkit-mask-image:url('./assets/images/avt-svg.svg');-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;background:#C5A059;"></div>
-                    </div>
-                    <div>
-                        <p class="hero-brand-name">Tám Thủy</p>
-                        <p class="hero-brand-sub">Yến Sào Đầm Thị Nại</p>
+                    <!-- Top gold accent bar -->
+                    <div class="hero-brand-badge__bar"></div>
+                    <!-- Shimmer sweep -->
+                    <div class="hero-brand-badge__shimmer"></div>
+                    <!-- Content row -->
+                    <div class="hero-brand-badge__inner">
+                        <div class="hero-brand-logo">
+                            <div class="hero-brand-logo__glow"></div>
+                            <div style="width:48px;height:48px;-webkit-mask-image:url('./assets/images/avt-svg.svg');-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;background:#E8C97A;position:relative;z-index:1;"></div>
+                        </div>
+                        <div class="hero-brand-text">
+                            <p class="hero-brand-name">Tám Thủy</p>
+                            <p class="hero-brand-sub">YẾN SÀO · ĐẦM THỊ NẠI</p>
+                        </div>
                     </div>
                 </div>
 
@@ -458,10 +469,10 @@
                 <div class="text-center mb-24">
                     
                     <h2 class="text-5xl font-serif font-bold text-brand-brown" data-aos="fade-up" data-aos-delay="300" style="font-family: 'Playfair Display', serif;">
-                        <span class="text-reveal-mask"><span class="text-reveal-item">Tinh</span></span>
-                        <span class="text-reveal-mask"><span class="text-reveal-item stagger-1">Hoa</span></span>
-                        <span class="text-reveal-mask"><span class="text-reveal-item stagger-2 text-brand-gold">Yến</span></span>
-                        <span class="text-reveal-mask"><span class="text-reveal-item stagger-3">Việt</span></span>
+                        <span class="text-reveal-mask"><span class="text-reveal-item">Lựa</span></span>
+                        <span class="text-reveal-mask"><span class="text-reveal-item stagger-1">Chọn</span></span>
+                        <span class="text-reveal-mask"><span class="text-reveal-item stagger-2 trust-text-style">An</span></span>
+                        <span class="text-reveal-mask"><span class="text-reveal-item stagger-3 trust-text-style">Tâm</span></span>
                     </h2>
                     <div class="w-24 h-1 bg-brand-gold mx-auto mt-6 rounded-full" data-aos="fade-up" data-aos-delay="450"></div>
                 </div>
@@ -473,10 +484,10 @@
                     
                     <div class="w-full md:w-1/2 p-10 md:p-16 text-left order-2 md:order-1" data-aos="fade-right" data-aos-delay="150">
                         <div class="inline-block px-5 py-1.5 border border-[#C5A059]/50 text-[#8B6508] rounded-full text-xs font-bold tracking-[0.2em] uppercase mb-6 bg-[#C5A059]/5">Nguyên Bản 100%</div>
-                        <h3 class="text-4xl md:text-5xl font-serif font-black text-[#4A2C2A] mb-4 group-hover:text-[#8B6508] transition-colors duration-500">Yến Thô Tự Nhiên</h3>
+                        <h3 class="text-4xl md:text-5xl font-serif font-black text-[#4A2C2A] mb-4 group-hover:text-[#8B6508] transition-colors duration-500 leading-[1.2]">Yến Thô Tự Nhiên</h3>
                         <p class="text-[#C5A059] italic mb-6 text-lg font-serif">Giữ trọn tinh hoa từ thiên nhiên</p>
                         <p class="text-gray-600 leading-relaxed mb-10 text-base md:text-lg">
-                            Tổ yến nguyên thủy được thu hoạch và phân loại khắt khe nhất. Giữ nguyên vẹn cấu trúc tổ, mùi thơm đặc trưng và giá trị dinh dưỡng tuyệt đối. Lựa chọn hoàn hảo cho người sành sỏi muốn tự tay tinh chế món quà sức khỏe.
+                            Tổ yến nguyên bản được thu hoạch và chọn lọc cẩn thận. Giữ nguyên vẹn cấu trúc tổ, mùi thơm đặc trưng và giá trị dinh dưỡng vốn có. Lựa chọn hoàn hảo cho người sành sỏi muốn tự tay tinh chế món quà sức khỏe.
                         </p>
 
                     </div>
@@ -499,10 +510,10 @@
 
                     <div class="w-full md:w-1/2 p-10 md:p-16 text-left" data-aos="fade-left" data-aos-delay="300">
                         <div class="inline-block px-5 py-1.5 border border-[#C5A059]/50 text-[#8B6508] rounded-full text-xs font-bold tracking-[0.2em] uppercase mb-6 bg-[#C5A059]/5">Tiện Lợi Tối Đa</div>
-                        <h3 class="text-4xl md:text-5xl font-serif font-black text-[#4A2C2A] mb-4 group-hover:text-[#8B6508] transition-colors duration-500">Yến Tươi Cao Cấp</h3>
+                        <h3 class="text-4xl md:text-5xl font-serif font-black text-[#4A2C2A] mb-4 group-hover:text-[#8B6508] transition-colors duration-500 leading-[1.2]">Yến Tươi Nguyên Chất</h3>
                         <p class="text-[#C5A059] italic mb-6 text-lg font-serif">Giải pháp bồi bổ cho người bận rộn</p>
                         <p class="text-gray-600 leading-relaxed mb-10 text-base md:text-lg">
-                            Được nhặt sạch lông bằng phương pháp thủ công tỉ mỉ, chưa qua sấy khô để giữ độ tươi giòn nguyên bản. Phân chia sẵn thành từng khẩu phần tinh tế, bạn chỉ cần mở nắp là có thể chưng ngay, tiết kiệm tối đa thời gian.
+                            Được nhặt sạch lông bằng phương pháp thủ công tỉ mỉ, chưa qua sấy khô để giữ vẹn nguyên dưỡng chất. Phân chia sẵn thành từng khẩu phần tinh tế, bạn chỉ cần mở nắp là có thể chưng ngay, tiết kiệm tối đa thời gian.
                         </p>
 
                     </div>
@@ -514,10 +525,10 @@
                     
                     <div class="w-full md:w-1/2 p-10 md:p-16 text-left order-2 md:order-1" data-aos="fade-right" data-aos-delay="150">
                         <div class="inline-block px-5 py-1.5 border border-[#C5A059]/50 text-[#8B6508] rounded-full text-xs font-bold tracking-[0.2em] uppercase mb-6 bg-[#C5A059]/5">Quà Biếu Đẳng Cấp</div>
-                        <h3 class="text-4xl md:text-5xl font-serif font-black text-[#4A2C2A] mb-4 group-hover:text-[#8B6508] transition-colors duration-500">Yến Tinh Chế Ép Tổ</h3>
+                        <h3 class="text-4xl md:text-5xl font-serif font-black text-[#4A2C2A] mb-4 group-hover:text-[#8B6508] transition-colors duration-500 leading-[1.2]">Yến Tinh Chế Nguyên Sợi</h3>
                         <p class="text-[#C5A059] italic mb-6 text-lg font-serif">Món quà tặng sức khỏe thượng lưu</p>
                         <p class="text-gray-600 leading-relaxed mb-10 text-base md:text-lg">
-                            Tuyển chọn từ những tổ yến già cỗi nhất, làm sạch cực kỳ cẩn thận và ép khuôn định hình đẹp mắt. Sợi yến dài, màu trắng ngà tự nhiên, khi chưng nở bung to, dai ngon. Đóng gói trong hộp lụa sang trọng.
+                            Được nhặt sạch lông thủ công tỉ mỉ để giữ lại trọn vẹn phần sợi yến dài tự nhiên. Tổ yến có màu trắng ngà, khi chưng nở to và sợi rất dai ngon. Sản phẩm được đóng hộp lụa lịch sự, là món quà biếu tặng thiết thực và ý nghĩa.
                         </p>
 
                     </div>
@@ -539,7 +550,7 @@
 
                     <div class="w-full md:w-1/2 p-10 md:p-16 text-left" data-aos="fade-left" data-aos-delay="300">
                         <div class="inline-block px-5 py-1.5 border border-[#C5A059]/50 text-[#8B6508] rounded-full text-xs font-bold tracking-[0.2em] uppercase mb-6 bg-[#C5A059]/5">Dinh Dưỡng Tức Thì</div>
-                        <h3 class="text-4xl md:text-5xl font-serif font-black text-[#4A2C2A] mb-4 group-hover:text-[#8B6508] transition-colors duration-500">Hũ Yến Chưng Sẵn</h3>
+                        <h3 class="text-4xl md:text-5xl font-serif font-black text-[#4A2C2A] mb-4 group-hover:text-[#8B6508] transition-colors duration-500 leading-[1.2]">Hũ Yến Chưng Sẵn</h3>
                         <p class="text-[#C5A059] italic mb-6 text-lg font-serif">Kết tinh thảo mộc hoàng cung</p>
                         <p class="text-gray-600 leading-relaxed mb-10 text-base md:text-lg">
                             Yến chưng tươi tiệt trùng nguyên hũ thủy tinh, kết hợp cùng các dược liệu quý như Táo Đỏ Tân Cương, Hạt Sen Đồng Tháp, Đông Trùng Hạ Thảo. Hàm lượng yến đặc sệt, bật nắp là có thể dùng ngay.
@@ -638,7 +649,7 @@
                 </div>
 
                 
-                <div class="hscroll-card hscroll-product-card pc-02 flex-shrink-0 w-[370px] h-[72vh] rounded-[2rem] overflow-hidden relative group" data-label="Yến Tươi · Cao Cấp">
+                <div class="hscroll-card hscroll-product-card pc-02 flex-shrink-0 w-[370px] h-[72vh] rounded-[2rem] overflow-hidden relative group" data-label="Yến Tươi · Nguyên Chất">
                     <div class="absolute inset-0 z-10" style="background: linear-gradient(to top, rgba(30,5,5,0.96) 0%, rgba(30,5,5,0.25) 45%, transparent 100%);"></div>
                     <div class="absolute inset-0 flex items-center justify-center overflow-hidden" style="background: linear-gradient(145deg, #1e0505 0%, #4a0f0f 50%, #2d0808 100%);">
                         <img src="./assets/images/yen-hop.webp" alt="Yến Hộp" class="w-[80%] object-contain transition-transform duration-700 ease-out group-hover:scale-110 drop-shadow-2xl">
@@ -646,7 +657,7 @@
                     <span class="absolute top-7 right-7 z-20 font-serif font-black text-6xl leading-none select-none" style="color: rgba(220,80,80,0.18);">02</span>
                     <div class="absolute bottom-0 left-0 right-0 p-8 z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
                         <span class="text-[10px] uppercase tracking-[0.25em] font-bold mb-2 block" style="color: #f28080;">Tiện Lợi Tối Đa</span>
-                        <h3 class="text-white font-serif font-black text-[1.75rem] leading-tight mb-3">Yến Tươi<br>Cao Cấp</h3>
+                        <h3 class="text-white font-serif font-black text-[1.75rem] leading-tight mb-3">Yến Tươi<br>Nguyên Chất</h3>
                         <p class="text-xs leading-relaxed mb-5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100" style="color: rgba(255,255,255,0.55);">
                             Phân chia sẵn từng khẩu phần tinh tế, mở nắp là chưng ngay, tiết kiệm tối đa thời gian.
                         </p>
@@ -657,7 +668,7 @@
                 </div>
 
                 
-                <div class="hscroll-card hscroll-product-card pc-03 flex-shrink-0 w-[370px] h-[72vh] rounded-[2rem] overflow-hidden relative group" data-label="Yến Tinh Chế · Ép Tổ">
+                <div class="hscroll-card hscroll-product-card pc-03 flex-shrink-0 w-[370px] h-[72vh] rounded-[2rem] overflow-hidden relative group" data-label="Yến Tinh Chế · Nguyên Sợi">
                     <div class="absolute inset-0 z-10" style="background: linear-gradient(to top, rgba(8,10,28,0.96) 0%, rgba(8,10,28,0.25) 45%, transparent 100%);"></div>
                     <div class="absolute inset-0 flex items-center justify-center overflow-hidden" style="background: linear-gradient(145deg, #08091c 0%, #141a4f 50%, #0e1135 100%);">
                         <img src="./assets/images/yen-hop.webp" alt="Yến Tinh Chế" class="w-[80%] object-contain transition-transform duration-700 ease-out group-hover:scale-110 drop-shadow-2xl">
@@ -665,7 +676,7 @@
                     <span class="absolute top-7 right-7 z-20 font-serif font-black text-6xl leading-none select-none" style="color: rgba(100,130,255,0.18);">03</span>
                     <div class="absolute bottom-0 left-0 right-0 p-8 z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
                         <span class="text-[10px] uppercase tracking-[0.25em] font-bold mb-2 block" style="color: #8899ff;">Quà Biếu Đẳng Cấp</span>
-                        <h3 class="text-white font-serif font-black text-[1.75rem] leading-tight mb-3">Yến Tinh Chế<br>Ép Tổ</h3>
+                        <h3 class="text-white font-serif font-black text-[1.75rem] leading-tight mb-3">Yến Tinh Chế<br>Nguyên Sợi</h3>
                         <p class="text-xs leading-relaxed mb-5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100" style="color: rgba(255,255,255,0.55);">
                             Đóng gói trong hộp lụa sang trọng, sợi yến dài trắng ngà, dai ngon tuyệt hảo.
                         </p>
@@ -842,9 +853,9 @@
                             </div>
                             <div class="trust-badge">
                                 <span class="trust-badge-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M9 12l2 2 4-4"></path></svg>
                                 </span>
-                                Đổi trả 7 ngày
+                                Đền 10 lần nếu yến giả
                             </div>
                             <div class="trust-badge">
                                 <span class="trust-badge-icon">
@@ -856,22 +867,22 @@
                                 <span class="trust-badge-icon">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>
                                 </span>
-                                Tặng quà đơn từ 2tr
+                                Quà tặng (đơn từ 3tr)
                             </div>
                         </div>
 
                         
-                        <div class="flex items-center gap-8 mt-14">
+                        <div class="flex items-center gap-6 mt-14">
                             <a href="https://zalo.me/0327534965" target="_blank"
-                               class="flex items-center gap-3.5 text-white/70 hover:text-[#C5A059] transition-colors text-base font-semibold no-underline">
-                                <span class="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center text-[#C5A059] hover:border-[#C5A059]/50 transition-colors shadow-sm hover:shadow-[#C5A059]/20 hover:-translate-y-0.5 duration-300">
+                               class="flex items-center gap-3 px-7 py-3.5 rounded-full border border-[#C5A059]/40 bg-[#380A12] hover:bg-[#4d101a] hover:border-[#C5A059] transition-all text-[#F0DEB4] text-[15px] font-bold tracking-wide no-underline shadow-[0_6px_16px_rgba(0,0,0,0.35)] hover:-translate-y-1">
+                                <span class="text-[#C5A059]">
                                     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
                                 </span>
                                 Chat Zalo ngay
                             </a>
                             <a href="tel:0327534965"
-                               class="flex items-center gap-3.5 text-white/70 hover:text-[#C5A059] transition-colors text-base font-semibold no-underline">
-                                <span class="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center text-[#C5A059] hover:border-[#C5A059]/50 transition-colors shadow-sm hover:shadow-[#C5A059]/20 hover:-translate-y-0.5 duration-300">
+                               class="flex items-center gap-3 px-7 py-3.5 rounded-full border border-[#C5A059]/40 bg-[#380A12] hover:bg-[#4d101a] hover:border-[#C5A059] transition-all text-[#F0DEB4] text-[15px] font-bold tracking-wide no-underline shadow-[0_6px_16px_rgba(0,0,0,0.35)] hover:-translate-y-1">
+                                <span class="text-[#C5A059]">
                                     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                                 </span>
                                 Gọi hotline
@@ -991,12 +1002,7 @@
 
         <section id="blog" class="blog-hscroll-section hscroll-section relative overflow-hidden" style="background: #fff5e8; scroll-margin-top: 100px; height: auto !important; min-height: auto !important; padding-top: 6rem;">
 
-            <!-- Label -->
-            <div class="hscroll-label absolute top-10 left-1/2 -translate-x-1/2 z-30 flex items-center gap-4 pointer-events-none">
-                <div class="w-20 h-px bg-[#C5A059]/30"></div>
-                <span class="text-[#8B6508] text-[10px] font-bold uppercase tracking-[0.35em] whitespace-nowrap">Góc Chuyên Gia · Kéo Để Khám Phá</span>
-                <div class="w-20 h-px bg-[#C5A059]/30"></div>
-            </div>
+
 
             <!-- Right fade -->
             <div class="hscroll-more-right absolute right-0 top-0 bottom-0 w-48 pointer-events-none" style="z-index:25; background: linear-gradient(to left, #fff5e8 0%, rgba(255,245,232,0.7) 40%, transparent 100%);"></div>
@@ -1031,21 +1037,7 @@
 
             </div>
 
-            <!-- Drag hint placed below the track (Desktop) -->
-            <div class="hscroll-drag-hint flex flex-col items-center gap-2 pointer-events-none mt-2 pb-8 w-full z-30 relative">
-                <div class="flex items-center gap-2">
-                    <svg class="w-5 h-5" style="color: rgba(139,101,8,0.7)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
-                        <path d="M9 11V6a2 2 0 0 1 4 0v5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M13 11V9a2 2 0 0 1 4 0v4a6 6 0 0 1-6 6H9a5 5 0 0 1-5-5v-1a2 2 0 0 1 4 0" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <span class="text-[10px] uppercase tracking-[0.22em]" style="color: rgba(74,44,42,0.4)">Kéo để khám phá</span>
-                </div>
-                <div class="flex items-center gap-1 mt-1">
-                    <svg class="w-3.5 h-3.5 hscroll-chev-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: rgba(197,160,89,0.3)"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
-                    <svg class="w-3.5 h-3.5 hscroll-chev-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: rgba(197,160,89,0.55)"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
-                    <svg class="w-3.5 h-3.5 hscroll-chev-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: rgba(197,160,89,0.8)"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
-                </div>
-            </div>
+
 
             <!-- Swipe indicator — chỉ hiện trên mobile -->
             <div class="blog-swipe-hint">
@@ -1113,11 +1105,15 @@
                 <div class="reviews-summary-divider"></div>
                 <div class="reviews-trust-badges">
                     <div class="reviews-trust-item">
-                        <span class="reviews-trust-icon">🏆</span>
+                        <span class="reviews-trust-icon flex items-center justify-center text-[#C5A059]">
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>
+                        </span>
                         <span class="reviews-trust-text">Top Seller<br><small>Yến sào Bình Định</small></span>
                     </div>
                     <div class="reviews-trust-item">
-                        <span class="reviews-trust-icon">✓</span>
+                        <span class="reviews-trust-icon flex items-center justify-center text-[#C5A059]">
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"></path><path d="m9 12 2 2 4-4"></path></svg>
+                        </span>
                         <span class="reviews-trust-text">100% Xác Minh<br><small>Mua hàng thực tế</small></span>
                     </div>
                 </div>
@@ -1441,6 +1437,10 @@
             var title = document.getElementById('hero-main-title');
             if (title && !title.classList.contains('hero-title-animate')) {
                 title.classList.add('hero-title-animate');
+            }
+            var textCol = document.querySelector('.hero-text-col');
+            if (textCol && !textCol.classList.contains('hero-text-animate')) {
+                textCol.classList.add('hero-text-animate');
             }
         }
 

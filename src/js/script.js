@@ -1100,8 +1100,9 @@ window.initBlogHScroll = function() {
     const section = document.getElementById('reviews');
     if (!section) return;
 
-    const cards  = section.querySelectorAll('.review-card');
-    const header = section.querySelector('.text-center');
+    const header = section.querySelector('.reviews-header');
+    const summary = section.querySelector('.reviews-summary');
+    const cards  = section.querySelectorAll('.rv-card');
 
     if (header) {
         gsap.fromTo(header,
@@ -1109,10 +1110,16 @@ window.initBlogHScroll = function() {
             { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: section, start: 'top 80%', once: true } }
         );
     }
+    if (summary) {
+        gsap.fromTo(summary,
+            { opacity: 0, y: 20, scale: 0.98 },
+            { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: 'power3.out', delay: 0.15, scrollTrigger: { trigger: section, start: 'top 75%', once: true } }
+        );
+    }
     if (cards.length) {
         gsap.fromTo(cards,
             { opacity: 0, y: 40, scale: 0.97 },
-            { opacity: 1, y: 0, scale: 1, duration: 0.7, stagger: 0.1, ease: 'power3.out', delay: 0.2, scrollTrigger: { trigger: section, start: 'top 75%', once: true } }
+            { opacity: 1, y: 0, scale: 1, duration: 0.7, stagger: 0.1, ease: 'power3.out', delay: 0.3, scrollTrigger: { trigger: section, start: 'top 75%', once: true } }
         );
     }
 })();

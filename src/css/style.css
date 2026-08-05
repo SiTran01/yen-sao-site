@@ -2212,7 +2212,8 @@ h6,
 .hero-title-plain {
     color: #E8D1A7;
 }
-.hero-title-italic {
+.hero-title-italic,
+.hero-title-italic .hc {
     font-style: italic;
     background: linear-gradient(135deg, #f5e6b0 0%, #E1B875 30%, #C5A059 65%, #8B6508 100%);
     -webkit-background-clip: text;
@@ -2366,44 +2367,111 @@ h6,
     border: 1px solid rgba(197,160,89,0.07);
 }
 
-/* Brand badge on image */
+/* ─── Brand badge on image — Wine-Red Premium Card ─── */
 .hero-brand-badge {
     position: absolute;
     bottom: -10%;
     right: -8%;
     z-index: 50;
+    overflow: hidden;
+    border-radius: 16px;
+    background: linear-gradient(145deg, #5C1020 0%, #3D0A15 55%, #2A0610 100%);
+    border: 1px solid rgba(232,201,122,0.32);
+    box-shadow:
+        0 4px 8px rgba(0,0,0,0.3),
+        0 14px 44px rgba(80,10,25,0.6),
+        inset 0 1px 0 rgba(232,201,122,0.12);
+    cursor: default;
+    transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1),
+                box-shadow 0.35s ease;
+}
+.hero-brand-badge:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow:
+        0 8px 16px rgba(0,0,0,0.35),
+        0 22px 60px rgba(80,10,25,0.75),
+        inset 0 1px 0 rgba(232,201,122,0.2);
+}
+/* Gold top-edge accent bar */
+.hero-brand-badge__bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(232,201,122,0.85) 25%,
+        #E8C97A 50%,
+        rgba(232,201,122,0.85) 75%,
+        transparent 100%);
+}
+/* Shimmer sweep animation */
+.hero-brand-badge__shimmer {
+    position: absolute;
+    top: 0; left: -120%; bottom: 0;
+    width: 55%;
+    background: linear-gradient(110deg,
+        transparent 30%,
+        rgba(232,201,122,0.06) 50%,
+        transparent 70%);
+    animation: badgeShimmer 4.5s ease-in-out infinite;
+    pointer-events: none;
+}
+@keyframes badgeShimmer {
+    0%   { left: -120%; }
+    45%  { left: 170%; }
+    100% { left: 170%; }
+}
+/* Inner content row */
+.hero-brand-badge__inner {
     display: flex;
     align-items: center;
-    gap: 10px;
-    background: rgba(26,8,5,0.85);
-    border: 1px solid rgba(197,160,89,0.3);
-    border-radius: 14px;
-    padding: 12px 16px;
-    backdrop-filter: blur(16px);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    gap: 12px;
+    padding: 12px 20px 10px;
+    position: relative;
+    z-index: 1;
 }
+/* Logo container without outer circle */
 .hero-brand-logo {
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    background: rgba(197,160,89,0.1);
-    border: 1px solid rgba(197,160,89,0.3);
+    position: relative;
+    width: 48px; height: 48px;
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
 }
+.hero-brand-logo__glow {
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,201,122,0.2) 0%, transparent 70%);
+    animation: logoGlowPulse 3s ease-in-out infinite;
+    pointer-events: none;
+}
+@keyframes logoGlowPulse {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50%       { opacity: 1;   transform: scale(1.15); }
+}
+/* Text block */
+.hero-brand-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+}
 .hero-brand-name {
     font-family: 'Playfair Display', serif;
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: #E8D1A7;
-    letter-spacing: 0.08em;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #F0DEB4;
+    letter-spacing: 0.07em;
+    line-height: 1.0;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.5);
+    margin-bottom: 2px;
 }
 .hero-brand-sub {
     font-family: 'Be Vietnam Pro', sans-serif;
-    font-size: 0.6rem;
-    font-weight: 600;
-    letter-spacing: 0.15em;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: rgba(197,160,89,0.6);
+    color: rgba(232,201,122,0.72);
 }
 
 /* Scroll cue */
@@ -2506,8 +2574,8 @@ h6,
 /* Badge now positioned relative to hero-img-col (not products-wrapper) */
 .hero-img-col { position: relative; }
 .hero-brand-badge {
-    bottom: 0 !important;
-    right: 0 !important;
+    bottom: -6px !important;
+    right: -6px !important;
 }
 
 /* Header when scrolled over dark hero — force dark bg + light text */
@@ -2632,10 +2700,22 @@ h6,
 #hero-main-title.hero-title-animate .hero-title-row:nth-child(1) .hero-char-group:nth-child(1) .hc:nth-child(1) { animation-delay: 0.05s; }
 #hero-main-title.hero-title-animate .hero-title-row:nth-child(1) .hero-char-group:nth-child(1) .hc:nth-child(2) { animation-delay: 0.13s; }
 #hero-main-title.hero-title-animate .hero-title-row:nth-child(1) .hero-char-group:nth-child(1) .hc:nth-child(3) { animation-delay: 0.21s; }
+
+/* Sào */
+#hero-main-title.hero-title-animate .hero-title-row:nth-child(1) .hero-char-group:nth-child(2) .hc:nth-child(1) { animation-delay: 0.29s; }
+#hero-main-title.hero-title-animate .hero-title-row:nth-child(1) .hero-char-group:nth-child(2) .hc:nth-child(2) { animation-delay: 0.37s; }
+#hero-main-title.hero-title-animate .hero-title-row:nth-child(1) .hero-char-group:nth-child(2) .hc:nth-child(3) { animation-delay: 0.45s; }
+
 /* Per-character stagger delays — Row 2: Tám (.hc inside plain span) */
 #hero-main-title.hero-title-animate .hero-title-row:nth-child(2) .hero-char-group:nth-child(1) .hc:nth-child(1) { animation-delay: 0.62s; }
 #hero-main-title.hero-title-animate .hero-title-row:nth-child(2) .hero-char-group:nth-child(1) .hc:nth-child(2) { animation-delay: 0.70s; }
 #hero-main-title.hero-title-animate .hero-title-row:nth-child(2) .hero-char-group:nth-child(1) .hc:nth-child(3) { animation-delay: 0.78s; }
+
+/* Thủy */
+#hero-main-title.hero-title-animate .hero-title-row:nth-child(2) .hero-char-group:nth-child(2) .hc:nth-child(1) { animation-delay: 0.86s; }
+#hero-main-title.hero-title-animate .hero-title-row:nth-child(2) .hero-char-group:nth-child(2) .hc:nth-child(2) { animation-delay: 0.94s; }
+#hero-main-title.hero-title-animate .hero-title-row:nth-child(2) .hero-char-group:nth-child(2) .hc:nth-child(3) { animation-delay: 1.02s; }
+#hero-main-title.hero-title-animate .hero-title-row:nth-child(2) .hero-char-group:nth-child(2) .hc:nth-child(4) { animation-delay: 1.10s; }
 
 /* Gentle float after letters appear */
 #hero-main-title.hero-title-animate {
