@@ -88,7 +88,7 @@ const renderProducts = () => {
                 <!-- Quick Action Overlay -->
                 <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
                     <div class="btn-buy-now">
-                        <a href="https://zalo.me/0900000000" class="bg-white text-brand-brown px-7 py-3 rounded-full font-bold shadow-xl hover:bg-brand-red hover:text-white transition-colors block">
+                        <a href="https://zalo.me/${window.SITE_CONFIG?.shop?.zaloId || '0327534965'}" class="bg-white text-brand-brown px-7 py-3 rounded-full font-bold shadow-xl hover:bg-brand-red hover:text-white transition-colors block">
                             Mua Ngay
                         </a>
                     </div>
@@ -863,9 +863,9 @@ window.initBlogHScroll = function() {
 (function initOrderForm() {
 
     // ──────────────────────────────────────────────────────────
-    // 🔧 CẤU HÌNH — Thay URL này sau khi cài xong n8n
+    // 🔧 CẤU HÌNH WEBHOOK (Lấy từ config.js / .env)
     // ──────────────────────────────────────────────────────────
-    const N8N_WEBHOOK_URL = `http://${window.location.hostname}:5678/webhook/order`; // VD: 'https://n8n.tamthuy.vn/webhook/order'
+    const N8N_WEBHOOK_URL = window.SITE_CONFIG?.webhooks?.order || '';
     const IS_WEBHOOK_CONFIGURED = N8N_WEBHOOK_URL.trim() !== '';
 
     // Cập nhật indicator trạng thái
@@ -1148,8 +1148,8 @@ function submitFooterNewsletter() {
 }
 
 (function initNewsletterForm() {
-    // 🔧 Cấu hình — thay URL khi có n8n
-    const N8N_NEWSLETTER_URL = ''; // VD: 'https://n8n.tamthuy.vn/webhook/newsletter'
+    // 🔧 Cấu hình — lấy từ config.js / .env
+    const N8N_NEWSLETTER_URL = window.SITE_CONFIG?.webhooks?.newsletter || '';
 
     const footerEmailInput = document.querySelector('footer input[type="email"]');
     const footerSubmitBtn  = document.querySelector('footer button');

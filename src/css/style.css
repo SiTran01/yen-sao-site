@@ -2,8 +2,8 @@
    01. @import — ALL @imports must come first (CSS spec)
    ============================================================ */
 
-/* Google Fonts — phải đứng TRƯỚC @import "tailwindcss" */
-@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Dancing+Script:wght@400..700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Great+Vibes&display=swap');
+/* Google Fonts — loaded via <link> in HTML <head> for faster rendering */
+/* (moved from @import to avoid render-blocking) */
 
 /* Tailwind v4 — chỉ import theme + utilities, BỎ preflight để tránh conflict với custom CSS */
 @import "tailwindcss/theme" layer(theme);
@@ -248,22 +248,7 @@ h6,
 }
 
 /* TÃ¡m Thá»§y Brand Sticker */
-.brand-sticker {
-    position: absolute;
-    z-index: 50;
-    width: max-content;
-    min-width: 250px;
-    padding: 1rem 1.75rem;
-    background: #800020;
-    border: 4px solid #C5A059;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-    border-radius: 60px;
-    text-align: left;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
+
 .brand-sticker::before {
     content: "";
     position: absolute;
@@ -272,25 +257,7 @@ h6,
     border-radius: 44px;
     pointer-events: none;
 }
-.sticker-main {
-    font-family: 'Dancing Script', cursive;
-    font-size: 3.2rem;
-    font-weight: 700;
-    line-height: 1;
-    color: #fff;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    margin: 0;
-}
-.sticker-sub {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #C5A059;
-    background: #800020;
-    padding: 0 10px;
-    position: relative;
-    z-index: 1;
-}
+
 
 /* Stamp animation (brand sticker entrance) */
 .stamp-animation {
@@ -298,34 +265,14 @@ h6,
 }
 
 /* Trust Feature Boxes (4-col grid below hero) */
-.feature-box-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-    padding: 0;
-    margin-top: 1.5rem;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-}
-.feature-box {
-    background-color: #fff;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 24px 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    width: 100%;
-}
+
 .feature-box:hover {
     transform: translateY(-4px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
-.feature-icon { width: 50px; flex-shrink: 0; text-align: center; }
+
 .feature-icon img { max-width: 100%; height: auto; }
-.feature-text { font-size: 0.95rem; color: #4f4f4f; line-height: 1.4; }
+
 .feature-text strong { font-size: 1.1rem; display: block; margin-bottom: 6px; color: #613613; }
 
 /* Toast Notification System */
@@ -479,20 +426,7 @@ h6,
    ============================================================ */
 
 /* White Marble background — flows normally in document (position handled by Tailwind `relative` on #hero) */
-.hero-marble {
-    background-color: #ffffff;
-    background-image:
-        radial-gradient(ellipse at top right, rgba(255, 255, 255, 1), transparent 70%),
-        radial-gradient(ellipse at bottom left, rgba(245, 240, 235, 0.8), transparent 70%),
-        linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(212,175,55,0.08) 50%, rgba(255,255,255,0) 100%),
-        url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    z-index: 50;
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+
 
 
 
@@ -520,52 +454,18 @@ h6,
 }
 
 /* Scroll Down Button */
-.scroll-down-btn {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: rgba(255, 255, 255, 0.8);
-    cursor: pointer;
-    z-index: 100;
-    transition: all 0.3s ease;
-    animation: bounce-gentle 2s infinite;
-}
+
 .scroll-down-btn:hover { color: #fff; bottom: 25px; }
 .scroll-down-btn svg { width: 40px; height: 40px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
 
 /* Legacy hero img position classes (kept for compatibility) */
-.hero-img-box {
-    top: 50%; right: 15%;
-    transform: translateY(-50%);
-    width: 350px; z-index: 2;
-    animation: float-medium 6s ease-in-out infinite;
-}
-.hero-img-hu {
-    top: 15%; left: 10%;
-    width: 220px; z-index: 1;
-    animation: float-slow 7s ease-in-out infinite;
-    animation-delay: 1s;
-}
-.hero-img-raw {
-    bottom: 10%; left: 25%;
-    width: 280px; z-index: 3;
-    animation: float-fast 8s ease-in-out infinite;
-    animation-delay: 2s;
-}
+
 
 
 /* ============================================================
    07. STATS SECTION
    ============================================================ */
 
-.stats-section {
-    background: #1C0D07;
-    position: relative;
-    padding: 80px 0;
-    border-top: 1px solid rgba(197,160,89,0.25);
-    border-bottom: 1px solid rgba(197,160,89,0.25);
-}
 
 /* Ambient glow */
 .stats-section::before {
@@ -598,28 +498,10 @@ h6,
 }
 
 /* Grid */
-.stats-grid {
-    display: flex;
-    align-items: stretch;
-    justify-content: center;
-    max-width: 1000px;
-    margin: 0 auto;
-}
+
 
 /* Divider */
-.stat-divider {
-    flex-shrink: 0;
-    width: 1px;
-    background: linear-gradient(to bottom,
-        transparent 0%,
-        rgba(197,160,89,0.3) 20%,
-        rgba(197,160,89,0.5) 50%,
-        rgba(197,160,89,0.3) 80%,
-        transparent 100%
-    );
-    position: relative;
-    margin: 0 4px;
-}
+
 .stat-divider::after {
     content: '✦';
     position: absolute;
@@ -633,19 +515,7 @@ h6,
 }
 
 /* Stat Card */
-.stat-card {
-    flex: 1;
-    padding: 8px 40px 24px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    position: relative;
-    opacity: 0;
-    transform: translateY(40px);
-    transition: transform 0.4s ease;
-    cursor: default;
-}
+
 .stat-card:hover { transform: translateY(-6px); }
 
 /* Icon */
@@ -760,13 +630,7 @@ h6,
    ============================================================ */
 
 /* Custom background for Products section */
-.bg-oriental {
-    background-image: url('../assets/images/bg-product.webp');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: relative;
-}
+
 
 /* Product card with shine hover */
 .product-card-premium {
@@ -792,7 +656,7 @@ h6,
     border-color: rgba(197, 160, 89, 0.5);
 }
 .product-card-premium:hover::after {
-    animation: shine-sweep 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    animation: card-shine-sweep 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 .product-card-premium img {
     transition: transform 1.5s var(--ease-premium);
@@ -801,11 +665,7 @@ h6,
 .product-card-premium:hover img { transform: scale(1.08); }
 
 /* Buy now button slides up on card hover */
-.btn-buy-now {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s var(--ease-out-back);
-}
+
 .product-card-premium:hover .btn-buy-now {
     opacity: 1;
     transform: translateY(0);
@@ -813,9 +673,9 @@ h6,
 }
 
 /* Product item vertical spacing */
-.product-item { margin-bottom: 14rem; }
+
 .product-item:last-child { margin-bottom: 4rem; }
-.product-grid-container { padding-top: 4rem; padding-bottom: 2rem; }
+
 
 /* Horizontal Scroll Section */
 .hscroll-section {
@@ -1378,7 +1238,7 @@ h6,
 }
 
 /* Product card shine */
-@keyframes shine-sweep { 100% { left: 200%; } }
+@keyframes card-shine-sweep { 100% { left: 200%; } }
 
 /* Hero floating images */
 @keyframes float-slow {
@@ -2550,19 +2410,6 @@ h6,
     .hero-trust-item { padding: 0 8px; }
 }
 
-/* Header light text on dark hero */
-#main-header.on-dark-hero .nav-item-premium {
-    color: rgba(232,209,167,0.75) !important;
-}
-#main-header.on-dark-hero .nav-item-premium:hover { color: #E1B875 !important; }
-#main-header.on-dark-hero .nav-item-premium::after { background-color: #C5A059 !important; }
-#main-header.on-dark-hero .font-serif { color: #E8D1A7 !important; }
-#main-header.on-dark-hero .border-gray-400\/30 { border-color: rgba(197,160,89,0.2) !important; }
-#main-header.on-dark-hero nav { background: rgba(26,8,5,0.5) !important; }
-#main-header.on-dark-hero img[alt*="Logo"] {
-    filter: brightness(0) invert(1) sepia(1) saturate(3) hue-rotate(10deg);
-}
-#main-header.on-dark-hero #hamburger-btn { border-color: rgba(197,160,89,0.4) !important; }
 #main-header.on-dark-hero .hamburger-line { background-color: rgba(232,209,167,0.8) !important; }
 #main-header.on-dark-hero .bg-\[\#C5A059\] { background: rgba(197,160,89,0.9) !important; }
 

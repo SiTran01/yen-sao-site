@@ -2,7 +2,11 @@
 <html lang="vi">
 
 <head>
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <!-- Preconnect for Google Fonts (load fonts ASAP, before CSS is parsed) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Dancing+Script:wght@400..700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Great+Vibes&display=swap">
+    <!-- Preload critical hero images -->
     <link rel="preload" as="image" href="./assets/images/yen-tinh-che.webp">
     <link rel="preload" as="image" href="./assets/images/yen-hu.webp">
     <link rel="preload" as="image" href="./assets/images/yen-hop.webp">
@@ -195,10 +199,10 @@
 
             
             <div class="flex items-center gap-4">
-                <a href="tel:0327534965"
+                <a href="tel:%VITE_PHONE_NUMBER%"
                     class="hidden md:flex items-center gap-2 border border-[#C5A059]/50 bg-[#4A1515] text-[#E8D1A7] px-6 py-2 rounded-[30px] font-bold text-xs hover:bg-[#C5A059] hover:text-white transition-all uppercase tracking-widest shadow-xl no-underline" style="text-decoration: none;">
                     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                    <span>0327.534.965</span>
+                    <span>%VITE_PHONE_NUMBER%</span>
                 </a>
                 <button id="hamburger-btn" class="md:hidden flex flex-col justify-center items-center w-11 h-11 gap-[5px] rounded-full border border-[#C5A059]/40 bg-[#4A1515]/10 backdrop-blur-sm transition-all duration-300 hover:bg-[#4A1515]/20"
                     onclick="openMobileMenu()" aria-label="Mở menu">
@@ -495,7 +499,7 @@
                     <div class="w-full md:w-1/2 order-1 md:order-2 relative p-8 md:p-12" data-aos="zoom-in-left" data-aos-delay="300">
                         
                         <div class="absolute inset-0 bg-gradient-to-tr from-[#C5A059]/30 to-transparent rounded-full blur-[60px] -z-10 transform group-hover:scale-125 transition-transform duration-1000"></div>
-                        <img src="./assets/images/yen-tinh-che.webp" alt="Yến Thô Nguyên Bản" class="w-full drop-shadow-[0_25px_35px_rgba(0,0,0,0.2)] transform transition-all duration-[1.5s] group-hover:scale-110 group-hover:-translate-y-6 group-hover:rotate-2 object-contain aspect-square">
+                        <img loading="lazy" src="./assets/images/yen-tinh-che.webp" alt="Yến Thô Nguyên Bản" class="w-full drop-shadow-[0_25px_35px_rgba(0,0,0,0.2)] transform transition-all duration-[1.5s] group-hover:scale-110 group-hover:-translate-y-6 group-hover:rotate-2 object-contain aspect-square">
                     </div>
                 </div>
 
@@ -505,7 +509,7 @@
                     
                     <div class="w-full md:w-1/2 relative p-8 md:p-12" data-aos="zoom-in-right" data-aos-delay="150">
                         <div class="absolute inset-0 bg-gradient-to-tl from-[#800020]/10 via-[#C5A059]/20 to-transparent rounded-full blur-[60px] -z-10 transform group-hover:scale-125 transition-transform duration-1000"></div>
-                        <img src="./assets/images/yen-hop.webp" alt="Yến Tươi Tiện Lợi" class="w-full drop-shadow-[0_25px_35px_rgba(0,0,0,0.2)] transform transition-all duration-[1.5s] group-hover:scale-110 group-hover:-translate-y-6 group-hover:-rotate-2 object-contain aspect-square">
+                        <img loading="lazy" src="./assets/images/yen-hop.webp" alt="Yến Tươi Tiện Lợi" class="w-full drop-shadow-[0_25px_35px_rgba(0,0,0,0.2)] transform transition-all duration-[1.5s] group-hover:scale-110 group-hover:-translate-y-6 group-hover:-rotate-2 object-contain aspect-square">
                     </div>
 
                     <div class="w-full md:w-1/2 p-10 md:p-16 text-left" data-aos="fade-left" data-aos-delay="300">
@@ -535,7 +539,7 @@
                     
                     <div class="w-full md:w-1/2 order-1 md:order-2 relative p-8 md:p-12" data-aos="zoom-in-left" data-aos-delay="300">
                         <div class="absolute inset-0 bg-gradient-to-tr from-[#8B6508]/20 via-[#C5A059]/20 to-transparent rounded-full blur-[60px] -z-10 transform group-hover:scale-125 transition-transform duration-1000"></div>
-                        <img src="./assets/images/yen-hop.webp" alt="Yến Tinh Chế Thượng Hạng" class="w-full drop-shadow-[0_25px_40px_rgba(0,0,0,0.25)] transform transition-all duration-[1.5s] group-hover:scale-110 group-hover:-translate-y-6 group-hover:rotate-3 object-contain aspect-square">
+                        <img loading="lazy" src="./assets/images/yen-hop.webp" alt="Yến Tinh Chế Thượng Hạng" class="w-full drop-shadow-[0_25px_40px_rgba(0,0,0,0.25)] transform transition-all duration-[1.5s] group-hover:scale-110 group-hover:-translate-y-6 group-hover:rotate-3 object-contain aspect-square">
                     </div>
                 </div>
 
@@ -545,7 +549,7 @@
                     
                     <div class="w-full md:w-1/2 relative p-8 md:p-12" data-aos="zoom-in-right" data-aos-delay="150">
                         <div class="absolute inset-0 bg-gradient-to-br from-[#800020]/15 via-transparent to-[#C5A059]/20 rounded-full blur-[60px] -z-10 transform group-hover:scale-125 transition-transform duration-1000"></div>
-                        <img src="./assets/images/yen-hu.webp" alt="Hũ Yến Chưng Sẵn" class="w-full drop-shadow-[0_20px_35px_rgba(0,0,0,0.2)] transform transition-all duration-[1.5s] group-hover:scale-110 group-hover:-translate-y-6 group-hover:-rotate-3 object-contain aspect-square">
+                        <img loading="lazy" src="./assets/images/yen-hu.webp" alt="Hũ Yến Chưng Sẵn" class="w-full drop-shadow-[0_20px_35px_rgba(0,0,0,0.2)] transform transition-all duration-[1.5s] group-hover:scale-110 group-hover:-translate-y-6 group-hover:-rotate-3 object-contain aspect-square">
                     </div>
 
                     <div class="w-full md:w-1/2 p-10 md:p-16 text-left" data-aos="fade-left" data-aos-delay="300">
@@ -631,7 +635,7 @@
                 <div class="hscroll-card hscroll-product-card pc-01 flex-shrink-0 w-[370px] h-[72vh] rounded-[2rem] overflow-hidden relative group" data-label="Yến Thô · Tự Nhiên">
                     <div class="absolute inset-0 z-10" style="background: linear-gradient(to top, rgba(5,20,12,0.95) 0%, rgba(5,20,12,0.3) 45%, transparent 100%);"></div>
                     <div class="absolute inset-0 flex items-center justify-center overflow-hidden" style="background: linear-gradient(145deg, #0a2015 0%, #1a4a2e 50%, #0d2e1a 100%);">
-                        <img src="./assets/images/yen-tinh-che.webp" alt="Yến Thô" class="w-[80%] object-contain transition-transform duration-700 ease-out group-hover:scale-110 drop-shadow-2xl">
+                        <img loading="lazy" src="./assets/images/yen-tinh-che.webp" alt="Yến Thô" class="w-[80%] object-contain transition-transform duration-700 ease-out group-hover:scale-110 drop-shadow-2xl">
                     </div>
                     
                     <span class="absolute top-7 right-7 z-20 font-serif font-black text-6xl leading-none select-none" style="color: rgba(74,200,120,0.18);">01</span>
@@ -652,7 +656,7 @@
                 <div class="hscroll-card hscroll-product-card pc-02 flex-shrink-0 w-[370px] h-[72vh] rounded-[2rem] overflow-hidden relative group" data-label="Yến Tươi · Nguyên Chất">
                     <div class="absolute inset-0 z-10" style="background: linear-gradient(to top, rgba(30,5,5,0.96) 0%, rgba(30,5,5,0.25) 45%, transparent 100%);"></div>
                     <div class="absolute inset-0 flex items-center justify-center overflow-hidden" style="background: linear-gradient(145deg, #1e0505 0%, #4a0f0f 50%, #2d0808 100%);">
-                        <img src="./assets/images/yen-hop.webp" alt="Yến Hộp" class="w-[80%] object-contain transition-transform duration-700 ease-out group-hover:scale-110 drop-shadow-2xl">
+                        <img loading="lazy" src="./assets/images/yen-hop.webp" alt="Yến Hộp" class="w-[80%] object-contain transition-transform duration-700 ease-out group-hover:scale-110 drop-shadow-2xl">
                     </div>
                     <span class="absolute top-7 right-7 z-20 font-serif font-black text-6xl leading-none select-none" style="color: rgba(220,80,80,0.18);">02</span>
                     <div class="absolute bottom-0 left-0 right-0 p-8 z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
@@ -671,7 +675,7 @@
                 <div class="hscroll-card hscroll-product-card pc-03 flex-shrink-0 w-[370px] h-[72vh] rounded-[2rem] overflow-hidden relative group" data-label="Yến Tinh Chế · Nguyên Sợi">
                     <div class="absolute inset-0 z-10" style="background: linear-gradient(to top, rgba(8,10,28,0.96) 0%, rgba(8,10,28,0.25) 45%, transparent 100%);"></div>
                     <div class="absolute inset-0 flex items-center justify-center overflow-hidden" style="background: linear-gradient(145deg, #08091c 0%, #141a4f 50%, #0e1135 100%);">
-                        <img src="./assets/images/yen-hop.webp" alt="Yến Tinh Chế" class="w-[80%] object-contain transition-transform duration-700 ease-out group-hover:scale-110 drop-shadow-2xl">
+                        <img loading="lazy" src="./assets/images/yen-hop.webp" alt="Yến Tinh Chế" class="w-[80%] object-contain transition-transform duration-700 ease-out group-hover:scale-110 drop-shadow-2xl">
                     </div>
                     <span class="absolute top-7 right-7 z-20 font-serif font-black text-6xl leading-none select-none" style="color: rgba(100,130,255,0.18);">03</span>
                     <div class="absolute bottom-0 left-0 right-0 p-8 z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
@@ -690,7 +694,7 @@
                 <div class="hscroll-card hscroll-product-card pc-04 flex-shrink-0 w-[370px] h-[72vh] rounded-[2rem] overflow-hidden relative group" data-label="Hũ Yến · Chưng Sẵn">
                     <div class="absolute inset-0 z-10" style="background: linear-gradient(to top, rgba(20,10,2,0.96) 0%, rgba(20,10,2,0.25) 45%, transparent 100%);"></div>
                     <div class="absolute inset-0 flex items-center justify-center overflow-hidden" style="background: linear-gradient(145deg, #140a02 0%, #3d2205 50%, #261502 100%);">
-                        <img src="./assets/images/yen-hu.webp" alt="Hũ Yến" class="w-[80%] object-contain transition-transform duration-700 ease-out group-hover:scale-110 drop-shadow-2xl">
+                        <img loading="lazy" src="./assets/images/yen-hu.webp" alt="Hũ Yến" class="w-[80%] object-contain transition-transform duration-700 ease-out group-hover:scale-110 drop-shadow-2xl">
                     </div>
                     <span class="absolute top-7 right-7 z-20 font-serif font-black text-6xl leading-none select-none" style="color: rgba(220,160,60,0.20);">04</span>
                     <div class="absolute bottom-0 left-0 right-0 p-8 z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
@@ -710,7 +714,7 @@
                 <div class="hscroll-card hscroll-product-card pc-05 flex-shrink-0 w-[370px] h-[72vh] rounded-[2rem] overflow-hidden relative group" data-label="Yến Tươi · Nguyên Chất">
                     <div class="absolute inset-0 z-10" style="background: linear-gradient(to top, rgba(22,5,16,0.96) 0%, rgba(22,5,16,0.25) 45%, transparent 100%);"></div>
                     <div class="absolute inset-0 flex items-center justify-center overflow-hidden" style="background: linear-gradient(145deg, #160510 0%, #450f38 50%, #2a0822 100%);">
-                        <img src="./assets/images/yen-tinh-che.webp" alt="Yến Tươi" class="w-[80%] object-contain transition-transform duration-700 ease-out group-hover:scale-110 drop-shadow-2xl">
+                        <img loading="lazy" src="./assets/images/yen-tinh-che.webp" alt="Yến Tươi" class="w-[80%] object-contain transition-transform duration-700 ease-out group-hover:scale-110 drop-shadow-2xl">
                     </div>
                     <span class="absolute top-7 right-7 z-20 font-serif font-black text-6xl leading-none select-none" style="color: rgba(220,100,200,0.18);">05</span>
                     <div class="absolute bottom-0 left-0 right-0 p-8 z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
@@ -729,7 +733,7 @@
                 <div class="hscroll-card hscroll-product-card pc-06 flex-shrink-0 w-[370px] h-[72vh] rounded-[2rem] overflow-hidden relative group" data-label="Yến Chưng · Thảo Mộc">
                     <div class="absolute inset-0 z-10" style="background: linear-gradient(to top, rgba(3,16,18,0.96) 0%, rgba(3,16,18,0.25) 45%, transparent 100%);"></div>
                     <div class="absolute inset-0 flex items-center justify-center overflow-hidden" style="background: linear-gradient(145deg, #031012 0%, #074a54 50%, #052e34 100%);">
-                        <img src="./assets/images/yen-hu.webp" alt="Yến Thảo Mộc" class="w-[80%] object-contain transition-transform duration-700 ease-out group-hover:scale-110 drop-shadow-2xl">
+                        <img loading="lazy" src="./assets/images/yen-hu.webp" alt="Yến Thảo Mộc" class="w-[80%] object-contain transition-transform duration-700 ease-out group-hover:scale-110 drop-shadow-2xl">
                     </div>
                     <span class="absolute top-7 right-7 z-20 font-serif font-black text-6xl leading-none select-none" style="color: rgba(60,200,210,0.18);">06</span>
                     <div class="absolute bottom-0 left-0 right-0 p-8 z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
@@ -748,7 +752,7 @@
                 <div class="hscroll-card hscroll-product-card pc-07 flex-shrink-0 w-[370px] h-[72vh] rounded-[2rem] overflow-hidden relative group" data-label="Bộ Quà · Hoàng Gia">
                     <div class="absolute inset-0 z-10" style="background: linear-gradient(to top, rgba(18,12,2,0.96) 0%, rgba(18,12,2,0.25) 45%, transparent 100%);"></div>
                     <div class="absolute inset-0 flex items-center justify-center overflow-hidden" style="background: linear-gradient(145deg, #120c02 0%, #3d2e06 50%, #261e03 100%);">
-                        <img src="./assets/images/yen-hop.webp" alt="Bộ Quà" class="w-[80%] object-contain transition-transform duration-700 ease-out group-hover:scale-110 drop-shadow-2xl">
+                        <img loading="lazy" src="./assets/images/yen-hop.webp" alt="Bộ Quà" class="w-[80%] object-contain transition-transform duration-700 ease-out group-hover:scale-110 drop-shadow-2xl">
                     </div>
                     <span class="absolute top-7 right-7 z-20 font-serif font-black text-6xl leading-none select-none" style="color: rgba(210,175,80,0.20);">07</span>
                     <div class="absolute bottom-0 left-0 right-0 p-8 z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
@@ -767,7 +771,7 @@
                 <div class="hscroll-card hscroll-product-card pc-08 flex-shrink-0 w-[370px] h-[72vh] rounded-[2rem] overflow-hidden relative group" data-label="Yến Sào · Thượng Phẩm">
                     <div class="absolute inset-0 z-10" style="background: linear-gradient(to top, rgba(10,5,20,0.96) 0%, rgba(10,5,20,0.25) 45%, transparent 100%);"></div>
                     <div class="absolute inset-0 flex items-center justify-center overflow-hidden" style="background: linear-gradient(145deg, #0a0514 0%, #2a1050 50%, #180a34 100%);">
-                        <img src="./assets/images/yen-tinh-che.webp" alt="Yến Thượng Phẩm" class="w-[80%] object-contain transition-transform duration-700 ease-out group-hover:scale-110 drop-shadow-2xl">
+                        <img loading="lazy" src="./assets/images/yen-tinh-che.webp" alt="Yến Thượng Phẩm" class="w-[80%] object-contain transition-transform duration-700 ease-out group-hover:scale-110 drop-shadow-2xl">
                     </div>
                     <span class="absolute top-7 right-7 z-20 font-serif font-black text-6xl leading-none select-none" style="color: rgba(180,120,255,0.20);">08</span>
                     <div class="absolute bottom-0 left-0 right-0 p-8 z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
@@ -873,14 +877,14 @@
 
                         
                         <div class="flex items-center gap-6 mt-14">
-                            <a href="https://zalo.me/0327534965" target="_blank"
+                            <a href="https://zalo.me/%VITE_ZALO_ID%" target="_blank"
                                class="flex items-center gap-3 px-7 py-3.5 rounded-full border border-[#C5A059]/40 bg-[#380A12] hover:bg-[#4d101a] hover:border-[#C5A059] transition-all text-[#F0DEB4] text-[15px] font-bold tracking-wide no-underline shadow-[0_6px_16px_rgba(0,0,0,0.35)] hover:-translate-y-1">
                                 <span class="text-[#C5A059]">
                                     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
                                 </span>
                                 Chat Zalo ngay
                             </a>
-                            <a href="tel:0327534965"
+                            <a href="tel:%VITE_PHONE_NUMBER%"
                                class="flex items-center gap-3 px-7 py-3.5 rounded-full border border-[#C5A059]/40 bg-[#380A12] hover:bg-[#4d101a] hover:border-[#C5A059] transition-all text-[#F0DEB4] text-[15px] font-bold tracking-wide no-underline shadow-[0_6px_16px_rgba(0,0,0,0.35)] hover:-translate-y-1">
                                 <span class="text-[#C5A059]">
                                     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
@@ -1250,17 +1254,17 @@
                         </p>
                         <!-- Social links -->
                         <div style="display:flex;gap:10px;">
-                            <a href="https://facebook.com" target="_blank" rel="noopener"
+                            <a href="%VITE_FACEBOOK_URL%" target="_blank" rel="noopener"
                                 style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(197,160,89,0.3);display:flex;align-items:center;justify-content:center;transition:all 0.3s;color:rgba(232,209,167,0.7);text-decoration:none;font-size:15px;"
                                 onmouseover="this.style.background='rgba(197,160,89,0.15)';this.style.borderColor='rgba(197,160,89,0.6)'"
                                 onmouseout="this.style.background='transparent';this.style.borderColor='rgba(197,160,89,0.3)'">
                                 <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
                             </a>
-                            <a href="https://zalo.me" target="_blank" rel="noopener"
+                            <a href="https://zalo.me/%VITE_ZALO_ID%" target="_blank" rel="noopener"
                                 style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(197,160,89,0.3);display:flex;align-items:center;justify-content:center;transition:all 0.3s;color:rgba(232,209,167,0.7);text-decoration:none;font-size:12px;font-weight:700;font-family:'Be Vietnam Pro',sans-serif;"
                                 onmouseover="this.style.background='rgba(197,160,89,0.15)';this.style.borderColor='rgba(197,160,89,0.6)'"
                                 onmouseout="this.style.background='transparent';this.style.borderColor='rgba(197,160,89,0.3)'">Zalo</a>
-                            <a href="https://tiktok.com" target="_blank" rel="noopener"
+                            <a href="%VITE_TIKTOK_URL%" target="_blank" rel="noopener"
                                 style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(197,160,89,0.3);display:flex;align-items:center;justify-content:center;transition:all 0.3s;color:rgba(232,209,167,0.7);text-decoration:none;"
                                 onmouseover="this.style.background='rgba(197,160,89,0.15)';this.style.borderColor='rgba(197,160,89,0.6)'"
                                 onmouseout="this.style.background='transparent';this.style.borderColor='rgba(197,160,89,0.3)'">
@@ -1283,15 +1287,15 @@
                                 <span style="width:30px;height:30px;border-radius:6px;background:rgba(197,160,89,0.1);border:1px solid rgba(197,160,89,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#C5A059;">
                                     <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                                 </span>
-                                <a href="tel:0327534965" style="font-size:14.5px;color:rgba(232,209,167,0.7);text-decoration:none;transition:color 0.3s;"
-                                    onmouseover="this.style.color='#C5A059'" onmouseout="this.style.color='rgba(232,209,167,0.7)'">0327.534.965</a>
+                                <a href="tel:%VITE_PHONE_NUMBER%" style="font-size:14.5px;color:rgba(232,209,167,0.7);text-decoration:none;transition:color 0.3s;"
+                                    onmouseover="this.style.color='#C5A059'" onmouseout="this.style.color='rgba(232,209,167,0.7)'">%VITE_PHONE_NUMBER%</a>
                             </li>
                             <li style="display:flex;align-items:center;gap:12px;">
                                 <span style="width:30px;height:30px;border-radius:6px;background:rgba(197,160,89,0.1);border:1px solid rgba(197,160,89,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#C5A059;">
                                     <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                                 </span>
-                                <a href="mailto:cskh@yensaotamthuy.com" style="font-size:14px;color:rgba(232,209,167,0.7);text-decoration:none;transition:color 0.3s;word-break:break-all;"
-                                    onmouseover="this.style.color='#C5A059'" onmouseout="this.style.color='rgba(232,209,167,0.7)'">cskh@yensaotamthuy.com</a>
+                                <a href="mailto:%VITE_EMAIL%" style="font-size:14px;color:rgba(232,209,167,0.7);text-decoration:none;transition:color 0.3s;word-break:break-all;"
+                                    onmouseover="this.style.color='#C5A059'" onmouseout="this.style.color='rgba(232,209,167,0.7)'">%VITE_EMAIL%</a>
                             </li>
                             <li style="display:flex;align-items:center;gap:12px;">
                                 <span style="width:30px;height:30px;border-radius:6px;background:rgba(197,160,89,0.1);border:1px solid rgba(197,160,89,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#C5A059;">
@@ -1403,14 +1407,44 @@
     </button>
 
     
-    <script defer src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    <script src="./assets/vendor/lenis.min.js"></script>
-    <script src="./assets/vendor/gsap.min.js"></script>
-    <script src="./assets/vendor/ScrollTrigger.min.js"></script>
-    <script defer src="./js/database.js"></script>
+    <script defer src="https://unpkg.com/@lottiefiles/lottie-player@2.0.3/dist/lottie-player.js"></script>
+    <script defer src="./assets/vendor/lenis.min.js"></script>
+    <script defer src="./assets/vendor/gsap.min.js"></script>
+    <script defer src="./assets/vendor/ScrollTrigger.min.js"></script>
+    
+    <!-- Môi trường & Config -->
+    <script>
+        window.ENV = {
+            PHONE: "%VITE_PHONE_NUMBER%",
+            ZALO: "%VITE_ZALO_ID%",
+            ADDRESS: "%VITE_SHOP_ADDRESS%",
+            SITE_URL: "%VITE_SITE_URL%",
+            WEBHOOK_ORDER: "%VITE_N8N_ORDER_WEBHOOK%",
+            WEBHOOK_NEWSLETTER: "%VITE_N8N_NEWSLETTER_WEBHOOK%",
+            WEBHOOK_CHATBOT: "%VITE_N8N_CHATBOT_WEBHOOK%",
+            EMAIL: "%VITE_EMAIL%"
+        };
+    </script>
+    <script defer src="./js/config.js?v=4"></script>
+    <script defer src="./js/database.js?v=2"></script>
     <script defer src="./js/script.js?v=4"></script>
-    <!-- AI Chatbot logic -->
-    <script defer src="./js/chatbot.js?v=15"></script>
+    <!-- AI Chatbot logic — lazy loaded on first interaction to save 35KB on page load -->
+    <script>
+    (function() {
+        var chatbotLoaded = false;
+        var trigger = document.getElementById('ai-chat-trigger');
+        if (trigger) {
+            trigger.addEventListener('click', function loadChatbot() {
+                if (!chatbotLoaded) {
+                    chatbotLoaded = true;
+                    var s = document.createElement('script');
+                    s.src = './js/chatbot.js?v=16';
+                    document.body.appendChild(s);
+                }
+            }, { once: false });
+        }
+    })();
+    </script>
     <!-- Blog logic -->
     <script defer src="./js/blog.js"></script>
 

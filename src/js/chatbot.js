@@ -12,10 +12,10 @@
    5. Copy URL webhook vào N8N_AI_WEBHOOK_URL bên dưới
    ─────────────────────────────────────────────────────────── */
 const CHATBOT_CONFIG = {
-    //  CẤU HÌNH WEBHOOK
-    n8nWebhookUrl: `http://${window.location.hostname}:5678/webhook/tamthuy-chat`,
-    maxHistoryLength: 12,         // số lượng tin nhắn giữ trong bộ nhớ (6 cặp hỏi/đáp)
-    typingDelay: { min: 600, max: 1500 }, // giả lập delay tự nhiên
+    // Lấy config từ config.js & .env
+    n8nWebhookUrl: window.SITE_CONFIG?.webhooks?.chatbot || '',
+    maxHistoryLength: window.SITE_CONFIG?.chatbot?.maxHistory || 12,
+    typingDelay: window.SITE_CONFIG?.chatbot?.typingDelay || { min: 600, max: 1500 },
 };
 
 // Tự động tạo danh sách sản phẩm từ database chung
@@ -350,7 +350,7 @@ async function mockResponse(userMsg) {
     if (lower.includes('loại') || lower.includes('sản phẩm') || lower.includes('có gì')) {
         return 'Tám Thủy chuyên cung cấp 4 dòng sản phẩm chính:\n\n Yến Thô — nguyên tổ 100% tự nhiên\n Yến Tinh Chế — đã làm sạch, định hình đẹp\n Yến Tươi — làm sạch trong ngày, cực tiện lợi\n Hũ Yến Chưng — tiện lợi, ăn liền\n\nBạn quan tâm loại nào nhất?';
     }
-    return '️ Lưu ý: Chatbot đang chạy ở chế độ demo (chưa kết nối n8n). Paste webhook URL vào CHATBOT_CONFIG.n8nWebhookUrl trong file chatbot.js để bật AI thật nhé!';
+    return `️ Lỗi Demo: WEBHOOK_CHATBOT trong ENV HTML là "${window.ENV?.WEBHOOK_CHATBOT}", trong SITE_CONFIG là "${window.SITE_CONFIG?.webhooks?.chatbot}"`;
 }
 
 /* ── Render functions ───────────────────────────────────────── */
