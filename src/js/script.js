@@ -129,18 +129,20 @@ const renderProducts = () => {
    ============================================================ */
 gsap.registerPlugin(ScrollTrigger);
 
-const lenis = new Lenis({
+const lenis = window.SITE_CONFIG?.features?.smoothScroll ? new Lenis({
     duration: 1.5,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // easeOutExpo
     smooth: true,
     smoothTouch: false,
-});
+}) : null;
 
 // Kết nối Lenis với GSAP ticker (1 RAF loop duy nhất, không dùng RAF thủ công)
 // Dùng gsap.ticker làm driver để tránh chạy 2 RAF loops song song
-lenis.on('scroll', ScrollTrigger.update);
-gsap.ticker.add((time) => { lenis.raf(time * 1000); });
-gsap.ticker.lagSmoothing(0);
+if (lenis) {
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+    gsap.ticker.lagSmoothing(0);
+}
 
 /** Smooth scroll to target ID using Lenis */
 window.luxuryScrollTo = (targetId) => {
@@ -152,11 +154,16 @@ window.luxuryScrollTo = (targetId) => {
     }
     if (!el) return;
     
-    lenis.scrollTo(el, {
-        offset: -130, // Đảm bảo chừa nhiều khoảng trống hơn cho fixed menu
-        duration: 1.5,
-        easing: (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
-    });
+    if (lenis) {
+        lenis.scrollTo(el, {
+            offset: -130, // Đảm bảo chừa nhiều khoảng trống hơn cho fixed menu
+            duration: 1.5,
+            easing: (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
+        });
+    } else {
+        const y = el.getBoundingClientRect().top + window.scrollY - 130;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+    }
 };
 
 
@@ -166,6 +173,11 @@ window.luxuryScrollTo = (targetId) => {
 (function initPreloader() {
     const preloader = document.getElementById('site-preloader');
     if (!preloader) return;
+
+    if (window.SITE_CONFIG && window.SITE_CONFIG.features && window.SITE_CONFIG.features.preloader === false) {
+        preloader.remove();
+        return;
+    }
 
     const hidePreloader = () => {
         setTimeout(() => {
@@ -199,6 +211,32 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }, 2000);
     }, 100);
+
+    // Apply SEO & Tab Info
+    (function applySeo() {
+        if (!window.SITE_CONFIG?.seo) return;
+        
+        if (window.SITE_CONFIG.seo.title) {
+            document.title = window.SITE_CONFIG.seo.title;
+        }
+        
+        if (window.SITE_CONFIG.seo.favicon) {
+            let link = document.querySelector("link[rel~='icon']");
+            if (!link) {
+                link = document.createElement('link');
+                link.rel = 'icon';
+                document.head.appendChild(link);
+            }
+            link.href = window.SITE_CONFIG.seo.favicon;
+        }
+    })();
+    // Proactively remove chatbot DOM if disabled (since chatbot.js is lazy loaded)
+    (function checkChatbotFlag() {
+        if (window.SITE_CONFIG && window.SITE_CONFIG.features && window.SITE_CONFIG.features.chatbot === false) {
+            document.getElementById('ai-chat-trigger')?.remove();
+            document.getElementById('ai-chat-panel')?.remove();
+        }
+    })();
 
     // Header dark mode: toggle class when over dark hero
     (function initHeaderDarkMode() {
@@ -458,6 +496,11 @@ window.addEventListener("load", function () {
 
     if (!chimContainer || !baiDap) return;
 
+    if (window.SITE_CONFIG && window.SITE_CONFIG.features && window.SITE_CONFIG.features.lottiebird === false) {
+        chimContainer.remove();
+        return;
+    }
+
     const rect = baiDap.getBoundingClientRect();
     const targetX = rect.left + (rect.width / 2) - 60;
     const targetY = rect.top - 80;
@@ -492,12 +535,84 @@ window.addEventListener("load", function () {
 
 
 /* ============================================================
+   08. CUSTOM GOLD CURSOR — Awwwards style cursor
+   ============================================================ */
+(function initCustomCursor() {
+    if (window.SITE_CONFIG && window.SITE_CONFIG.features && window.SITE_CONFIG.features.goldCursor === false) {
+        return;
+    }
+    
+    // Check if device is touch
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
 
+    const cursor = document.createElement('div');
+    cursor.id = 'custom-gold-cursor';
+    cursor.style.cssText = `
+        position: fixed;
+        top: 0; left: 0;
+        width: 20px; height: 20px;
+        border: 2px solid #C5A059;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        transition: width 0.2s, height 0.2s, background-color 0.2s;
+        mix-blend-mode: difference;
+    `;
+    document.body.appendChild(cursor);
+    
+    // Hide default cursor
+    const style = document.createElement('style');
+    style.innerHTML = `
+        * { cursor: none !important; }
+    `;
+    document.head.appendChild(style);
+    
+    // GSAP quickSetter for high performance
+    const setX = gsap.quickSetter(cursor, "x", "px");
+    const setY = gsap.quickSetter(cursor, "y", "px");
+    
+    window.addEventListener('mousemove', e => {
+        setX(e.clientX);
+        setY(e.clientY);
+    });
+    
+    // Hover effects
+    const addHoverEffect = () => {
+        document.querySelectorAll('a, button, input, select, textarea, [class*="cursor-pointer"]').forEach(el => {
+            if (el.dataset.cursorBound) return;
+            el.dataset.cursorBound = "1";
+            el.addEventListener('mouseenter', () => {
+                cursor.style.width = '50px';
+                cursor.style.height = '50px';
+                cursor.style.backgroundColor = 'rgba(197, 160, 89, 0.4)';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.width = '20px';
+                cursor.style.height = '20px';
+                cursor.style.backgroundColor = 'transparent';
+            });
+        });
+    };
+    
+    addHoverEffect();
+    
+    // Observe DOM changes to attach hover effects to new elements
+    const observer = new MutationObserver(mutations => {
+        if (mutations.length) addHoverEffect();
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+})();
 
 /* ============================================================
    09. HORIZONTAL SCROLL GALLERY — Wheel → ngang (Lenis-safe)
    ============================================================ */
 (function initHorizontalScroll() {
+    if (window.SITE_CONFIG && window.SITE_CONFIG.features && window.SITE_CONFIG.features.hscrollGallery === false) {
+        const section = document.getElementById('products-horizontal');
+        if (section) section.style.display = 'none';
+        return;
+    }
     const isMobileView = window.matchMedia('(max-width: 1024px)').matches;
     const section = document.getElementById('products-horizontal');
     const track   = document.querySelector('.hscroll-track-products') || document.querySelector('#products-horizontal .hscroll-track');
@@ -846,6 +961,12 @@ function createHScrollInstance(section, track) {
 // Called by blog.js after cards are injected
 window.initBlogHScroll = function() {
     const section = document.getElementById('blog');
+    
+    if (window.SITE_CONFIG && window.SITE_CONFIG.features && window.SITE_CONFIG.features.blogSection === false) {
+        if (section) section.style.display = 'none';
+        return;
+    }
+
     const track   = document.getElementById('blog-grid');
     if (section && track && !section.dataset.hscrollReady) {
         section.dataset.hscrollReady = '1';
@@ -861,6 +982,11 @@ window.initBlogHScroll = function() {
    11. ORDER FORM — n8n Webhook integration
    ============================================================ */
 (function initOrderForm() {
+    if (window.SITE_CONFIG && window.SITE_CONFIG.features && window.SITE_CONFIG.features.orderForm === false) {
+        const orderSection = document.getElementById('order');
+        if (orderSection) orderSection.style.display = 'none';
+        return;
+    }
 
     // ──────────────────────────────────────────────────────────
     // 🔧 CẤU HÌNH WEBHOOK (Lấy từ config.js / .env)
@@ -1045,6 +1171,11 @@ window.initBlogHScroll = function() {
     const floatingBtn = document.getElementById('floating-order-btn');
     if (!floatingBtn) return;
 
+    if (window.SITE_CONFIG && window.SITE_CONFIG.features && window.SITE_CONFIG.features.floatingBtn === false) {
+        floatingBtn.remove();
+        return;
+    }
+
     const heroSection = document.getElementById('hero');
     if (!heroSection) return;
 
@@ -1099,6 +1230,11 @@ window.initBlogHScroll = function() {
 (function initTestimonialsAnimation() {
     const section = document.getElementById('reviews');
     if (!section) return;
+
+    if (window.SITE_CONFIG && window.SITE_CONFIG.features && window.SITE_CONFIG.features.reviewSection === false) {
+        section.style.display = 'none';
+        return;
+    }
 
     const header = section.querySelector('.reviews-header');
     const summary = section.querySelector('.reviews-summary');

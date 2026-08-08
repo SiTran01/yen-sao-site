@@ -57,6 +57,12 @@ let dom = {};
 
 /* ── Khởi tạo ───────────────────────────────────────────────── */
 function initChatbot() {
+    if (window.SITE_CONFIG && window.SITE_CONFIG.features && window.SITE_CONFIG.features.chatbot === false) {
+        document.getElementById('ai-chat-trigger')?.remove();
+        document.getElementById('ai-chat-panel')?.remove();
+        return;
+    }
+
     dom = {
         trigger:    document.getElementById('ai-chat-trigger'),
         panel:      document.getElementById('ai-chat-panel'),

@@ -17,6 +17,12 @@ const SITE_CONFIG = {
         siteUrl: window.ENV?.SITE_URL || 'https://yensaotamthuy.vn',
     },
 
+    // ── SEO & Meta ──────────────────────────────────────────
+    seo: {
+        title:   'Yến Sào Tám Thủy | Tinh Hoa Yến Việt',
+        favicon: './assets/images/avt-gold.svg',
+    },
+
     // ── n8n Webhooks (lấy từ .env) ──────────────────────────
     webhooks: {
         order:      (() => {
@@ -37,13 +43,14 @@ const SITE_CONFIG = {
     features: {
         preloader:      true,   // Màn hình loading khi mở web
         chatbot:        true,   // Trợ lý AI Tám Thủy
-        lottiebird:     true,   // Con chim yến bay trên trang
+        lottiebird:     false,   // Con chim yến bay trên trang
         smoothScroll:   true,   // Cuộn mượt (Lenis)
         goldCursor:     true,   // Con trỏ chuột vàng (desktop)
         floatingBtn:    true,   // Nút "Đặt Hàng Ngay" nổi trên mobile
         hscrollGallery: true,   // Gallery cuộn ngang sản phẩm
         blogSection:    true,   // Phần blog / bài viết
         reviewSection:  true,   // Phần đánh giá khách hàng
+        orderForm:      true,   // Form đặt hàng
     },
 
     // ── Chatbot AI ──────────────────────────────────────────
@@ -55,7 +62,7 @@ const SITE_CONFIG = {
 
     // ── Hiệu ứng & Animation ───────────────────────────────
     animation: {
-        preloaderMinTime: 1500,     // Thời gian tối thiểu hiện preloader (ms)
+        preloaderMinTime: 15000,     // Thời gian tối thiểu hiện preloader (ms)
         heroParallax:     true,     // Hiệu ứng parallax trên hero
         revealOnScroll:   true,     // Hiệu ứng hiện dần khi cuộn
     },
