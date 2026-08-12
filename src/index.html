@@ -875,21 +875,26 @@
                             </div>
                         </div>
 
-                        
-                        <div class="flex items-center gap-6 mt-14">
+                        <div class="flex flex-wrap items-center gap-3 sm:gap-4 mt-8 sm:mt-14">
+                            <!-- Primary Button: Zalo -->
                             <a href="https://zalo.me/%VITE_ZALO_ID%" target="_blank"
-                               class="flex items-center gap-3 px-7 py-3.5 rounded-full border border-[#C5A059]/40 bg-[#380A12] hover:bg-[#4d101a] hover:border-[#C5A059] transition-all text-[#F0DEB4] text-[15px] font-bold tracking-wide no-underline shadow-[0_6px_16px_rgba(0,0,0,0.35)] hover:-translate-y-1">
-                                <span class="text-[#C5A059]">
-                                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                               class="group relative flex items-center justify-center gap-2 sm:gap-3 px-5 py-3 sm:px-8 sm:py-4 rounded-full bg-gradient-to-r from-[#C5A059] via-[#E8D1A7] to-[#C5A059] bg-[length:200%_auto] text-[#1A0A05] text-[13px] sm:text-[15px] font-bold tracking-widest uppercase no-underline shadow-[0_8px_20px_rgba(197,160,89,0.3)] hover:shadow-[0_12px_25px_rgba(197,160,89,0.5)] transition-all duration-500 hover:-translate-y-1 overflow-hidden"
+                               onmouseover="this.style.backgroundPosition='right center'"
+                               onmouseout="this.style.backgroundPosition='left center'">
+                                <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
+                                <span class="relative z-10 flex items-center justify-center w-[18px] h-[18px] sm:w-[22px] sm:h-[22px]">
+                                    <svg viewBox="0 0 24 24" class="w-full h-full" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
                                 </span>
-                                Chat Zalo ngay
+                                <span class="relative z-10">Chat Zalo Ngay</span>
                             </a>
+                            
+                            <!-- Secondary Button: Hotline -->
                             <a href="tel:%VITE_PHONE_NUMBER%"
-                               class="flex items-center gap-3 px-7 py-3.5 rounded-full border border-[#C5A059]/40 bg-[#380A12] hover:bg-[#4d101a] hover:border-[#C5A059] transition-all text-[#F0DEB4] text-[15px] font-bold tracking-wide no-underline shadow-[0_6px_16px_rgba(0,0,0,0.35)] hover:-translate-y-1">
-                                <span class="text-[#C5A059]">
-                                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                               class="group relative flex items-center justify-center gap-2 sm:gap-3 px-5 py-3 sm:px-8 sm:py-4 rounded-full border border-[#C5A059]/40 bg-[#380A12]/50 backdrop-blur-md text-[#F0DEB4] text-[13px] sm:text-[15px] font-bold tracking-widest uppercase no-underline shadow-[0_4px_15px_rgba(0,0,0,0.2)] hover:border-[#C5A059] hover:bg-[#C5A059]/10 hover:shadow-[0_8px_25px_rgba(197,160,89,0.25)] transition-all duration-300 hover:-translate-y-1">
+                                <span class="flex items-center justify-center w-[18px] h-[18px] sm:w-[22px] sm:h-[22px] text-[#C5A059] group-hover:scale-110 group-hover:text-[#E8D1A7] transition-all duration-300">
+                                    <svg viewBox="0 0 24 24" class="w-full h-full" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                                 </span>
-                                Gọi hotline
+                                <span>Gọi Hotline</span>
                             </a>
                         </div>
                     </div>
@@ -1357,14 +1362,15 @@
                                 style="width:100%;padding:12px;border:none;border-radius:8px;background:linear-gradient(135deg,#C5A059,#E1B875,#C5A059);background-size:200% auto;color:#1A0A05;font-family:'Playfair Display',serif;font-size:13px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;transition:all 0.3s;box-shadow:0 4px 16px rgba(197,160,89,0.3);"
                                 onmouseover="this.style.backgroundPosition='right center';this.style.boxShadow='0 6px 24px rgba(197,160,89,0.5)'"
                                 onmouseout="this.style.backgroundPosition='left center';this.style.boxShadow='0 4px 16px rgba(197,160,89,0.3)'">
-                                ✦ Đăng Ký Ngay
+                                Đăng Ký Ngay
                             </button>
                         </div>
                         <!-- Trust badges -->
-                        <div style="display:flex;gap:8px;margin-top:20px;flex-wrap:wrap;">
-                            <span style="font-size:12px;color:rgba(197,160,89,0.6);border:1px solid rgba(197,160,89,0.2);border-radius:20px;padding:4px 10px;">🔒 Bảo mật</span>
-                            <span style="font-size:12px;color:rgba(197,160,89,0.6);border:1px solid rgba(197,160,89,0.2);border-radius:20px;padding:4px 10px;">✓ Xác thực</span>
-                            <span style="font-size:12px;color:rgba(197,160,89,0.6);border:1px solid rgba(197,160,89,0.2);border-radius:20px;padding:4px 10px;">🚚 Toàn quốc</span>
+                        <div style="display:flex;margin-top:20px;">
+                            <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:rgba(197,160,89,0.8);border:1px solid rgba(197,160,89,0.3);border-radius:20px;padding:6px 14px;background:rgba(197,160,89,0.05);">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+                                Đền 10 lần nếu phát hiện yến giả
+                            </span>
                         </div>
                     </div>
 
@@ -1378,12 +1384,9 @@
                 </div>
 
                 <!-- Bottom bar -->
-                <div style="padding:20px 0 28px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;">
-                    <p style="font-size:13px;color:rgba(197,160,89,0.4);margin:0;letter-spacing:0.05em;">
-                        © 2025 <span style="color:rgba(197,160,89,0.6);font-weight:600;">Yến Sào Tám Thủy</span>. Bảo lưu mọi quyền.
-                    </p>
-                    <p style="font-size:13px;color:rgba(197,160,89,0.3);margin:0;">
-                        Thiết kế bởi <span style="color:rgba(197,160,89,0.5);">Antigravity</span> ✦
+                <div style="padding:20px 0 28px;text-align:center;">
+                    <p style="font-size:14px;color:rgba(197,160,89,0.7);margin:0;letter-spacing:0.05em;font-family:'Playfair Display',serif;font-style:italic;">
+                        "Yến Sào Tám Thủy — Vì sức khỏe gia đình bạn"
                     </p>
                 </div>
 
@@ -1428,23 +1431,8 @@
     <script defer src="./js/config.js?v=4"></script>
     <script defer src="./js/database.js?v=2"></script>
     <script defer src="./js/script.js?v=4"></script>
-    <!-- AI Chatbot logic — lazy loaded on first interaction to save 35KB on page load -->
-    <script>
-    (function() {
-        var chatbotLoaded = false;
-        var trigger = document.getElementById('ai-chat-trigger');
-        if (trigger) {
-            trigger.addEventListener('click', function loadChatbot() {
-                if (!chatbotLoaded) {
-                    chatbotLoaded = true;
-                    var s = document.createElement('script');
-                    s.src = './js/chatbot.js?v=16';
-                    document.body.appendChild(s);
-                }
-            }, { once: false });
-        }
-    })();
-    </script>
+    <!-- AI Chatbot logic -->
+    <script defer src="./js/chatbot.js?v=17"></script>
     <!-- Blog logic -->
     <script defer src="./js/blog.js"></script>
 

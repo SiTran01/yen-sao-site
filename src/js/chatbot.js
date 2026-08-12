@@ -153,13 +153,21 @@ function initChatbot() {
                 greetingBubble.classList.add('show-greeting');
                 playNotificationSound();
                 
-                // Nếu là tin nhắn cuối cùng (giới thiệu), tăng thời gian hiển thị thêm 5s (8000ms)
-                const delay = (step === messages.length - 1) ? 8000 : 3000;
-                
-                setTimeout(() => {
-                    step++;
-                    showNextMessage();
-                }, delay);
+                if (step === messages.length - 1) {
+                    // Nếu là tin nhắn cuối cùng, chỉ ẩn nếu greetingTimeout > 0
+                    if (window.SITE_CONFIG?.chatbot?.greetingTimeout > 0) {
+                        setTimeout(() => {
+                            greetingBubble.classList.remove('show-greeting');
+                            step++; // Đánh dấu đã xong
+                        }, window.SITE_CONFIG.chatbot.greetingTimeout);
+                    }
+                } else {
+                    // Nếu chưa phải tin nhắn cuối, chuyển sang tin nhắn tiếp theo sau 3 giây
+                    setTimeout(() => {
+                        step++;
+                        showNextMessage();
+                    }, 3000);
+                }
             }, 500);
         };
         
@@ -170,9 +178,10 @@ function initChatbot() {
             document.removeEventListener('touchstart', startGreeting);
             document.removeEventListener('keydown', startGreeting);
             
+            const delayTime = window.SITE_CONFIG?.chatbot?.greetingDelay ?? 1000;
             setTimeout(() => {
                 showNextMessage();
-            }, 1000); // Đợi 1 giây sau khi khách tương tác mới bắt đầu hiện
+            }, delayTime); // Đợi theo config sau khi khách tương tác mới bắt đầu hiện
         };
         
         // Chờ khách hàng tương tác với trang web rồi mới hiện lời chào để trình duyệt cho phép phát âm thanh
@@ -655,55 +664,13 @@ function trimHistory() {
 }
 
 /* ── Contextual Triggers ────────────────────────────────────── */
-const CONTEXT_TRIGGERS = [
-    {
-        selector: '#v-yen-tho, .hscroll-product-card[data-label="Yến Thô · Tự Nhiên"]',
-        delay: 8000,
-        message: "Yến thô giữ trọn 100% vi chất tự nhiên, rất hợp nếu bạn có thời gian tự nhặt lông. Bạn muốn mình gửi video hướng dẫn cách nhặt lông yến nhanh không? ",
-        id: "yen-tho"
-    },
-    {
-        selector: '#v-yen-tuoi, .hscroll-product-card[data-label="Yến Tươi · Cao Cấp"]',
-        delay: 8000,
-        message: "Dòng yến tươi này Tám Thủy đã nhặt lông hoàn toàn thủ công, bạn mua về là chưng được ngay. Mình tư vấn thêm cho bạn nhé? ",
-        id: "yen-tuoi"
-    },
-    {
-        selector: '#v-yen-tinh-che, .hscroll-product-card[data-label="Yến Tinh Chế · Ép Tổ"]',
-        delay: 8000,
-        message: "Yến tinh chế ép tổ là món quà sức khỏe cực kỳ sang trọng và ý nghĩa. Bạn định mua để sử dụng hay mang đi biếu tặng ạ? ",
-        id: "yen-tinh-che"
-    },
-    {
-        selector: '.hscroll-product-card[data-label="Hũ Yến · Chưng Sẵn"]',
-        delay: 7000,
-        message: "Yến chưng sẵn cực kỳ tiện lợi để bồi bổ sức khỏe mỗi ngày hoặc làm quà tặng. Bạn định mua dùng hay biếu ạ? ",
-        id: "yen-chung"
-    },
-    {
-        selector: '#blog',
-        delay: 8000,
-        message: "Bạn đang tìm hiểu kiến thức về yến sào? Cứ hỏi mình bất kỳ thắc mắc nào về cách dùng, cách chưng hay công dụng nhé! ",
-        id: "blog-section"
-    },
-    {
-        selector: '#order',
-        delay: 8000,
-        message: "Bạn đang điền form đặt hàng phải không? Nếu có thắc mắc gì về giá cả hay phân loại sản phẩm, cứ hỏi mình nhé! ",
-        id: "order-section"
-    },
-    {
-        selector: 'footer',
-        delay: 5000,
-        message: "Bạn cần hỗ trợ thêm thông tin gì không? Đừng ngại nhắn tin cho mình nhé! ",
-        id: "footer-section"
-    }
-];
-
 function initContextualTriggers() {
     const greetingBubble = document.getElementById('ai-chat-greeting');
     const greetingText = document.getElementById('ai-greeting-text');
     if (!greetingBubble || !greetingText) return;
+
+    const triggers = window.SITE_CONFIG?.chatbot?.contextualTriggers || [];
+    if (triggers.length === 0) return;
 
     let activeTriggerTimer = null;
     let currentTriggerId = null;
@@ -711,7 +678,7 @@ function initContextualTriggers() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             const triggerId = entry.target.getAttribute('data-trigger-id');
-            const config = CONTEXT_TRIGGERS.find(t => t.id === triggerId);
+            const config = triggers.find(t => t.id === triggerId);
             if (!config) return;
 
             if (entry.isIntersecting) {
@@ -731,12 +698,14 @@ function initContextualTriggers() {
                         greetingBubble.classList.add('show-greeting');
                         playNotificationSound();
                         
-                        // Auto hide after 10s
-                        setTimeout(() => {
-                            if (greetingText.innerText === config.message) {
-                                greetingBubble.classList.remove('show-greeting');
-                            }
-                        }, 10000);
+                        // Tự động ẩn theo greetingTimeout chung
+                        if (window.SITE_CONFIG?.chatbot?.greetingTimeout > 0) {
+                            setTimeout(() => {
+                                if (greetingText.innerText.trim() === config.message.trim()) {
+                                    greetingBubble.classList.remove('show-greeting');
+                                }
+                            }, window.SITE_CONFIG.chatbot.greetingTimeout);
+                        }
                     }, 500); // Wait for fade out
                     
                     sessionStorage.setItem(`ai_ctx_${triggerId}`, 'true');
@@ -756,7 +725,7 @@ function initContextualTriggers() {
 
     // Start observing after a short delay
     setTimeout(() => {
-        CONTEXT_TRIGGERS.forEach(config => {
+        triggers.forEach(config => {
             const el = document.querySelector(config.selector);
             if (el) {
                 el.setAttribute('data-trigger-id', config.id);

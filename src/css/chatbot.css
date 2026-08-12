@@ -94,7 +94,7 @@
 .ai-chat-greeting {
     position: fixed;
     right: 32px;
-    bottom: 104px;
+    bottom: 126px; /* Cao lên 20px theo ý sếp */
     width: max-content;
     max-width: 280px;
     background: #1a0a05;
@@ -123,8 +123,8 @@
 }
 .ai-chat-greeting-tail {
     position: absolute;
-    bottom: -7px;
-    right: 21px; /* Align precisely with the center of the 56px trigger button (28px from right edge - 7px half width) */
+    bottom: -7px; /* Tính toán hình học: đầu mũi nhọn sẽ chạm đúng pixel của viền trên nút chat */
+    right: 21px; /* Căn giữa hoàn hảo với nút chat */
     width: 14px;
     height: 14px;
     background: inherit;
