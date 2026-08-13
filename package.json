@@ -5,7 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite --host",
-    "build": "vite build"
+    "build": "vite build",
+    "gen-images": "node scripts/generate-responsive-images.mjs"
   },
   "keywords": [],
   "author": "",

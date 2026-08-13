@@ -1,0 +1,13 @@
+# robots.txt — Yến Sào Tám Thủy
+# https://yensaotamthuy.vn/
+
+User-agent: *
+Allow: /
+
+# Không cho bot index các file config/env
+Disallow: /js/config.js
+Disallow: /js/database.js
+Disallow: /.env
+
+# Sitemap
+Sitemap: https://yensaotamthuy.vn/sitemap.xml

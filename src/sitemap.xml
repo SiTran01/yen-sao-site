@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Trang chủ -->
+  <url>
+    <loc>https://yensaotamthuy.vn/</loc>
+    <lastmod>2026-08-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Section: Sản phẩm -->
+  <url>
+    <loc>https://yensaotamthuy.vn/#products</loc>
+    <lastmod>2026-08-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Section: Đặt hàng -->
+  <url>
+    <loc>https://yensaotamthuy.vn/#order</loc>
+    <lastmod>2026-08-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Section: Blog / Kiến thức yến sào -->
+  <url>
+    <loc>https://yensaotamthuy.vn/#blog</loc>
+    <lastmod>2026-08-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Section: FAQ -->
+  <url>
+    <loc>https://yensaotamthuy.vn/#faq</loc>
+    <lastmod>2026-08-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Section: Câu chuyện thương hiệu -->
+  <url>
+    <loc>https://yensaotamthuy.vn/#story</loc>
+    <lastmod>2026-08-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Section: Đánh giá khách hàng -->
+  <url>
+    <loc>https://yensaotamthuy.vn/#reviews</loc>
+    <lastmod>2026-08-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+</urlset>

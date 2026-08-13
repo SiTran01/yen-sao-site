@@ -46,7 +46,7 @@ const SITE_CONFIG = {
         lottiebird:     false,   // Con chim yến bay trên trang
         smoothScroll:   true,   // Cuộn mượt (Lenis)
         goldCursor:     false,   // Con trỏ chuột vàng (desktop)
-        floatingBtn:    false,   // Nút "Đặt Hàng Ngay" nổi trên mobile
+        floatingBtn:    false,    // Nút "Đặt Hàng Ngay" nổi trên mobile
         hscrollGallery: true,   // Gallery cuộn ngang sản phẩm
         blogSection:    true,   // Phần blog / bài viết
         reviewSection:  true,   // Phần đánh giá khách hàng

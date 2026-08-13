@@ -37,19 +37,22 @@
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "name": "Yến Sào Tám Thủy",
-        "description": "Cung cấp yến sào cao cấp nguyên chất tại khu vực Đầm Thị Nại, Gia Lai. Yến thô, tinh chế, yến tươi, hũ yến chưng.",
+        "description": "Cung cấp yến sào cao cấp nguyên chất tại khu vực Đầm Thị Nại, Bình Định. Yến thô, tinh chế, yến tươi, hũ yến chưng sẵn. Không qua trung gian, không pha trộn, không chất bảo quản.",
         "url": "https://yensaotamthuy.vn",
-        "telephone": "+84900000000",
+        "telephone": "+84327534965",
+        "email": "yensaotamthuy@gmail.com",
         "address": {
             "@type": "PostalAddress",
+            "streetAddress": "Đầm Thị Nại",
             "addressLocality": "Quy Nhơn",
             "addressRegion": "Bình Định",
+            "postalCode": "55000",
             "addressCountry": "VN"
         },
         "geo": {
             "@type": "GeoCoordinates",
-            "latitude": "13.7757",
-            "longitude": "109.2297"
+            "latitude": "13.80556",
+            "longitude": "109.255"
         },
         "openingHoursSpecification": [{
             "@type": "OpeningHoursSpecification",
@@ -62,8 +65,85 @@
             "ratingValue": "4.9",
             "reviewCount": "322"
         },
-        "priceRange": "₫₫₫"
+        "priceRange": "₫₫₫",
+        "sameAs": ["https://zalo.me/0327534965"]
     }
+    </script>
+
+    <!-- Product ItemList Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Sản Phẩm Yến Sào Tám Thủy",
+        "url": "https://yensaotamthuy.vn/#products",
+        "itemListElement": [
+            {
+                "@type": "ListItem", "position": 1,
+                "item": {
+                    "@type": "Product", "name": "Yến Thô Tự Nhiên",
+                    "description": "Tổ yến còn nguyên lông, 100% tự nhiên, giữ trọn dưỡng chất.",
+                    "brand": { "@type": "Brand", "name": "Yến Sào Tám Thủy" },
+                    "image": "https://yensaotamthuy.vn/assets/images/yen-tinh-che.webp",
+                    "offers": { "@type": "Offer", "priceCurrency": "VND", "price": "3500000", "availability": "https://schema.org/InStock" },
+                    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5", "reviewCount": "128" }
+                }
+            },
+            {
+                "@type": "ListItem", "position": 2,
+                "item": {
+                    "@type": "Product", "name": "Yến Tươi Cao Cấp",
+                    "description": "Thu hoạch và làm sạch thủ công, đóng gói ngay trong ngày.",
+                    "brand": { "@type": "Brand", "name": "Yến Sào Tám Thủy" },
+                    "image": "https://yensaotamthuy.vn/assets/images/yen-hop.webp",
+                    "offers": { "@type": "Offer", "priceCurrency": "VND", "price": "1500000", "availability": "https://schema.org/InStock" },
+                    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "95" }
+                }
+            },
+            {
+                "@type": "ListItem", "position": 3,
+                "item": {
+                    "@type": "Product", "name": "Yến Tinh Chế Ép Tổ",
+                    "description": "Đã làm sạch lông, ép khuôn định hình, thích hợp biếu tặng sang trọng.",
+                    "brand": { "@type": "Brand", "name": "Yến Sào Tám Thủy" },
+                    "image": "https://yensaotamthuy.vn/assets/images/yen-hop.webp",
+                    "offers": { "@type": "Offer", "priceCurrency": "VND", "price": "4200000", "availability": "https://schema.org/InStock" },
+                    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5", "reviewCount": "215" }
+                }
+            },
+            {
+                "@type": "ListItem", "position": 4,
+                "item": {
+                    "@type": "Product", "name": "Hũ Yến Chưng Sẵn",
+                    "description": "Chưng cất với đường phèn, táo đỏ, hạt sen. Mở nắp dùng ngay.",
+                    "brand": { "@type": "Brand", "name": "Yến Sào Tám Thủy" },
+                    "image": "https://yensaotamthuy.vn/assets/images/yen-hu.webp",
+                    "offers": { "@type": "Offer", "priceCurrency": "VND", "price": "850000", "availability": "https://schema.org/InStock" },
+                    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "320" }
+                }
+            }
+        ]
+    }
+    </script>
+
+    <!-- FAQPage Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            { "@type": "Question", "name": "Yến sào Tám Thủy khác gì so với yến ngoài thị trường?", "acceptedAnswer": { "@type": "Answer", "text": "Yến Tám Thủy được thu hoạch trực tiếp từ nhà yến tự nhiên tại Đầm Thị Nại, Bình Định. Không qua trung gian, không pha trộn, không chất bảo quản. Mỗi mẻ yến đều có thể truy xuất nguồn gốc rõ ràng." } },
+            { "@type": "Question", "name": "Làm sao phân biệt yến thật và yến giả?", "acceptedAnswer": { "@type": "Answer", "text": "Yến thật có màu trắng ngà hoặc vàng nhạt tự nhiên, mùi tanh nhẹ của biển, khi chưng nở gấp 4-6 lần và có độ dai giòn. Yến giả thường quá trắng đồng đều, không mùi, nở ít và nhão." } },
+            { "@type": "Question", "name": "Giao hàng bao lâu? Có giao toàn quốc không?", "acceptedAnswer": { "@type": "Answer", "text": "Giao hàng toàn quốc qua GHTK, GHN, ViettelPost. 1-2 ngày tại TP.HCM, Hà Nội, Đà Nẵng; 2-3 ngày các tỉnh khác." } },
+            { "@type": "Question", "name": "Chính sách đổi trả như thế nào?", "acceptedAnswer": { "@type": "Answer", "text": "Đổi trả trong 7 ngày nếu sản phẩm không đúng mô tả hoặc có lỗi. Phí ship đổi trả do Tám Thủy chịu nếu lỗi từ phía chúng tôi." } },
+            { "@type": "Question", "name": "Có giá sỉ cho doanh nghiệp không?", "acceptedAnswer": { "@type": "Answer", "text": "Từ 5 hộp trở lên giảm 8–15%. Từ 20 hộp được in logo, thiết kế hộp theo yêu cầu, xuất hóa đơn VAT. Liên hệ hotline để nhận báo giá sỉ." } }
+        ]
+    }
+    </script>
+
+    <!-- WebSite Schema -->
+    <script type="application/ld+json">
+    { "@context": "https://schema.org", "@type": "WebSite", "name": "Yến Sào Tám Thủy", "url": "https://yensaotamthuy.vn" }
     </script>
 
     <!-- Tailwind compiled at build time via PostCSS — NO CDN -->
@@ -509,7 +589,10 @@
                     
                     <div class="w-full md:w-1/2 relative p-8 md:p-12" data-aos="zoom-in-right" data-aos-delay="150">
                         <div class="absolute inset-0 bg-gradient-to-tl from-[#800020]/10 via-[#C5A059]/20 to-transparent rounded-full blur-[60px] -z-10 transform group-hover:scale-125 transition-transform duration-1000"></div>
-                        <img loading="lazy" src="./assets/images/yen-hop.webp" alt="Yến Tươi Tiện Lợi" class="w-full drop-shadow-[0_25px_35px_rgba(0,0,0,0.2)] transform transition-all duration-[1.5s] group-hover:scale-110 group-hover:-translate-y-6 group-hover:-rotate-2 object-contain aspect-square">
+                        <picture>
+                            <source srcset="./assets/images/yen-hop-400w.webp 400w, ./assets/images/yen-hop.webp 800w" sizes="(max-width:768px) 400px, 800px" type="image/webp">
+                            <img loading="lazy" decoding="async" src="./assets/images/yen-hop.webp" alt="Yến Tươi Tiện Lợi — Yến Sào Tám Thủy" class="w-full drop-shadow-[0_25px_35px_rgba(0,0,0,0.2)] transform transition-all duration-[1.5s] group-hover:scale-110 group-hover:-translate-y-6 group-hover:-rotate-2 object-contain aspect-square">
+                        </picture>
                     </div>
 
                     <div class="w-full md:w-1/2 p-10 md:p-16 text-left" data-aos="fade-left" data-aos-delay="300">
@@ -539,7 +622,10 @@
                     
                     <div class="w-full md:w-1/2 order-1 md:order-2 relative p-8 md:p-12" data-aos="zoom-in-left" data-aos-delay="300">
                         <div class="absolute inset-0 bg-gradient-to-tr from-[#8B6508]/20 via-[#C5A059]/20 to-transparent rounded-full blur-[60px] -z-10 transform group-hover:scale-125 transition-transform duration-1000"></div>
-                        <img loading="lazy" src="./assets/images/yen-hop.webp" alt="Yến Tinh Chế Thượng Hạng" class="w-full drop-shadow-[0_25px_40px_rgba(0,0,0,0.25)] transform transition-all duration-[1.5s] group-hover:scale-110 group-hover:-translate-y-6 group-hover:rotate-3 object-contain aspect-square">
+                        <picture>
+                            <source srcset="./assets/images/yen-hop-400w.webp 400w, ./assets/images/yen-hop.webp 800w" sizes="(max-width:768px) 400px, 800px" type="image/webp">
+                            <img loading="lazy" decoding="async" src="./assets/images/yen-hop.webp" alt="Yến Tinh Chế Thượng Hạng — Yến Sào Tám Thủy" class="w-full drop-shadow-[0_25px_40px_rgba(0,0,0,0.25)] transform transition-all duration-[1.5s] group-hover:scale-110 group-hover:-translate-y-6 group-hover:rotate-3 object-contain aspect-square">
+                        </picture>
                     </div>
                 </div>
 
@@ -1356,9 +1442,12 @@
                         </p>
                         <div id="footer-newsletter" style="display:flex;flex-direction:column;gap:10px;">
                             <input type="email" id="footer-email" placeholder="Nhập email của bạn..."
+                                aria-label="Địa chỉ email để nhận ưu đãi"
+                                autocomplete="email"
                                 style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.06);border:1px solid rgba(197,160,89,0.3);border-radius:8px;color:#E8D1A7;font-size:14px;font-family:'Be Vietnam Pro',sans-serif;outline:none;transition:border-color 0.3s;box-sizing:border-box;"
                                 onfocus="this.style.borderColor='rgba(197,160,89,0.7)'" onblur="this.style.borderColor='rgba(197,160,89,0.3)'">
                             <button onclick="submitFooterNewsletter()"
+                                aria-label="Đăng ký nhận thông tin ưu đãi"
                                 style="width:100%;padding:12px;border:none;border-radius:8px;background:linear-gradient(135deg,#C5A059,#E1B875,#C5A059);background-size:200% auto;color:#1A0A05;font-family:'Playfair Display',serif;font-size:13px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;transition:all 0.3s;box-shadow:0 4px 16px rgba(197,160,89,0.3);"
                                 onmouseover="this.style.backgroundPosition='right center';this.style.boxShadow='0 6px 24px rgba(197,160,89,0.5)'"
                                 onmouseout="this.style.backgroundPosition='left center';this.style.boxShadow='0 4px 16px rgba(197,160,89,0.3)'">

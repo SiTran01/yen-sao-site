@@ -83,7 +83,13 @@ const renderProducts = () => {
                 <div class="absolute top-0 left-0 bg-brand-red text-white text-xs font-bold px-3 py-1 z-10 rounded-br-lg uppercase tracking-wider">
                     ${product.tag}
                 </div>
-                <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">
+                <picture>
+                    <source
+                        srcset="${product.image.replace('.webp','-400w.webp')} 400w, ${product.image} 800w"
+                        sizes="(max-width: 640px) 400px, 800px"
+                        type="image/webp">
+                    <img src="${product.image}" alt="${product.name} — Yến Sào Tám Thủy" class="w-full h-full object-cover" loading="lazy" decoding="async" width="400" height="300">
+                </picture>
 
                 <!-- Quick Action Overlay -->
                 <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
