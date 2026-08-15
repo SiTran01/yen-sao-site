@@ -664,9 +664,11 @@ window.addEventListener("load", function () {
             const introLines = section.querySelectorAll('.hscroll-intro-line');
             const introEls   = section.querySelectorAll('.hscroll-intro-el');
             const cards      = section.querySelectorAll('.hscroll-product-card');
+            const decorTree  = section.querySelector('.decor-hscroll-branch-tl');
             gsap.set(introLines, { clearProps: 'all' });
             gsap.set(introEls,   { clearProps: 'all' });
             gsap.set(cards,      { clearProps: 'all' });
+            if (decorTree) gsap.set(decorTree, { clearProps: 'all' });
         }
         return;
     }
@@ -771,14 +773,21 @@ window.addEventListener("load", function () {
     const introLines = section.querySelectorAll('.hscroll-intro-line');
     const introEls   = section.querySelectorAll('.hscroll-intro-el');
     const cards      = section.querySelectorAll('.hscroll-product-card');
+    const decorTree  = section.querySelector('.decor-hscroll-branch-tl'); // Lấy phần tử cây
 
     gsap.set(introLines, { y: '110%' });
     gsap.set(introEls,   { opacity: 0, y: -16 });
     gsap.set(cards,      { x: 80, opacity: 0 });
+    if (decorTree) gsap.set(decorTree, { opacity: 0, y: -30 });
 
     const entranceTl = gsap.timeline({ scrollTrigger: { trigger: section, start: 'top 82%', once: true } });
+    
+    if (decorTree) {
+        entranceTl.to(decorTree, { opacity: 0.12, y: 0, duration: 2.5, ease: 'power2.out' }, 0); // Chạy cùng lúc ngay từ đầu, mờ dần 2.5s
+    }
+
     entranceTl
-        .to(introLines, { y: '0%', duration: 0.9, stagger: 0.13, ease: 'power3.out' })
+        .to(introLines, { y: '0%', duration: 0.9, stagger: 0.13, ease: 'power3.out' }, 0.2)
         .to(introEls,   { opacity: 1, y: 0, duration: 0.6, stagger: 0.15, ease: 'power2.out' }, '-=0.4')
         .to(cards,      { x: 0, opacity: 1, duration: 0.75, stagger: 0.07, ease: 'power3.out' }, '-=0.6');
 
@@ -841,10 +850,12 @@ function createHScrollInstance(section, track) {
             }
             const introLines = section.querySelectorAll('.hscroll-intro-line');
             const introEls   = section.querySelectorAll('.hscroll-intro-el');
-            const cards      = section.querySelectorAll('.blog-post-card');
+            const cards      = section.querySelectorAll('.blog-post-card, .hscroll-product-card');
+            const decorTree  = section.querySelector('.decor-blog-branch-tl');
             gsap.set(introLines, { clearProps: 'all' });
             gsap.set(introEls,   { clearProps: 'all' });
             gsap.set(cards,      { clearProps: 'all' });
+            if (decorTree) gsap.set(decorTree, { clearProps: 'all' });
         }
         return;
     }
@@ -941,13 +952,22 @@ function createHScrollInstance(section, track) {
     // Entrance animation
     const introLines = section.querySelectorAll('.hscroll-intro-line');
     const introEls   = section.querySelectorAll('.hscroll-intro-el');
-    const cards      = section.querySelectorAll('.blog-post-card');
+    const cards      = section.querySelectorAll('.blog-post-card, .hscroll-product-card');
+    const decorTree  = section.querySelector('.decor-blog-branch-tl'); // Lấy phần tử cây blog
+
     gsap.set(introLines, { y: '110%' });
     gsap.set(introEls,   { opacity: 0, y: -16 });
     gsap.set(cards,      { x: 80, opacity: 0 });
+    if (decorTree) gsap.set(decorTree, { opacity: 0, y: -30 });
+
     const entranceTl = gsap.timeline({ scrollTrigger: { trigger: section, start: 'top 82%', once: true } });
+    
+    if (decorTree) {
+        entranceTl.to(decorTree, { opacity: 0.10, y: 0, duration: 2.5, ease: 'power2.out' }, 0); // Giảm opacity mờ đi để không lấn át chữ
+    }
+
     entranceTl
-        .to(introLines, { y: '0%', duration: 0.9, stagger: 0.13, ease: 'power3.out' })
+        .to(introLines, { y: '0%', duration: 0.9, stagger: 0.13, ease: 'power3.out' }, 0.2)
         .to(introEls,   { opacity: 1, y: 0, duration: 0.6, stagger: 0.15, ease: 'power2.out' }, '-=0.4')
         .to(cards,      { x: 0, opacity: 1, duration: 0.75, stagger: 0.1, ease: 'power3.out' }, '-=0.6');
 
