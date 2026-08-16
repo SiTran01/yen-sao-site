@@ -490,19 +490,19 @@
                 <!-- Product images -->
                 <div class="hero-products-wrapper relative w-full max-w-[480px] aspect-square">
 
-                    <div class="gsap-hero-img-1 absolute top-[0%] left-[0%] w-[65%] z-10 hero-img-load" style="transition-delay:0.1s;">
+                    <div class="gsap-hero-img-1 absolute top-[0%] left-[0%] w-[65%] z-10 hero-img-load" style="transition-delay:0.9s;">
                         <div class="w-full h-full transition-transform duration-500 hover:scale-[1.04]">
                             <img src="./assets/images/yen-tinh-che.webp" alt="Tổ Yến Tinh Chế" class="w-full drop-shadow-[0_30px_60px_rgba(0,0,0,0.5)]">
                         </div>
                     </div>
 
-                    <div class="gsap-hero-img-2 absolute top-[18%] right-[0%] w-[45%] z-20 hero-img-load" style="transition-delay:0.3s;">
+                    <div class="gsap-hero-img-2 absolute top-[18%] right-[0%] w-[45%] z-20 hero-img-load" style="transition-delay:1.1s;">
                         <div class="w-full h-full transition-transform duration-500 hover:scale-[1.04]">
                             <img src="./assets/images/yen-hu.webp" alt="Hũ Yến Chưng" class="w-full drop-shadow-[0_20px_50px_rgba(0,0,0,0.45)]">
                         </div>
                     </div>
 
-                    <div class="gsap-hero-img-3 absolute bottom-[5%] left-[20%] w-[60%] z-30 hero-img-load" style="transition-delay:0.5s;">
+                    <div class="gsap-hero-img-3 absolute bottom-[5%] left-[20%] w-[60%] z-30 hero-img-load" style="transition-delay:1.3s;">
                         <div class="w-full h-full transition-transform duration-500 hover:scale-[1.04]">
                             <img src="./assets/images/yen-hop.webp" alt="Hộp Quà Yến Sào" class="w-full drop-shadow-[0_25px_50px_rgba(0,0,0,0.4)]">
                         </div>
@@ -511,7 +511,7 @@
                 </div><!-- /hero-products-wrapper -->
 
                 <!-- Brand badge — outside wrapper to avoid clip -->
-                <div class="hero-brand-badge stamp-animation" style="animation-delay:2s;">
+                <div class="hero-brand-badge stamp-animation" style="animation-delay:2.8s;">
                     <!-- Top gold accent bar -->
                     <div class="hero-brand-badge__bar"></div>
                     <!-- Shimmer sweep -->
@@ -1581,7 +1581,7 @@
         var preloader = document.getElementById('site-preloader');
         if (!preloader) {
             // No preloader: trigger immediately after DOM ready
-            setTimeout(triggerHeroTitleAnimation, 100);
+            setTimeout(triggerHeroTitleAnimation, 800);
             return;
         }
 
@@ -1590,8 +1590,8 @@
             mutations.forEach(function(m) {
                 if (m.type === 'attributes' && m.attributeName === 'class') {
                     if (preloader.classList.contains('is-hidden')) {
-                        // Small delay so the hero is fully visible before letters fly in
-                        setTimeout(triggerHeroTitleAnimation, 200);
+                        // Delay 800ms
+                        setTimeout(triggerHeroTitleAnimation, 800);
                         observer.disconnect();
                     }
                 }
@@ -1599,11 +1599,11 @@
         });
         observer.observe(preloader, { attributes: true });
 
-        // Fallback: trigger after 3s regardless
+        // Fallback: trigger after 5s regardless
         setTimeout(function() {
             triggerHeroTitleAnimation();
             observer.disconnect();
-        }, 3000);
+        }, 5000);
     })();
     </script>
 </body>

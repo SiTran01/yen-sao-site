@@ -85,7 +85,7 @@
     100% { clip-path: inset(0 0 0 0); opacity: var(--decor-opacity, 0.18); }
 }
 @keyframes decor-fly-in {
-    0% { opacity: 0; transform: translate(40px, -20px) scale(0.9) rotate(var(--decor-rot, 0deg)); }
+    0% { opacity: 0; transform: translate(-60px, 40px) scale(0.9) rotate(var(--decor-rot, 0deg)); }
     100% { opacity: var(--decor-opacity, 0.18); transform: translate(0, 0) scale(1) rotate(var(--decor-rot, 0deg)); }
 }
 @keyframes decor-sway {
@@ -104,20 +104,26 @@
     --decor-rot: -8deg; --decor-opacity: 0.38;
     top: 80px; left: -60px; width: clamp(240px, 30vw, 420px); opacity: 0;
     transform: rotate(var(--decor-rot, 0deg));
-    animation: decor-grow-left 2.5s cubic-bezier(0.25,1,0.5,1) 0.8s forwards,
-               decor-sway 10s ease-in-out 3.3s infinite;
     transform-origin: left top;
+}
+body.page-loaded .decor-hero-branch-tl {
+    animation: decor-grow-left 2.5s cubic-bezier(0.25,1,0.5,1) 0.1s forwards,
+               decor-sway 10s ease-in-out 3.3s infinite;
 }
 .decor-hero-birds-br {
     --decor-opacity: 0.32;
     top: 80px; right: 80px; width: clamp(160px, 18vw, 260px); opacity: 0;
-    animation: decor-fly-in 2s cubic-bezier(0.25,1,0.5,1) 1.2s forwards,
+}
+body.page-loaded .decor-hero-birds-br {
+    animation: decor-fly-in 2s cubic-bezier(0.25,1,0.5,1) 0.3s forwards,
                decor-drift 14s ease-in-out 3.2s infinite;
 }
 .decor-hero-landscape {
     --decor-opacity: 0.15;
     bottom: 0; right: -30px; width: clamp(300px, 38vw, 520px); opacity: 0;
-    animation: decor-grow-right 2.4s cubic-bezier(0.25,1,0.5,1) 1.5s forwards;
+}
+body.page-loaded .decor-hero-landscape {
+    animation: decor-grow-right 2.4s cubic-bezier(0.25,1,0.5,1) 0.5s forwards;
 }
 .decor-products-branch-tr {
     --decor-rot: 0deg; --decor-opacity: 0.20;
@@ -141,9 +147,11 @@
 }
 .decor-hscroll-branch-tl {
     --decor-rot: 0deg; --decor-opacity: 0.12;
-    top: 70px; left: -60px; width: clamp(300px, 38vw, 550px); opacity: var(--decor-opacity);
-    transform: rotate(var(--decor-rot)) scaleY(1.4);
-    transform-origin: left top;
+    top: 70px; left: 0px; width: clamp(300px, 38vw, 550px); opacity: var(--decor-opacity);
+    transform: rotate(var(--decor-rot)) scaleX(-1) scaleY(1.4);
+    transform-origin: center top;
+    -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%);
+    mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%);
 }
 .decor-blog-branch-tl {
     --decor-rot: 0deg; --decor-opacity: 0.10; 
@@ -233,7 +241,7 @@
     100% { clip-path: inset(0 0 0 0); opacity: var(--decor-opacity, 0.18); }
 }
 @keyframes decor-fly-in {
-    0% { opacity: 0; transform: translate(40px, -20px) scale(0.9) rotate(var(--decor-rot, 0deg)); }
+    0% { opacity: 0; transform: translate(-60px, 40px) scale(0.9) rotate(var(--decor-rot, 0deg)); }
     100% { opacity: var(--decor-opacity, 0.18); transform: translate(0, 0) scale(1) rotate(var(--decor-rot, 0deg)); }
 }
 @keyframes decor-sway {
@@ -252,20 +260,26 @@
     --decor-rot: -8deg; --decor-opacity: 0.38;
     top: 80px; left: -60px; width: clamp(240px, 30vw, 420px); opacity: 0;
     transform: rotate(var(--decor-rot, 0deg));
-    animation: decor-grow-left 2.5s cubic-bezier(0.25,1,0.5,1) 0.8s forwards,
-               decor-sway 10s ease-in-out 3.3s infinite;
     transform-origin: left top;
+}
+body.page-loaded .decor-hero-branch-tl {
+    animation: decor-grow-left 2.5s cubic-bezier(0.25,1,0.5,1) 0.1s forwards,
+               decor-sway 10s ease-in-out 3.3s infinite;
 }
 .decor-hero-birds-br {
     --decor-opacity: 0.32;
     top: 80px; right: 80px; width: clamp(160px, 18vw, 260px); opacity: 0;
-    animation: decor-fly-in 2s cubic-bezier(0.25,1,0.5,1) 1.2s forwards,
+}
+body.page-loaded .decor-hero-birds-br {
+    animation: decor-fly-in 2s cubic-bezier(0.25,1,0.5,1) 0.3s forwards,
                decor-drift 14s ease-in-out 3.2s infinite;
 }
 .decor-hero-landscape {
     --decor-opacity: 0.15;
     bottom: 0; right: -30px; width: clamp(300px, 38vw, 520px); opacity: 0;
-    animation: decor-grow-right 2.4s cubic-bezier(0.25,1,0.5,1) 1.5s forwards;
+}
+body.page-loaded .decor-hero-landscape {
+    animation: decor-grow-right 2.4s cubic-bezier(0.25,1,0.5,1) 0.5s forwards;
 }
 .decor-products-branch-tr {
     --decor-rot: 0deg; --decor-opacity: 0.20;
@@ -289,9 +303,11 @@
 }
 .decor-hscroll-branch-tl {
     --decor-rot: 0deg; --decor-opacity: 0.12;
-    top: 70px; left: -60px; width: clamp(300px, 38vw, 550px); opacity: var(--decor-opacity);
-    transform: rotate(var(--decor-rot)) scaleY(1.4);
-    transform-origin: left top;
+    top: 70px; left: 0px; width: clamp(300px, 38vw, 550px); opacity: var(--decor-opacity);
+    transform: rotate(var(--decor-rot)) scaleX(-1) scaleY(1.4);
+    transform-origin: center top;
+    -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%);
+    mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%);
 }
 .decor-blog-branch-tl {
     --decor-rot: 0deg; --decor-opacity: 0.10; 
@@ -2511,6 +2527,39 @@ h6,
     height: 36px;
     background: linear-gradient(to bottom, transparent, rgba(197,160,89,0.25), transparent);
     flex-shrink: 0;
+}
+
+/* Animations cho các thành phần còn lại trong hero-text-col */
+.hero-eyebrow-wrap,
+.hero-tagline,
+.hero-trust-row {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.hero-cta-row {
+    opacity: 0;
+    transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.hero-text-animate .hero-eyebrow-wrap {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.1s;
+}
+.hero-text-animate .hero-tagline {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.8s;
+}
+.hero-text-animate .hero-cta-row {
+    opacity: 1;
+    transition-delay: 1.0s;
+}
+.hero-text-animate .hero-trust-row {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 1.2s;
 }
 
 /* RIGHT — image col */

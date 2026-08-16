@@ -188,6 +188,8 @@ window.luxuryScrollTo = (targetId) => {
     const hidePreloader = () => {
         setTimeout(() => {
             preloader.classList.add('is-hidden');
+            document.body.classList.add('page-loaded');
+            ScrollTrigger.refresh();
             preloader.addEventListener('transitionend', () => preloader.remove(), { once: true });
         }, 300); // 300ms buffer sau window.load
     };
@@ -205,18 +207,12 @@ window.luxuryScrollTo = (targetId) => {
    ============================================================ */
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Trigger page-loaded class (unlock hero image animations)
+    // Remove CSS transition sau khi animation xong → nhường cho GSAP
     setTimeout(() => {
-        document.body.classList.add('page-loaded');
-        ScrollTrigger.refresh();
-
-        // Remove CSS transition sau khi animation xong → nhường cho GSAP
-        setTimeout(() => {
-            document.querySelectorAll('.hero-img-load').forEach(el => {
-                el.style.transition = 'none';
-            });
-        }, 2000);
-    }, 100);
+        document.querySelectorAll('.hero-img-load').forEach(el => {
+            el.style.transition = 'none';
+        });
+    }, 4000);
 
     // Apply SEO & Tab Info
     (function applySeo() {
