@@ -774,12 +774,12 @@ window.addEventListener("load", function () {
     gsap.set(introLines, { y: '110%' });
     gsap.set(introEls,   { opacity: 0, y: -16 });
     gsap.set(cards,      { x: 80, opacity: 0 });
-    if (decorTree) gsap.set(decorTree, { opacity: 0, y: -30 });
+    if (decorTree) gsap.set(decorTree, { opacity: 0, clipPath: 'inset(0% 0% 0% 100%)', rotation: -8, scaleX: -1, scaleY: 1.4 });
 
     const entranceTl = gsap.timeline({ scrollTrigger: { trigger: section, start: 'top 82%', once: true } });
     
     if (decorTree) {
-        entranceTl.to(decorTree, { opacity: 0.12, y: 0, duration: 2.5, ease: 'power2.out' }, 0); // Chạy cùng lúc ngay từ đầu, mờ dần 2.5s
+        entranceTl.to(decorTree, { opacity: 0.12, clipPath: 'inset(0% 0% 0% 0%)', rotation: 0, scaleX: -1, scaleY: 1.4, duration: 2.0, ease: 'power2.out' }, 0.5); 
     }
 
     entranceTl
@@ -954,12 +954,12 @@ function createHScrollInstance(section, track) {
     gsap.set(introLines, { y: '110%' });
     gsap.set(introEls,   { opacity: 0, y: -16 });
     gsap.set(cards,      { x: 80, opacity: 0 });
-    if (decorTree) gsap.set(decorTree, { opacity: 0, y: -30 });
+    if (decorTree) gsap.set(decorTree, { opacity: 0, clipPath: 'inset(0% 0% 0% 100%)', rotation: -8, scaleX: -1, scaleY: 1.7 });
 
     const entranceTl = gsap.timeline({ scrollTrigger: { trigger: section, start: 'top 82%', once: true } });
     
     if (decorTree) {
-        entranceTl.to(decorTree, { opacity: 0.10, y: 0, duration: 2.5, ease: 'power2.out' }, 0); // Giảm opacity mờ đi để không lấn át chữ
+        entranceTl.to(decorTree, { opacity: 0.10, clipPath: 'inset(0% 0% 0% 0%)', rotation: 0, scaleX: -1, scaleY: 1.7, duration: 2.0, ease: 'power2.out' }, 0.5); 
     }
 
     entranceTl

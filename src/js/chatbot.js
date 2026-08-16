@@ -130,7 +130,9 @@ function initChatbot() {
     const greetingBubble = document.getElementById('ai-chat-greeting');
     const greetingText = document.getElementById('ai-greeting-text');
     
-    if (greetingBubble && greetingText && chatHistory.length === 0 && !sessionStorage.getItem('ai_greeting_shown')) {
+    const isAutoGreetingEnabled = window.SITE_CONFIG?.chatbot?.autoGreeting !== false;
+
+    if (isAutoGreetingEnabled && greetingBubble && greetingText && chatHistory.length === 0 && !sessionStorage.getItem('ai_greeting_shown')) {
         const messages = [
             "Xin chào! ",
             "Mình là Trợ Lý Tám Thủy. Bạn cần tư vấn về yến sào ạ? "
@@ -665,6 +667,8 @@ function trimHistory() {
 
 /* ── Contextual Triggers ────────────────────────────────────── */
 function initContextualTriggers() {
+    if (window.SITE_CONFIG?.chatbot?.autoContextual === false) return;
+
     const greetingBubble = document.getElementById('ai-chat-greeting');
     const greetingText = document.getElementById('ai-greeting-text');
     if (!greetingBubble || !greetingText) return;

@@ -55,6 +55,8 @@ const SITE_CONFIG = {
 
     // ── Chatbot AI ──────────────────────────────────────────
     chatbot: {
+        autoGreeting: true,         // Bật/tắt tự động hiện lời chào lúc mới vào trang (Xin chào! Mình là...)
+        autoContextual: false,       // Bật/tắt tự động nhảy lời chào tư vấn khi cuộn đến từng sản phẩm
         maxHistory:  12,            // Số tin nhắn giữ lại (6 cặp hỏi/đáp)
         // systemPrompt: `Bạn là trợ lý tư vấn yến sào của "Yến Sào Tám Thủy" (yensaotamthuy.vn). Trả lời thân thiện, ngắn gọn, thấu hiểu khách hàng.`,
         greetingDelay: 1000,        // Thời gian chờ trước khi tự động hiện lời chào (ms)
