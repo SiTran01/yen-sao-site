@@ -88,32 +88,58 @@ export default async function handler(req, res) {
             });
 
             const htmlContent = `
-                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #e5e7eb; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
-                    <div style="text-align: center; margin-bottom: 20px;">
-                        <h2 style="color: #b78a48; margin-bottom: 5px;">Cảm ơn bạn đã đặt hàng!</h2>
-                        <p style="color: #6b7280; font-size: 14px; margin-top: 0;">Yến Sào Tám Thủy - Tinh Hoa Yến Việt</p>
-                    </div>
-                    <p>Chào <b>${payload.name}</b>,</p>
-                    <p>Chúng tôi đã nhận được yêu cầu đặt hàng của bạn. Yến Sào Tám Thủy sẽ sớm liên hệ qua số điện thoại <b>${payload.phone}</b> để xác nhận đơn hàng và thời gian giao hàng.</p>
+                <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid #e5e7eb;">
                     
-                    <div style="background-color: #f9fafb; padding: 20px; border-radius: 8px; margin: 25px 0; border: 1px solid #f3f4f6;">
-                        <h3 style="margin-top: 0; color: #111827; border-bottom: 1px solid #e5e7eb; padding-bottom: 10px;">Thông tin đơn hàng của bạn:</h3>
-                        <ul style="line-height: 1.8; padding-left: 20px; color: #374151;">
-                            <li><b>Sản phẩm:</b> ${payload.product}</li>
-                            <li><b>Số lượng/Phân loại:</b> ${payload.qty}</li>
-                            <li><b>Địa chỉ nhận hàng:</b> ${payload.address}</li>
-                            <li><b>Ghi chú:</b> ${payload.note || 'Không có'}</li>
-                            <li><b>Phương thức thanh toán:</b> ${payload.payment || 'Thanh toán khi nhận hàng (COD)'}</li>
-                        </ul>
+                    <!-- Header -->
+                    <div style="background-color: #380A12; padding: 30px 20px; text-align: center; border-bottom: 3px solid #C5A059;">
+                        <h1 style="color: #C5A059; margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 2px;">Yến Sào Tám Thủy</h1>
+                        <p style="color: #F0DEB4; margin: 10px 0 0 0; font-style: italic; font-size: 14px;">Tinh Hoa Yến Việt - Trao Gửi Sức Khỏe Vàng</p>
+                    </div>
+
+                    <!-- Body -->
+                    <div style="padding: 30px 20px;">
+                        <h2 style="color: #380A12; margin-top: 0; font-size: 20px;">Cảm ơn bạn đã đặt hàng!</h2>
+                        <p style="color: #4b5563; line-height: 1.6;">Chào <b>${payload.name}</b>,</p>
+                        <p style="color: #4b5563; line-height: 1.6;">Chúng tôi đã nhận được yêu cầu đặt hàng của bạn. Đội ngũ chăm sóc khách hàng sẽ sớm liên hệ qua số điện thoại <b style="color: #380A12;">${payload.phone}</b> để xác nhận đơn và thời gian giao hàng.</p>
+                        
+                        <!-- Order Details -->
+                        <div style="background-color: #faf9f6; border: 1px solid #e5e7eb; border-left: 4px solid #C5A059; padding: 20px; margin: 25px 0; border-radius: 4px;">
+                            <h3 style="margin-top: 0; color: #380A12; font-size: 15px; text-transform: uppercase; letter-spacing: 1px;">Thông tin đơn hàng</h3>
+                            <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                                <tr>
+                                    <td style="padding: 8px 0; border-bottom: 1px dashed #e5e7eb; color: #6b7280; width: 40%;">Sản phẩm:</td>
+                                    <td style="padding: 8px 0; border-bottom: 1px dashed #e5e7eb; color: #111827; font-weight: bold;">${payload.product}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px 0; border-bottom: 1px dashed #e5e7eb; color: #6b7280;">Số lượng/Phân loại:</td>
+                                    <td style="padding: 8px 0; border-bottom: 1px dashed #e5e7eb; color: #111827; font-weight: bold;">${payload.qty}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px 0; border-bottom: 1px dashed #e5e7eb; color: #6b7280;">Thanh toán:</td>
+                                    <td style="padding: 8px 0; border-bottom: 1px dashed #e5e7eb; color: #111827; font-weight: bold;">${payload.payment || 'Thanh toán khi nhận hàng (COD)'}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px 0; border-bottom: 1px dashed #e5e7eb; color: #6b7280;">Địa chỉ nhận hàng:</td>
+                                    <td style="padding: 8px 0; border-bottom: 1px dashed #e5e7eb; color: #111827; font-weight: bold;">${payload.address}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px 0; color: #6b7280;">Ghi chú:</td>
+                                    <td style="padding: 8px 0; color: #111827; font-weight: bold;">${payload.note || 'Không có'}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+                        <p style="color: #4b5563; line-height: 1.6;">Nếu có bất kỳ thắc mắc nào, vui lòng liên hệ trực tiếp qua hotline/Zalo: <b style="color: #C5A059; font-size: 16px;">0327534965</b>.</p>
                     </div>
                     
-                    <p style="color: #4b5563; font-size: 15px;">Nếu có bất kỳ thắc mắc nào hoặc cần thay đổi thông tin, vui lòng liên hệ hotline/Zalo: <b>0327534965</b>.</p>
-                    <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0 20px 0;">
-                    <p style="text-align: center; color: #9ca3af; font-size: 12px; line-height: 1.5;">
-                        <b>Yến Sào Tám Thủy</b><br>
-                        Đầm Thị Nại, Bình Định<br>
-                        Website: yensaotamthuy.vn
-                    </p>
+                    <!-- Footer -->
+                    <div style="background-color: #f9fafb; padding: 20px; text-align: center; border-top: 1px solid #e5e7eb;">
+                        <p style="color: #9ca3af; font-size: 12px; margin: 0; line-height: 1.6;">
+                            <strong style="color: #6b7280;">Yến Sào Tám Thủy</strong><br>
+                            Đầm Thị Nại, Bình Định<br>
+                            <a href="https://yensaotamthuy.vn" style="color: #C5A059; text-decoration: none;">yensaotamthuy.vn</a>
+                        </p>
+                    </div>
                 </div>
             `;
 
