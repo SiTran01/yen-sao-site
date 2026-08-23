@@ -1021,8 +1021,8 @@ window.initBlogHScroll = function() {
     const statusText = document.getElementById('n8n-status-text');
     if (dot && statusText) {
         if (IS_WEBHOOK_CONFIGURED) {
-            dot.classList.remove('pending');
-            statusText.textContent = 'Hệ thống xử lý đơn · Đang hoạt động';
+            dot.classList.add('pending');
+            statusText.textContent = 'Hệ thống xử lý đơn · Đang kiểm tra...';
         } else {
             dot.classList.add('pending');
             statusText.textContent = 'Hệ thống xử lý đơn · Chưa cấu hình (sẽ lưu tạm)';
@@ -1081,13 +1081,29 @@ window.initBlogHScroll = function() {
     if (IS_WEBHOOK_CONFIGURED) {
         fetch(N8N_WEBHOOK_URL, { method: 'GET' })
             .then(async res => {
-                if (!res.ok) {
-                    const data = await res.json().catch(() => ({}));
+                if (!res.ok) throw new Error('HTTP Error');
+                
+                const contentType = res.headers.get("content-type");
+                if (!contentType || !contentType.includes("application/json")) {
+                    throw new Error('Not a JSON response (Dev server fallback)');
+                }
+                
+                const data = await res.json();
+                if (data.status !== 'ok') {
                     throw new Error(data.message || 'Lỗi server');
+                }
+                
+                if (dot && statusText) {
+                    dot.classList.remove('pending');
+                    statusText.textContent = 'Hệ thống xử lý đơn · Đang hoạt động';
                 }
             })
             .catch(err => {
                 console.warn('[TámThủy] Đặt hàng đang bị lỗi hoặc bảo trì:', err.message);
+                if (dot && statusText) {
+                    dot.classList.add('pending');
+                    statusText.textContent = 'Hệ thống xử lý đơn · Đang bảo trì';
+                }
                 if (submitBtn) {
                     submitBtn.disabled = true;
                     submitBtn.innerHTML = '<i class="ph ph-warning"></i> Hệ thống đang bảo trì';
@@ -1115,6 +1131,7 @@ window.initBlogHScroll = function() {
         const payload = {
             name:    document.getElementById('order-name')?.value?.trim()    || '',
             phone:   document.getElementById('order-phone')?.value?.trim()   || '',
+            email:   document.getElementById('order-email')?.value?.trim()   || '',
             address: document.getElementById('order-address')?.value?.trim() || '',
             product: document.getElementById('order-product')?.value         || '',
             qty:     finalQty || '1',
