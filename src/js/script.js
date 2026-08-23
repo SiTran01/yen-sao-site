@@ -178,17 +178,27 @@ window.luxuryScrollTo = (targetId) => {
    ============================================================ */
 (function initPreloader() {
     const preloader = document.getElementById('site-preloader');
-    if (!preloader) return;
+    
+    const triggerPreloaderDone = () => {
+        document.body.classList.add('page-loaded');
+        window.dispatchEvent(new Event('sitePreloaderDone'));
+    };
+
+    if (!preloader) {
+        triggerPreloaderDone();
+        return;
+    }
 
     if (window.SITE_CONFIG && window.SITE_CONFIG.features && window.SITE_CONFIG.features.preloader === false) {
         preloader.remove();
+        triggerPreloaderDone();
         return;
     }
 
     const hidePreloader = () => {
         setTimeout(() => {
             preloader.classList.add('is-hidden');
-            document.body.classList.add('page-loaded');
+            triggerPreloaderDone();
             ScrollTrigger.refresh();
             preloader.addEventListener('transitionend', () => preloader.remove(), { once: true });
         }, 300); // 300ms buffer sau window.load
@@ -409,11 +419,19 @@ document.addEventListener('DOMContentLoaded', () => {
     gsap.utils.toArray('[data-aos]').forEach(element => {
         // Trong Hero hoặc trên Mobile → hiện ngay sau khi load (không dùng ScrollTrigger để tránh lỗi overflow ngang trên Android)
         if (element.closest('#hero') || isMobile) {
-            setTimeout(() => {
-                element.style.opacity = '1';
-                element.style.transform = 'none';
-                element.classList.add('aos-animate');
-            }, (parseInt(element.getAttribute('data-aos-delay')) || 0) + 100);
+            const runAnim = () => {
+                setTimeout(() => {
+                    element.style.opacity = '1';
+                    element.style.transform = 'none';
+                    element.classList.add('aos-animate');
+                }, (parseInt(element.getAttribute('data-aos-delay')) || 0) + 100);
+            };
+
+            if (document.body.classList.contains('page-loaded')) {
+                runAnim();
+            } else {
+                window.addEventListener('sitePreloaderDone', runAnim, { once: true });
+            }
             return;
         }
 
@@ -492,7 +510,7 @@ document.addEventListener('DOMContentLoaded', () => {
    07. CHIM YẾN — GSAP Bezier arc bird animation
    Chim bay từ góc dưới-trái → đậu lên chữ "YẾN SÀO"
    ============================================================ */
-window.addEventListener("load", function () {
+window.addEventListener("sitePreloaderDone", function () {
     const chimContainer = document.getElementById("chim-container");
     const baiDap = document.getElementById("to-chim");
 
