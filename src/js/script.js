@@ -1022,10 +1022,10 @@ window.initBlogHScroll = function() {
     if (dot && statusText) {
         if (IS_WEBHOOK_CONFIGURED) {
             dot.classList.remove('pending');
-            statusText.textContent = 'Tự động hóa n8n · Đang hoạt động';
+            statusText.textContent = 'Hệ thống xử lý đơn · Đang hoạt động';
         } else {
             dot.classList.add('pending');
-            statusText.textContent = 'n8n Webhook · Chưa cấu hình (sẽ lưu tạm)';
+            statusText.textContent = 'Hệ thống xử lý đơn · Chưa cấu hình (sẽ lưu tạm)';
         }
     }
 
@@ -1077,6 +1077,26 @@ window.initBlogHScroll = function() {
 
     if (!form) return;
 
+    // Kiểm tra trạng thái hệ thống đặt hàng (Backend Health Check)
+    if (IS_WEBHOOK_CONFIGURED) {
+        fetch(N8N_WEBHOOK_URL, { method: 'GET' })
+            .then(async res => {
+                if (!res.ok) {
+                    const data = await res.json().catch(() => ({}));
+                    throw new Error(data.message || 'Lỗi server');
+                }
+            })
+            .catch(err => {
+                console.warn('[TámThủy] Đặt hàng đang bị lỗi hoặc bảo trì:', err.message);
+                if (submitBtn) {
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<i class="ph ph-warning"></i> Hệ thống đang bảo trì';
+                    submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                    submitBtn.title = 'Tính năng đặt hàng tạm thời không khả dụng do lỗi hệ thống.';
+                }
+            });
+    }
+
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
@@ -1122,8 +1142,8 @@ window.initBlogHScroll = function() {
             successEl.classList.add('is-visible');
 
             const modeMsg = result.mode === 'localStorage'
-                ? 'Đơn đã lưu tạm · Sẽ gửi tự động khi n8n kết nối'
-                : 'n8n đã nhận đơn và đang xử lý tự động';
+                ? 'Đơn đã lưu tạm · Sẽ xử lý khi hệ thống kết nối'
+                : 'Hệ thống đã nhận đơn và đang xử lý';
 
             showToast({ type: 'success', title: '🎉 Đặt hàng thành công!', message: modeMsg, duration: 6000 });
 

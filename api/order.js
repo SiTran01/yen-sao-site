@@ -1,4 +1,24 @@
 export default async function handler(req, res) {
+    if (req.method === 'GET') {
+        try {
+            const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+            const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
+
+            if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
+                return res.status(500).json({ status: 'error', message: 'Thiếu cấu hình Telegram' });
+            }
+
+            const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getMe`);
+            if (!response.ok) {
+                return res.status(500).json({ status: 'error', message: 'Token Telegram không hợp lệ' });
+            }
+
+            return res.status(200).json({ status: 'ok', message: 'Hệ thống đặt hàng sẵn sàng' });
+        } catch (error) {
+            return res.status(500).json({ status: 'error', message: 'Không thể kết nối đến Telegram' });
+        }
+    }
+
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Method Not Allowed' });
     }
