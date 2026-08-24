@@ -1,29 +1,29 @@
-﻿/* ============================================================
-   âš™ï¸ SITE CONFIG â€” Yáº¿n SÃ o TÃ¡m Thá»§y
-   Táº¥t cáº£ tÃ­nh nÄƒng báº­t/táº¯t vÃ  cáº¥u hÃ¬nh táº­p trung táº¡i Ä‘Ã¢y.
+/* ============================================================
+   ⚙️ SITE CONFIG — Yến Sào Tám Thủy
+   Tất cả tính năng bật/tắt và cấu hình tập trung tại đây.
    
-   LÆ°u Ã½: CÃ¡c biáº¿n nháº¡y cáº£m (webhook URL, SÄT, API key...)
-   Ä‘Æ°á»£c Ä‘áº·t trong file .env â€” KHÃ”NG hardcode á»Ÿ Ä‘Ã¢y.
+   Lưu ý: Các biến nhạy cảm (webhook URL, SĐT, API key...)
+   được đặt trong file .env — KHÔNG hardcode ở đây.
    ============================================================ */
 
 const SITE_CONFIG = {
-    // â”€â”€ ThÃ´ng tin cá»­a hÃ ng (láº¥y tá»« .env) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Thông tin cửa hàng (lấy từ .env) ────────────────────
     shop: {
-        name:    window.ENV?.SITE_NAME || 'Yáº¿n SÃ o TÃ¡m Thá»§y',
+        name:    window.ENV?.SITE_NAME || 'Yến Sào Tám Thủy',
         phone:   window.ENV?.PHONE || '0327534965',
         zaloId:  window.ENV?.ZALO || '0327534965',
         email:   window.ENV?.EMAIL || 'cskh@yensaotamthuy.com',
-        address: window.ENV?.ADDRESS || 'Äáº§m Thá»‹ Náº¡i, BÃ¬nh Äá»‹nh',
-        siteUrl: window.ENV?.SITE_URL || '%VITE_SITE_URL%',
+        address: window.ENV?.ADDRESS || 'Đầm Thị Nại, Bình Định',
+        siteUrl: window.ENV?.SITE_URL || 'https://yensaotamthuy.vn',
     },
 
-    // â”€â”€ SEO & Meta â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── SEO & Meta ──────────────────────────────────────────
     seo: {
-        title:   'Yáº¿n SÃ o TÃ¡m Thá»§y | Tinh Hoa Yáº¿n Viá»‡t',
+        title:   'Yến Sào Tám Thủy | Tinh Hoa Yến Việt',
         favicon: './assets/images/avt-gold.svg',
     },
 
-    // â”€â”€ n8n Webhooks (láº¥y tá»« .env) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── n8n Webhooks (lấy từ .env) ──────────────────────────
     webhooks: {
         order:      (() => {
             let url = (window.ENV?.WEBHOOK_ORDER && window.ENV.WEBHOOK_ORDER !== '%VITE_N8N_ORDER_WEBHOOK%') ? window.ENV.WEBHOOK_ORDER : '';
@@ -39,91 +39,91 @@ const SITE_CONFIG = {
         })(),
     },
 
-    // â”€â”€ Báº­t / Táº¯t tÃ­nh nÄƒng â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Bật / Tắt tính năng ─────────────────────────────────
     features: {
-        preloader:      true,   // MÃ n hÃ¬nh loading khi má»Ÿ web
-        chatbot:        true,   // Trá»£ lÃ½ AI TÃ¡m Thá»§y
-        lottiebird:     false,   // Con chim yáº¿n bay trÃªn trang
-        smoothScroll:   true,   // Cuá»™n mÆ°á»£t (Lenis)
-        goldCursor:     false,   // Con trá» chuá»™t vÃ ng (desktop)
-        floatingBtn:    false,    // NÃºt "Äáº·t HÃ ng Ngay" ná»•i trÃªn mobile
-        hscrollGallery: true,   // Gallery cuá»™n ngang sáº£n pháº©m
-        blogSection:    true,   // Pháº§n blog / bÃ i viáº¿t
-        reviewSection:  true,   // Pháº§n Ä‘Ã¡nh giÃ¡ khÃ¡ch hÃ ng
-        orderForm:      true,   // Form Ä‘áº·t hÃ ng
+        preloader:      true,   // Màn hình loading khi mở web
+        chatbot:        true,   // Trợ lý AI Tám Thủy
+        lottiebird:     false,   // Con chim yến bay trên trang
+        smoothScroll:   true,   // Cuộn mượt (Lenis)
+        goldCursor:     false,   // Con trỏ chuột vàng (desktop)
+        floatingBtn:    false,    // Nút "Đặt Hàng Ngay" nổi trên mobile
+        hscrollGallery: true,   // Gallery cuộn ngang sản phẩm
+        blogSection:    true,   // Phần blog / bài viết
+        reviewSection:  true,   // Phần đánh giá khách hàng
+        orderForm:      true,   // Form đặt hàng
     },
 
-    // â”€â”€ Chatbot AI â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Chatbot AI ──────────────────────────────────────────
     chatbot: {
-        autoGreeting: true,         // Báº­t/táº¯t tá»± Ä‘á»™ng hiá»‡n lá»i chÃ o lÃºc má»›i vÃ o trang (Xin chÃ o! MÃ¬nh lÃ ...)
-        autoContextual: false,       // Báº­t/táº¯t tá»± Ä‘á»™ng nháº£y lá»i chÃ o tÆ° váº¥n khi cuá»™n Ä‘áº¿n tá»«ng sáº£n pháº©m
-        maxHistory:  12,            // Sá»‘ tin nháº¯n giá»¯ láº¡i (6 cáº·p há»i/Ä‘Ã¡p)
-        // systemPrompt: `Báº¡n lÃ  trá»£ lÃ½ tÆ° váº¥n yáº¿n sÃ o cá»§a "Yáº¿n SÃ o TÃ¡m Thá»§y" (yensaotamthuy.vn). Tráº£ lá»i thÃ¢n thiá»‡n, ngáº¯n gá»n, tháº¥u hiá»ƒu khÃ¡ch hÃ ng.`,
-        greetingDelay: 1000,        // Thá»i gian chá» trÆ°á»›c khi tá»± Ä‘á»™ng hiá»‡n lá»i chÃ o (ms)
-        greetingTimeout: 10000,      // Thá»i gian tá»± Ä‘á»™ng áº©n lá»i chÃ o (ms), 0 Ä‘á»ƒ khÃ´ng tá»± áº©n
-        typingDelay: { min: 600, max: 1500 },  // Delay giáº£ láº­p gÃµ chá»¯ (ms)
-        soundVolume: 0.6,           // Ã‚m lÆ°á»£ng tiáº¿ng thÃ´ng bÃ¡o (0â€“1)
+        autoGreeting: true,         // Bật/tắt tự động hiện lời chào lúc mới vào trang (Xin chào! Mình là...)
+        autoContextual: false,       // Bật/tắt tự động nhảy lời chào tư vấn khi cuộn đến từng sản phẩm
+        maxHistory:  12,            // Số tin nhắn giữ lại (6 cặp hỏi/đáp)
+        // systemPrompt: `Bạn là trợ lý tư vấn yến sào của "Yến Sào Tám Thủy" (yensaotamthuy.vn). Trả lời thân thiện, ngắn gọn, thấu hiểu khách hàng.`,
+        greetingDelay: 1000,        // Thời gian chờ trước khi tự động hiện lời chào (ms)
+        greetingTimeout: 10000,      // Thời gian tự động ẩn lời chào (ms), 0 để không tự ẩn
+        typingDelay: { min: 600, max: 1500 },  // Delay giả lập gõ chữ (ms)
+        soundVolume: 0.6,           // Âm lượng tiếng thông báo (0–1)
         
-        // Cáº¥u hÃ¬nh lá»i chÃ o tá»± Ä‘á»™ng theo tá»«ng vÃ¹ng hiá»ƒn thá»‹ (cuá»™n tá»›i Ä‘Ã¢u hiá»‡n tá»›i Ä‘Ã³)
+        // Cấu hình lời chào tự động theo từng vùng hiển thị (cuộn tới đâu hiện tới đó)
         contextualTriggers: [
             {
-                selector: '#v-yen-tho, .hscroll-product-card[data-label="Yáº¿n ThÃ´ Â· Tá»± NhiÃªn"]',
+                selector: '#v-yen-tho, .hscroll-product-card[data-label="Yến Thô · Tự Nhiên"]',
                 delay: 8000,
-                message: "Yáº¿n thÃ´ giá»¯ trá»n 100% vi cháº¥t tá»± nhiÃªn, ráº¥t há»£p náº¿u báº¡n cÃ³ thá»i gian tá»± nháº·t lÃ´ng. Báº¡n muá»‘n mÃ¬nh gá»­i video hÆ°á»›ng dáº«n cÃ¡ch nháº·t lÃ´ng yáº¿n nhanh khÃ´ng? ",
+                message: "Yến thô giữ trọn 100% vi chất tự nhiên, rất hợp nếu bạn có thời gian tự nhặt lông. Bạn muốn mình gửi video hướng dẫn cách nhặt lông yến nhanh không? ",
                 id: "yen-tho"
             },
             {
-                selector: '#v-yen-tuoi, .hscroll-product-card[data-label="Yáº¿n TÆ°Æ¡i Â· Cao Cáº¥p"]',
+                selector: '#v-yen-tuoi, .hscroll-product-card[data-label="Yến Tươi · Cao Cấp"]',
                 delay: 8000,
-                message: "DÃ²ng yáº¿n tÆ°Æ¡i nÃ y TÃ¡m Thá»§y Ä‘Ã£ nháº·t lÃ´ng hoÃ n toÃ n thá»§ cÃ´ng, báº¡n mua vá» lÃ  chÆ°ng Ä‘Æ°á»£c ngay. MÃ¬nh tÆ° váº¥n thÃªm cho báº¡n nhÃ©? ",
+                message: "Dòng yến tươi này Tám Thủy đã nhặt lông hoàn toàn thủ công, bạn mua về là chưng được ngay. Mình tư vấn thêm cho bạn nhé? ",
                 id: "yen-tuoi"
             },
             {
-                selector: '#v-yen-tinh-che, .hscroll-product-card[data-label="Yáº¿n Tinh Cháº¿ Â· Ã‰p Tá»•"]',
+                selector: '#v-yen-tinh-che, .hscroll-product-card[data-label="Yến Tinh Chế · Ép Tổ"]',
                 delay: 8000,
-                message: "Yáº¿n tinh cháº¿ Ã©p tá»• lÃ  mÃ³n quÃ  sá»©c khá»e cá»±c ká»³ sang trá»ng vÃ  Ã½ nghÄ©a. Báº¡n Ä‘á»‹nh mua Ä‘á»ƒ sá»­ dá»¥ng hay mang Ä‘i biáº¿u táº·ng áº¡? ",
+                message: "Yến tinh chế ép tổ là món quà sức khỏe cực kỳ sang trọng và ý nghĩa. Bạn định mua để sử dụng hay mang đi biếu tặng ạ? ",
                 id: "yen-tinh-che"
             },
             {
-                selector: '.hscroll-product-card[data-label="HÅ© Yáº¿n Â· ChÆ°ng Sáºµn"]',
+                selector: '.hscroll-product-card[data-label="Hũ Yến · Chưng Sẵn"]',
                 delay: 7000,
-                message: "Yáº¿n chÆ°ng sáºµn cá»±c ká»³ tiá»‡n lá»£i Ä‘á»ƒ bá»“i bá»• sá»©c khá»e má»—i ngÃ y hoáº·c lÃ m quÃ  táº·ng. Báº¡n Ä‘á»‹nh mua dÃ¹ng hay biáº¿u áº¡? ",
+                message: "Yến chưng sẵn cực kỳ tiện lợi để bồi bổ sức khỏe mỗi ngày hoặc làm quà tặng. Bạn định mua dùng hay biếu ạ? ",
                 id: "yen-chung"
             },
             {
                 selector: '#blog',
                 delay: 8000,
-                message: "Báº¡n Ä‘ang tÃ¬m hiá»ƒu kiáº¿n thá»©c vá» yáº¿n sÃ o? Cá»© há»i mÃ¬nh báº¥t ká»³ tháº¯c máº¯c nÃ o vá» cÃ¡ch dÃ¹ng, cÃ¡ch chÆ°ng hay cÃ´ng dá»¥ng nhÃ©! ",
+                message: "Bạn đang tìm hiểu kiến thức về yến sào? Cứ hỏi mình bất kỳ thắc mắc nào về cách dùng, cách chưng hay công dụng nhé! ",
                 id: "blog-section"
             },
             {
                 selector: '#order',
                 delay: 8000,
-                message: "Báº¡n Ä‘ang Ä‘iá»n form Ä‘áº·t hÃ ng pháº£i khÃ´ng? Náº¿u cÃ³ tháº¯c máº¯c gÃ¬ vá» giÃ¡ cáº£ hay phÃ¢n loáº¡i sáº£n pháº©m, cá»© há»i mÃ¬nh nhÃ©! ",
+                message: "Bạn đang điền form đặt hàng phải không? Nếu có thắc mắc gì về giá cả hay phân loại sản phẩm, cứ hỏi mình nhé! ",
                 id: "order-section"
             },
             {
                 selector: 'footer',
                 delay: 5000,
-                message: "Báº¡n cáº§n há»— trá»£ thÃªm thÃ´ng tin gÃ¬ khÃ´ng? Äá»«ng ngáº¡i nháº¯n tin cho mÃ¬nh nhÃ©! ",
+                message: "Bạn cần hỗ trợ thêm thông tin gì không? Đừng ngại nhắn tin cho mình nhé! ",
                 id: "footer-section"
             }
         ]
     },
 
-    // â”€â”€ Hiá»‡u á»©ng & Animation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Hiệu ứng & Animation ───────────────────────────────
     animation: {
-        preloaderMinTime: 15000,     // Thá»i gian tá»‘i thiá»ƒu hiá»‡n preloader (ms)
-        heroParallax:     true,     // Hiá»‡u á»©ng parallax trÃªn hero
-        revealOnScroll:   true,     // Hiá»‡u á»©ng hiá»‡n dáº§n khi cuá»™n
+        preloaderMinTime: 15000,     // Thời gian tối thiểu hiện preloader (ms)
+        heroParallax:     true,     // Hiệu ứng parallax trên hero
+        revealOnScroll:   true,     // Hiệu ứng hiện dần khi cuộn
     },
 
-    // â”€â”€ Form Ä‘áº·t hÃ ng â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Form đặt hàng ───────────────────────────────────────
     order: {
-        minQuantityHu: 4,           // Sá»‘ hÅ© tá»‘i thiá»ƒu khi Ä‘áº·t Yáº¿n ChÆ°ng
-        giftThreshold: 3000000,     // ÄÆ¡n tá»« bao nhiÃªu Ä‘Æ°á»£c táº·ng quÃ  (VNÄ)
+        minQuantityHu: 4,           // Số hũ tối thiểu khi đặt Yến Chưng
+        giftThreshold: 3000000,     // Đơn từ bao nhiêu được tặng quà (VNĐ)
     },
 };
 
-// Gáº¯n vÃ o window Ä‘á»ƒ cÃ¡c script khÃ¡c cÃ³ thá»ƒ Ä‘á»c Ä‘Æ°á»£c qua window.SITE_CONFIG
+// Gắn vào window để các script khác có thể đọc được qua window.SITE_CONFIG
 window.SITE_CONFIG = SITE_CONFIG;
