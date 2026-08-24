@@ -1338,74 +1338,116 @@ window.initBlogHScroll = function() {
 })();
 
 
-/* ============================================================
-   16. NEWSLETTER FORM — Footer email → n8n
-   ============================================================ */
+window.closeNewsletterModal = function() {
+    const modal = document.getElementById('newsletter-modal');
+    const content = document.getElementById('newsletter-modal-content');
+    if (!modal) return;
+    
+    content.classList.remove('scale-100');
+    content.classList.add('scale-95');
+    modal.classList.remove('opacity-100');
+    
+    setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }, 300);
+};
 
-/** Global wrapper — gọi từ onclick trong HTML */
-function submitFooterNewsletter() {
-    const emailInput = document.getElementById('footer-email');
-    if (!emailInput) return;
-    const email = emailInput.value.trim();
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        showToast({ type: 'error', title: 'Email không hợp lệ', message: 'Vui lòng nhập địa chỉ email đúng định dạng.' });
-        return;
-    }
-    const payload = { email, source: 'newsletter-footer', timestamp: new Date().toISOString() };
-    const subs = JSON.parse(localStorage.getItem('tamthuy_subscribers') || '[]');
-    subs.push(payload);
-    localStorage.setItem('tamthuy_subscribers', JSON.stringify(subs));
-    emailInput.value = '';
-    showToast({ type: 'success', title: '🎉 Đăng ký thành công!', message: 'Mã giảm giá 10% sẽ được gửi về email của bạn.', duration: 6000 });
-}
+window.openNewsletterModal = function(email) {
+    const modal = document.getElementById('newsletter-modal');
+    const content = document.getElementById('newsletter-modal-content');
+    const emailInput = document.getElementById('modal-nl-email');
+    if (!modal) return;
+    
+    if (emailInput) emailInput.value = email;
+    
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    
+    // Force reflow
+    void modal.offsetWidth;
+    
+    modal.classList.add('opacity-100');
+    content.classList.remove('scale-95');
+    content.classList.add('scale-100');
+};
 
 (function initNewsletterForm() {
-    // 🔧 Cấu hình — lấy từ config.js / .env
-    const N8N_NEWSLETTER_URL = window.SITE_CONFIG?.webhooks?.newsletter || '';
-
     const footerEmailInput = document.querySelector('footer input[type="email"]');
     const footerSubmitBtn  = document.querySelector('footer button');
-    if (!footerEmailInput || !footerSubmitBtn) return;
+    
+    if (footerEmailInput && footerSubmitBtn) {
+        footerSubmitBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const email = footerEmailInput.value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showToast({ type: 'error', title: 'Email không hợp lệ', message: 'Vui lòng nhập địa chỉ email đúng định dạng.' });
+                return;
+            }
+            openNewsletterModal(email);
+        });
 
-    footerSubmitBtn.addEventListener('click', async (e) => {
-        e.preventDefault();
-        const email = footerEmailInput.value.trim();
+        footerEmailInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') footerSubmitBtn.click();
+        });
+    }
 
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            showToast({ type: 'error', title: 'Email không hợp lệ', message: 'Vui lòng nhập địa chỉ email đúng định dạng.' });
-            return;
-        }
+    const modalForm = document.getElementById('newsletter-modal-form');
+    if (modalForm) {
+        modalForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const nameInput = document.getElementById('modal-nl-name');
+            const phoneInput = document.getElementById('modal-nl-phone');
+            const emailInput = document.getElementById('modal-nl-email');
+            const submitBtn = document.getElementById('modal-nl-submit');
+            
+            const name = nameInput.value.trim();
+            const phone = phoneInput.value.trim();
+            const email = emailInput.value.trim();
+            
+            if (!name || !phone) {
+                showToast({ type: 'error', title: 'Thiếu thông tin', message: 'Vui lòng điền đầy đủ Họ tên và Số điện thoại.' });
+                return;
+            }
+            
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<svg class="animate-spin h-5 w-5 mr-2 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Đang Xử Lý...';
+            submitBtn.disabled = true;
 
-        const payload = { email, source: 'newsletter-footer', timestamp: new Date().toISOString() };
+            const payload = {
+                name: name,
+                phone: phone,
+                email: email,
+                source: 'newsletter-footer',
+                timestamp: new Date().toISOString()
+            };
 
-        try {
-            if (N8N_NEWSLETTER_URL) {
-                await fetch(N8N_NEWSLETTER_URL, {
+            try {
+                const response = await fetch('/api/newsletter', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload),
                 });
-            } else {
-                // Lưu tạm localStorage
-                const subs = JSON.parse(localStorage.getItem('tamthuy_subscribers') || '[]');
-                subs.push(payload);
-                localStorage.setItem('tamthuy_subscribers', JSON.stringify(subs));
+                
+                if (!response.ok) throw new Error('Network error');
+
+                closeNewsletterModal();
+                if (footerEmailInput) footerEmailInput.value = '';
+                nameInput.value = '';
+                phoneInput.value = '';
+                
+                showToast({ type: 'success', title: '🎉 Đăng ký thành công!', message: 'Mã giảm giá đã được gửi về email của bạn. Vui lòng kiểm tra hộp thư!', duration: 6000 });
+            } catch (err) {
+                console.error(err);
+                showToast({ type: 'error', title: 'Lỗi hệ thống', message: 'Không thể gửi yêu cầu lúc này. Vui lòng thử lại sau.' });
+            } finally {
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
             }
-
-            footerEmailInput.value = '';
-            showToast({ type: 'success', title: '🎉 Đăng ký thành công!', message: 'Mã giảm giá 10% sẽ được gửi về email của bạn.', duration: 6000 });
-
-        } catch {
-            showToast({ type: 'error', title: 'Lỗi kết nối', message: 'Vui lòng thử lại sau.' });
-        }
-    });
-
-    // Cho phép nhấn Enter
-    footerEmailInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') footerSubmitBtn.click();
-    });
+        });
+    }
 })();
 
 /* ============================================================
