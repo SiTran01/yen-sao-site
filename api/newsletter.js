@@ -16,6 +16,7 @@ export default async function handler(req, res) {
         const SMTP_PORT = process.env.SMTP_PORT || 465;
         const SMTP_USER = process.env.SMTP_USER;
         const SMTP_PASS = process.env.SMTP_PASS;
+        const SITE_URL = process.env.VITE_SITE_URL || 'https://yensaotamthuy.vn';
 
         // ── 2. Tác vụ: Gửi Telegram ──
         const sendTelegram = async () => {
@@ -85,7 +86,7 @@ export default async function handler(req, res) {
                         <p style="color: #4b5563; line-height: 1.6; text-align: left; font-size: 14px;"><b>Cách sử dụng:</b> Khi đặt hàng trên Website, bạn chỉ cần nhập mã này vào phần <b>Ghi chú</b>, hoặc đọc mã này cho nhân viên tư vấn khi chúng tôi gọi điện xác nhận đơn hàng.</p>
                         
                         <div style="margin-top: 30px;">
-                            <a href="https://yensaotamthuy.vn/#products" style="display: inline-block; background-color: #C5A059; color: #ffffff; padding: 12px 30px; text-decoration: none; border-radius: 30px; font-weight: bold; text-transform: uppercase; font-size: 14px; letter-spacing: 1px;">Khám Phá Sản Phẩm Ngay</a>
+                            <a href="${SITE_URL}/#products" style="display: inline-block; background-color: #C5A059; color: #ffffff; padding: 12px 30px; text-decoration: none; border-radius: 30px; font-weight: bold; text-transform: uppercase; font-size: 14px; letter-spacing: 1px;">Khám Phá Sản Phẩm Ngay</a>
                         </div>
                     </div>
                     
@@ -95,7 +96,7 @@ export default async function handler(req, res) {
                             <strong style="color: #6b7280;">Yến Sào Tám Thủy</strong><br>
                             Hotline/Zalo: 0327534965<br>
                             Đầm Thị Nại, Bình Định<br>
-                            <a href="https://yensaotamthuy.vn" style="color: #C5A059; text-decoration: none;">yensaotamthuy.vn</a>
+                            <a href="${SITE_URL}" style="color: #C5A059; text-decoration: none;">${SITE_URL.replace(/^https?:\/\//, '')}</a>
                         </p>
                     </div>
                 </div>
