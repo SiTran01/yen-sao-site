@@ -16,7 +16,9 @@ export default async function handler(req, res) {
         const SMTP_PORT = process.env.SMTP_PORT || 465;
         const SMTP_USER = process.env.SMTP_USER;
         const SMTP_PASS = process.env.SMTP_PASS;
-        const SITE_URL = process.env.VITE_SITE_URL || 'https://yensaotamthuy.vn';
+        
+        const rawSiteUrl = process.env.VITE_SITE_URL || 'https://yensaotamthuy.vn';
+        const SITE_URL = rawSiteUrl.replace(/\/+$/, '');
 
         // ── 2. Tác vụ: Gửi Telegram ──
         const sendTelegram = async () => {
