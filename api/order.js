@@ -153,7 +153,7 @@ export default async function handler(req, res) {
             await transporter.sendMail({
                 from: `"Yến Sào Tám Thủy" <${SMTP_USER}>`,
                 to: payload.email,
-                subject: 'Xác nhận đơn hàng từ Yến Sào Tám Thủy',
+                subject: `🎉 Xác nhận đơn hàng từ Yến Sào Tám Thủy - ${payload.name}`,
                 html: htmlContent
             });
         };
